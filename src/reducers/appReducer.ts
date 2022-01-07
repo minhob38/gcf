@@ -4,32 +4,34 @@ import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 
 // actions types
-const ENABLE_LOADING = "app/ENABLE_LOADING";
-const DISABLE_LOADING = "app/DISABLE_LOADING";
+const CLICK_BUTTON = "app/CLICK_BUTTON";
+const CLICK_BUTTON_ASYNC = "app/CLICK_BUTTON_ASYNC";
 
 // action creators
-export const enableLoading = createAction(ENABLE_LOADING);
-export const disableLoading = createAction(DISABLE_LOADING);
-// ↑ export const disableLoading = () => ({ type: "app/DISABLE_LOADING" });
+export const clickButton = createAction(CLICK_BUTTON);
+export const clickButtonAsync = createAction(CLICK_BUTTON_ASYNC);
+// ↑ export const disableLoading = () => ({ type: "app/CLICK_BUTTON_ASYNC" });
+
+//sagas
+function* clickButtonSaga(action) {
+  console.log(action);
+  yield delay(3000);
+  yield put(clickButton());
+}
 
 export function* appSaga() {
-  //
+  yield takeLatest(clickButtonAsync, clickButtonSaga);
 }
 
 const initialState = {
-  isLoading: false,
+  isClicked: false,
 };
 
 const appReducer = handleActions(
   {
-    [ENABLE_LOADING]: (state, action) => {
+    [CLICK_BUTTON]: (state, action) => {
       return produce(state, (draft) => {
-        draft.isLoading = true;
-      });
-    },
-    [DISABLE_LOADING]: (state, action) => {
-      return produce(state, (draft) => {
-        draft.isLoading = false;
+        draft.isClicked = !draft.isClicked;
       });
     },
   },

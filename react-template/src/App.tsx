@@ -7,6 +7,7 @@ import Button from "./components/Button";
 import LinkButton from "./components/LinkButton";
 
 function App() {
+  console.log(process.env.NODE_ENV);
   return (
     <>
       <Home />

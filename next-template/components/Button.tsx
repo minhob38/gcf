@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
+import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
+import { actionCreators } from "../store/appSlice";
 
 const buttonCss = css`
   all: unset;
@@ -16,9 +18,10 @@ const buttonCss = css`
 `;
 
 const Button: React.FC = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleButtonClick = () => {
-    // dispatch(actionCreators.clickButtonAsync());
+    // dispatch(actionCreatorss.clickButtonAsync());
+    dispatch(actionCreators.clickButton());
   };
   return (
     <div css={buttonCss} onClick={handleButtonClick}>

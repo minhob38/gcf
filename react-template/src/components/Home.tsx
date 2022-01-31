@@ -8,6 +8,8 @@ const HomeContainer = styled.div`
   font: normal bold 16px / 24x Noto Sans CJK KR;
 `;
 
-export default function Home() {
+const Home: React.FC = () => {
   return <HomeContainer>Home 🏠</HomeContainer>;
-}
+};
+
+export default Home;

@@ -15,6 +15,8 @@ const SLink = styled(Link)`
   cursor: pointer;
 `;
 
-export default function LinkButton({ path }) {
+const LinkButton: React.FC<{ path: string }> = ({ path }) => {
   return <SLink to={path}>{path} 링크 📌</SLink>;
-}
+};
+
+export default LinkButton;

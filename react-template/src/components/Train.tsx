@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 tailwindcss
 https://tailwindcss.com/docs/installation
 */
-export default function Flight() {
+const Flight: React.FC = () => {
   return (
     <>
       <Helmet>
@@ -15,4 +15,6 @@ export default function Flight() {
       <div className="text-base font-mono">Train 🚂</div>
     </>
   );
-}
+};
+
+export default Flight;

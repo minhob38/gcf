@@ -16,10 +16,12 @@ const ButtonContainer = styled.div`
   cursor: pointer;
 `;
 
-export default function Button() {
+const Button: React.FC = () => {
   const dispatch = useDispatch();
   const handleButtonClick = () => {
     dispatch(actionCreators.clickButtonAsync());
   };
   return <ButtonContainer onClick={handleButtonClick}>Click 📝</ButtonContainer>;
-}
+};
+
+export default Button;

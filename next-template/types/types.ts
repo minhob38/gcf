@@ -1,4 +1,3 @@
-export interface ISample {
-  n: number;
-  str: string;
+export interface ITrainApi {
+  emoji: string;
 }

@@ -43,4 +43,10 @@
 <!-- ### • test -->
 <!-- jest -->
 
- <!-- TODO: getInitialProps, getStaticProps, SWR, getStaticPatch,getServerSideProps router.prefetch -->
+ <!-- TODO:
+ - getStaticProps
+ - useSwr
+ - getStaticPatch
+ - getServerSideProps
+ - router.prefetch
+ -->

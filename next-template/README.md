@@ -1,6 +1,6 @@
 # Next Template
 
-매번 next app을 만들기 번거로워, 미리 환경을 만들어 둔 react boiler plate입니다. 😨
+매번 next app을 만들기 번거로워, 미리 환경을 만들어 둔 next boiler plate입니다. 😨
 
 ## 환경
 
@@ -12,7 +12,7 @@
 
 ### • 상태관리
 
-\- redux saga
+\- redux toolkit + redux saga
 
 ### • style
 
@@ -27,10 +27,6 @@
 ### • ajax
 
 \- axios
-
-### • seo
-
-\- helmet
 
 <!-- ### • coding convention
 

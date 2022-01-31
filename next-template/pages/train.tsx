@@ -14,4 +14,8 @@ const Train: NextPage = () => {
   );
 };
 
+Train.getInitialProps = async ctx => {
+  const { data } = await axi
+}
+
 export default Train;

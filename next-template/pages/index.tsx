@@ -23,7 +23,7 @@ const INDEX: NextPage = () => {
     <>
       <Home />
       <Button />
-      <Link href="/plane/[id]" passHref={true}>
+      <Link href="/plane" passHref={true}>
         <A>/plane 링크 📌</A>
       </Link>
       <Link href="/train">/train 링크 📌</Link>

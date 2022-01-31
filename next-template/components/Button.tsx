@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
-import { actionCreators } from "../store/appSlice";
+import { actions } from "../store/slices/appSlice";
 
 const buttonCss = css`
   all: unset;
@@ -20,8 +20,8 @@ const buttonCss = css`
 const Button: React.FC = () => {
   const dispatch = useDispatch();
   const handleButtonClick = () => {
-    // dispatch(actionCreatorss.clickButtonAsync());
-    dispatch(actionCreators.clickButton());
+    // dispatch(actionss.clickButtonAsync());
+    dispatch(actions.clickButtonAsync());
   };
   return (
     <div css={buttonCss} onClick={handleButtonClick}>

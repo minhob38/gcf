@@ -1,7 +1,6 @@
 import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-// import axios from "axios";
 import axios from "../configs/axios-config";
 import { ITrainApi } from "../types/types";
 

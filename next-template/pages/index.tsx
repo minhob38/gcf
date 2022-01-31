@@ -12,6 +12,7 @@ const INDEX: NextPage = () => {
       <Home />
       <Button />
       <Link href="/plane">/plane 링크 📌</Link>
+      <Link href="/train">/plane 링크 📌</Link>
     </>
   );
 };

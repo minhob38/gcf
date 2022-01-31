@@ -20,7 +20,6 @@ const buttonCss = css`
 const Button: React.FC = () => {
   const dispatch = useDispatch();
   const handleButtonClick = () => {
-    // dispatch(actionss.clickButtonAsync());
     dispatch(actions.clickButtonAsync());
   };
   return (

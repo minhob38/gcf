@@ -36,7 +36,7 @@ const Plane: NextPage = () => {
         <A>f22</A>
       </Link>
       <Link href="/plane/f35?type=a" passHref={true}>
-        <A>F35</A>
+        <A>f35</A>
       </Link>
     </>
   );

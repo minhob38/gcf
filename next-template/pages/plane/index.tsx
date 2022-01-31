@@ -24,7 +24,7 @@ const A = styled.a`
   cursor: pointer;
 `;
 
-const PLANE: NextPage = () => {
+const Plane: NextPage = () => {
   return (
     <>
       <div css={CSS}>Plane 🛩</div>
@@ -42,4 +42,4 @@ const PLANE: NextPage = () => {
   );
 };
 
-export default PLANE;
+export default Plane;

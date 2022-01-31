@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-const TRAIN: NextPage = () => {
+const Train: NextPage = () => {
   return (
     <>
       <Head>
@@ -14,4 +14,4 @@ const TRAIN: NextPage = () => {
   );
 };
 
-export default TRAIN;
+export default Train;

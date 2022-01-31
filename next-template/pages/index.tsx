@@ -18,7 +18,7 @@ const A = styled.a`
   cursor: pointer;
 `;
 
-const INDEX: NextPage = () => {
+const Index: NextPage = () => {
   return (
     <>
       <Home />
@@ -31,4 +31,4 @@ const INDEX: NextPage = () => {
   );
 };
 
-export default INDEX;
+export default Index;

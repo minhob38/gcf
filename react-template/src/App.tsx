@@ -17,7 +17,7 @@ function App() {
   return (
     <Wrapper>
       <Home />
-      <Button />
+      <Button label="Click 📝" />
       <LinkButton path="/plane" />
       <LinkButton path="/train" />
       <Routes>

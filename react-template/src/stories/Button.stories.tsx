@@ -1,12 +1,14 @@
 import { Meta, Story } from "@storybook/react";
 import Button from "../components/Button";
 import { decorators } from "../../.storybook/preview";
+import { action } from "@storybook/addon-actions";
 import { IButtonProps } from "../types/types";
 
 export default {
   title: "버튼",
   component: Button,
   decorators,
+  // argTypes: { onClick: { action: "clicked" } },
 } as Meta;
 
 const Template = (args) => <Button {...args} />;

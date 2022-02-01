@@ -1,4 +1,4 @@
 export interface IButtonProps {
-  /** button label입니다. */
+  /** button label(typescript type)입니다. */
   label: string;
 }

@@ -46,3 +46,5 @@
  - getServerSideProps
  - router.prefetch
  -->
+
+ <!-- thunk로 바꾸자 -->

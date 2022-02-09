@@ -61,3 +61,6 @@ next-template/.vercel
 
 # typescript
 next-template/*.tsbuildinfo
+
+### server
+server/node_modules

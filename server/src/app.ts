@@ -1,19 +1,17 @@
 import express from 'express';
-import path from 'path';
 import morgan from 'morgan';
+import cors from 'cors';
 import routes from './routes';
 import { errorHandler, notFoundHandler } from './middlewares/error-middleware';
 
 const app: express.Application = express();
 
+app.use(cors());
+
 app.use(morgan('dev'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', routes);
 

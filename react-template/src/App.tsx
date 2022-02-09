@@ -8,7 +8,7 @@ import Plane from "./components/Plane";
 import Train from "./components/Train";
 import Button from "./components/Button";
 import LinkButton from "./components/LinkButton";
-import { subscribeServer, sendNotification } from "./utils/subscribe";
+import { subscribeServer, notifyServer } from "./utils/subscribe";
 
 const Wrapper = styled.div({
   width: "100%",
@@ -42,10 +42,10 @@ function App() {
         <Route path="/train" element={<Train />}></Route>
       </Routes>
       <button css={buttonStyle} onClick={() => subscribeServer()}>
-        Server Subscribe
+        Server Subscription
       </button>
-      <button css={buttonStyle} onClick={() => sendNotification()}>
-        Send Notification
+      <button css={buttonStyle} onClick={() => notifyServer()}>
+        Server Notification
       </button>
     </Wrapper>
   );

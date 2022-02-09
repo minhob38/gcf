@@ -11,7 +11,7 @@ export const subscribeServer = async () => {
   });
 
   const response = await axios.post(
-    "/push/subscribe",
+    "/push/subscription",
     { subscription: JSON.stringify(subscription) },
     {
       headers: {
@@ -26,7 +26,7 @@ export const subscribeServer = async () => {
 };
 
 /* subscribe 등록 */
-export const sendNotification = async () => {
+export const notifyServer = async () => {
   const response = await axios.post(
     "/push/notification",
     { content: "alarm : )" },

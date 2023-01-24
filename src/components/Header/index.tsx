@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 // import { useRouter } from 'next/router';
-import * as size from "../constants/size";
-import * as colors from "../constants/colors";
-import * as fonts from "../constants/fonts";
-import * as margins from "../constants/margins";
+import * as size from "@constants/size";
+import * as colors from "@constants/colors";
+import * as fonts from "@constants/fonts";
+import * as margins from "@constants/margins";
 
 // import Image from '@components/common/Image';
 // import * as colors from '@constants/colors';

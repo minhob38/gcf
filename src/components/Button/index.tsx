@@ -16,13 +16,13 @@ interface IStyleProps {
 const Wrapper = styled.button`
   all: unset;
   display: block;
-  background-color: ${colors.WHITE1};
+  background-color: ${colors.WHITE_1};
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
-  border: 2px solid ${colors.YELLOW1};
+  border: 2px solid ${colors.PRIMARY_3};
   border-radius: 8px;
   font: ${fonts.BUTTON_2};
-  color: ${colors.BLACK1};
+  color: ${colors.BLACK_1};
   text-align: center;
   /* &:hover {
     background-color: #ebc7c7;

@@ -39,7 +39,7 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   font: ${fonts.TITLE_T1};
-  color: ${colors.SECONDARY_500};
+  color: ${colors.PRIMARY_1};
 `;
 
 const LoginText = styled.div`
@@ -47,7 +47,7 @@ const LoginText = styled.div`
   justify-content: center;
   align-items: center;
   font: ${fonts.SUBTITLE_T1};
-  color: ${colors.SECONDARY_500};
+  color: ${colors.PRIMARY_1};
 `;
 
 // const ImageContainer = styled.div``;

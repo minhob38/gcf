@@ -22,14 +22,14 @@ export const YELLOW4 = "#fffce9";
 
 export const RED1 = "#f57038";
 
-/* desgin system */
-export const PRIMARY_500 = "#e4813a";
-export const PRIMARY_400 = "#f3bc4e";
-export const PRIMARY_350 = "#f7ca54";
-export const PRIMARY_300 = "#f9d658";
-export const PRIMARY_250 = "#fce480";
-export const PRIMARY_200 = "#fdf1a6";
-export const PRIMARY_100 = "#fffce9";
+/* design system */
+export const BLACK_1 = "#000000";
+
+export const WHITE_1 = "#ffffff";
+
+export const PRIMARY_1 = "#3b7e43";
+export const PRIMARY_2 = "#46954f";
+export const PRIMARY_3 = "#98c362";
 
 export const SECONDARY_REAL_BLACK = "#000000";
 export const SECONDARY_500 = "#1a1a1a";

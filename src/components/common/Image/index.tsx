@@ -8,18 +8,18 @@ interface IProps {
   height?: string;
 }
 
-const CarCard: React.FC<IProps> = ({ src, alt, width = "none", height = "none" }) => {
+const Image: React.FC<IProps> = ({ src, alt, width = "none", height = "none" }) => {
   return (
     <img
       src={src}
       alt={alt}
       css={css`
-        object-fit: contain;
         width: ${width};
+        object-fit: contain;
         height: ${height};
       `}
     ></img>
   );
 };
 
-export default CarCard;
+export default Image;

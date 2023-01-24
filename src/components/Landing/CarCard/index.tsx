@@ -40,6 +40,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
+const Info = styled.div``;
+
+const CarName = styled.div``;
+const CarChip = styled.div``;
+
 const CarCard: React.FC = () => {
   return (
     <Wrapper>
@@ -49,6 +54,10 @@ const CarCard: React.FC = () => {
         width="200px"
         height="150px"
       />
+      <Info>
+        <CarName>Kia Sorento</CarName>
+        <CarChip></CarChip>
+      </Info>
     </Wrapper>
   );
 };

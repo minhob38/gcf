@@ -37,6 +37,13 @@ const ButtonContainer = styled.div`
   padding: 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
+const CarCardContainer = styled.div`
+  padding: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
+// = ButtonContainer height + margin을 줄 height
+const SCROLL_BOTTOM_MARGIN = 70 + 20;
+
 const Landing = () => {
   return (
     <>
@@ -47,8 +54,21 @@ const Landing = () => {
           <Button title="Buy/Used" width="100px" height="40px"></Button>
           <Button title="Rent/New" width="100px" height="40px"></Button>
         </ButtonContainer>
-        <Scroll direction="y" height="calc(100% - 127px - 10px)">
-          <CarCard></CarCard>
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          <CarCardContainer>
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+            <CarCard />
+          </CarCardContainer>
         </Scroll>
       </Content>
     </>

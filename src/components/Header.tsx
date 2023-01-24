@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import * as size from "../constants/size";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
+import * as margins from "../constants/margins";
 
 // import Image from '@components/common/Image';
 // import * as colors from '@constants/colors';
@@ -23,23 +24,29 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: ${size.HEADER_HEIGHT};
-  padding: 0 0 0 20px;
+  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
   box-shadow: ${colors.SHADOW};
   background-color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const Title = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font: ${fonts.TITLE_T2};
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
+`;
+
+const LoginText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: ${fonts.SUBTITLE_T1};
   color: ${colors.SECONDARY_500};
 `;
 
@@ -79,6 +86,7 @@ const Header: React.FC<IProps> = ({
         <Image src={src} alt={alt} width="24px" height="24px" />
       </ImageContainer> */}
       <Title>{title}</Title>
+      <LoginText>Login</LoginText>
     </Wrapper>
   );
 };

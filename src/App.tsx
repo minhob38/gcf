@@ -9,6 +9,7 @@ import Train from "./components/Train";
 import Button from "./components/Button";
 import LinkButton from "./components/LinkButton";
 import { subscribeServer, notifyServer } from "./utils/subscribe";
+import { Landing } from "./pages/Landing";
 
 const Wrapper = styled.div({
   width: "100%",
@@ -33,20 +34,21 @@ function App() {
 
   return (
     <Wrapper>
-      <Home />
-      <Button label="Click 📝" />
-      <LinkButton path="/plane" />
-      <LinkButton path="/train" />
+      {/* <Home /> */}
+      {/* <Button label="Click 📝" /> */}
+      {/* <LinkButton path="/plane" /> */}
+      {/* <LinkButton path="/train" /> */}
       <Routes>
-        <Route path="/plane" element={<Plane />}></Route>
-        <Route path="/train" element={<Train />}></Route>
+        <Route path="/" element={<Landing />}></Route>
+        {/* <Route path="/plane" element={<Plane />}></Route> */}
+        {/* <Route path="/train" element={<Train />}></Route> */}
       </Routes>
-      <button css={buttonStyle} onClick={() => subscribeServer()}>
+      {/* <button css={buttonStyle} onClick={() => subscribeServer()}>
         Server Subscription
       </button>
       <button css={buttonStyle} onClick={() => notifyServer()}>
         Server Notification
-      </button>
+      </button> */}
     </Wrapper>
   );
 }

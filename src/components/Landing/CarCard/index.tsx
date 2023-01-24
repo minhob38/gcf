@@ -6,39 +6,11 @@ import * as fonts from "@constants/fonts";
 
 import Image from "@components/common/Image";
 
-interface IProps extends IStyleProps {
-  title: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-interface IStyleProps {
-  width: string;
-  height: string;
-}
-
-// const Wrapper = styled.button`
-//   all: unset;
-//   display: block;
-//   background-color: ${colors.WHITE_1};
-//   width: ${(props: IStyleProps) => props.width};
-//   height: ${(props: IStyleProps) => props.height};
-//   border: 2px solid ${colors.PRIMARY_3};
-//   border-radius: 8px;
-//   font: ${fonts.BUTTON_2};
-//   color: ${colors.BLACK_1};
-//   text-align: center;
-//   /* &:hover {
-//     background-color: #ebc7c7;
-//     border: none;
-//   } */
-//   cursor: pointer;
-// `;
-
 const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: start;
   margin: 0 0 10px 0;
 `;
 
@@ -46,16 +18,22 @@ const Info = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: start;
-  margin: 0 0 0 10px;
+  width: 40%;
 `;
 
-const CarName = styled.div``;
-// const CarChip = styled.div``;
+const CarName = styled.div`
+  margin: 0 0 10px 0;
+  font: ${fonts.BODY_EMPHASIS_1};
+  color: ${colors.BLACK_1};
+`;
+
+const CarChipContainer = styled.div``;
 
 const CarChip = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
   font: ${fonts.BUTTON_3};
   color: ${colors.SECONDARY_400};
   background-color: ${colors.PRIMARY_3};
@@ -69,31 +47,35 @@ const CarCard: React.FC = () => {
       <Image
         src="https://user-images.githubusercontent.com/57255024/214351958-1ef60011-d940-4680-a38e-5c7c664f4e18.png"
         alt="car"
-        width="60%"
-        // height="130px"
+        width="55%"
+      />
+      <div
+        css={css`
+          margin: 0 0 0 5%;
+        `}
       />
       <Info>
         <CarName>Kia Sorento</CarName>
         {/* <CarChip> */}
-        <div
-          css={css`
-            display: flex;
-            flex-flow: row nowrap;
-            margin: 0 0 5px 0;
-            /* width: fit-content; */
-          `}
-        >
-          <CarChip>Hatch</CarChip>
+        <CarChipContainer>
           <div
             css={css`
-              width: 5px;
+              display: flex;
+              flex-flow: row nowrap;
+              margin: 0 0 5px 0;
+              /* width: fit-content; */
             `}
-          ></div>
-          <CarChip>Seat 7</CarChip>
-        </div>
-        <CarChip>$10K ~ 20K</CarChip>
-
-        {/* </CarChip> */}
+          >
+            <CarChip>Hatch</CarChip>
+            <div
+              css={css`
+                width: 5px;
+              `}
+            />
+            <CarChip>Seat 7</CarChip>
+          </div>
+          <CarChip>$10K ~ 20K</CarChip>
+        </CarChipContainer>
       </Info>
     </Wrapper>
   );

@@ -38,7 +38,7 @@ const ButtonContainer = styled.div`
 `;
 
 const CarCardContainer = styled.div`
-  padding: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 // = ButtonContainer height + margin을 줄 height

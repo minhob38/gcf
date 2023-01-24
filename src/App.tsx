@@ -9,7 +9,7 @@ import Train from "./components/Train";
 import Button from "./components/Button";
 import LinkButton from "./components/LinkButton";
 import { subscribeServer, notifyServer } from "./utils/subscribe";
-import { Landing } from "./pages/Landing";
+import  Landing  from "./pages/Landing";
 
 const Wrapper = styled.div({
   width: "100%",

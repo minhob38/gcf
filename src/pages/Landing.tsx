@@ -10,6 +10,8 @@
 // import LinkButton from "./components/LinkButton";
 // import { subscribeServer, notifyServer } from "./utils/subscribe";
 
+import Header from "../components/Header";
+
 // const Wrapper = styled.div({
 //   width: "100%",
 //   height: "100%",
@@ -28,11 +30,12 @@
 //   cursor: pointer;
 // `;
 
-export const Landing = () => {
+const Landing = () => {
   console.log(process.env.NODE_ENV);
 
   return (
-    <div>Landing</div>
+    <Header title="GCF CAR"></Header>
+    // <div>Landing</div>
     // <Wrapper>
     //   <Home />
     //   <Button label="Click 📝" />
@@ -50,6 +53,6 @@ export const Landing = () => {
     //   </button>
     // </Wrapper>
   );
-}
+};
 
-
+export default Landing;

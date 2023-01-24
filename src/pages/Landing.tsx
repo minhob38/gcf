@@ -10,7 +10,9 @@
 // import LinkButton from "./components/LinkButton";
 // import { subscribeServer, notifyServer } from "./utils/subscribe";
 
-import Header from "../components/Header";
+import Content from "@components/Content";
+import Header from "@components/Header";
+import * as size from "@constants/size";
 
 // const Wrapper = styled.div({
 //   width: "100%",
@@ -34,24 +36,12 @@ const Landing = () => {
   console.log(process.env.NODE_ENV);
 
   return (
-    <Header title="GCF CAR"></Header>
-    // <div>Landing</div>
-    // <Wrapper>
-    //   <Home />
-    //   <Button label="Click 📝" />
-    //   <LinkButton path="/plane" />
-    //   <LinkButton path="/train" />
-    //   <Routes>
-    //     <Route path="/plane" element={<Plane />}></Route>
-    //     <Route path="/train" element={<Train />}></Route>
-    //   </Routes>
-    //   <button css={buttonStyle} onClick={() => subscribeServer()}>
-    //     Server Subscription
-    //   </button>
-    //   <button css={buttonStyle} onClick={() => notifyServer()}>
-    //     Server Notification
-    //   </button>
-    // </Wrapper>
+    <>
+      <Header title="GCF CAR"></Header>
+      <Content top={size.HEADER_HEIGHT} bottom="0">
+        <div>h</div>
+      </Content>
+    </>
   );
 };
 

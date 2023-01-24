@@ -1,17 +1,7 @@
-// /** @jsxImportSource @emotion/react */
-// import React from "react";
-// import { Route, Routes } from "react-router-dom";
-// import { css } from "@emotion/react";
-// import styled from "@emotion/styled";
-// import Home from "./components/Home";
-// import Plane from "./components/Plane";
-// import Train from "./components/Train";
-// import Button from "./components/Button";
-// import LinkButton from "./components/LinkButton";
-// import { subscribeServer, notifyServer } from "./utils/subscribe";
-
-import Content from "@components/Content";
+/** @jsxImportSource @emotion/react */
 import Header from "@components/Header";
+import Content from "@components/Content";
+import Scroll from "@components/Scroll";
 import * as size from "@constants/size";
 
 // const Wrapper = styled.div({
@@ -33,13 +23,11 @@ import * as size from "@constants/size";
 // `;
 
 const Landing = () => {
-  console.log(process.env.NODE_ENV);
-
   return (
     <>
       <Header title="GCF CAR"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <div>h</div>
+        <Scroll direction="y" height="calc(100% - 127px - 10px)"></Scroll>
       </Content>
     </>
   );

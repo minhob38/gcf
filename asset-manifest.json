@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/gcf/static/css/main.d5622912.css",
+    "main.js": "/gcf/static/js/main.b33f6429.js",
+    "service-worker.js": "/gcf/service-worker.js",
+    "index.html": "/gcf/index.html",
+    "main.d5622912.css.map": "/gcf/static/css/main.d5622912.css.map",
+    "main.b33f6429.js.map": "/gcf/static/js/main.b33f6429.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5622912.css",
+    "static/js/main.b33f6429.js"
+  ]
+}

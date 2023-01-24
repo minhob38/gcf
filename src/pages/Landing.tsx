@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 
-import Header from "@components/Header";
-import Content from "@components/Content";
-import Button from "@components/Button";
-import Scroll from "@components/Scroll";
+import Header from "@components/common/Header";
+import Content from "@components/common/Content";
+import Button from "@components/Landing/Button";
+import Scroll from "@components/common/Scroll";
 
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
+import CarCard from "@components/Landing/CarCard";
 
 // const Wrapper = styled.div({
 //   width: "100%",
@@ -46,7 +47,9 @@ const Landing = () => {
           <Button title="Buy/Used" width="100px" height="40px"></Button>
           <Button title="Rent/New" width="100px" height="40px"></Button>
         </ButtonContainer>
-        <Scroll direction="y" height="calc(100% - 127px - 10px)"></Scroll>
+        <Scroll direction="y" height="calc(100% - 127px - 10px)">
+          <CarCard></CarCard>
+        </Scroll>
       </Content>
     </>
   );

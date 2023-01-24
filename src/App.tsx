@@ -6,10 +6,10 @@ import styled from "@emotion/styled";
 import Home from "./components/Home";
 import Plane from "./components/Plane";
 import Train from "./components/Train";
-import Button from "./components/Button";
+import Button from "./components/Landing/Button";
 import LinkButton from "./components/LinkButton";
 import { subscribeServer, notifyServer } from "./utils/subscribe";
-import  Landing  from "./pages/Landing";
+import Landing from "./pages/Landing";
 
 const Wrapper = styled.div({
   width: "100%",

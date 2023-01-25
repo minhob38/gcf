@@ -33,7 +33,6 @@ const SignIn = () => {
   const checkStatus = useTypedSelector((state) => state.rootReducer.authReducer.checkStatus);
   const dispatch = useTypedDispatch();
   const handleCheckBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(ev.target.checked);
     dispatch(actions.checkSignIn());
   };
 

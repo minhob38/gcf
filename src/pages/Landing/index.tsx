@@ -7,6 +7,7 @@ import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import CarCard from "@components/Landing/CarCard";
+import { ErrorBoundary } from "react-error-boundary";
 
 const ButtonContainer = styled.div`
   display: flex;

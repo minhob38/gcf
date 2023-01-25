@@ -1,14 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
-
 import Image from "@components/common/Image";
-
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-
 import checkedImage from "@assets/images/checked-24x24.svg";
-import { useTypedDispatch } from "@hooks/useStore";
+import uncheckedImage from "@assets/images/unchecked-24x24.svg";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
 
 const Label = styled.label`
@@ -32,18 +30,28 @@ const ImageBox = styled.div`
 `;
 
 const SignIn = () => {
+  const checkStatus = useTypedSelector((state) => state.rootReducer.authReducer.checkStatus);
   const dispatch = useTypedDispatch();
+  const handleCheckBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(ev.target.checked);
+    dispatch(actions.checkSignIn());
+  };
 
   return (
     <>
       <Label>
         <ImageBox>
-          <Image src={checkedImage} alt="checked" height="24px" />
+          <Image
+            src={checkStatus === "sign-in" ? checkedImage : uncheckedImage}
+            alt={checkStatus === "sign-in" ? "checked" : "unchecked"}
+            height="24px"
+          />
         </ImageBox>
         <CheckboxInput
           type="checkbox"
           name="email"
-          onChange={() => dispatch(actions.checkSignIn())}
+          checked={checkStatus === "sign-in" ? true : false}
+          onChange={handleCheckBoxChange}
         />
         <Title>Sign in, Already a customer?</Title>
       </Label>

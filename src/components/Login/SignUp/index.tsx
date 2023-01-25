@@ -5,6 +5,9 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import checkedImage from "@assets/images/checked-24x24.svg";
+import uncheckedImage from "@assets/images/unchecked-24x24.svg";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import { actions } from "@store/slices/authSlice";
 
 const Label = styled.label`
   display: flex;
@@ -68,13 +71,28 @@ const ContinueButton = styled.div`
 `;
 
 const SignUp = () => {
+  const checkStatus = useTypedSelector((state) => state.rootReducer.authReducer.checkStatus);
+  const dispatch = useTypedDispatch();
+  const handleCheckBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(actions.checkSignUp());
+  };
+
   return (
     <>
       <Label>
         <ImageBox>
-          <Image src={checkedImage} alt="checked" height="24px" />
+          <Image
+            src={checkStatus === "sign-up" ? checkedImage : uncheckedImage}
+            alt={checkStatus === "sign-up" ? "checked" : "unchecked"}
+            height="24px"
+          />
         </ImageBox>
-        <CheckboxInput type="checkbox" name="email" />
+        <CheckboxInput
+          type="checkbox"
+          name="email"
+          checked={checkStatus === "sign-up" ? true : false}
+          onChange={handleCheckBoxChange}
+        />
         <Title>Create Account, New to GCF CAR</Title>
       </Label>
       <InputBox>

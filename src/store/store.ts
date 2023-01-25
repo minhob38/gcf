@@ -1,16 +1,32 @@
-import { createStore, applyMiddleware } from "redux";
-import { createLogger } from "redux-logger";
+import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
-import rootReducer, { rootSaga } from "../reducers/rootReducer";
+import { all } from "redux-saga/effects";
+import logger from "redux-logger";
+import authReducer from "@store/slices/authSlice";
 
+export function* rootSaga() {
+  yield all([]);
+}
 const sagaMiddleware = createSagaMiddleware();
-const middleware = [sagaMiddleware];
+const middleware: any = [sagaMiddleware];
 
 if (process.env.NODE_ENV === "development") {
-  middleware.push(createLogger());
+  middleware.push(logger);
 }
 
-const store = createStore(rootReducer, applyMiddleware(...middleware));
+// combine으로 합치지 않아도 됩니다. (코드정리를 위해 rootReducer로 묶었습니다.)
+const rootReducer = combineReducers({
+  authReducer,
+});
+
+export const store = configureStore({
+  reducer: { rootReducer },
+  middleware,
+});
+
 sagaMiddleware.run(rootSaga);
 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export default store;

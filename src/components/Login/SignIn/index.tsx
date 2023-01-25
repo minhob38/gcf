@@ -1,10 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 
-import Header from "@components/common/Header";
-import Content from "@components/common/Content";
-import Button from "@components/Landing/Button";
-import Scroll from "@components/common/Scroll";
 import Image from "@components/common/Image";
 
 import * as fonts from "@constants/fonts";
@@ -12,6 +8,8 @@ import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 
 import checkedImage from "@assets/images/checked-24x24.svg";
+import { useTypedDispatch } from "@hooks/useStore";
+import { actions } from "@store/slices/authSlice";
 
 const Label = styled.label`
   display: flex;
@@ -34,13 +32,19 @@ const ImageBox = styled.div`
 `;
 
 const SignIn = () => {
+  const dispatch = useTypedDispatch();
+
   return (
     <>
       <Label>
         <ImageBox>
           <Image src={checkedImage} alt="checked" height="24px" />
         </ImageBox>
-        <CheckboxInput type="checkbox" name="email" />
+        <CheckboxInput
+          type="checkbox"
+          name="email"
+          onChange={() => dispatch(actions.checkSignIn())}
+        />
         <Title>Sign in, Already a customer?</Title>
       </Label>
     </>

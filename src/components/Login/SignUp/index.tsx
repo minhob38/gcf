@@ -97,6 +97,19 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 `;
 
+const ContinueButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  height: 50px;
+  margin: 0 auto 44px auto;
+  border-radius: 8px;
+  background-color: ${colors.PRIMARY_1};
+  font: ${fonts.FONT_LARGE_400};
+  color: ${colors.WHITE_1};
+`;
+
 const SignUp = () => {
   return (
     <>
@@ -112,13 +125,14 @@ const SignUp = () => {
         <TextInput placeholder="John Doe" type="text" name="name" />
       </InputBox>
       <InputBox>
-        <SubTitle>email</SubTitle>
+        <SubTitle>Email</SubTitle>
         <TextInput placeholder="gcf@gmail.com" type="email" name="email" />
       </InputBox>
       <InputBox>
         <SubTitle>Create a password</SubTitle>
         <TextInput placeholder="password" type="password" name="password" />
       </InputBox>
+      <ContinueButton onClick={() => alert("백엔드 연동 필요")}>Continue</ContinueButton>
     </>
   );
 };

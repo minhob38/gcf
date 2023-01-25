@@ -1,17 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
-// import { useRouter } from 'next/router';
 import * as size from "@constants/size";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import * as margins from "@constants/margins";
 
-// import Image from '@components/common/Image';
-// import * as colors from '@constants/colors';
-// import * as fonts from '@constants/fonts';
-// import backImage from '@assets/images/icons/back.svg';
-// import closeImage from '@assets/images/icons/close.svg';
-// import { HEADER_HEIGHT } from '@constants/size';
+import { Link } from "react-router-dom";
 
 interface IProps {
   title: string;
@@ -42,7 +36,15 @@ const Title = styled.div`
   color: ${colors.PRIMARY_1};
 `;
 
-const LoginText = styled.div`
+// const ImageContainer = styled.div``;
+
+// const Header : React.FC<IProps>= ({title}) => {
+//   return <div>{title}</div>
+
+// }
+
+const SLink = styled(Link)`
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,12 +52,9 @@ const LoginText = styled.div`
   color: ${colors.PRIMARY_1};
 `;
 
-// const ImageContainer = styled.div``;
-
-// const Header : React.FC<IProps>= ({title}) => {
-//   return <div>{title}</div>
-
-// }
+const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) => {
+  return <SLink to={path}>{title}</SLink>;
+};
 
 const Header: React.FC<IProps> = ({
   title,
@@ -82,11 +81,8 @@ const Header: React.FC<IProps> = ({
   // };
   return (
     <Wrapper>
-      {/* <ImageContainer onClick={handleClick}>
-        <Image src={src} alt={alt} width="24px" height="24px" />
-      </ImageContainer> */}
       <Title>{title}</Title>
-      <LoginText>Login</LoginText>
+      <LinkButton path="/login" title="Login" />
     </Wrapper>
   );
 };

@@ -35,7 +35,7 @@ const CarChip = styled.div`
   align-items: center;
   flex: 1;
   font: ${fonts.BUTTON_3};
-  color: ${colors.SECONDARY_400};
+  color: ${colors.BLACK_1};
   background-color: ${colors.PRIMARY_3};
   padding: 5.5px 12px;
   border-radius: 4px;

@@ -2,15 +2,24 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 import Landing from "./pages/Landing";
+import * as colors from "@constants/colors";
 
 const Wrapper = styled.div({
   width: "100%",
   height: "100%",
 });
 
+const MobileWrapper = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${colors.BACKGROUND};
+  overflow: hidden;
+`;
+
 function App() {
   return (
-    <Wrapper>
+    <MobileWrapper>
       {/* <Home /> */}
       {/* <Button label="Click 📝" /> */}
       {/* <LinkButton path="/plane" /> */}
@@ -27,7 +36,7 @@ function App() {
       <button css={buttonStyle} onClick={() => notifyServer()}>
         Server Notification
       </button> */}
-    </Wrapper>
+    </MobileWrapper>
   );
 }
 

@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   height: ${size.HEADER_HEIGHT};
   padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
   box-shadow: ${colors.SHADOW};
-  background-color: ${colors.SECONDARY_REAL_WHITE};
+  background-color: ${colors.WHITE_1};
 `;
 
 const Title = styled.div`

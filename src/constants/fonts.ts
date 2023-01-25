@@ -1,4 +1,4 @@
-/* desgin system */
+/* design system */
 export const FONT_HEADER_400 = "normal 400 32px / 45px Pretendard Variable";
 export const FONT_HEADER_600 = "normal 600 32px / 45px Pretendard Variable";
 

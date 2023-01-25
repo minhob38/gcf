@@ -1,10 +1,53 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
+
+import Header from "@components/common/Header";
+import Content from "@components/common/Content";
+import Button from "@components/Landing/Button";
+import Scroll from "@components/common/Scroll";
 import Image from "@components/common/Image";
+
+import * as size from "@constants/size";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
+import CarCard from "@components/Landing/CarCard";
+
 import checkedImage from "@assets/images/checked-24x24.svg";
+
+// const Wrapper = styled.div({
+//   width: "100%",
+//   height: "100%",
+// });
+
+// const buttonStyle = css`
+//   all: unset;
+//   display: block;
+//   background-color: #f3e192;
+//   width: 10rem;
+//   height: 2rem;
+//   &:hover {
+//     background-color: #ebc7c7;
+//     border: none;
+//   }
+//   cursor: pointer;
+// `;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 15px 0;
+  padding: 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
+const CarCardContainer = styled.div`
+  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
+// = ButtonContainer height + margin을 줄 height
+const SCROLL_BOTTOM_MARGIN = 70 + 20;
 
 const Label = styled.label`
   display: flex;
@@ -67,7 +110,7 @@ const ContinueButton = styled.div`
   color: ${colors.WHITE_1};
 `;
 
-const SignUp = () => {
+const SignIn = () => {
   return (
     <>
       <Label>
@@ -77,7 +120,7 @@ const SignUp = () => {
         <CheckboxInput type="checkbox" name="email" />
         <Title>Create Account, New to GCF CAR</Title>
       </Label>
-      <InputBox>
+      {/* <InputBox>
         <SubTitle>First and last name</SubTitle>
         <TextInput placeholder="John Doe" type="text" name="name" />
       </InputBox>
@@ -88,10 +131,9 @@ const SignUp = () => {
       <InputBox>
         <SubTitle>Create a password</SubTitle>
         <TextInput placeholder="password" type="password" name="password" />
-      </InputBox>
-      <ContinueButton onClick={() => alert("백엔드 연동 필요")}>Continue</ContinueButton>
+      </InputBox> */}
     </>
   );
 };
 
-export default SignUp;
+export default SignIn;

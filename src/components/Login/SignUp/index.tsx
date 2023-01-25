@@ -9,7 +9,6 @@ import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import CarCard from "@components/Landing/CarCard";
-import SignUp from "@components/Login/SignUp";
 
 // const Wrapper = styled.div({
 //   width: "100%",
@@ -45,15 +44,20 @@ const CarCardContainer = styled.div`
 // = ButtonContainer height + margin을 줄 height
 const SCROLL_BOTTOM_MARGIN = 70 + 20;
 
-const Login = () => {
+const Input = styled.input`
+  all: unset;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+`;
+
+const SignUp = () => {
   return (
     <>
-      <Header title="GCF CAR"></Header>
-      <Content top={size.HEADER_HEIGHT} bottom="0">
-        <SignUp />
-      </Content>
+      <Input type="checkbox" name="email" />
+      hello
     </>
   );
 };
 
-export default Login;
+export default SignUp;

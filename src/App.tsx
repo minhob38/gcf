@@ -3,11 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 import Landing from "./pages/Landing";
 import * as colors from "@constants/colors";
-
-const Wrapper = styled.div({
-  width: "100%",
-  height: "100%",
-});
+import Login from "pages/Login";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -27,8 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />}></Route>
         <Route path="/gcf" element={<Landing />}></Route>
-        {/* <Route path="/plane" element={<Plane />}></Route> */}
-        {/* <Route path="/train" element={<Train />}></Route> */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/gcf/login" element={<Login />}></Route>
       </Routes>
       {/* <button css={buttonStyle} onClick={() => subscribeServer()}>
         Server Subscription

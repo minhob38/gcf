@@ -4,14 +4,15 @@ import * as size from "@constants/size";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import * as margins from "@constants/margins";
-
 import { Link } from "react-router-dom";
+import Image from "@components/common/Image";
+import leftArrowImage from "@assets/images/left-arrow-24x24.svg";
+import rightArrowImage from "@assets/images/right-arrow-24x24.svg";
 
 interface IProps {
   title: string;
-  // type: 'back' | 'close';
-  // backPath?: string;
-  // closePath?: string;
+  mode: "logo" | "back" | "close";
+  // login
 }
 
 const Wrapper = styled.div`
@@ -28,7 +29,7 @@ const Wrapper = styled.div`
   background-color: ${colors.WHITE_1};
 `;
 
-const Title = styled.div`
+const LogoTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,12 +37,17 @@ const Title = styled.div`
   color: ${colors.PRIMARY_1};
 `;
 
-// const ImageContainer = styled.div``;
-
-// const Header : React.FC<IProps>= ({title}) => {
-//   return <div>{title}</div>
-
-// }
+const BackTitle = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: ${fonts.FONT_BIG_600};
+  color: ${colors.PRIMARY_1};
+`;
 
 const SLink = styled(Link)`
   all: unset;
@@ -56,35 +62,32 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
   return <SLink to={path}>{title}</SLink>;
 };
 
-const Header: React.FC<IProps> = ({
-  title,
-  // type,
-  // backPath = '/',
-  // closePath = '/',
-}) => {
-  // const router = useRouter();
-  // let src: any;
-  // let alt: 'back' | 'close';
-  // let path: string;
-  // if (type === 'back') {
-  //   src = backImage;
-  //   alt = 'back';
-  //   path = backPath;
-  // } else {
-  //   src = closeImage;
-  //   alt = 'close';
-  //   path = closePath;
-  // }
-  // const handleClick = () => {
-  //   if (!path) return;
-  //   router.push(path);
-  // };
-  return (
-    <Wrapper>
-      <Title>{title}</Title>
-      <LinkButton path="/login" title="Login" />
-    </Wrapper>
-  );
+const Header: React.FC<IProps> = ({ title, mode }) => {
+  switch (mode) {
+    case (mode = "logo"):
+      return (
+        <Wrapper>
+          <LogoTitle>{title}</LogoTitle>
+          <LinkButton path="/login" title="Login" />
+        </Wrapper>
+      );
+    case (mode = "back"):
+      return (
+        <Wrapper>
+          <Link to="/">
+            <Image src={leftArrowImage} alt="back" height="24px" />
+          </Link>
+          <BackTitle>{title}</BackTitle>
+        </Wrapper>
+      );
+    default:
+      return (
+        <Wrapper>
+          <LogoTitle>{title}</LogoTitle>
+          <LinkButton path="/login" title="Login" />
+        </Wrapper>
+      );
+  }
 };
 
 export default Header;

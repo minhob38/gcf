@@ -76,6 +76,9 @@ const SignUp = () => {
   const handleCheckBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.checkSignUp());
   };
+  const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(actions.textInput(ev.target));
+  };
 
   return (
     <>
@@ -97,15 +100,30 @@ const SignUp = () => {
       </Label>
       <InputBox>
         <SubTitle>First and last name</SubTitle>
-        <TextInput placeholder="John Doe" type="text" name="name" />
+        <TextInput
+          placeholder="John Doe"
+          type="text"
+          name="name"
+          onChange={handleTextInputChange}
+        />
       </InputBox>
       <InputBox>
         <SubTitle>Email</SubTitle>
-        <TextInput placeholder="gcf@gmail.com" type="email" name="email" />
+        <TextInput
+          placeholder="gcf@gmail.com"
+          type="email"
+          name="email"
+          onChange={handleTextInputChange}
+        />
       </InputBox>
       <InputBox>
         <SubTitle>Create a password</SubTitle>
-        <TextInput placeholder="password" type="password" name="password" />
+        <TextInput
+          placeholder="password"
+          type="password"
+          name="password"
+          onChange={handleTextInputChange}
+        />
       </InputBox>
       <ContinueButton onClick={() => alert("백엔드 연동 필요")}>Continue</ContinueButton>
     </>

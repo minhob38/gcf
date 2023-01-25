@@ -17,6 +17,7 @@ function App() {
       {/* <LinkButton path="/train" /> */}
       <Routes>
         <Route path="/" element={<Landing />}></Route>
+        <Route path="/gcf" element={<Landing />}></Route>
         {/* <Route path="/plane" element={<Plane />}></Route> */}
         {/* <Route path="/train" element={<Train />}></Route> */}
       </Routes>

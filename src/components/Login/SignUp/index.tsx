@@ -52,6 +52,7 @@ const SCROLL_BOTTOM_MARGIN = 70 + 20;
 const Label = styled.label`
   display: flex;
   align-items: center;
+  margin: 15px 0 15px ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const CheckboxInput = styled.input`
@@ -59,21 +60,25 @@ const CheckboxInput = styled.input`
 `;
 
 const Title = styled.div`
-  font: ${fonts.FONT_LARGE_400};
+  font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
   margin: 0 0 0 0;
 `;
 
+const ImageBox = styled.div`
+  margin: 0 5px 0 0;
+`;
+
 const SubTitle = styled.div`
-  font: ${fonts.FONT_MEDIUM_400};
+  font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.BLACK_1};
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
 `;
 
 const TextInput = styled.input`
   all: unset;
   width: 100%;
-  height: 100%;
+  height: 32px;
   border-bottom: 1px solid ${colors.GRAY_1};
   text-align: center;
   font: ${fonts.FONT_MEDIUM_400};
@@ -87,16 +92,18 @@ const InputBox = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 `;
 
 const SignUp = () => {
   return (
     <>
       <Label>
-        <Image src={checkedImage} alt="checked" height="24px" />
+        <ImageBox>
+          <Image src={checkedImage} alt="checked" height="24px" />
+        </ImageBox>
         <CheckboxInput type="checkbox" name="email" />
         <Title>Create Account, New to GCF CAR</Title>
       </Label>
@@ -106,7 +113,11 @@ const SignUp = () => {
       </InputBox>
       <InputBox>
         <SubTitle>email</SubTitle>
-        <TextInput placeholder="gcf@gmail.com" type="text" name="name" />
+        <TextInput placeholder="gcf@gmail.com" type="email" name="email" />
+      </InputBox>
+      <InputBox>
+        <SubTitle>Create a password</SubTitle>
+        <TextInput placeholder="password" type="password" name="password" />
       </InputBox>
     </>
   );

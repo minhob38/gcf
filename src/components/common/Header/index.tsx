@@ -63,6 +63,11 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
 };
 
 const Header: React.FC<IProps> = ({ title, mode }) => {
+  const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
+  const loginPath = window.location.hostname === "minhob38.github.io" ? "/gcf/login" : "/login";
+
+  console.log(homePath, loginPath);
+  console.log(window.location.hostname);
   switch (mode) {
     case (mode = "logo"):
       return (
@@ -74,7 +79,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
     case (mode = "back"):
       return (
         <Wrapper>
-          <Link to="/">
+          <Link to={homePath}>
             <Image src={leftArrowImage} alt="back" height="24px" />
           </Link>
           <BackTitle>{title}</BackTitle>
@@ -84,7 +89,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          <LinkButton path="/login" title="Login" />
+          <LinkButton path={loginPath} title="Login" />
         </Wrapper>
       );
   }

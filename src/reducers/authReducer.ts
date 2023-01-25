@@ -27,7 +27,7 @@ const initialState = {
   isClicked: false,
 };
 
-const authReducer = handleActions(
+const appReducer = handleActions(
   {
     [CLICK_BUTTON]: (state, action) => {
       return produce(state, (draft) => {
@@ -38,4 +38,4 @@ const authReducer = handleActions(
   initialState,
 );
 
-export default authReducer;
+export default appReducer;

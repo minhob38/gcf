@@ -6,6 +6,7 @@ export const ERROR_RED = "#ee5050";
 
 export const BLACK_1 = "#000000";
 export const WHITE_1 = "#ffffff";
+export const GRAY_1 = "#999999";
 
 export const PRIMARY_1 = "#3b7e43";
 export const PRIMARY_2 = "#46954f";

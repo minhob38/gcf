@@ -32,7 +32,7 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font: ${fonts.TITLE_T1};
+  font: ${fonts.FONT_HEADER_600};
   color: ${colors.PRIMARY_1};
 `;
 
@@ -48,7 +48,7 @@ const SLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font: ${fonts.SUBTITLE_T1};
+  font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.PRIMARY_1};
 `;
 

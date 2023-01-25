@@ -23,7 +23,7 @@ const Info = styled.div`
 
 const CarName = styled.div`
   margin: 0 0 10px 0;
-  font: ${fonts.BODY_EMPHASIS_1};
+  font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.BLACK_1};
 `;
 
@@ -34,7 +34,7 @@ const CarChip = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  font: ${fonts.BUTTON_3};
+  font: ${fonts.FONT_TINY_400};
   color: ${colors.BLACK_1};
   background-color: ${colors.PRIMARY_3};
   padding: 5.5px 12px;

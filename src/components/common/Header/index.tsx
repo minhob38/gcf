@@ -73,7 +73,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          <LinkButton path="/login" title="Login" />
+          <LinkButton path={loginPath} title="Login" />
         </Wrapper>
       );
     case (mode = "back"):

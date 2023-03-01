@@ -13,7 +13,8 @@ import MonthSelect from "@components/common/Select/MonthSelect";
 import HourSelect from "@components/common/Select/HourSelect";
 import MinuteSelect from "@components/common/Select/MinuteSelect";
 import PlaceSelect from "@components/common/Select/PlaceSelect";
-import { EPLACE_TYPE } from "types/enum";
+import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
+import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -62,27 +63,30 @@ const PickupService = () => {
         <YearContainer>
           <SelectContainer>
             <SelectTitle>Year</SelectTitle>
-            <YearSelect size={{ width: "160px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "48px" }} />
           </SelectContainer>
         </YearContainer>
         <MonthDateContainer>
           <SelectContainer>
             <SelectTitle>Month</SelectTitle>
-            <MonthSelect size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "48px" }} />
           </SelectContainer>
-          <SelectContainer>
+          {/* <SelectContainer>
             <SelectTitle>Date</SelectTitle>
             <DateSelect year={2023} month={2} size={{ width: "120px", height: "48px" }} />
-          </SelectContainer>
+          </SelectContainer> */}
         </MonthDateContainer>
         <HourMinuteContainer>
           <SelectContainer>
             <SelectTitle>Hour</SelectTitle>
-            <HourSelect size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.HOUR} size={{ width: "120px", height: "48px" }} />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Minute</SelectTitle>
-            <MinuteSelect size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect
+              type={ESCHEDULE_TYPE.MINUTE}
+              size={{ width: "120px", height: "48px" }}
+            />
           </SelectContainer>
         </HourMinuteContainer>
         <Title>Place</Title>

@@ -4,3 +4,8 @@ export enum ESERVICE_TYPE {
   CAR = "car",
   TEL = "tel",
 }
+
+export enum EPLACE_TYPE {
+  ARRIVAL = "arrival",
+  DEPARTURE = "departure",
+}

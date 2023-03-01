@@ -12,6 +12,8 @@ import YearSelect from "@components/common/Select/YearSelect";
 import MonthSelect from "@components/common/Select/MonthSelect";
 import HourSelect from "@components/common/Select/HourSelect";
 import MinuteSelect from "@components/common/Select/MinuteSelect";
+import PlaceSelect from "@components/common/Select/PlaceSelect";
+import { EPLACE_TYPE } from "types/enum";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -25,18 +27,19 @@ const YearContainer = styled.div`
 
 const MonthDateContainer = styled(YearContainer)``;
 const HourMinuteContainer = styled(YearContainer)``;
+const PlaceContainer = styled(YearContainer)``;
 
 const SelectContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 0 30px 0 0;
+  margin: 0 20px 0 0;
 `;
 // margin: ${margins.TOP_MARGIN} auto 0 auto;
 
 const Title = styled.div`
-  margin: ${margins.TOP_MARGIN} 0 10px ${margins.SIDE_MAIN_MARGIN};
+  margin: ${margins.TOP_MARGIN} 0 5px ${margins.SIDE_MAIN_MARGIN};
   font: ${fonts.FONT_BIG_400};
   color: ${colors.BLACK_1};
 `;
@@ -83,6 +86,14 @@ const PickupService = () => {
           </SelectContainer>
         </HourMinuteContainer>
         <Title>Place</Title>
+        <PlaceContainer>
+          <SelectContainer>
+            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "48px" }} />
+          </SelectContainer>
+          <SelectContainer>
+            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "48px" }} />
+          </SelectContainer>
+        </PlaceContainer>
         <Title>Flight</Title>
       </Content>
     </>

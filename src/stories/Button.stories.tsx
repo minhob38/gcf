@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Button from "../components/Landing/Button";
+import Button from "../components/CarService/Button";
 import { decorators } from "../../.storybook/preview";
 import { action } from "@storybook/addon-actions";
 import { IButtonProps } from "../types/types";

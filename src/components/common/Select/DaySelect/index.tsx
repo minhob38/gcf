@@ -5,6 +5,8 @@ import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import { actions } from "@store/slices/pickupSlice";
 
 interface IProps {
   year: number;
@@ -12,6 +14,9 @@ interface IProps {
 }
 
 const DaySelect: React.FC<IProps> = ({ year, month }) => {
+  const dispatch = useTypedDispatch();
+  const date = useTypedSelector((state) => state.rootReducer.pickupReducer.date);
+
   let days: number[] = [];
 
   switch (month) {
@@ -55,7 +60,7 @@ const DaySelect: React.FC<IProps> = ({ year, month }) => {
     );
   });
 
-  const Input = styled.select`
+  const Select = styled.select`
     all: unset;
     text-align: center;
     font: ${fonts.FONT_SMALL_400};
@@ -87,9 +92,15 @@ const DaySelect: React.FC<IProps> = ({ year, month }) => {
 
   return (
     <Wrapper>
-      <Input name="day" value={new Date().getDate()}>
+      <Select
+        name="date"
+        value={date}
+        onChange={(ev) => {
+          dispatch(actions.selectInput(ev.target));
+        }}
+      >
         {Options}
-      </Input>
+      </Select>
     </Wrapper>
   );
 };

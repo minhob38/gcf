@@ -4,6 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import logger from "redux-logger";
 import authReducer from "@store/slices/authSlice";
+import pickupReducer from "@store/slices/pickupSlice";
 
 export function* rootSaga() {
   yield all([]);
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === "development") {
 // combine으로 합치지 않아도 됩니다. (코드정리를 위해 rootReducer로 묶었습니다.)
 const rootReducer = combineReducers({
   authReducer,
+  pickupReducer,
 });
 
 export const store = configureStore({

@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { v4 as uuid4 } from "uuid";
-import * as size from "@constants/size";
-import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
@@ -15,20 +13,20 @@ interface IProps {
   size: { width: string; height: string };
 }
 
-const MonthSelect: React.FC<IProps> = ({ type, size }) => {
+const MinuteSelect: React.FC<IProps> = ({ type, size }) => {
   const dispatch = useTypedDispatch();
-  const month = useTypedSelector((state) => state.rootReducer.pickupReducer.month);
+  const minute = useTypedSelector((state) => state.rootReducer.pickupReducer.minute);
 
-  const months = [variables.SELECT_DEFAULT_TEXT];
+  const minutes = [variables.SELECT_DEFAULT_TEXT];
 
-  for (let i = 1; i < 13; i++) {
-    months.push(i.toString());
+  for (let i = 0; i < 6; i++) {
+    minutes.push((10 * i).toString());
   }
 
-  const Options = months.map((month) => {
+  const Options = minutes.map((minute) => {
     return (
-      <option key={uuid4()} value={month}>
-        {month}
+      <option key={uuid4()} value={minute}>
+        {minute}
       </option>
     );
   });
@@ -54,8 +52,8 @@ const MonthSelect: React.FC<IProps> = ({ type, size }) => {
   return (
     <Wrapper>
       <Select
-        name="month"
-        value={month}
+        name="minute"
+        value={minute}
         onChange={(ev) => {
           dispatch(actions.selectInput(ev.target));
         }}
@@ -66,4 +64,4 @@ const MonthSelect: React.FC<IProps> = ({ type, size }) => {
   );
 };
 
-export default MonthSelect;
+export default MinuteSelect;

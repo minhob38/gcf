@@ -7,11 +7,16 @@ import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
 import { ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
+import { useEffect, useState } from "react";
 
 interface IProps {
   service?: ESERVICE_TYPE;
   type: ESCHEDULE_TYPE;
   size: { width: string; height: string };
+}
+
+interface IStyleProps {
+  selected: boolean;
 }
 
 const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
@@ -21,6 +26,50 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
   const date = useTypedSelector((state) => state.rootReducer.pickupReducer.date);
   const hour = useTypedSelector((state) => state.rootReducer.pickupReducer.hour);
   const minute = useTypedSelector((state) => state.rootReducer.pickupReducer.minute);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+
+  useEffect(() => {
+    switch (type) {
+      case ESCHEDULE_TYPE.YEAR:
+        if (year === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        setIsSelected(true);
+        break;
+      case ESCHEDULE_TYPE.MONTH:
+        if (month === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+
+        setIsSelected(true);
+        break;
+      case ESCHEDULE_TYPE.DATE:
+        if (date === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        setIsSelected(true);
+        break;
+      case ESCHEDULE_TYPE.HOUR:
+        if (hour === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        setIsSelected(true);
+        break;
+      case ESCHEDULE_TYPE.MINUTE:
+        if (minute === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        setIsSelected(true);
+        break;
+      default:
+        setIsSelected(false);
+    }
+  }, [type, year, month, date, hour, minute]);
 
   const months = [variables.SELECT_DEFAULT_TEXT];
   const dates = [variables.SELECT_DEFAULT_TEXT];
@@ -122,9 +171,6 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
 
   const Select = styled.select`
     all: unset;
-    text-align: center;
-    font: ${fonts.FONT_SMALL_400};
-    color: ${colors.BLACK_1};
   `;
 
   const Wrapper = styled.div`
@@ -136,10 +182,14 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
     height: ${size.height};
     border-radius: 8px;
     background: ${colors.WHITE_1};
+    border: ${(props: IStyleProps) => (props.selected ? `2px solid ${colors.PRIMARY_3}` : `none`)};
+    text-align: center;
+    font: ${fonts.FONT_SMALL_400};
+    color: ${(props: IStyleProps) => (props.selected ? `${colors.BLACK_1}` : `${colors.GRAY_1}`)};
   `;
 
   return (
-    <Wrapper>
+    <Wrapper selected={isSelected}>
       <Select
         name={name}
         value={value}

@@ -29,7 +29,7 @@ const initialState: IState = {
 };
 
 const pickupSlice = createSlice({
-  name: "auth",
+  name: "pickup",
   initialState,
   reducers: {
     initialize: (state) => {

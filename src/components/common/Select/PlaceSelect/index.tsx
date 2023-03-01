@@ -7,6 +7,7 @@ import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
 import { EPLACE_TYPE, ESERVICE_TYPE } from "types/enum";
+import { useEffect, useState } from "react";
 
 interface IProps {
   service?: ESERVICE_TYPE;
@@ -14,10 +15,40 @@ interface IProps {
   size: { width: string; height: string };
 }
 
+interface IStyleProps {
+  selected: boolean;
+}
+
 const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
   const dispatch = useTypedDispatch();
   const arrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);
   const departure = useTypedSelector((state) => state.rootReducer.pickupReducer.departure);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+
+  useEffect(() => {
+    switch (type) {
+      case EPLACE_TYPE.ARRIVAL:
+        if (arrival === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        setIsSelected(true);
+
+        break;
+      case EPLACE_TYPE.DEPARTURE:
+        console.log(departure);
+        if (departure === variables.SELECT_DEFAULT_TEXT) {
+          setIsSelected(false);
+          return;
+        }
+        console.log(departure, "???");
+        setIsSelected(true);
+
+        break;
+      default:
+        setIsSelected(false);
+    }
+  }, [type, arrival, departure]);
 
   const departures = [variables.SELECT_DEFAULT_TEXT, "Incheon Airport"];
   const arrivals = [variables.SELECT_DEFAULT_TEXT, "GCF"];
@@ -53,9 +84,6 @@ const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
 
   const Select = styled.select`
     all: unset;
-    text-align: center;
-    font: ${fonts.FONT_SMALL_400};
-    color: ${colors.BLACK_1};
   `;
 
   const Wrapper = styled.div`
@@ -67,10 +95,14 @@ const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
     height: ${size.height};
     border-radius: 8px;
     background: ${colors.WHITE_1};
+    border: ${(props: IStyleProps) => (props.selected ? `2px solid ${colors.PRIMARY_3}` : `none`)};
+    text-align: center;
+    font: ${fonts.FONT_SMALL_400};
+    color: ${(props: IStyleProps) => (props.selected ? `${colors.BLACK_1}` : `${colors.GRAY_1}`)};
   `;
 
   return (
-    <Wrapper>
+    <Wrapper selected={isSelected}>
       <Select
         name={name}
         value={value}

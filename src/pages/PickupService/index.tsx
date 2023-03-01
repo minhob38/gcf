@@ -92,7 +92,7 @@ const PickupService = () => {
             <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "48px" }} />
           </SelectContainer>
         </PlaceContainer>
-        <Title>Flight</Title>
+        <Title>Flight(TODO)</Title>
       </Content>
     </>
   );

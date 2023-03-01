@@ -2,7 +2,6 @@
 import styled from "@emotion/styled";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
-import { v4 as uuid4 } from "uuid";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
@@ -66,10 +65,10 @@ const PickupService = () => {
             <SelectTitle>Month</SelectTitle>
             <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "48px" }} />
           </SelectContainer>
-          {/* <SelectContainer>
+          <SelectContainer>
             <SelectTitle>Date</SelectTitle>
-            <DateSelect year={2023} month={2} size={{ width: "120px", height: "48px" }} />
-          </SelectContainer> */}
+            <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "48px" }} />
+          </SelectContainer>
         </MonthDateContainer>
         <HourMinuteContainer>
           <SelectContainer>

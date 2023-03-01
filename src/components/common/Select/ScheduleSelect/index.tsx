@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { v4 as uuid4 } from "uuid";
-import * as size from "@constants/size";
-import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
@@ -11,6 +9,7 @@ import { actions } from "@store/slices/pickupSlice";
 import { ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 
 interface IProps {
+  service?: ESERVICE_TYPE;
   type: ESCHEDULE_TYPE;
   size: { width: string; height: string };
 }
@@ -50,6 +49,44 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
         months.push(i.toString());
       }
       options = months;
+      break;
+    case ESCHEDULE_TYPE.DATE:
+      value = date;
+      name = "date";
+      switch (month) {
+        case "2":
+          // TODO: 윤달처리
+          for (let i = 1; i < 29; i++) {
+            dates.push(i.toString());
+          }
+          break;
+        case "1":
+        case "3":
+        case "5":
+        case "7":
+        case "8":
+        case "10":
+        case "12":
+          for (let i = 1; i < 32; i++) {
+            dates.push(i.toString());
+          }
+          break;
+        case "4":
+        case "6":
+        case "9":
+        case "11":
+          for (let i = 1; i < 31; i++) {
+            dates.push(i.toString());
+          }
+          break;
+        default:
+          // for (let i = 1; i < 32; i++) {
+          //   dates.push(i.toString());
+          // }
+          break;
+      }
+
+      options = dates;
       break;
     case ESCHEDULE_TYPE.HOUR:
       value = hour;
@@ -108,6 +145,21 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
         value={value}
         onChange={(ev) => {
           dispatch(actions.selectInput(ev.target));
+        }}
+        onClick={(ev) => {
+          switch (type) {
+            case ESCHEDULE_TYPE.DATE:
+              if (
+                year === variables.SELECT_DEFAULT_TEXT ||
+                month === variables.SELECT_DEFAULT_TEXT
+              ) {
+                // modal로 바꾸기
+                alert("select year and month first");
+              }
+
+              break;
+            default:
+          }
         }}
       >
         {Options}

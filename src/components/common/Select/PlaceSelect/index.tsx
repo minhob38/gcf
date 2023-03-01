@@ -1,16 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { v4 as uuid4 } from "uuid";
-import * as size from "@constants/size";
-import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
-import { EPLACE_TYPE } from "types/enum";
+import { EPLACE_TYPE, ESERVICE_TYPE } from "types/enum";
 
 interface IProps {
+  service?: ESERVICE_TYPE;
   type: EPLACE_TYPE;
   size: { width: string; height: string };
 }

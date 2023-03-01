@@ -6,6 +6,7 @@ import * as colors from "@constants/colors";
 import Login from "pages/Login";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "pages/Error";
+import CarService from "pages/CarService";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -29,6 +30,9 @@ function App() {
           <Route path="/gcf" element={<Landing />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/gcf/login" element={<Login />}></Route>
+          {/* car service */}
+          <Route path="/car" element={<CarService />}></Route>
+          <Route path="/gcf/car" element={<CarService />}></Route>
         </Routes>
       </ErrorBoundary>
     </MobileWrapper>

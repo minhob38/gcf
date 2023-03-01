@@ -4,11 +4,8 @@ import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
-import pickUpImage from "@assets/images/pickup-service.jpg";
-import teleImage from "@assets/images/tele-service.png";
-import moveImage from "@assets/images/move-service.png";
-import carImage from "@assets/images/car-service.png";
 import ServiceBanner from "@components/Landing/ServiceBanner";
+import { ESERVICE_TYPE } from "types/enum";
 
 const ServiceContainer = styled.div`
   display: flex;
@@ -30,12 +27,12 @@ const Landing = () => {
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />
         <ServiceContainer>
-          <ServiceBanner title="Pick Up" image={{ src: pickUpImage, alt: "pickup" }} />
-          <ServiceBanner title="Tele" image={{ src: teleImage, alt: "tele" }} />
+          <ServiceBanner type={ESERVICE_TYPE.PICKUP} />
+          <ServiceBanner type={ESERVICE_TYPE.TEL} />
         </ServiceContainer>
         <ServiceContainer>
-          <ServiceBanner title="Move" image={{ src: moveImage, alt: "move" }} />
-          <ServiceBanner title="My Car" image={{ src: carImage, alt: "car" }} />
+          <ServiceBanner type={ESERVICE_TYPE.MOVE} />
+          <ServiceBanner type={ESERVICE_TYPE.CAR} />
         </ServiceContainer>
       </Content>
     </>

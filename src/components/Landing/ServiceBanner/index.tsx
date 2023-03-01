@@ -3,10 +3,15 @@ import styled from "@emotion/styled";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import Image from "@components/common/Image";
+import { Link } from "react-router-dom";
+import { ESERVICE_TYPE } from "types/enum";
+import pickUpImage from "@assets/images/pickup-service.jpg";
+import teleImage from "@assets/images/tele-service.png";
+import moveImage from "@assets/images/move-service.png";
+import carImage from "@assets/images/car-service.png";
 
 interface IProps {
-  title: string;
-  image: { src: any; alt: string };
+  type: ESERVICE_TYPE;
   // onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -41,6 +46,9 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   width: ${`calc(50% - ${GAP}/2)`};
   box-shadow: 0 5px 10px -10px ${colors.GRAY_1}; // 아래에만 그림자 넣기
+  &:hover {
+  }
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -52,13 +60,52 @@ const Title = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const ServiceBanner: React.FC<IProps> = ({ title, image }) => {
-  const { src, alt } = image;
+const ServiceBanner: React.FC<IProps> = ({ type }) => {
+  let title: string;
+  let src: any;
+  let alt: string;
+  let path: string;
+
+  switch (type) {
+    case ESERVICE_TYPE.PICKUP:
+      title = "Pick Up";
+      src = pickUpImage;
+      alt = "pickup";
+      path = "/pickup";
+      break;
+    case ESERVICE_TYPE.MOVE:
+      title = "Move";
+      src = moveImage;
+      alt = "move";
+      path = "/move";
+      break;
+    case ESERVICE_TYPE.TEL:
+      title = "Tel";
+      src = teleImage;
+      alt = "tel";
+      path = "/tel";
+      break;
+    case ESERVICE_TYPE.CAR:
+      title = "My Car";
+      src = carImage;
+      alt = "car";
+      path = "/car";
+      break;
+    default:
+      title = "My Car";
+      src = carImage;
+      alt = "car";
+      path = "/car";
+  }
+
+  path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
 
   return (
     <Wrapper>
-      <Image src={src} alt={alt} width="100%" />
-      <Title>{title}</Title>
+      <Link to={path}>
+        <Image src={src} alt={alt} width="100%" />
+        <Title>{title}</Title>
+      </Link>
     </Wrapper>
   );
 };

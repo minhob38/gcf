@@ -7,7 +7,6 @@ import * as margins from "@constants/margins";
 import { Link } from "react-router-dom";
 import Image from "@components/common/Image";
 import leftArrowImage from "@assets/images/left-arrow-24x24.svg";
-import rightArrowImage from "@assets/images/right-arrow-24x24.svg";
 
 interface IProps {
   title: string;

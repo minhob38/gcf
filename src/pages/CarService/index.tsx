@@ -24,7 +24,7 @@ const CarCardContainer = styled.div`
 // = ButtonContainer height + margin을 줄 height
 const SCROLL_BOTTOM_MARGIN = 70 + 20;
 
-const Landing = () => {
+const CarService = () => {
   return (
     <>
       <Header title="GCF CAR" mode="logo"></Header>
@@ -55,4 +55,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default CarService;

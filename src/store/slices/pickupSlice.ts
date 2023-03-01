@@ -42,6 +42,11 @@ const pickupSlice = createSlice({
       const { name, value } = action.payload;
       state[name] = value;
     },
+
+    textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
+      const { name, value } = action.payload;
+      state[name] = value;
+    },
   },
 });
 

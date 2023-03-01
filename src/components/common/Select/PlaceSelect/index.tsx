@@ -33,17 +33,13 @@ const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
           return;
         }
         setIsSelected(true);
-
         break;
       case EPLACE_TYPE.DEPARTURE:
-        console.log(departure);
         if (departure === variables.SELECT_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
-        console.log(departure, "???");
         setIsSelected(true);
-
         break;
       default:
         setIsSelected(false);

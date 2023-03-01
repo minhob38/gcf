@@ -35,7 +35,7 @@ const SelectContainer = styled.div`
 
 const Title = styled.div`
   margin: ${margins.TOP_MARGIN} 0 5px ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.FONT_BIG_400};
+  font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
 `;
 
@@ -44,8 +44,26 @@ const SelectTitle = styled.div`
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  font: ${fonts.FONT_LARGE_400};
+  font: ${fonts.FONT_SMALL_400};
   color: ${colors.BLACK_1};
+`;
+
+const RequestButton = styled.div`
+  position: fixed;
+  bottom: ${margins.SIDE_MAIN_MARGIN};
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  height: 50px;
+
+  /* margin: 0 auto 44px auto; */
+  border-radius: 8px;
+  background-color: ${colors.PRIMARY_1};
+  font: ${fonts.FONT_LARGE_400};
+  color: ${colors.WHITE_1};
 `;
 
 const PickupService = () => {
@@ -93,6 +111,7 @@ const PickupService = () => {
           </SelectContainer>
         </PlaceContainer>
         <Title>Flight(TODO)</Title>
+        <RequestButton>Request</RequestButton>
       </Content>
     </>
   );

@@ -18,7 +18,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  year: new Date().getFullYear().toString(),
+  year: variables.SELECT_DEFAULT_TEXT,
   month: variables.SELECT_DEFAULT_TEXT,
   date: variables.SELECT_DEFAULT_TEXT,
   hour: variables.SELECT_DEFAULT_TEXT,

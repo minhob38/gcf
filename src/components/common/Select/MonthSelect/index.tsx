@@ -8,8 +8,14 @@ import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
+import { ESERVICE_TYPE } from "types/enum";
 
-const MonthSelect: React.FC = () => {
+interface IProps {
+  type?: ESERVICE_TYPE;
+  size: { width: string; height: string };
+}
+
+const MonthSelect: React.FC<IProps> = ({ type, size }) => {
   const dispatch = useTypedDispatch();
   const month = useTypedSelector((state) => state.rootReducer.pickupReducer.month);
 
@@ -44,25 +50,13 @@ const MonthSelect: React.FC = () => {
     color: ${colors.BLACK_1};
   `;
 
-  // const Wrapper = styled.div`
-  //   box-sizing: border-box;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: 120px;
-  //   height: 48px;
-  //   /* border: ${(props: IStyleProps) => (props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`)}; */
-  //   border-radius: 8px;
-  //   background: ${colors.SECONDARY_REAL_WHITE};
-  // `;
-
   const Wrapper = styled.div`
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
-    height: 48px;
+    width: ${size.width};
+    height: ${size.height};
     border-radius: 8px;
     background: ${colors.WHITE_1};
   `;

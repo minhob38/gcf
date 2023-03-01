@@ -31,9 +31,9 @@ const PickupService = () => {
     <>
       <Header title="GCF CAR" mode="logo"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <YearSelect />
-        <MonthSelect />
-        <DateSelect year={2023} month={2} />
+        <YearSelect size={{ width: "120px", height: "48px" }} />
+        <MonthSelect size={{ width: "120px", height: "48px" }} />
+        <DateSelect year={2023} month={2} size={{ width: "120px", height: "48px" }} />
       </Content>
     </>
   );

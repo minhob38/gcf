@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import * as variables from "@constants/variables";
 
 interface IState {
   // checkStatus: "sign-up" | "sign-in";
@@ -6,25 +7,25 @@ interface IState {
   // email: string | null;
   // password: string | null;
 
-  year: number;
-  month: number;
-  date: number;
-  hour: number;
-  minute: number;
-  departure: string | null;
-  arrival: string | null;
-  flightNumber: string | null;
+  year: string;
+  month: string;
+  date: string;
+  hour: string;
+  minute: string;
+  departure: string;
+  arrival: string;
+  flightNumber: string;
 }
 
 const initialState: IState = {
-  year: new Date().getFullYear(),
-  month: new Date().getMonth(),
-  date: new Date().getDate(),
-  hour: 0,
-  minute: 0,
-  departure: null,
-  arrival: null,
-  flightNumber: null,
+  year: new Date().getFullYear().toString(),
+  month: variables.SELECT_DEFAULT_TEXT,
+  date: variables.SELECT_DEFAULT_TEXT,
+  hour: variables.SELECT_DEFAULT_TEXT,
+  minute: variables.SELECT_DEFAULT_TEXT,
+  departure: variables.SELECT_DEFAULT_TEXT,
+  arrival: variables.SELECT_DEFAULT_TEXT,
+  flightNumber: variables.SELECT_DEFAULT_TEXT,
 };
 
 const pickupSlice = createSlice({
@@ -39,18 +40,6 @@ const pickupSlice = createSlice({
 
     selectInput: (state, action: PayloadAction<React.ChangeEvent<HTMLSelectElement>["target"]>) => {
       const { name, value } = action.payload;
-
-      if (
-        name === "year" ||
-        name === "month" ||
-        name === "date" ||
-        name === "hour" ||
-        name === "minute"
-      ) {
-        state[name] = parseInt(value);
-        return;
-      }
-
       state[name] = value;
     },
   },

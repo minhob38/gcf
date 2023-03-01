@@ -12,6 +12,7 @@ import * as colors from "@constants/colors";
 
 import CarCard from "@components/CarService/CarCard";
 import DaySelect from "@components/common/Select/DaySelect";
+import { useState } from "react";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -29,16 +30,6 @@ const CarCardContainer = styled.div`
 // = ButtonContainer height + margin을 줄 height
 
 const PickupService = () => {
-  // const days = ["1", "2", ""];
-  // const days = new Array()
-  // const DayOptions = days.map((day) => {
-  //   return (
-  //     <option key={uuid4()} value={day}>
-  //       {day}
-  //     </option>
-  //   );
-  // });
-
   return (
     <>
       <Header title="GCF CAR" mode="logo"></Header>

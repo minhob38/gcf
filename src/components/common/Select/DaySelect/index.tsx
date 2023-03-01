@@ -5,6 +5,7 @@ import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
+import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
 
@@ -17,13 +18,14 @@ const DaySelect: React.FC<IProps> = ({ year, month }) => {
   const dispatch = useTypedDispatch();
   const date = useTypedSelector((state) => state.rootReducer.pickupReducer.date);
 
-  let days: number[] = [];
+  // -1은 선택이 안되었음을 보여주는 수
+  let days: string[] = [variables.SELECT_DEFAULT_TEXT];
 
   switch (month) {
     case 2:
       // TODO: 윤달처리
       for (let i = 1; i < 29; i++) {
-        days.push(i);
+        days.push(i.toString());
       }
       break;
     case 1:
@@ -34,7 +36,7 @@ const DaySelect: React.FC<IProps> = ({ year, month }) => {
     case 10:
     case 12:
       for (let i = 1; i < 32; i++) {
-        days.push(i);
+        days.push(i.toString());
       }
       break;
     case 4:
@@ -42,12 +44,12 @@ const DaySelect: React.FC<IProps> = ({ year, month }) => {
     case 9:
     case 11:
       for (let i = 1; i < 31; i++) {
-        days.push(i);
+        days.push(i.toString());
       }
       break;
     default:
       for (let i = 1; i < 32; i++) {
-        days.push(i);
+        days.push(i.toString());
       }
       break;
   }

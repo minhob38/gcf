@@ -17,7 +17,7 @@ const ServiceContainer = styled.div`
 `;
 
 const Margin = styled.div`
-  height: 20px;
+  height: ${margins.TOP_MARGIN};
 `;
 
 const Landing = () => {

@@ -79,11 +79,11 @@ const ServiceBanner: React.FC<IProps> = ({ type }) => {
       alt = "move";
       path = "/move";
       break;
-    case ESERVICE_TYPE.TEL:
-      title = "Tel";
+    case ESERVICE_TYPE.TELCOM:
+      title = "Telcom";
       src = teleImage;
-      alt = "tel";
-      path = "/tel";
+      alt = "telcom";
+      path = "/telcom";
       break;
     case ESERVICE_TYPE.CAR:
       title = "My Car";

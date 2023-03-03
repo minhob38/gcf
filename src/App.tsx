@@ -8,6 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "pages/Error";
 import CarService from "pages/CarService";
 import PickupService from "pages/PickupService";
+import TelcomService from "pages/TelcomService";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -31,9 +32,12 @@ function App() {
           <Route path="/gcf" element={<Landing />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/gcf/login" element={<Login />}></Route>
-          {/* car service */}
+          {/* pickup service */}
           <Route path="/pickup" element={<PickupService />}></Route>
           <Route path="/gcf/pickup" element={<PickupService />}></Route>
+          {/* telcom service */}
+          <Route path="/telcom" element={<TelcomService />}></Route>
+          <Route path="/gcf/telocm" element={<TelcomService />}></Route>
           {/* car service */}
           <Route path="/car" element={<CarService />}></Route>
           <Route path="/gcf/car" element={<CarService />}></Route>

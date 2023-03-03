@@ -28,7 +28,7 @@ const Landing = () => {
         <Margin />
         <ServiceContainer>
           <ServiceBanner type={ESERVICE_TYPE.PICKUP} />
-          <ServiceBanner type={ESERVICE_TYPE.TEL} />
+          <ServiceBanner type={ESERVICE_TYPE.TELCOM} />
         </ServiceContainer>
         <ServiceContainer>
           <ServiceBanner type={ESERVICE_TYPE.MOVE} />

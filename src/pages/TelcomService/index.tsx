@@ -9,7 +9,8 @@ import * as colors from "@constants/colors";
 import PlaceSelect from "@components/common/Select/PlaceSelect";
 import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
-import TextInput from "@components/common/Select/TextInput";
+import TextInput from "@components/common/Input/TextInput";
+import CheckboxInput from "@components/common/Input/CheckboxInput";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -89,16 +90,9 @@ const TelcomService = () => {
         </YearMonthContainer>
         <Gap />
         <Title>Kind</Title>
-        <PlaceContainer>
-          <SelectContainer>
-            <SelectTitle>Departure</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Arrival</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
-        </PlaceContainer>
+        <CheckboxInput name="kind" title="Mobile Phone" />
+        <CheckboxInput name="kind" title="Internet[LAN]" />
+        <CheckboxInput name="kind" title="Television" />
         <RequestButton>Request</RequestButton>
       </Content>
     </>

@@ -9,7 +9,7 @@ import * as colors from "@constants/colors";
 import PlaceSelect from "@components/common/Select/PlaceSelect";
 import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
-import TextInput from "@components/common/Select/TextInput";
+import TextInput from "@components/common/Input/TextInput";
 
 // = ButtonContainer height + margin을 줄 height
 

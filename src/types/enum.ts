@@ -17,3 +17,9 @@ export enum ESCHEDULE_TYPE {
   HOUR = "hour",
   MINUTE = "minute",
 }
+
+export enum ETELCOM_KIND_TYPE {
+  MOBILE = "mobile",
+  INTERNET = "internet",
+  TV = "tv",
+}

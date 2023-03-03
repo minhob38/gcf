@@ -6,10 +6,8 @@ import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import PlaceSelect from "@components/common/Select/PlaceSelect";
-import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
+import { ESCHEDULE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
-import TextInput from "@components/common/Input/TextInput";
 import CheckboxInput from "@components/common/Input/CheckboxInput";
 
 // = ButtonContainer height + margin을 줄 height
@@ -21,11 +19,6 @@ const YearMonthContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   margin: 0 auto 10px auto;
 `;
-
-const MonthDateContainer = styled(YearMonthContainer)``;
-const HourMinuteContainer = styled(YearMonthContainer)``;
-const PlaceContainer = styled(YearMonthContainer)``;
-const FlightContainer = styled(YearMonthContainer)``;
 
 const SelectContainer = styled.div`
   display: flex;
@@ -68,6 +61,12 @@ const RequestButton = styled.div`
   color: ${colors.WHITE_1};
 `;
 
+const CheckboxContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px 0;
+`;
+
 const Gap = styled.div`
   height: 20px;
 `;
@@ -90,9 +89,11 @@ const TelcomService = () => {
         </YearMonthContainer>
         <Gap />
         <Title>Kind</Title>
-        <CheckboxInput name="kind" title="Mobile Phone" />
-        <CheckboxInput name="kind" title="Internet[LAN]" />
-        <CheckboxInput name="kind" title="Television" />
+        <CheckboxContainer>
+          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.MOBILE} title="Mobile Phone" />
+          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.INTERNET} title="Internet[LAN]" />
+          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
+        </CheckboxContainer>
         <RequestButton>Request</RequestButton>
       </Content>
     </>

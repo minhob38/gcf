@@ -3,13 +3,19 @@ import styled from "@emotion/styled";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import * as margins from "@constants/margins";
-import { useTypedDispatch } from "@hooks/useStore";
-import { actions } from "@store/slices/pickupSlice";
-import { ESERVICE_TYPE } from "types/enum";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import { actions as telcomActions } from "@store/slices/telcomSlice";
+import { shallowEqual } from "react-redux";
+import { useEffect, useState } from "react";
 
 interface IProps {
   name: string;
   title: string;
+  value: string;
+}
+
+interface IStyleProps {
+  checked: boolean;
 }
 
 const Label = styled.label`
@@ -31,27 +37,36 @@ const Text = styled.div`
   width: 100%;
   font: ${fonts.FONT_LARGE_400};
   color: ${colors.GRAY_1};
+  color: ${(props: IStyleProps) => (props.checked ? colors.BLACK_1 : colors.GRAY_1)};
   background-color: ${colors.WHITE_1};
-  border: 2px solid ${colors.GRAY_1};
+  border: ${(props: IStyleProps) => (props.checked ? `2px solid ${colors.PRIMARY_3}` : "none")};
   border-radius: 8px;
 `;
-// border: ${(props: IStyleProps) => (props.selected ? `2px solid ${colors.PRIMARY_3}` : `none`)};
+// border: ${(props: IStyleProps) =>
+//   props.checked ? `2px solid ${colors.PRIMARY_2}` : `2px solid ${colors.GRAY_1}`};
 
-const CheckboxInput: React.FC<IProps> = ({ name, title }) => {
+const CheckboxInput: React.FC<IProps> = ({ name, title, value }) => {
   const dispatch = useTypedDispatch();
+  const kind = useTypedSelector((state) => state.rootReducer.telcomReducer.kind, shallowEqual);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.textInput(ev.target));
+  useEffect(() => {
+    if (kind.includes(value as any)) setIsChecked(true);
+  }, [kind, value]);
+
+  const handleCheckboxInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(telcomActions.checkboxInput(ev.target));
   };
 
   return (
     <Label>
-      <Text>{title}</Text>
+      <Text checked={isChecked}>{title}</Text>
       <Input
         type="checkbox"
         name={name}
-        // checked={checkStatus === "sign-in" ? true : false}
-        // onChange={handleCheckBoxChange}
+        value={value}
+        checked={isChecked}
+        onChange={handleCheckboxInputChange}
       />
     </Label>
   );

@@ -5,6 +5,7 @@ import { all } from "redux-saga/effects";
 import logger from "redux-logger";
 import authReducer from "@store/slices/authSlice";
 import pickupReducer from "@store/slices/pickupSlice";
+import telcomReducer from "@store/slices/telcomSlice";
 
 export function* rootSaga() {
   yield all([]);
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
 const rootReducer = combineReducers({
   authReducer,
   pickupReducer,
+  telcomReducer,
 });
 
 export const store = configureStore({

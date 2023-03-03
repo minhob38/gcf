@@ -1,1 +1,1 @@
-export const SELECT_DEFAULT_TEXT = "Select : )";
+export const SELECT_DEFAULT_TEXT = "Select";

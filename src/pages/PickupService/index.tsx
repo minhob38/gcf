@@ -24,6 +24,7 @@ const YearContainer = styled.div`
 const MonthDateContainer = styled(YearContainer)``;
 const HourMinuteContainer = styled(YearContainer)``;
 const PlaceContainer = styled(YearContainer)``;
+const FlightContainer = styled(YearContainer)``;
 
 const SelectContainer = styled.div`
   display: flex;
@@ -32,13 +33,6 @@ const SelectContainer = styled.div`
   align-items: center;
   margin: 0 20px 0 0;
 `;
-// margin: ${margins.TOP_MARGIN} auto 0 auto;
-
-const Title = styled.div`
-  margin: ${margins.TOP_MARGIN} 0 5px ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.FONT_LARGE_600};
-  color: ${colors.BLACK_1};
-`;
 
 const SelectTitle = styled.div`
   width: 100%;
@@ -46,6 +40,12 @@ const SelectTitle = styled.div`
   /* justify-content: center; */
   align-items: center;
   font: ${fonts.FONT_SMALL_400};
+  color: ${colors.BLACK_1};
+`;
+
+const Title = styled.div`
+  margin: ${margins.TOP_MARGIN} 0 5px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
 `;
 
@@ -67,6 +67,10 @@ const RequestButton = styled.div`
   color: ${colors.WHITE_1};
 `;
 
+const Gap = styled.div`
+  height: 20px;
+`;
+
 const PickupService = () => {
   return (
     <>
@@ -76,43 +80,49 @@ const PickupService = () => {
         <YearContainer>
           <SelectContainer>
             <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "30px" }} />
           </SelectContainer>
         </YearContainer>
         <MonthDateContainer>
           <SelectContainer>
             <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "30px" }} />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Date</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "30px" }} />
           </SelectContainer>
         </MonthDateContainer>
         <HourMinuteContainer>
           <SelectContainer>
             <SelectTitle>Hour</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.HOUR} size={{ width: "120px", height: "48px" }} />
+            <ScheduleSelect type={ESCHEDULE_TYPE.HOUR} size={{ width: "120px", height: "30px" }} />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Minute</SelectTitle>
             <ScheduleSelect
               type={ESCHEDULE_TYPE.MINUTE}
-              size={{ width: "120px", height: "48px" }}
+              size={{ width: "120px", height: "30px" }}
             />
           </SelectContainer>
         </HourMinuteContainer>
+        <Gap />
         <Title>Place</Title>
         <PlaceContainer>
           <SelectContainer>
-            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "48px" }} />
+            <SelectTitle>Departure</SelectTitle>
+            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
           </SelectContainer>
           <SelectContainer>
-            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "48px" }} />
+            <SelectTitle>Arrival</SelectTitle>
+            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
           </SelectContainer>
         </PlaceContainer>
-        <Title>Flight(TODO)</Title>
-        <TextInput />
+        <Gap />
+        <Title>Flight</Title>
+        <FlightContainer>
+          <TextInput />
+        </FlightContainer>
         <RequestButton>Request</RequestButton>
       </Content>
     </>

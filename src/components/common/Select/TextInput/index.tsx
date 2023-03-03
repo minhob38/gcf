@@ -1,9 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
-import * as size from "@constants/size";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
-import * as margins from "@constants/margins";
 import { useTypedDispatch } from "@hooks/useStore";
 import { actions } from "@store/slices/pickupSlice";
 import { ESERVICE_TYPE } from "types/enum";
@@ -38,7 +36,12 @@ const TextInput: React.FC<IProps | any> = () => {
 
   return (
     <Wrapper>
-      <Input placeholder="John Doe" type="text" name="name" onChange={handleTextInputChange} />
+      <Input
+        placeholder="Flight Number"
+        type="text"
+        name="flightNumber"
+        onChange={handleTextInputChange}
+      />
     </Wrapper>
   );
 };

@@ -9,6 +9,7 @@ import ErrorPage from "pages/Error";
 import CarService from "pages/CarService";
 import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
+import MoveService from "pages/MoveSerivce";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -37,7 +38,10 @@ function App() {
           <Route path="/gcf/pickup" element={<PickupService />}></Route>
           {/* telcom service */}
           <Route path="/telcom" element={<TelcomService />}></Route>
-          <Route path="/gcf/telocm" element={<TelcomService />}></Route>
+          <Route path="/gcf/telcom" element={<TelcomService />}></Route>
+          {/* move service */}
+          <Route path="/move" element={<MoveService />}></Route>
+          <Route path="/gcf/move" element={<MoveService />}></Route>
           {/* car service */}
           <Route path="/car" element={<CarService />}></Route>
           <Route path="/gcf/car" element={<CarService />}></Route>

@@ -20,14 +20,15 @@ const Input = styled.input`
 
 interface IProps {
   service?: ESERVICE_TYPE;
-  size: { width: string; height: string };
+  name: string;
+  placeholder: string;
 }
 
 const Wrapper = styled.div`
   width: 100%;
 `;
 
-const TextInput: React.FC<IProps | any> = () => {
+const TextInput: React.FC<IProps> = ({ name, placeholder }) => {
   const dispatch = useTypedDispatch();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +37,7 @@ const TextInput: React.FC<IProps | any> = () => {
 
   return (
     <Wrapper>
-      <Input
-        placeholder="Flight Number"
-        type="text"
-        name="flightNumber"
-        onChange={handleTextInputChange}
-      />
+      <Input placeholder={placeholder} type="text" name={name} onChange={handleTextInputChange} />
     </Wrapper>
   );
 };

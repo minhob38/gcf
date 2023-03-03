@@ -22,8 +22,13 @@ const YearContainer = styled.div`
 `;
 
 const MonthDateContainer = styled(YearContainer)``;
-const HourMinuteContainer = styled(YearContainer)``;
-const PlaceContainer = styled(YearContainer)``;
+const PlaceContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px 0;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  margin: 0 auto 10px auto;
+`;
 const FlightContainer = styled(YearContainer)``;
 
 const SelectContainer = styled.div`
@@ -31,7 +36,7 @@ const SelectContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 0 20px 0 0;
+  /* margin: 0 20px 0 0; */
 `;
 
 const SelectTitle = styled.div`
@@ -71,7 +76,15 @@ const Gap = styled.div`
   height: 20px;
 `;
 
-const PickupService = () => {
+const ArrivalContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  gap: 15px 0;
+  width: 100%;
+`;
+
+const MoveService = () => {
   return (
     <>
       <Header title="GCF Pick up" mode="logo"></Header>
@@ -93,40 +106,28 @@ const PickupService = () => {
             <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "30px" }} />
           </SelectContainer>
         </MonthDateContainer>
-        <HourMinuteContainer>
-          <SelectContainer>
-            <SelectTitle>Hour</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.HOUR} size={{ width: "120px", height: "30px" }} />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Minute</SelectTitle>
-            <ScheduleSelect
-              type={ESCHEDULE_TYPE.MINUTE}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-        </HourMinuteContainer>
         <Gap />
         <Title>Place</Title>
         <PlaceContainer>
-          <SelectContainer>
-            <SelectTitle>Departure</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Arrival</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
+          <ArrivalContainer>
+            <SelectContainer>
+              <SelectTitle>Departure</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+            <TextInput name="arrival" placeholder="Arrival Address" />
+          </ArrivalContainer>
+          <ArrivalContainer>
+            <SelectContainer>
+              <SelectTitle>Arrival</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+            <TextInput name="arrival" placeholder="Arrival Address" />
+          </ArrivalContainer>
         </PlaceContainer>
-        <Gap />
-        <Title>Flight</Title>
-        <FlightContainer>
-          <TextInput name="flightNumber" placeholder="Flight Number" />
-        </FlightContainer>
         <RequestButton>Request</RequestButton>
       </Content>
     </>
   );
 };
 
-export default PickupService;
+export default MoveService;

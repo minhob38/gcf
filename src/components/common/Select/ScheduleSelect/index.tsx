@@ -4,13 +4,16 @@ import { v4 as uuid4 } from "uuid";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
-import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions } from "@store/slices/pickupSlice";
-import { ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
+import { useTypedDispatch } from "@hooks/useStore";
+import { actions as pickupActions } from "@store/slices/pickupSlice";
+import { actions as telcomActions } from "@store/slices/telcomSlice";
+import { actions as moveActions } from "@store/slices/moveSlice";
+import { EENGLISH_MONTH, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import { useEffect, useState } from "react";
+import { useDateSelector } from "@hooks/useSelect";
 
 interface IProps {
-  service?: ESERVICE_TYPE;
+  service: ESERVICE_TYPE;
   type: ESCHEDULE_TYPE;
   size: { width: string; height: string };
 }
@@ -19,26 +22,24 @@ interface IStyleProps {
   selected: boolean;
 }
 
-const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
+const ScheduleSelect: React.FC<IProps> = ({ service, type, size }) => {
   const dispatch = useTypedDispatch();
-  const year = useTypedSelector((state) => state.rootReducer.pickupReducer.year);
-  const month = useTypedSelector((state) => state.rootReducer.pickupReducer.month);
-  const date = useTypedSelector((state) => state.rootReducer.pickupReducer.date);
-  const hour = useTypedSelector((state) => state.rootReducer.pickupReducer.hour);
-  const minute = useTypedSelector((state) => state.rootReducer.pickupReducer.minute);
+  const [year, month, date, hour, minute] = useDateSelector(service);
+  console.log([year, month, date, hour, minute]);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(year, month, date, hour, minute);
     switch (type) {
       case ESCHEDULE_TYPE.YEAR:
-        if (year === variables.SELECT_DEFAULT_TEXT) {
+        if (year === variables.SELECT_YEAR_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
         setIsSelected(true);
         break;
       case ESCHEDULE_TYPE.MONTH:
-        if (month === variables.SELECT_DEFAULT_TEXT) {
+        if (month === variables.SELECT_MONTH_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
@@ -46,21 +47,21 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
         setIsSelected(true);
         break;
       case ESCHEDULE_TYPE.DATE:
-        if (date === variables.SELECT_DEFAULT_TEXT) {
+        if (date === variables.SELECT_DATE_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
         setIsSelected(true);
         break;
       case ESCHEDULE_TYPE.HOUR:
-        if (hour === variables.SELECT_DEFAULT_TEXT) {
+        if (hour === variables.SELECT_HOUR_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
         setIsSelected(true);
         break;
       case ESCHEDULE_TYPE.MINUTE:
-        if (minute === variables.SELECT_DEFAULT_TEXT) {
+        if (minute === variables.SELECT_MINUTE_DEFAULT_TEXT) {
           setIsSelected(false);
           return;
         }
@@ -71,12 +72,12 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
     }
   }, [type, year, month, date, hour, minute]);
 
-  const months = [variables.SELECT_DEFAULT_TEXT];
-  const dates = [variables.SELECT_DEFAULT_TEXT];
-  const hours = [variables.SELECT_DEFAULT_TEXT];
-  const minutes = [variables.SELECT_DEFAULT_TEXT];
+  const months = [variables.SELECT_MONTH_DEFAULT_TEXT];
+  const dates = [variables.SELECT_DATE_DEFAULT_TEXT];
+  const hours = [variables.SELECT_HOUR_DEFAULT_TEXT];
+  const minutes = [variables.SELECT_MINUTE_DEFAULT_TEXT];
   const years = [
-    variables.SELECT_DEFAULT_TEXT,
+    variables.SELECT_YEAR_DEFAULT_TEXT,
     new Date().getFullYear().toString(),
     (new Date().getFullYear() + 1).toString(),
   ];
@@ -94,52 +95,60 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
     case ESCHEDULE_TYPE.MONTH:
       value = month;
       name = "month";
-      for (let i = 1; i < 13; i++) {
-        months.push(i.toString());
-      }
+      const engMonth = [
+        EENGLISH_MONTH.JAN,
+        EENGLISH_MONTH.FEB,
+        EENGLISH_MONTH.MAR,
+        EENGLISH_MONTH.APR,
+        EENGLISH_MONTH.MAY,
+        EENGLISH_MONTH.JUN,
+        EENGLISH_MONTH.JUL,
+        EENGLISH_MONTH.AUG,
+        EENGLISH_MONTH.SEP,
+        EENGLISH_MONTH.OCT,
+        EENGLISH_MONTH.NOV,
+        EENGLISH_MONTH.DEC,
+      ];
+      months.push(...engMonth);
       options = months;
       break;
     case ESCHEDULE_TYPE.DATE:
       value = date;
       name = "date";
       switch (month) {
-        case "2":
+        case EENGLISH_MONTH.FEB:
           // TODO: 윤달처리
           for (let i = 1; i < 29; i++) {
             dates.push(i.toString());
           }
           break;
-        case "1":
-        case "3":
-        case "5":
-        case "7":
-        case "8":
-        case "10":
-        case "12":
+        case EENGLISH_MONTH.JAN:
+        case EENGLISH_MONTH.MAR:
+        case EENGLISH_MONTH.MAY:
+        case EENGLISH_MONTH.JUL:
+        case EENGLISH_MONTH.AUG:
+        case EENGLISH_MONTH.OCT:
+        case EENGLISH_MONTH.DEC:
           for (let i = 1; i < 32; i++) {
             dates.push(i.toString());
           }
           break;
-        case "4":
-        case "6":
-        case "9":
-        case "11":
+        case EENGLISH_MONTH.APR:
+        case EENGLISH_MONTH.JUN:
+        case EENGLISH_MONTH.SEP:
+        case EENGLISH_MONTH.NOV:
           for (let i = 1; i < 31; i++) {
             dates.push(i.toString());
           }
           break;
         default:
-          // for (let i = 1; i < 32; i++) {
-          //   dates.push(i.toString());
-          // }
-          break;
       }
 
       options = dates;
       break;
     case ESCHEDULE_TYPE.HOUR:
       value = hour;
-      name = "hours";
+      name = "hour";
       for (let i = 0; i < 24; i++) {
         const hour = i.toString();
         const twoDigit = hour.length === 1 ? "0" + hour : hour;
@@ -194,7 +203,20 @@ const ScheduleSelect: React.FC<IProps> = ({ type, size }) => {
         name={name}
         value={value}
         onChange={(ev) => {
-          dispatch(actions.selectInput(ev.target));
+          switch (service) {
+            case ESERVICE_TYPE.PICKUP:
+              dispatch(pickupActions.selectInput(ev.target));
+              break;
+            case ESERVICE_TYPE.TELCOM:
+              dispatch(telcomActions.selectInput(ev.target));
+              break;
+            case ESERVICE_TYPE.MOVE:
+              dispatch(moveActions.selectInput(ev.target));
+              break;
+            default:
+          }
+
+          dispatch(pickupActions.selectInput(ev.target));
         }}
         onClick={(ev) => {
           switch (type) {

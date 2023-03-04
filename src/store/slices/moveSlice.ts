@@ -10,17 +10,17 @@ interface IState {
 
   year: string;
   month: string;
-  kind: ETELCOM_KIND_TYPE[];
+  // kind: ETELCOM_KIND_TYPE[];
 }
 
 const initialState: IState = {
   year: variables.SELECT_DEFAULT_TEXT,
   month: variables.SELECT_DEFAULT_TEXT,
-  kind: [],
+  // kind: [],
 };
 
-const telcomSlice = createSlice({
-  name: "telcom",
+const moveSlice = createSlice({
+  name: "move",
   initialState,
   reducers: {
     initialize: (state) => {
@@ -34,25 +34,25 @@ const telcomSlice = createSlice({
       state[name] = value;
     },
 
-    checkboxInput: (
-      state,
-      action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>,
-    ) => {
-      const { name, value, type } = action.payload;
+    // checkboxInput: (
+    //   state,
+    //   action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>,
+    // ) => {
+    //   const { name, value, type } = action.payload;
 
-      if (type === "checkbox") {
-        const idx = (state[name] as string[]).indexOf(value);
+    //   if (type === "checkbox") {
+    //     const idx = (state[name] as string[]).indexOf(value);
 
-        if (idx === -1) {
-          state[name].push(value);
-          return;
-        }
+    //     if (idx === -1) {
+    //       state[name].push(value);
+    //       return;
+    //     }
 
-        (state[name] as string[]).splice(idx, 1);
-      }
-    },
+    //     (state[name] as string[]).splice(idx, 1);
+    //   }
+    // },
   },
 });
 
-export const actions = telcomSlice.actions;
-export default telcomSlice.reducer;
+export const actions = moveSlice.actions;
+export default moveSlice.reducer;

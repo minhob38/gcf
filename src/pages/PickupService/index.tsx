@@ -7,7 +7,7 @@ import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import PlaceSelect from "@components/common/Select/PlaceSelect";
-import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
+import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 
@@ -80,27 +80,44 @@ const PickupService = () => {
         <YearContainer>
           <SelectContainer>
             <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.PICKUP}
+              type={ESCHEDULE_TYPE.YEAR}
+              size={{ width: "160px", height: "30px" }}
+            />
           </SelectContainer>
         </YearContainer>
         <MonthDateContainer>
           <SelectContainer>
             <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.PICKUP}
+              type={ESCHEDULE_TYPE.MONTH}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Date</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.PICKUP}
+              type={ESCHEDULE_TYPE.DATE}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
         </MonthDateContainer>
         <HourMinuteContainer>
           <SelectContainer>
             <SelectTitle>Hour</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.HOUR} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.PICKUP}
+              type={ESCHEDULE_TYPE.HOUR}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Minute</SelectTitle>
             <ScheduleSelect
+              service={ESERVICE_TYPE.PICKUP}
               type={ESCHEDULE_TYPE.MINUTE}
               size={{ width: "120px", height: "30px" }}
             />

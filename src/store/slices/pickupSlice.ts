@@ -2,11 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as variables from "@constants/variables";
 
 interface IState {
-  // checkStatus: "sign-up" | "sign-in";
-  // name: string | null;
-  // email: string | null;
-  // password: string | null;
-
   year: string;
   month: string;
   date: string;
@@ -18,11 +13,11 @@ interface IState {
 }
 
 const initialState: IState = {
-  year: variables.SELECT_DEFAULT_TEXT,
-  month: variables.SELECT_DEFAULT_TEXT,
-  date: variables.SELECT_DEFAULT_TEXT,
-  hour: variables.SELECT_DEFAULT_TEXT,
-  minute: variables.SELECT_DEFAULT_TEXT,
+  year: variables.SELECT_YEAR_DEFAULT_TEXT,
+  month: variables.SELECT_MONTH_DEFAULT_TEXT,
+  date: variables.SELECT_DATE_DEFAULT_TEXT,
+  hour: variables.SELECT_HOUR_DEFAULT_TEXT,
+  minute: variables.SELECT_MINUTE_DEFAULT_TEXT,
   departure: variables.SELECT_DEFAULT_TEXT,
   arrival: variables.SELECT_DEFAULT_TEXT,
   flightNumber: variables.SELECT_DEFAULT_TEXT,

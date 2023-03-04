@@ -6,7 +6,7 @@ import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import { ESCHEDULE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
+import { ESCHEDULE_TYPE, ESERVICE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import CheckboxInput from "@components/common/Input/CheckboxInput";
 
@@ -80,11 +80,19 @@ const TelcomService = () => {
         <YearMonthContainer>
           <SelectContainer>
             <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.TELCOM}
+              type={ESCHEDULE_TYPE.YEAR}
+              size={{ width: "160px", height: "30px" }}
+            />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.TELCOM}
+              type={ESCHEDULE_TYPE.MONTH}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
         </YearMonthContainer>
         <Gap />

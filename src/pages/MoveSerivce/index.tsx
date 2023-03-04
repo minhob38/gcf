@@ -7,11 +7,9 @@ import * as margins from "@constants/margins";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import PlaceSelect from "@components/common/Select/PlaceSelect";
-import { EPLACE_TYPE, ESCHEDULE_TYPE } from "types/enum";
+import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
-
-// = ButtonContainer height + margin을 줄 height
 
 const YearContainer = styled.div`
   display: flex;
@@ -29,7 +27,6 @@ const PlaceContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   margin: 0 auto 10px auto;
 `;
-const FlightContainer = styled(YearContainer)``;
 
 const SelectContainer = styled.div`
   display: flex;
@@ -93,17 +90,29 @@ const MoveService = () => {
         <YearContainer>
           <SelectContainer>
             <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.YEAR} size={{ width: "160px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.MOVE}
+              type={ESCHEDULE_TYPE.YEAR}
+              size={{ width: "160px", height: "30px" }}
+            />
           </SelectContainer>
         </YearContainer>
         <MonthDateContainer>
           <SelectContainer>
             <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.MONTH} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.MOVE}
+              type={ESCHEDULE_TYPE.MONTH}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
           <SelectContainer>
             <SelectTitle>Date</SelectTitle>
-            <ScheduleSelect type={ESCHEDULE_TYPE.DATE} size={{ width: "120px", height: "30px" }} />
+            <ScheduleSelect
+              service={ESERVICE_TYPE.MOVE}
+              type={ESCHEDULE_TYPE.DATE}
+              size={{ width: "120px", height: "30px" }}
+            />
           </SelectContainer>
         </MonthDateContainer>
         <Gap />

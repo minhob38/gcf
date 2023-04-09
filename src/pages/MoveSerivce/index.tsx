@@ -10,6 +10,7 @@ import PlaceSelect from "@components/common/Select/PlaceSelect";
 import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
+import RequestButton from "@components/common/Button/RequestButton";
 
 const YearContainer = styled.div`
   display: flex;
@@ -51,24 +52,6 @@ const Title = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const RequestButton = styled.div`
-  position: fixed;
-  bottom: ${margins.SIDE_MAIN_MARGIN};
-  left: 50%;
-  transform: translate(-50%, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  height: 50px;
-
-  /* margin: 0 auto 44px auto; */
-  border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.WHITE_1};
-`;
-
 const Gap = styled.div`
   height: 20px;
 `;
@@ -79,6 +62,17 @@ const ArrivalContainer = styled.div`
   align-items: flex-start;
   gap: 15px 0;
   width: 100%;
+`;
+
+const RequestButtonContainer = styled.div`
+  position: fixed;
+  bottom: ${margins.SIDE_MAIN_MARGIN};
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
 `;
 
 const MoveService = () => {
@@ -133,7 +127,9 @@ const MoveService = () => {
             <TextInput name="arrival" placeholder="Arrival Address" />
           </ArrivalContainer>
         </PlaceContainer>
-        <RequestButton>Request</RequestButton>
+        <RequestButtonContainer>
+          <RequestButton service={ESERVICE_TYPE.MOVE} />
+        </RequestButtonContainer>{" "}
       </Content>
     </>
   );

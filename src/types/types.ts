@@ -22,3 +22,13 @@ export interface IPickupRequest {
 // minute: "30";
 // month: "Jun";
 // year: "2024";
+
+export interface ITelcomRequest {
+  kind: string[];
+  month: string;
+  year: string;
+}
+// <e.g>
+// kind: ["internet", "mobile"];
+// month: "Apr";
+// year: "2024";

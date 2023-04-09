@@ -9,6 +9,7 @@ import * as colors from "@constants/colors";
 import { ESCHEDULE_TYPE, ESERVICE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import CheckboxInput from "@components/common/Input/CheckboxInput";
+import RequestButton from "@components/common/Button/RequestButton";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -43,24 +44,6 @@ const Title = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const RequestButton = styled.div`
-  position: fixed;
-  bottom: ${margins.SIDE_MAIN_MARGIN};
-  left: 50%;
-  transform: translate(-50%, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  height: 50px;
-
-  /* margin: 0 auto 44px auto; */
-  border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.WHITE_1};
-`;
-
 const CheckboxContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -69,6 +52,17 @@ const CheckboxContainer = styled.div`
 
 const Gap = styled.div`
   height: 20px;
+`;
+
+const RequestButtonContainer = styled.div`
+  position: fixed;
+  bottom: ${margins.SIDE_MAIN_MARGIN};
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
 `;
 
 const TelcomService = () => {
@@ -102,7 +96,9 @@ const TelcomService = () => {
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.INTERNET} title="Internet[LAN]" />
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
         </CheckboxContainer>
-        <RequestButton>Request</RequestButton>
+        <RequestButtonContainer>
+          <RequestButton service={ESERVICE_TYPE.TELCOM} />
+        </RequestButtonContainer>{" "}
       </Content>
     </>
   );

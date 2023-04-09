@@ -11,6 +11,7 @@ import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 import Scroll from "@components/common/Scroll";
+import RequestButton from "@components/common/Button/RequestButton";
 
 const YearContainer = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const Title = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const RequestButton = styled.div`
+const RequestButtonContainer = styled.div`
   position: fixed;
   bottom: ${margins.SIDE_MAIN_MARGIN};
   left: 50%;
@@ -57,13 +58,6 @@ const RequestButton = styled.div`
   justify-content: center;
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  height: 50px;
-
-  /* margin: 0 auto 44px auto; */
-  border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.WHITE_1};
 `;
 
 const Gap = styled.div`
@@ -145,7 +139,9 @@ const PickupService = () => {
             <TextInput name="flightNumber" placeholder="Flight Number" />
           </FlightContainer>
         </Scroll>
-        <RequestButton>Request</RequestButton>
+        <RequestButtonContainer>
+          <RequestButton />
+        </RequestButtonContainer>
       </Content>
     </>
   );

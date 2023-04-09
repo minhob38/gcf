@@ -2,8 +2,10 @@
 import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import { useMutation } from "react-query";
-import { testPostApi } from "@apis/functions";
+import { pickUpRequestApi, testPostApi } from "@apis/functions";
+import { useTypedSelector } from "@hooks/useStore";
+import { useApiMutation } from "@hooks/useApiMutation";
+import { IPickupRequest } from "types/types";
 
 const Button = styled.div`
   display: flex;
@@ -18,25 +20,11 @@ const Button = styled.div`
 `;
 
 const RequestButton = () => {
-  const requestMutation = useMutation(testPostApi, {
-    //
-    onMutate: (variables) => {
-      console.log("mutate", variables);
-    },
-    onError: (error, variables, context) => {
-      console.log("error", error, variables, context);
-    },
-    onSuccess: (data, variables, context) => {
-      console.log("success", data, variables, context);
-    },
-    // error + success
-    onSettled: () => {
-      console.log("settled");
-    },
-  });
+  const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer);
+  const pickupMutation = useApiMutation<IPickupRequest>(pickUpRequestApi);
 
   const handleClick = () => {
-    requestMutation.mutate("input");
+    pickupMutation.mutate(pickupState);
   };
 
   return (

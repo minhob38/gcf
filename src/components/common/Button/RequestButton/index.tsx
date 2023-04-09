@@ -2,6 +2,7 @@
 import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
+import { useMutation } from "react-query";
 
 const Button = styled.div`
   display: flex;
@@ -16,6 +17,26 @@ const Button = styled.div`
 `;
 
 const RequestButton = () => {
+  // const requestMutation = useMutation(api, {
+  //   onMutate: (variable) => {
+  //     console.log("onMutate", variable);
+  //     // variable : {loginId: 'xxx', password; 'xxx'}
+  //   },
+  //   onError: (error, variable, context) => {
+  //     // error
+  //   },
+  //   onSuccess: (data, variables, context) => {
+  //     console.log("success", data, variables, context);
+  //   },
+  //   onSettled: () => {
+  //     console.log("end");
+  //   },
+  // });
+
+  // const handleClick = () => {
+  //   requestMutation.mutate();
+  // };
+
   return (
     <>
       <Button>Request</Button>

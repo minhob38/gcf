@@ -12,6 +12,8 @@ import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 import Scroll from "@components/common/Scroll";
 import RequestButton from "@components/common/Button/RequestButton";
+import axios from "@configs/axios-config";
+import { useQuery } from "react-query";
 
 const YearContainer = styled.div`
   display: flex;
@@ -69,6 +71,25 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
+  const testApi = async () => {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
+    const { data } = response;
+    throw new Error("!!!");
+    return data;
+  };
+  const testOption = {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    onSuccess: (data) => {
+      console.log("success", data);
+    },
+    onError: (e) => {
+      console.log("error", e.message);
+    },
+  };
+  const query = useQuery("testQuery", testApi, testOption);
+  const { isLoading, isError, data, error } = query;
+
   return (
     <>
       <Header title="GCF Pick up" mode="logo"></Header>

@@ -25,11 +25,9 @@ interface IStyleProps {
 const ScheduleSelect: React.FC<IProps> = ({ service, type, size }) => {
   const dispatch = useTypedDispatch();
   const [year, month, date, hour, minute] = useDateSelector(service);
-  console.log([year, month, date, hour, minute]);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(year, month, date, hour, minute);
     switch (type) {
       case ESCHEDULE_TYPE.YEAR:
         if (year === variables.SELECT_YEAR_DEFAULT_TEXT) {

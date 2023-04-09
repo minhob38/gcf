@@ -10,8 +10,7 @@ import PlaceSelect from "@components/common/Select/PlaceSelect";
 import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
-
-// = ButtonContainer height + margin을 줄 height
+import Scroll from "@components/common/Scroll";
 
 const YearContainer = styled.div`
   display: flex;
@@ -71,75 +70,81 @@ const Gap = styled.div`
   height: 20px;
 `;
 
+// = button 영역 + margin을 줄 height
+// prettier-ignore
+const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
+
 const PickupService = () => {
   return (
     <>
       <Header title="GCF Pick up" mode="logo"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Title>Schedule</Title>
-        <YearContainer>
-          <SelectContainer>
-            <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.PICKUP}
-              type={ESCHEDULE_TYPE.YEAR}
-              size={{ width: "160px", height: "30px" }}
-            />
-          </SelectContainer>
-        </YearContainer>
-        <MonthDateContainer>
-          <SelectContainer>
-            <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.PICKUP}
-              type={ESCHEDULE_TYPE.MONTH}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Date</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.PICKUP}
-              type={ESCHEDULE_TYPE.DATE}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-        </MonthDateContainer>
-        <HourMinuteContainer>
-          <SelectContainer>
-            <SelectTitle>Hour</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.PICKUP}
-              type={ESCHEDULE_TYPE.HOUR}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Minute</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.PICKUP}
-              type={ESCHEDULE_TYPE.MINUTE}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-        </HourMinuteContainer>
-        <Gap />
-        <Title>Place</Title>
-        <PlaceContainer>
-          <SelectContainer>
-            <SelectTitle>Departure</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Arrival</SelectTitle>
-            <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
-          </SelectContainer>
-        </PlaceContainer>
-        <Gap />
-        <Title>Flight</Title>
-        <FlightContainer>
-          <TextInput name="flightNumber" placeholder="Flight Number" />
-        </FlightContainer>
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          <Title>Schedule</Title>
+          <YearContainer>
+            <SelectContainer>
+              <SelectTitle>Year</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.YEAR}
+                size={{ width: "160px", height: "30px" }}
+              />
+            </SelectContainer>
+          </YearContainer>
+          <MonthDateContainer>
+            <SelectContainer>
+              <SelectTitle>Month</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.MONTH}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Date</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.DATE}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </MonthDateContainer>
+          <HourMinuteContainer>
+            <SelectContainer>
+              <SelectTitle>Hour</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.HOUR}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Minute</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.MINUTE}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </HourMinuteContainer>
+          <Gap />
+          <Title>Place</Title>
+          <PlaceContainer>
+            <SelectContainer>
+              <SelectTitle>Departure</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Arrival</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+          </PlaceContainer>
+          <Gap />
+          <Title>Flight</Title>
+          <FlightContainer>
+            <TextInput name="flightNumber" placeholder="Flight Number" />
+          </FlightContainer>
+        </Scroll>
         <RequestButton>Request</RequestButton>
       </Content>
     </>

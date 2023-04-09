@@ -27,13 +27,13 @@ function App() {
 
   return (
     <MobileWrapper>
-      <Suspense fallback={<Fallback />}>
-        <ErrorBoundary
-          FallbackComponent={ErrorPage}
-          onReset={() => {
-            // reset the state of your app so the error doesn't happen again
-          }}
-        >
+      <ErrorBoundary
+        FallbackComponent={ErrorPage}
+        onReset={() => {
+          // reset the state of your app so the error doesn't happen again
+        }}
+      >
+        <Suspense fallback={<Fallback />}>
           <Routes>
             <Route path="/" element={<Landing />}></Route>
             <Route path="/gcf" element={<Landing />}></Route>
@@ -52,8 +52,8 @@ function App() {
             <Route path="/car" element={<CarService />}></Route>
             <Route path="/gcf/car" element={<CarService />}></Route>
           </Routes>
-        </ErrorBoundary>
-      </Suspense>
+        </Suspense>
+      </ErrorBoundary>
     </MobileWrapper>
   );
 }

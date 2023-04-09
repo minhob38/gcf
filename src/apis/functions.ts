@@ -5,8 +5,7 @@ export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
   const { data } = response;
   await new Promise((resolve, reject) => setTimeout(() => resolve("..."), 3000));
-  // throw new Error("error"); -> onError로 감
-  throw new Error("???");
+  // throw new Error("error"); -> onError로 감 / onError로 가면 ErrorBoundary 동작
   return data;
 };
 

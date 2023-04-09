@@ -15,7 +15,6 @@ import RequestButton from "@components/common/Button/RequestButton";
 import { useQuery } from "react-query";
 import { testGetApi } from "@apis/functions";
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 const YearContainer = styled.div`
   display: flex;
@@ -79,7 +78,6 @@ const PickupService = () => {
     suspense: true,
     onSuccess: (data) => {
       console.log("success", data);
-      throw new Error("..");
     },
     onError: (e) => {
       console.log("error", e.message);
@@ -88,88 +86,79 @@ const PickupService = () => {
   const query = useQuery("testQuery", testGetApi, testOption);
   const { isLoading, isError, data, error } = query;
 
-  const Fallback = () => {
-    return <div>asdsadas...</div>;
-  };
-
   return (
     <>
       <Header title="GCF Pick up" mode="logo"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Suspense fallback={<Fallback />}>
-          <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
-            <Title>Schedule</Title>
-            <YearContainer>
-              <SelectContainer>
-                <SelectTitle>Year</SelectTitle>
-                <ScheduleSelect
-                  service={ESERVICE_TYPE.PICKUP}
-                  type={ESCHEDULE_TYPE.YEAR}
-                  size={{ width: "160px", height: "30px" }}
-                />
-              </SelectContainer>
-            </YearContainer>
-            <MonthDateContainer>
-              <SelectContainer>
-                <SelectTitle>Month</SelectTitle>
-                <ScheduleSelect
-                  service={ESERVICE_TYPE.PICKUP}
-                  type={ESCHEDULE_TYPE.MONTH}
-                  size={{ width: "120px", height: "30px" }}
-                />
-              </SelectContainer>
-              <SelectContainer>
-                <SelectTitle>Date</SelectTitle>
-                <ScheduleSelect
-                  service={ESERVICE_TYPE.PICKUP}
-                  type={ESCHEDULE_TYPE.DATE}
-                  size={{ width: "120px", height: "30px" }}
-                />
-              </SelectContainer>
-            </MonthDateContainer>
-            <HourMinuteContainer>
-              <SelectContainer>
-                <SelectTitle>Hour</SelectTitle>
-                <ScheduleSelect
-                  service={ESERVICE_TYPE.PICKUP}
-                  type={ESCHEDULE_TYPE.HOUR}
-                  size={{ width: "120px", height: "30px" }}
-                />
-              </SelectContainer>
-              <SelectContainer>
-                <SelectTitle>Minute</SelectTitle>
-                <ScheduleSelect
-                  service={ESERVICE_TYPE.PICKUP}
-                  type={ESCHEDULE_TYPE.MINUTE}
-                  size={{ width: "120px", height: "30px" }}
-                />
-              </SelectContainer>
-            </HourMinuteContainer>
-            <Gap />
-            <Title>Place</Title>
-            <PlaceContainer>
-              <SelectContainer>
-                <SelectTitle>Departure</SelectTitle>
-                <PlaceSelect
-                  type={EPLACE_TYPE.DEPARTURE}
-                  size={{ width: "160px", height: "30px" }}
-                />
-              </SelectContainer>
-              <SelectContainer>
-                <SelectTitle>Arrival</SelectTitle>
-                <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
-              </SelectContainer>
-            </PlaceContainer>
-            <Gap />
-            <Title>Flight</Title>
-            <FlightContainer>
-              <TextInput name="flightNumber" placeholder="Flight Number" />
-            </FlightContainer>
-          </Scroll>
-          <RequestButtonContainer>
-            <RequestButton service={ESERVICE_TYPE.PICKUP} />
-          </RequestButtonContainer>
-        </Suspense>
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          <Title>Schedule</Title>
+          <YearContainer>
+            <SelectContainer>
+              <SelectTitle>Year</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.YEAR}
+                size={{ width: "160px", height: "30px" }}
+              />
+            </SelectContainer>
+          </YearContainer>
+          <MonthDateContainer>
+            <SelectContainer>
+              <SelectTitle>Month</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.MONTH}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Date</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.DATE}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </MonthDateContainer>
+          <HourMinuteContainer>
+            <SelectContainer>
+              <SelectTitle>Hour</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.HOUR}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Minute</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={ESCHEDULE_TYPE.MINUTE}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </HourMinuteContainer>
+          <Gap />
+          <Title>Place</Title>
+          <PlaceContainer>
+            <SelectContainer>
+              <SelectTitle>Departure</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+            <SelectContainer>
+              <SelectTitle>Arrival</SelectTitle>
+              <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
+            </SelectContainer>
+          </PlaceContainer>
+          <Gap />
+          <Title>Flight</Title>
+          <FlightContainer>
+            <TextInput name="flightNumber" placeholder="Flight Number" />
+          </FlightContainer>
+        </Scroll>
+        <RequestButtonContainer>
+          <RequestButton service={ESERVICE_TYPE.PICKUP} />
+        </RequestButtonContainer>
       </Content>
     </>
   );

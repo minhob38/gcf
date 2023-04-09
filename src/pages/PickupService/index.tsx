@@ -12,8 +12,8 @@ import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 import Scroll from "@components/common/Scroll";
 import RequestButton from "@components/common/Button/RequestButton";
-import axios from "@configs/axios-config";
 import { useQuery } from "react-query";
+import { testGetApi } from "@apis/functions";
 
 const YearContainer = styled.div`
   display: flex;
@@ -71,12 +71,6 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
-  const testApi = async () => {
-    const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
-    const { data } = response;
-    throw new Error("!!!");
-    return data;
-  };
   const testOption = {
     refetchOnWindowFocus: false,
     retry: 0,
@@ -87,7 +81,7 @@ const PickupService = () => {
       console.log("error", e.message);
     },
   };
-  const query = useQuery("testQuery", testApi, testOption);
+  const query = useQuery("testQuery", testGetApi, testOption);
   const { isLoading, isError, data, error } = query;
 
   return (

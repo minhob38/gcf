@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { useMutation } from "react-query";
+import { testPostApi } from "@apis/functions";
 
 const Button = styled.div`
   display: flex;
@@ -17,29 +18,30 @@ const Button = styled.div`
 `;
 
 const RequestButton = () => {
-  // const requestMutation = useMutation(api, {
-  //   onMutate: (variable) => {
-  //     console.log("onMutate", variable);
-  //     // variable : {loginId: 'xxx', password; 'xxx'}
-  //   },
-  //   onError: (error, variable, context) => {
-  //     // error
-  //   },
-  //   onSuccess: (data, variables, context) => {
-  //     console.log("success", data, variables, context);
-  //   },
-  //   onSettled: () => {
-  //     console.log("end");
-  //   },
-  // });
+  const requestMutation = useMutation(testPostApi, {
+    //
+    onMutate: (variables) => {
+      console.log("mutate", variables);
+    },
+    onError: (error, variables, context) => {
+      console.log("error", error, variables, context);
+    },
+    onSuccess: (data, variables, context) => {
+      console.log("success", data, variables, context);
+    },
+    // error + success
+    onSettled: () => {
+      console.log("settled");
+    },
+  });
 
-  // const handleClick = () => {
-  //   requestMutation.mutate();
-  // };
+  const handleClick = () => {
+    requestMutation.mutate("input");
+  };
 
   return (
     <>
-      <Button>Request</Button>
+      <Button onClick={handleClick}>Request</Button>
     </>
   );
 };

@@ -13,23 +13,14 @@ import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TextInput from "@components/Auth/TextInput";
+import SignButton from "@components/Auth/SignButton";
+import ErrorText from "@components/Auth/ErrorText";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.BLACK_1};
   margin: 0 0 5px 0;
-`;
-
-const TextInput = styled.input`
-  all: unset;
-  width: 100%;
-  height: 32px;
-  border-bottom: 1px solid ${colors.GRAY_1};
-  text-align: center;
-  font: ${fonts.FONT_MEDIUM_400};
-  &::placeholder {
-    color: ${colors.GRAY_1};
-  }
 `;
 
 const InputBox = styled.div`
@@ -42,29 +33,15 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 `;
 
-const SignInButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  height: 50px;
-  margin: 15px auto 15px auto;
-  border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.WHITE_1};
-`;
-
-const ErrorText = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  font: ${fonts.FONT_SMALL_400};
-  color: ${colors.ERROR_RED};
-`;
 const Margin = styled.div`
   height: ${margins.TOP_MARGIN};
+`;
+
+const SignButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px auto 15px auto;
 `;
 
 const SLink = styled(Link)`
@@ -138,8 +115,10 @@ const SignIn: React.FC = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <ErrorText>{errorMessage ? errorMessage : ""}</ErrorText>
-        <SignInButton onClick={handleSignInButtonClick}>Sign in</SignInButton>
+        <ErrorText text={errorMessage} />
+        <SignButtonContainer>
+          <SignButton onClick={handleSignInButtonClick} label="Sign in" />
+        </SignButtonContainer>
         <LinkButton path={signUpPath} title="create an account ?" />
       </Content>
     </>

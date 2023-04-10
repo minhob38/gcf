@@ -12,24 +12,14 @@ import { useApiMutation } from "@hooks/useApiMutation";
 import { ISignUpRequest } from "types/types";
 import { signUpApi } from "@apis/functions";
 import { useEffect, useState } from "react";
-import { isError } from "react-query";
+import TextInput from "@components/Auth/TextInput";
+import SignButton from "@components/Auth/SignButton";
+import ErrorText from "@components/Auth/ErrorText";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.BLACK_1};
   margin: 0 0 5px 0;
-`;
-
-const TextInput = styled.input`
-  all: unset;
-  width: 100%;
-  height: 32px;
-  border-bottom: 1px solid ${colors.GRAY_1};
-  text-align: center;
-  font: ${fonts.FONT_MEDIUM_400};
-  &::placeholder {
-    color: ${colors.GRAY_1};
-  }
 `;
 
 const InputBox = styled.div`
@@ -42,30 +32,15 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 `;
 
-const SignUpButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  height: 50px;
-  margin: 15px auto 15px auto;
-  border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.WHITE_1};
-`;
-
 const Margin = styled.div`
   height: ${margins.TOP_MARGIN};
 `;
 
-const ErrorText = styled.div`
+const SignButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  font: ${fonts.FONT_SMALL_400};
-  color: ${colors.ERROR_RED};
+  margin: 15px auto 15px auto;
 `;
 
 const SignUp = () => {
@@ -131,8 +106,10 @@ const SignUp = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <ErrorText>{errorMessage ? errorMessage : ""}</ErrorText>
-        <SignUpButton onClick={handleSignUpButtonClick}>Sign up</SignUpButton>
+        <ErrorText text={errorMessage} />
+        <SignButtonContainer>
+          <SignButton label="Sign up" onClick={handleSignUpButtonClick} />
+        </SignButtonContainer>
       </Content>
     </>
   );

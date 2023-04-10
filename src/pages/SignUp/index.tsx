@@ -95,14 +95,16 @@ const SignUp = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const name = useTypedSelector((state) => state.rootReducer.authReducer.name);
-  const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.textInput(ev.target));
-  };
+
   const {
     mutate: signUpMutate,
     isError: isSignUpError,
     isSuccess: isSignUpSucces,
   } = useApiMutation<ISignUpRequest>(signUpApi);
+
+  const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(actions.textInput(ev.target));
+  };
 
   const handleSignUpButtonClick = () => {
     if (!email || !password || !name) {

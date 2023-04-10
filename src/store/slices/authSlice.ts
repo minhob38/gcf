@@ -5,7 +5,7 @@ interface IState {
   name: string | null;
   email: string | null;
   password: string | null;
-  isLogin: boolean;
+  isAuthenticated: boolean;
 }
 
 const initialState: IState = {
@@ -13,7 +13,7 @@ const initialState: IState = {
   name: null,
   email: null,
   password: null,
-  isLogin: false,
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({

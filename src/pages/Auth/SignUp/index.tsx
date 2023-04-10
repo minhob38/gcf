@@ -68,11 +68,11 @@ const SignUp = () => {
     signUpMutate({ fullName: name, email, password });
   };
 
-  useEffect(() => {
-    if (isSignUpError) {
-      setErrorMessage("sign up fail");
-    }
-  }, [isSignUpError]);
+  // useEffect(() => {
+  //   if (isSignUpError) {
+  //     setErrorMessage("sign up fail");
+  //   }
+  // }, [isSignUpError]);
 
   return (
     <>

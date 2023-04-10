@@ -13,6 +13,7 @@ import MoveService from "pages/MoveSerivce";
 import { Suspense } from "react";
 import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
+import { useTypedSelector } from "@hooks/useStore";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -27,8 +28,10 @@ function App() {
     return <div>loading...</div>;
   };
 
-  const isLogin = false;
-
+  const isAuthenticated = useTypedSelector(
+    (state) => state.rootReducer.authReducer.isAuthenticated,
+  );
+  // const isAuthenticated = false;
   return (
     <MobileWrapper>
       <ErrorBoundary
@@ -42,25 +45,52 @@ function App() {
             <Route path="/" element={<Landing />}></Route>
             <Route path="/gcf" element={<Landing />}></Route>
             {/* auth */}
-            <Route path="/sign-in" element={<SignIn />}></Route>
-            <Route path="/gcf/sign-in" element={<SignIn />}></Route>
+            <Route
+              path="/sign-in"
+              element={!isAuthenticated ? <SignIn /> : <Navigate replace to="/" />}
+            ></Route>
+            <Route
+              path="/gcf/sign-in"
+              element={!isAuthenticated ? <SignIn /> : <Navigate replace to="/gcf" />}
+            ></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/gcf/sign-up" element={<SignUp />}></Route>
             {/* pickup service */}
             <Route
               path="/pickup"
-              element={isLogin ? <PickupService /> : <Navigate replace to="/" />}
+              element={isAuthenticated ? <PickupService /> : <Navigate replace to="/" />}
             ></Route>
-            <Route path="/gcf/pickup" element={<PickupService />}></Route>
+            <Route
+              path="/gcf/pickup"
+              element={isAuthenticated ? <PickupService /> : <Navigate replace to="/gcf" />}
+            ></Route>
             {/* telcom service */}
-            <Route path="/telcom" element={<TelcomService />}></Route>
-            <Route path="/gcf/telcom" element={<TelcomService />}></Route>
+            <Route
+              path="/telcom"
+              element={isAuthenticated ? <TelcomService /> : <Navigate replace to="/" />}
+            ></Route>
+            <Route
+              path="/gcf/telcom"
+              element={isAuthenticated ? <TelcomService /> : <Navigate replace to="/gcf" />}
+            ></Route>
             {/* move service */}
-            <Route path="/move" element={<MoveService />}></Route>
-            <Route path="/gcf/move" element={<MoveService />}></Route>
+            <Route
+              path="/move"
+              element={isAuthenticated ? <MoveService /> : <Navigate replace to="/" />}
+            ></Route>
+            <Route
+              path="/gcf/move"
+              element={isAuthenticated ? <MoveService /> : <Navigate replace to="/gcf" />}
+            ></Route>
             {/* car service */}
-            <Route path="/car" element={<CarService />}></Route>
-            <Route path="/gcf/car" element={<CarService />}></Route>
+            <Route
+              path="/car"
+              element={isAuthenticated ? <CarService /> : <Navigate replace to="/" />}
+            ></Route>
+            <Route
+              path="/gcf/car"
+              element={isAuthenticated ? <CarService /> : <Navigate replace to="/gcf" />}
+            ></Route>
           </Routes>
         </Suspense>
       </ErrorBoundary>

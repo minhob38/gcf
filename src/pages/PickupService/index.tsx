@@ -14,7 +14,6 @@ import Scroll from "@components/common/Scroll";
 import RequestButton from "@components/common/Button/RequestButton";
 import { useQuery } from "react-query";
 import { testGetApi } from "@apis/functions";
-import { Suspense } from "react";
 
 const YearContainer = styled.div`
   display: flex;

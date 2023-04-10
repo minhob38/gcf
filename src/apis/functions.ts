@@ -1,5 +1,5 @@
 import axios from "@configs/axios-config";
-import { IPickupRequest } from "types/types";
+import { IPickupRequest, ISignInRequest } from "types/types";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -16,6 +16,12 @@ export const testPostApi = async (input) => {
   const { data } = response;
   // throw new Error("error"); -> onError로 감
   return data;
+};
+
+export const signInApi = async (input: ISignInRequest) => {
+  console.log("signin", input);
+  throw new Error("signin error");
+  return "...";
 };
 
 export const pickUpRequestApi = async (input: IPickupRequest) => {

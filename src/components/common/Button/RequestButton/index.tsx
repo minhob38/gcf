@@ -2,7 +2,7 @@
 import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import { pickUpRequestApi } from "@apis/functions";
+import { pickUpRequestApi, telcomRequestApi } from "@apis/functions";
 import { useTypedSelector } from "@hooks/useStore";
 import { useApiMutation } from "@hooks/useApiMutation";
 import { IPickupRequest } from "types/types";
@@ -26,16 +26,16 @@ const Button = styled.div`
 
 const RequestButton: React.FC<IProps> = ({ service }) => {
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer);
-  const pickupMutation = useApiMutation<IPickupRequest>(pickUpRequestApi);
-  const telcomMutation = useApiMutation<IPickupRequest>(pickUpRequestApi);
+  const { mutate: pickupMutate } = useApiMutation<IPickupRequest>(pickUpRequestApi);
+  const { mutate: telcomMutate } = useApiMutation<IPickupRequest>(telcomRequestApi);
 
   const handleClick = () => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
-        pickupMutation.mutate(pickupState);
+        pickupMutate(pickupState);
         return;
       case ESERVICE_TYPE.TELCOM:
-        telcomMutation.mutate(pickupState);
+        telcomMutate(pickupState);
         return;
       default:
         return;

@@ -8,6 +8,9 @@ import checkedImage from "@assets/images/checked-24x24.svg";
 import uncheckedImage from "@assets/images/unchecked-24x24.svg";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
+import { useApiMutation } from "@hooks/useApiMutation";
+import { ISignInRequest } from "types/types";
+import { signInApi } from "@apis/functions";
 
 const Label = styled.label`
   display: flex;
@@ -57,17 +60,27 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 `;
 
-const ContinueButton = styled.div`
+const SignInButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 50px;
-  margin: 0 auto 44px auto;
+  margin: 50px auto 44px auto;
   border-radius: 8px;
   background-color: ${colors.PRIMARY_1};
   font: ${fonts.FONT_LARGE_400};
   color: ${colors.WHITE_1};
+`;
+
+const ErrorText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  font: ${fonts.FONT_SMALL_400};
+  color: ${colors.ERROR_RED};
+  margin: 0 auto 0 auto;
 `;
 
 const Margin = styled.div`
@@ -76,12 +89,24 @@ const Margin = styled.div`
 
 const SignIn = () => {
   const checkStatus = useTypedSelector((state) => state.rootReducer.authReducer.checkStatus);
+  const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
+  const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
+
   const dispatch = useTypedDispatch();
+  const {
+    mutate: signInMutate,
+    isError: isSignInError,
+    isSuccess: isSignInSucces,
+  } = useApiMutation<ISignInRequest>(signInApi);
   const handleCheckBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.checkSignUp());
   };
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.textInput(ev.target));
+  };
+  const handleSignInButtonClick = () => {
+    if (!email || !password) return;
+    signInMutate({ email, password });
   };
 
   return (
@@ -130,7 +155,8 @@ const SignIn = () => {
           onChange={handleTextInputChange}
         />
       </InputBox>
-      <ContinueButton onClick={() => alert("백엔드 연동 필요")}>Continue</ContinueButton>
+      {isSignInError && <ErrorText>Invalid email or password</ErrorText>}
+      <SignInButton onClick={handleSignInButtonClick}>Sign in</SignInButton>
     </>
   );
 };

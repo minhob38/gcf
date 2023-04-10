@@ -3,6 +3,11 @@ export interface IButtonProps {
   label: string;
 }
 
+export interface ISignInRequest {
+  email: string;
+  password: string;
+}
+
 export interface IPickupRequest {
   arrival: string;
   date: string;

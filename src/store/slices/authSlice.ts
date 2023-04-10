@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
-  checkStatus: "sign-up" | "sign-in";
+  // checkStatus: "sign-up" | "sign-in";
   name: string | null;
   email: string | null;
   password: string | null;
+  isLogin: boolean;
 }
 
 const initialState: IState = {
-  checkStatus: "sign-up",
+  // checkStatus: "sign-up",
   name: null,
   email: null,
   password: null,
+  isLogin: false,
 };
 
 const authSlice = createSlice({
@@ -23,12 +25,12 @@ const authSlice = createSlice({
         state[key] = initialState[key];
       }
     },
-    checkSignUp: (state) => {
-      state.checkStatus = "sign-up";
-    },
-    checkSignIn: (state) => {
-      state.checkStatus = "sign-in";
-    },
+    // checkSignUp: (state) => {
+    //   state.checkStatus = "sign-up";
+    // },
+    // checkSignIn: (state) => {
+    //   state.checkStatus = "sign-in";
+    // },
     textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
       const { name, value } = action.payload;
       switch (name) {

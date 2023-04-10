@@ -12,6 +12,7 @@ import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
 import { Suspense } from "react";
 import SignUp from "pages/Auth/SignUp";
+import { Navigate } from "react-router-dom";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -25,6 +26,8 @@ function App() {
   const Fallback = () => {
     return <div>loading...</div>;
   };
+
+  const isLogin = false;
 
   return (
     <MobileWrapper>
@@ -44,7 +47,10 @@ function App() {
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/gcf/sign-up" element={<SignUp />}></Route>
             {/* pickup service */}
-            <Route path="/pickup" element={<PickupService />}></Route>
+            <Route
+              path="/pickup"
+              element={isLogin ? <PickupService /> : <Navigate replace to="/" />}
+            ></Route>
             <Route path="/gcf/pickup" element={<PickupService />}></Route>
             {/* telcom service */}
             <Route path="/telcom" element={<TelcomService />}></Route>

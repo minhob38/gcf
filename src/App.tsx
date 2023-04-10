@@ -11,6 +11,7 @@ import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
 import { Suspense } from "react";
+import SignUp from "pages/SignUp";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -37,8 +38,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />}></Route>
             <Route path="/gcf" element={<Landing />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/gcf/login" element={<Login />}></Route>
+            {/* auth */}
+            <Route path="/sign-in" element={<Login />}></Route>
+            <Route path="/gcf/sign-in" element={<Login />}></Route>
+            <Route path="/sign-up" element={<SignUp />}></Route>
+            <Route path="/gcf/sign-up" element={<SignUp />}></Route>
             {/* pickup service */}
             <Route path="/pickup" element={<PickupService />}></Route>
             <Route path="/gcf/pickup" element={<PickupService />}></Route>

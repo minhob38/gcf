@@ -8,6 +8,12 @@ export interface ISignInRequest {
   password: string;
 }
 
+export interface ISignUpRequest {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
 export interface IPickupRequest {
   arrival: string;
   date: string;

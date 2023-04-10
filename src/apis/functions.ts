@@ -24,6 +24,12 @@ export const signInApi = async (input: ISignInRequest) => {
   return "...";
 };
 
+export const signUpApi = async (input: ISignInRequest) => {
+  console.log("signup", input);
+  throw new Error("signup error");
+  return "...";
+};
+
 export const pickUpRequestApi = async (input: IPickupRequest) => {
   console.log("input", input);
   return "...";

@@ -12,26 +12,7 @@ import { signInApi } from "@apis/functions";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import { useEffect, useState } from "react";
-
-const Label = styled.label`
-  display: flex;
-  align-items: center;
-  margin: 15px 0 15px ${margins.SIDE_MAIN_MARGIN};
-`;
-
-const CheckboxInput = styled.input`
-  all: unset;
-`;
-
-const Title = styled.div`
-  font: ${fonts.FONT_LARGE_600};
-  color: ${colors.BLACK_1};
-  margin: 0 0 0 0;
-`;
-
-const ImageBox = styled.div`
-  margin: 0 5px 0 0;
-`;
+import { Link } from "react-router-dom";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -61,13 +42,13 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 `;
 
-const SignUpButton = styled.div`
+const SignInButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 50px;
-  margin: 50px auto 44px auto;
+  margin: 15px auto 15px auto;
   border-radius: 8px;
   background-color: ${colors.PRIMARY_1};
   font: ${fonts.FONT_LARGE_400};
@@ -81,13 +62,30 @@ const ErrorText = styled.div`
   height: 30px;
   font: ${fonts.FONT_SMALL_400};
   color: ${colors.ERROR_RED};
-  margin: 0 0 5px 0;
 `;
 const Margin = styled.div`
   height: ${margins.TOP_MARGIN};
 `;
 
-const SignIn = () => {
+const SLink = styled(Link)`
+  all: unset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.FONT_MEDIUM_600};
+  color: ${colors.BLACK_1};
+  text-decoration: underline;
+`;
+
+const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) => {
+  return <SLink to={path}>{title}</SLink>;
+};
+
+const SignIn: React.FC = () => {
+  const signUpPath =
+    window.location.hostname === "minhob38.github.io" ? "/gcf/sign-up" : "/sign-up";
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
@@ -141,7 +139,8 @@ const SignIn = () => {
           />
         </InputBox>
         <ErrorText>{errorMessage ? errorMessage : ""}</ErrorText>
-        <SignUpButton onClick={handleSignInButtonClick}>Sign in</SignUpButton>
+        <SignInButton onClick={handleSignInButtonClick}>Sign in</SignInButton>
+        <LinkButton path={signUpPath} title="create an account ?" />
       </Content>
     </>
   );

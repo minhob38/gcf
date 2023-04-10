@@ -48,7 +48,7 @@ const SignUpButton = styled.div`
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 50px;
-  margin: 30px auto 30px auto;
+  margin: 15px auto 15px auto;
   border-radius: 8px;
   background-color: ${colors.PRIMARY_1};
   font: ${fonts.FONT_LARGE_400};
@@ -66,7 +66,6 @@ const ErrorText = styled.div`
   height: 30px;
   font: ${fonts.FONT_SMALL_400};
   color: ${colors.ERROR_RED};
-  margin: 0 0 5px 0;
 `;
 
 const SignUp = () => {

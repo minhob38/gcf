@@ -14,26 +14,6 @@ import { signUpApi } from "@apis/functions";
 import { useEffect, useState } from "react";
 import { isError } from "react-query";
 
-const Label = styled.label`
-  display: flex;
-  align-items: center;
-  margin: 15px 0 15px ${margins.SIDE_MAIN_MARGIN};
-`;
-
-const CheckboxInput = styled.input`
-  all: unset;
-`;
-
-const Title = styled.div`
-  font: ${fonts.FONT_LARGE_600};
-  color: ${colors.BLACK_1};
-  margin: 0 0 0 0;
-`;
-
-const ImageBox = styled.div`
-  margin: 0 5px 0 0;
-`;
-
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.BLACK_1};

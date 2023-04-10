@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 import Landing from "./pages/Landing";
 import * as colors from "@constants/colors";
-import SignIn from "pages/SignIn";
+import SignIn from "pages/Auth/SignIn";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "pages/Error";
 import CarService from "pages/CarService";
@@ -11,7 +11,7 @@ import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
 import { Suspense } from "react";
-import SignUp from "pages/SignUp";
+import SignUp from "pages/Auth/SignUp";
 
 const MobileWrapper = styled.div`
   position: relative;

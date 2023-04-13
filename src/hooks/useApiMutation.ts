@@ -3,6 +3,7 @@ import * as api from "@apis/functions";
 import { useTypedDispatch } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
+import { actions as authActions } from "@store/slices/authSlice";
 
 export const useApiMutation = <T>(api: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation<unknown, unknown, T, void>(
@@ -40,7 +41,7 @@ export const useSignInMutation = () => {
       dispatch(errorActions.throwSignInError());
     },
     onSuccess: (data, variables, context) => {
-      console.log("success", data, variables, context);
+      dispatch(authActions.authenticate());
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

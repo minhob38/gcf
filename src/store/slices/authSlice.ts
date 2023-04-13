@@ -31,6 +31,13 @@ const authSlice = createSlice({
     // checkSignIn: (state) => {
     //   state.checkStatus = "sign-in";
     // },
+
+    authenticate: (state) => {
+      state.isAuthenticated = true;
+    },
+    unAuthenticate: (state) => {
+      state.isAuthenticated = true;
+    },
     textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
       const { name, value } = action.payload;
       switch (name) {

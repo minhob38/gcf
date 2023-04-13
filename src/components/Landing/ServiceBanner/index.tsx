@@ -9,37 +9,14 @@ import pickUpImage from "@assets/images/pickup-service.jpg";
 import teleImage from "@assets/images/tele-service.png";
 import moveImage from "@assets/images/move-service.png";
 import carImage from "@assets/images/car-service.png";
+import { useTypedSelector } from "@hooks/useStore";
 
 interface IProps {
   type: ESERVICE_TYPE;
-  // onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-// interface IStyleProps {
-//   width: string;
-//   height: string;
-// }
-
 const GAP = "10px";
-
-// const Wrapper = styled.div`
-//   width: ${`calc(100% - ${GAP}/2)`};
-//   /* all: unset;
-//   display: block;
-//   background-color: ${colors.WHITE_1};
-//   width: ${(props: IStyleProps) => props.width};
-//   height: ${(props: IStyleProps) => props.height};
-//   border: 2px solid ${colors.PRIMARY_3};
-//   border-radius: 8px;
-//   font: ${fonts.FONT_MEDIUM_600};
-//   color: ${colors.BLACK_1};
-//   text-align: center;
-//   /* &:hover {
-//     background-color: #ebc7c7;
-//     border: none;
-//   } */
-//   cursor: pointer;
-// `;
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,7 +37,7 @@ const Title = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const ServiceBanner: React.FC<IProps> = ({ type }) => {
+const ServiceBanner: React.FC<IProps> = ({ type, onClick }) => {
   let title: string;
   let src: any;
   let alt: string;
@@ -101,7 +78,7 @@ const ServiceBanner: React.FC<IProps> = ({ type }) => {
   path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Link to={path}>
         <Image src={src} alt={alt} width="100%" />
         <Title>{title}</Title>

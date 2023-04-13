@@ -8,6 +8,7 @@ import pickupReducer from "@store/slices/pickupSlice";
 import telcomReducer from "@store/slices/telcomSlice";
 import modalReducer from "@store/slices/modalSlice";
 import moveReducer from "@store/slices/moveSlice";
+import errorReducer from "@store/slices/errorSlice";
 
 export function* rootSaga() {
   yield all([]);
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   telcomReducer,
   moveReducer,
   modalReducer,
+  errorReducer,
 });
 
 export const store = configureStore({

@@ -1,5 +1,5 @@
 import axios from "@configs/axios-config";
-import { IPickupRequest, ISignInRequest } from "types/types";
+import { IPickupRequest, ISignInRequest, ISignUpRequest } from "types/types";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -20,11 +20,11 @@ export const testPostApi = async (input) => {
 
 export const signInApi = async (input: ISignInRequest) => {
   console.log("signin", input);
-  await new Promise((res, rej) => setTimeout(() => res("..."), 3000));
+  await new Promise((res, rej) => setTimeout(() => rej("..."), 3000));
   return "...";
 };
 
-export const signUpApi = async (input: ISignInRequest) => {
+export const signUpApi = async (input: ISignUpRequest) => {
   console.log("signup", input);
   throw new Error("signup error");
   return "...";

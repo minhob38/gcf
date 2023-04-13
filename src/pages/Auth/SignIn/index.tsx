@@ -70,9 +70,10 @@ const SignIn: React.FC = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
+  const isSignInError = useTypedSelector((state) => state.rootReducer.errorReducer.isSignInError);
 
   const dispatch = useTypedDispatch();
-  const { mutate: signInMutate, isLoading: isSignInLoading } = useSignInMutation();
+  const signInMutation = useSignInMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.textInput(ev.target));
@@ -83,15 +84,14 @@ const SignIn: React.FC = () => {
       setErrorMessage("Enter email and password");
       return;
     }
-    signInMutate({ email, password });
+    signInMutation.mutate({ email, password });
   };
 
-  // useEffect(() => {
-  //   if (isSignInError) {
-  //     console.log("!!!");
-  //     setErrorMessage("sign in fail");
-  //   }
-  // }, [isSignInError]);
+  useEffect(() => {
+    if (isSignInError) {
+      setErrorMessage("sign in fail");
+    }
+  }, [isSignInError]);
 
   return (
     <>

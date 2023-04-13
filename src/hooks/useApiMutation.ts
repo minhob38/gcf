@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 import * as api from "@apis/functions";
 import { useTypedDispatch } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
+import { actions as errorActions } from "@store/slices/errorSlice";
 
 export const useApiMutation = <T>(api: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation<unknown, unknown, T, void>(
@@ -31,12 +32,12 @@ export const useApiMutation = <T>(api: any) => {
 
 export const useSignInMutation = () => {
   const dispatch = useTypedDispatch();
-  const { mutate, isLoading, isError, error, isSuccess } = useMutation(api.signInApi, {
+  const mutation = useMutation(api.signInApi, {
     onMutate: (variables) => {
       dispatch(modalActions.showLoading());
     },
     onError: (error, variables, context) => {
-      console.log("error", error, variables, context);
+      dispatch(errorActions.throwSignInError());
     },
     onSuccess: (data, variables, context) => {
       console.log("success", data, variables, context);
@@ -45,5 +46,6 @@ export const useSignInMutation = () => {
       dispatch(modalActions.hideLoading());
     },
   });
-  return { mutate, isLoading, isError, error, isSuccess };
+
+  return mutation;
 };

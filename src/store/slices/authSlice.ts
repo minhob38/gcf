@@ -13,7 +13,7 @@ const initialState: IState = {
   name: null,
   email: null,
   password: null,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true" ? true : false,
 };
 
 const authSlice = createSlice({

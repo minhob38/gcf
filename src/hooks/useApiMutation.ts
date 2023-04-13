@@ -42,6 +42,9 @@ export const useSignInMutation = () => {
     },
     onSuccess: (data, variables, context) => {
       dispatch(authActions.authenticate());
+      // localstorage에 로그인 정보 저장
+      // 나중에 401 error 받으면, 로그인 정보 지우기
+      localStorage.setItem("isAuthenticated", "true");
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
   isSignInWarning: boolean;
+  isLoading: boolean;
 }
 
 const initialState: IState = {
   isSignInWarning: false,
+  isLoading: false,
 };
 
 const modalSlice = createSlice({
@@ -22,6 +24,12 @@ const modalSlice = createSlice({
     },
     hideSignInWarning: (state) => {
       state.isSignInWarning = false;
+    },
+    showLoading: (state) => {
+      state.isLoading = true;
+    },
+    hideLoading: (state) => {
+      state.isLoading = false;
     },
   },
 });

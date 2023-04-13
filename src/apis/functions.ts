@@ -20,7 +20,7 @@ export const testPostApi = async (input) => {
 
 export const signInApi = async (input: ISignInRequest) => {
   console.log("signin", input);
-  throw new Error("signin error");
+  await new Promise((res, rej) => setTimeout(() => res("..."), 3000));
   return "...";
 };
 

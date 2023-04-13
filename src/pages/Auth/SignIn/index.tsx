@@ -6,7 +6,7 @@ import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
-import { useApiMutation } from "@hooks/useApiMutation";
+import { useApiMutation, useSignInMutation } from "@hooks/useApiMutation";
 import { ISignInRequest } from "types/types";
 import { signInApi } from "@apis/functions";
 import Header from "@components/common/Header";
@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
+import Spinner from "animations/Spinner";
+import Loading from "animations/Loading";
+import LoadingModal from "modals/SpinnerLoadingModal";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -66,13 +69,10 @@ const SignIn: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
+  const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
 
   const dispatch = useTypedDispatch();
-  const {
-    mutate: signInMutate,
-    isError: isSignInError,
-    isSuccess: isSignInSucces,
-  } = useApiMutation<ISignInRequest>(signInApi);
+  const { mutate: signInMutate, isLoading: isSignInLoading } = useSignInMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.textInput(ev.target));
@@ -95,6 +95,7 @@ const SignIn: React.FC = () => {
 
   return (
     <>
+      {isLoading && <LoadingModal />}
       <Header title="Welcome" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />

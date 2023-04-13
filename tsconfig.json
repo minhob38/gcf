@@ -20,6 +20,7 @@
     "baseUrl": "src",
     "paths": {
       "@apis/*": ["apis/*"],
+      "@animations/*": ["animations/*"],
       "@assets/*": ["assets/*"],
       "@configs/*": ["configs/*"],
       "@components/*": ["components/*"],

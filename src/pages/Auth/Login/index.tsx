@@ -6,9 +6,7 @@ import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
-import { useApiMutation, useSignInMutation } from "@hooks/useApiMutation";
-import { ISignInRequest } from "types/types";
-import { signInApi } from "@apis/functions";
+import { useLoginMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import { useEffect, useState } from "react";
@@ -16,8 +14,6 @@ import { Link } from "react-router-dom";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
-import Spinner from "animations/Spinner";
-import Loading from "animations/Loading";
 import LoadingModal from "modals/SpinnerLoadingModal";
 
 const SubTitle = styled.div`
@@ -62,7 +58,7 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
   return <SLink to={path}>{title}</SLink>;
 };
 
-const SignIn: React.FC = () => {
+const Login: React.FC = () => {
   const signUpPath =
     window.location.hostname === "minhob38.github.io" ? "/gcf/sign-up" : "/sign-up";
 
@@ -70,28 +66,28 @@ const SignIn: React.FC = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
-  const isSignInError = useTypedSelector((state) => state.rootReducer.errorReducer.isSignInError);
+  const isLoginError = useTypedSelector((state) => state.rootReducer.errorReducer.isLoginError);
 
   const dispatch = useTypedDispatch();
-  const signInMutation = useSignInMutation();
+  const loginMutation = useLoginMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.textInput(ev.target));
   };
 
-  const handleSignInButtonClick = () => {
+  const handleLoginButtonClick = () => {
     if (!email || !password) {
       setErrorMessage("Enter email and password");
       return;
     }
-    signInMutation.mutate({ email, password });
+    loginMutation.mutate({ email, password });
   };
 
   useEffect(() => {
-    if (isSignInError) {
+    if (isLoginError) {
       setErrorMessage("sign in fail");
     }
-  }, [isSignInError]);
+  }, [isLoginError]);
 
   return (
     <>
@@ -119,7 +115,7 @@ const SignIn: React.FC = () => {
         </InputBox>
         <ErrorText text={errorMessage} />
         <SignButtonContainer>
-          <SignButton onClick={handleSignInButtonClick} label="Sign in" />
+          <SignButton onClick={handleLoginButtonClick} label="Login" />
         </SignButtonContainer>
         <LinkButton path={signUpPath} title="create an account ?" />
       </Content>
@@ -127,4 +123,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default Login;

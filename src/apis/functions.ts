@@ -1,5 +1,5 @@
 import axios from "@configs/axios-config";
-import { IPickupRequest, ISignInRequest, ISignUpRequest } from "types/types";
+import { IPickupRequest, ILoginRequest, ISignUpRequest } from "types/types";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -18,10 +18,10 @@ export const testPostApi = async (input) => {
   return data;
 };
 
-export const signInApi = async (input: ISignInRequest) => {
+export const loginApi = async (input: ILoginRequest) => {
   const { email, password } = input;
   await new Promise((res, rej) => setTimeout(() => res("..."), 1000));
-  if (email === "gcf@gcf.com" && password === "12345") return;
+  if (email === "gcf@gmail.com" && password === "12345") return;
   throw new Error("invalid password");
 };
 

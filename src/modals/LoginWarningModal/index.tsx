@@ -48,24 +48,24 @@ const Button = styled.div`
   color: ${colors.WHITE_1};
 `;
 
-const SignInWarningModal: React.FC = () => {
+const LoginWarningModal: React.FC = () => {
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (ev.currentTarget !== ev.target) return;
-    dispatch(modalActions.hideSignInWarning());
+    dispatch(modalActions.hideLoginWarning());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    dispatch(modalActions.hideSignInWarning());
+    dispatch(modalActions.hideLoginWarning());
   };
 
   return (
     <Modal onClick={handleClickModal}>
       <Box>
-        This service requires "Sign-in"
+        This service requires "Login"
         <Button onClick={handleClickButton}>Close</Button>
       </Box>
     </Modal>
   );
 };
 
-export default SignInWarningModal;
+export default LoginWarningModal;

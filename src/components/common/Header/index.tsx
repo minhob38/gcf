@@ -70,15 +70,15 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
   );
 
   const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
-  const signInPath =
-    window.location.hostname === "minhob38.github.io" ? "/gcf/sign-in" : "/sign-in";
+  const loginPath =
+    window.location.hostname === "minhob38.github.io" ? "/gcf/login-in" : "/login-in";
 
   switch (mode) {
     case (mode = "logo"):
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          {!isAuthenticated ? <LinkButton path={signInPath} title="Login" /> : <Profile />}
+          {!isAuthenticated ? <LinkButton path={loginPath} title="Login" /> : <Profile />}
         </Wrapper>
       );
     case (mode = "back"):
@@ -94,7 +94,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          {!isAuthenticated ? <LinkButton path={signInPath} title="Login" /> : <Profile />}
+          {!isAuthenticated ? <LinkButton path={loginPath} title="Login" /> : <Profile />}
         </Wrapper>
       );
   }

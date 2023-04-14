@@ -31,14 +31,14 @@ export const useApiMutation = <T>(api: any) => {
   return { mutate, isLoading, isError, error, isSuccess };
 };
 
-export const useSignInMutation = () => {
+export const useLoginMutation = () => {
   const dispatch = useTypedDispatch();
-  const mutation = useMutation(api.signInApi, {
+  const mutation = useMutation(api.loginApi, {
     onMutate: (variables) => {
       dispatch(modalActions.showLoading());
     },
     onError: (error, variables, context) => {
-      dispatch(errorActions.throwSignInError());
+      dispatch(errorActions.throwLoginError());
     },
     onSuccess: (data, variables, context) => {
       dispatch(authActions.authenticate());

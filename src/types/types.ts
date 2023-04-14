@@ -3,7 +3,7 @@ export interface IButtonProps {
   label: string;
 }
 
-export interface ISignInRequest {
+export interface ILoginRequest {
   email: string;
   password: string;
 }

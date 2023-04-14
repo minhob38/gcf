@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 import Landing from "./pages/Landing";
 import * as colors from "@constants/colors";
-import SignIn from "pages/Auth/SignIn";
+import Login from "pages/Auth/Login";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "pages/Error";
 import CarService from "pages/CarService";
@@ -46,12 +46,12 @@ function App() {
             <Route path="/gcf" element={<Landing />}></Route>
             {/* auth */}
             <Route
-              path="/sign-in"
-              element={!isAuthenticated ? <SignIn /> : <Navigate replace to="/" />}
+              path="/login"
+              element={!isAuthenticated ? <Login /> : <Navigate replace to="/" />}
             ></Route>
             <Route
-              path="/gcf/sign-in"
-              element={!isAuthenticated ? <SignIn /> : <Navigate replace to="/gcf" />}
+              path="/gcf/login"
+              element={!isAuthenticated ? <Login /> : <Navigate replace to="/gcf" />}
             ></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/gcf/sign-up" element={<SignUp />}></Route>

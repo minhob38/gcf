@@ -8,7 +8,7 @@ import ServiceBanner from "@components/Landing/ServiceBanner";
 import { ESERVICE_TYPE } from "types/enum";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
-import SignInWarningModal from "modals/SignInWarningModal";
+import LoginWarningModal from "modals/LoginWarningModal";
 
 const ServiceContainer = styled.div`
   display: flex;
@@ -27,18 +27,16 @@ const Landing: React.FC = () => {
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.authReducer.isAuthenticated,
   );
-  const isSignInWarning = useTypedSelector(
-    (state) => state.rootReducer.modalReducer.isSignInWarning,
-  );
+  const isLoginWarning = useTypedSelector((state) => state.rootReducer.modalReducer.isLoginWarning);
   const dispatch = useTypedDispatch();
   const handleBannerClick = () => {
     if (isAuthenticated) return;
-    dispatch(modalActions.showSignInWarning());
+    dispatch(modalActions.showLoginWarning());
   };
 
   return (
     <>
-      {isSignInWarning && <SignInWarningModal />}
+      {isLoginWarning && <LoginWarningModal />}
       <Header title="GCF CAR" mode="logo"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
-  isSignInError: boolean;
+  isLoginError: boolean;
 }
 
 const initialState: IState = {
-  isSignInError: false,
+  isLoginError: false,
 };
 
 const errorSlice = createSlice({
@@ -17,11 +17,11 @@ const errorSlice = createSlice({
         state[key] = initialState[key];
       }
     },
-    throwSignInError: (state) => {
-      state.isSignInError = true;
+    throwLoginError: (state) => {
+      state.isLoginError = true;
     },
-    catchSignInError: (state) => {
-      state.isSignInError = false;
+    catchLoginError: (state) => {
+      state.isLoginError = false;
     },
   },
 });

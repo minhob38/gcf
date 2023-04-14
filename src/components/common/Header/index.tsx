@@ -7,6 +7,9 @@ import * as margins from "@constants/margins";
 import { Link } from "react-router-dom";
 import Image from "@components/common/Image";
 import leftArrowImage from "@assets/images/left-arrow-24x24.svg";
+import { useTypedSelector } from "@hooks/useStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
   title: string;
@@ -61,7 +64,28 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
   return <SLink to={path}>{title}</SLink>;
 };
 
+const ProfileContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+`;
+
+const ProfileName = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  margin: 5px 0 0 0;
+  font: ${fonts.FONT_TINY_600};
+  color: ${colors.BLACK_1};
+`;
+
 const Header: React.FC<IProps> = ({ title, mode }) => {
+  const isAuthenticated = useTypedSelector(
+    (state) => state.rootReducer.authReducer.isAuthenticated,
+  );
+
   const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
   const signInPath =
     window.location.hostname === "minhob38.github.io" ? "/gcf/sign-in" : "/sign-in";
@@ -71,7 +95,14 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          <LinkButton path={signInPath} title="Login" />
+          {!isAuthenticated ? (
+            <LinkButton path={signInPath} title="Login" />
+          ) : (
+            <ProfileContainer>
+              <FontAwesomeIcon icon={faUser} fontSize={"24px"} />
+              <ProfileName>Minho</ProfileName>
+            </ProfileContainer>
+          )}
         </Wrapper>
       );
     case (mode = "back"):
@@ -87,7 +118,14 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          <LinkButton path={signInPath} title="Login" />
+          {!isAuthenticated ? (
+            <LinkButton path={signInPath} title="Login" />
+          ) : (
+            <ProfileContainer>
+              <FontAwesomeIcon icon={faUser} fontSize={"24px"} />
+              <ProfileName>Minho</ProfileName>
+            </ProfileContainer>
+          )}
         </Wrapper>
       );
   }

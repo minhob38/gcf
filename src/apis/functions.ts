@@ -19,9 +19,10 @@ export const testPostApi = async (input) => {
 };
 
 export const signInApi = async (input: ISignInRequest) => {
-  console.log("signin", input);
-  await new Promise((res, rej) => setTimeout(() => res("..."), 3000));
-  return "...";
+  const { email, password } = input;
+  await new Promise((res, rej) => setTimeout(() => res("..."), 1000));
+  if (email === "gcf@gcf.com" && password === "12345") return;
+  throw new Error("invalid password");
 };
 
 export const signUpApi = async (input: ISignUpRequest) => {

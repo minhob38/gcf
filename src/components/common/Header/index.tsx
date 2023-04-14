@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 import Image from "@components/common/Image";
 import leftArrowImage from "@assets/images/left-arrow-24x24.svg";
 import { useTypedSelector } from "@hooks/useStore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import Profile from "./Profile";
 
 interface IProps {
   title: string;
@@ -29,6 +28,7 @@ const Wrapper = styled.div`
   padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
   box-shadow: ${colors.SHADOW};
   background-color: ${colors.WHITE_1};
+  z-index: 1;
 `;
 
 const LogoTitle = styled.div`
@@ -64,23 +64,6 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
   return <SLink to={path}>{title}</SLink>;
 };
 
-const ProfileContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-`;
-
-const ProfileName = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-  margin: 5px 0 0 0;
-  font: ${fonts.FONT_TINY_600};
-  color: ${colors.BLACK_1};
-`;
-
 const Header: React.FC<IProps> = ({ title, mode }) => {
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.authReducer.isAuthenticated,
@@ -95,14 +78,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          {!isAuthenticated ? (
-            <LinkButton path={signInPath} title="Login" />
-          ) : (
-            <ProfileContainer>
-              <FontAwesomeIcon icon={faUser} fontSize={"24px"} />
-              <ProfileName>Minho</ProfileName>
-            </ProfileContainer>
-          )}
+          {!isAuthenticated ? <LinkButton path={signInPath} title="Login" /> : <Profile />}
         </Wrapper>
       );
     case (mode = "back"):
@@ -118,14 +94,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
-          {!isAuthenticated ? (
-            <LinkButton path={signInPath} title="Login" />
-          ) : (
-            <ProfileContainer>
-              <FontAwesomeIcon icon={faUser} fontSize={"24px"} />
-              <ProfileName>Minho</ProfileName>
-            </ProfileContainer>
-          )}
+          {!isAuthenticated ? <LinkButton path={signInPath} title="Login" /> : <Profile />}
         </Wrapper>
       );
   }

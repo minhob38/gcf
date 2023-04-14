@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gcf/static/css/main.d5622912.css",
-    "main.js": "/gcf/static/js/main.0153a96c.js",
+    "main.js": "/gcf/static/js/main.877ab7c5.js",
     "service-worker.js": "/gcf/service-worker.js",
     "static/media/move-service.png": "/gcf/static/media/move-service.8c82bcf6420929484902.png",
     "static/media/tele-service.png": "/gcf/static/media/tele-service.414451cb43f103f4ca11.png",
@@ -9,14 +9,12 @@
     "static/media/pickup-service.jpg": "/gcf/static/media/pickup-service.ac3da72bb8d0fffe4a38.jpg",
     "static/media/information.png": "/gcf/static/media/information.2ed0bc214dbdce3c658b.png",
     "index.html": "/gcf/index.html",
-    "static/media/checked-24x24.svg": "/gcf/static/media/checked-24x24.ed6403a52628c599c0537395da9f4536.svg",
-    "static/media/unchecked-24x24.svg": "/gcf/static/media/unchecked-24x24.acdc9989bc6344574b877d518e719e2c.svg",
     "static/media/left-arrow-24x24.svg": "/gcf/static/media/left-arrow-24x24.cb94c68fea5f0e0d590761c5749e3418.svg",
     "main.d5622912.css.map": "/gcf/static/css/main.d5622912.css.map",
-    "main.0153a96c.js.map": "/gcf/static/js/main.0153a96c.js.map"
+    "main.877ab7c5.js.map": "/gcf/static/js/main.877ab7c5.js.map"
   },
   "entrypoints": [
     "static/css/main.d5622912.css",
-    "static/js/main.0153a96c.js"
+    "static/js/main.877ab7c5.js"
   ]
 }

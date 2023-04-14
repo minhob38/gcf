@@ -70,8 +70,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
   );
 
   const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
-  const loginPath =
-    window.location.hostname === "minhob38.github.io" ? "/gcf/login-in" : "/login-in";
+  const loginPath = window.location.hostname === "minhob38.github.io" ? "/gcf/login" : "/login";
 
   switch (mode) {
     case (mode = "logo"):

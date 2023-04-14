@@ -21,7 +21,6 @@ const ProfileName = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
-  margin: 5px 0 0 0;
   font: ${fonts.FONT_SMALL_400};
   color: ${colors.BLACK_1};
 `;

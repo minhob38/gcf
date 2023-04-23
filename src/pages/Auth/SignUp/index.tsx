@@ -68,6 +68,15 @@ const SignUp = () => {
       return;
     }
 
+    // email 형식 체크
+    const re = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const isEmailFormat = re.test(email);
+
+    if (!isEmailFormat) {
+      setErrorMessage("Invalid email format");
+      return;
+    }
+
     // 비밀번호/재확인 비밀번호가 같은 에러
     if (password !== rePassword) {
       setErrorMessage("Password and re-password should be same");

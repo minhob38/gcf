@@ -25,6 +25,9 @@ export const loginApi = async (input: ILoginRequest) => {
   throw new Error("invalid password");
 };
 
+/**
+ * @description 회원가입 api
+ */
 export const signUpApi = async (input: ISignUpRequest) => {
   const { fullName, email, password, rePassword } = input;
   const body = {
@@ -34,8 +37,6 @@ export const signUpApi = async (input: ISignUpRequest) => {
     reEnterPassword: rePassword,
   };
 
-  return;
-
   const response = await axios.post<IApiResponse>(
     "https://dev.onepick.info/api/v1/user-register",
     body,
@@ -43,6 +44,8 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
   const data = response.data;
   const status = response.status;
+
+  if (data.result === "SUCCESS") return;
 
   if (data.result === "FAIL") {
     // 비밀번호 형식 에러

@@ -15,6 +15,7 @@ import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import { useNavigate } from "react-router-dom";
 import SignUpNotificationModal from "modals/SignUpNotificationModal";
+import { checkIsEmailFormat } from "@utils/common";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -44,7 +45,6 @@ const SignButtonContainer = styled.div`
 `;
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const isSignUpNotification = useTypedSelector(
@@ -69,8 +69,7 @@ const SignUp = () => {
     }
 
     // email 형식 체크
-    const re = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const isEmailFormat = re.test(email);
+    const isEmailFormat = checkIsEmailFormat(email);
 
     if (!isEmailFormat) {
       setErrorMessage("Invalid email format");

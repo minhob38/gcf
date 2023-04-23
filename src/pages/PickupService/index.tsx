@@ -71,20 +71,6 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
-  // const testOption = {
-  //   refetchOnWindowFocus: false,
-  //   retry: 0,
-  //   suspense: true,
-  //   onSuccess: (data) => {
-  //     console.log("success", data);
-  //   },
-  //   onError: (e) => {
-  //     console.log("error", e.message);
-  //   },
-  // };
-  // const query = useQuery("testQuery", testGetApi, testOption);
-  // const { isLoading, isError, data, error } = query;
-
   return (
     <>
       <Header title="Pick up" mode="back"></Header>

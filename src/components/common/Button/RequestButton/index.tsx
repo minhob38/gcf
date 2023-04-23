@@ -59,7 +59,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
         const { year, month, date, hour, minute, departure, arrival, flightNumber } = pickupState;
-
+        console.log(pickupState);
         if (
           year === variables.SELECT_YEAR_DEFAULT_TEXT ||
           month === variables.SELECT_MONTH_DEFAULT_TEXT ||

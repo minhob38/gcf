@@ -1,4 +1,5 @@
 import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
+import { convertEnglishToNumberMonth } from "@utils/common";
 import { IPickupRequest, ILoginRequest, ISignUpRequest, IApiResponse } from "types/types";
 
 export const testGetApi = async () => {
@@ -87,7 +88,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
 };
 
 export const pickUpRequestApi = async (input: IPickupRequest) => {
-  // const { fullName, email, password, rePassword } = input;
+  const { year, month, date, hour, minute, departure, arrival, flightNumber } = input;
   const body: {
     userId: number;
     year: number;
@@ -100,18 +101,15 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
     flightNumber: string;
   } = {
     userId: 1,
-    year: 2023,
-    month: 4,
-    day: 24,
-    hour: 5,
-    minute: 30,
-    departure: "NewYork",
-    arrival: "Seoul",
-    flightNumber: "A542",
+    year: parseInt(year),
+    month: convertEnglishToNumberMonth(month),
+    day: parseInt(date),
+    hour: parseInt(hour),
+    minute: parseInt(minute),
+    departure,
+    arrival,
+    flightNumber,
   };
-  console.log(input);
-  console.log(body);
-  return;
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/request`,
@@ -121,7 +119,9 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
   const data = response.data;
   const status = response.status;
 
-  if (data.result === "SUCCESS") return;
+  console.log(data);
+
+  // if (data.result === "SUCCESS") return;
   return "...";
 };
 

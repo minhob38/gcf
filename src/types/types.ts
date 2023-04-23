@@ -62,3 +62,7 @@ export interface IMoveRequest {
 // kind: ["internet", "mobile"];
 // month: "Apr";
 // year: "2024";
+
+export interface IFindMyPickup {
+  userId: number;
+}

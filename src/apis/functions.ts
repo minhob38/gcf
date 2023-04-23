@@ -1,5 +1,6 @@
 import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
 import { convertEnglishToNumberMonth, convertTelcomServiceInputToApiRequest } from "@utils/common";
+import { QueryFunctionContext, QueryKey } from "react-query";
 import {
   IPickupRequest,
   ILoginRequest,
@@ -7,6 +8,7 @@ import {
   IApiResponse,
   ITelcomRequest,
   IMoveRequest,
+  IFindMyPickup,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -216,5 +218,51 @@ export const moveRequestApi = async (input: IMoveRequest) => {
     }
 
     throw new Error("move error");
+  }
+};
+
+/**
+ * @description 나의 pickup 조회 api
+ */
+export const findMyPickupApi = async ({ queryKey }) => {
+  console.log(queryKey);
+  console.log(queryKey.queryKey);
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/pickups/${userId}/retrieve`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const res = data.data as unknown as {
+      applyStatus: string;
+      arrival: string;
+      day: number;
+      departure: string;
+      flightNumber: string;
+      hour: number;
+      minute: number;
+      month: number;
+      userId: number;
+      year: number;
+    };
+
+    return {
+      applyStatus: res.applyStatus,
+      arrival: res.arrival,
+      date: res.day,
+      departure: res.departure,
+      flightNumber: res.flightNumber,
+      hour: res.hour,
+      minute: res.minute,
+      month: res.month,
+      year: res.year,
+    };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find my pickup booking error");
   }
 };

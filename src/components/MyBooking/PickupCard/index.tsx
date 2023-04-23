@@ -17,6 +17,7 @@ import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
 import { checkIsEmailFormat } from "@utils/common";
+import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
 
 const Wrapper = styled.div`
   display: flex;
@@ -61,6 +62,10 @@ const PlainText = styled.div`
 `;
 
 const PickupCard: React.FC = () => {
+  const userId = 1;
+  const query = useMyPickupBookingQuery(userId);
+  console.log(query.data);
+
   return (
     <Wrapper>
       <TimeSchedule>

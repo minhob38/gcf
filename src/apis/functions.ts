@@ -66,7 +66,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
   const data = response.data;
   const status = response.status;
-  console.log(data);
+
   if (data.result === "SUCCESS") return;
 
   if (data.result === "FAIL") {

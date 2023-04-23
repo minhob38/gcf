@@ -68,7 +68,7 @@ const RequestButtonContainer = styled.div`
 const TelcomService = () => {
   return (
     <>
-      <Header title="GCF Telcom" mode="logo"></Header>
+      <Header title="Telcom" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Title>Schedule</Title>
         <YearMonthContainer>

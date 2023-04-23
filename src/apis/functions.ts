@@ -1,4 +1,4 @@
-import axios from "@configs/axios-config";
+import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
 import { IPickupRequest, ILoginRequest, ISignUpRequest, IApiResponse } from "types/types";
 
 export const testGetApi = async () => {
@@ -22,10 +22,7 @@ export const loginApi = async (input: ILoginRequest) => {
   const { email, password } = input;
   const body = { email, password };
 
-  const response = await axios.post<IApiResponse>(
-    "https://dev.onepick.info/api/v1/users/login",
-    body,
-  );
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login`, body);
 
   const data = response.data;
   const status = response.status;
@@ -59,10 +56,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
     reEnterPassword: rePassword,
   };
 
-  const response = await axios.post<IApiResponse>(
-    "https://dev.onepick.info/api/v1/user-register",
-    body,
-  );
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/v1/user-register`, body);
 
   const data = response.data;
   const status = response.status;
@@ -87,8 +81,29 @@ export const signUpApi = async (input: ISignUpRequest) => {
   }
 };
 
-export const pickUpRequestApi = async (input: IPickupRequest) => {
-  console.log("input", input);
+export const pickUpRequestApi = async (input: IPickupRequest | any) => {
+  // const { fullName, email, password, rePassword } = input;
+  const body = {
+    userId: 1,
+    year: 2023,
+    month: 4,
+    day: 24,
+    hour: 5,
+    minute: 30,
+    departure: "NewYork",
+    arrival: "Seoul",
+    flightNumber: "A542",
+  };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/pickups/request`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
   return "...";
 };
 

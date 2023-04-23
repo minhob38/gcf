@@ -37,7 +37,7 @@ const Landing: React.FC = () => {
   return (
     <>
       {isLoginWarning && <LoginWarningModal />}
-      <Header title="GCF CAR" mode="logo"></Header>
+      <Header title="One Pick" mode="logo"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />
         <ServiceContainer>

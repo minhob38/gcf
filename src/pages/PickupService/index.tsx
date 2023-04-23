@@ -71,23 +71,23 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
-  const testOption = {
-    refetchOnWindowFocus: false,
-    retry: 0,
-    suspense: true,
-    onSuccess: (data) => {
-      console.log("success", data);
-    },
-    onError: (e) => {
-      console.log("error", e.message);
-    },
-  };
-  const query = useQuery("testQuery", testGetApi, testOption);
-  const { isLoading, isError, data, error } = query;
+  // const testOption = {
+  //   refetchOnWindowFocus: false,
+  //   retry: 0,
+  //   suspense: true,
+  //   onSuccess: (data) => {
+  //     console.log("success", data);
+  //   },
+  //   onError: (e) => {
+  //     console.log("error", e.message);
+  //   },
+  // };
+  // const query = useQuery("testQuery", testGetApi, testOption);
+  // const { isLoading, isError, data, error } = query;
 
   return (
     <>
-      <Header title="GCF Pick up" mode="logo"></Header>
+      <Header title="Pick up" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <Title>Schedule</Title>

@@ -56,10 +56,11 @@ function App() {
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/gcf/sign-up" element={<SignUp />}></Route>
             {/* pickup service */}
-            <Route
+            {/* <Route
               path="/pickup"
               element={isAuthenticated ? <PickupService /> : <Navigate replace to="/" />}
-            ></Route>
+            ></Route> */}
+            <Route path="/pickup" element={<PickupService />}></Route>
             <Route
               path="/gcf/pickup"
               element={isAuthenticated ? <PickupService /> : <Navigate replace to="/gcf" />}

@@ -75,3 +75,24 @@ export const useLoginMutation = () => {
 
   return mutation;
 };
+
+export const usePickUpMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.pickUpRequestApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      // const errorMessage = (error as Error).message;
+      // dispatch(errorActions.throwLoginError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      // dispatch(authActions.authenticate());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};

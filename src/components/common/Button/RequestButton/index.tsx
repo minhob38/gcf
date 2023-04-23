@@ -4,7 +4,7 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { pickUpRequestApi, telcomRequestApi } from "@apis/functions";
 import { useTypedSelector } from "@hooks/useStore";
-import { useApiMutation } from "@hooks/useApiMutation";
+import { useApiMutation, usePickUpMutation } from "@hooks/useApiMutation";
 import { IPickupRequest } from "types/types";
 import { ESERVICE_TYPE } from "types/enum";
 
@@ -28,11 +28,12 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer);
   const { mutate: pickupMutate } = useApiMutation<IPickupRequest>(pickUpRequestApi);
   const { mutate: telcomMutate } = useApiMutation<IPickupRequest>(telcomRequestApi);
+  const pickUpMutation = usePickUpMutation();
 
   const handleClick = () => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
-        pickupMutate(pickupState);
+        pickUpMutation.mutate("...");
         return;
       case ESERVICE_TYPE.TELCOM:
         telcomMutate(pickupState);

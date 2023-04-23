@@ -34,7 +34,6 @@ export interface IPickupRequest {
   month: string;
   year: string;
 }
-
 // <e.g>
 // arrival: "GCF";
 // date: "9";
@@ -56,7 +55,6 @@ export interface ITelcomRequest {
 // year: "2024";
 
 export interface IMoveRequest {
-  kind: ETELCOM_KIND_TYPE[];
   month: string;
   year: string;
 }

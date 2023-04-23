@@ -11,6 +11,10 @@ import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 import RequestButton from "@components/common/Button/RequestButton";
+import Scroll from "@components/common/Scroll";
+import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import { actions as errorActions } from "@store/slices/errorSlice";
 
 const YearContainer = styled.div`
   display: flex;
@@ -75,58 +79,77 @@ const RequestButtonContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
 `;
 
+// = button 영역 + margin을 줄 height
+// prettier-ignore
+const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
+
 const MoveService = () => {
+  const dispatch = useTypedDispatch();
+  const isPickupTelcomMoveNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
+  );
+  const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
+
   return (
     <>
+      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
       <Header title="Move" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Title>Schedule</Title>
-        <YearContainer>
-          <SelectContainer>
-            <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.MOVE}
-              type={ESCHEDULE_TYPE.YEAR}
-              size={{ width: "160px", height: "30px" }}
-            />
-          </SelectContainer>
-        </YearContainer>
-        <MonthDateContainer>
-          <SelectContainer>
-            <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.MOVE}
-              type={ESCHEDULE_TYPE.MONTH}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-          <SelectContainer>
-            <SelectTitle>Date</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.MOVE}
-              type={ESCHEDULE_TYPE.DATE}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-        </MonthDateContainer>
-        <Gap />
-        <Title>Place</Title>
-        <PlaceContainer>
-          <ArrivalContainer>
-            <SelectContainer>
-              <SelectTitle>Departure</SelectTitle>
-              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          <Title>Schedule</Title>
+          <YearContainer>
+            <SelectContainer onFocus={handleFocus}>
+              <SelectTitle>Year</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.MOVE}
+                type={ESCHEDULE_TYPE.YEAR}
+                size={{ width: "160px", height: "30px" }}
+              />
             </SelectContainer>
-            <TextInput name="arrival" placeholder="Arrival Address" />
-          </ArrivalContainer>
-          <ArrivalContainer>
-            <SelectContainer>
-              <SelectTitle>Arrival</SelectTitle>
-              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+          </YearContainer>
+          <MonthDateContainer>
+            <SelectContainer onFocus={handleFocus}>
+              <SelectTitle>Month</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.MOVE}
+                type={ESCHEDULE_TYPE.MONTH}
+                size={{ width: "120px", height: "30px" }}
+              />
             </SelectContainer>
-            <TextInput name="arrival" placeholder="Arrival Address" />
-          </ArrivalContainer>
-        </PlaceContainer>
+            <SelectContainer onFocus={handleFocus}>
+              <SelectTitle>Date</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.MOVE}
+                type={ESCHEDULE_TYPE.DATE}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </MonthDateContainer>
+          <Gap />
+          <Title>Place</Title>
+          <PlaceContainer>
+            <ArrivalContainer onFocus={handleFocus}>
+              <SelectContainer>
+                <SelectTitle>Departure</SelectTitle>
+                {/* <PlaceSelect
+                  type={EPLACE_TYPE.DEPARTURE}
+                  size={{ width: "160px", height: "30px" }}
+                /> */}
+              </SelectContainer>
+              <TextInput name="arrival" placeholder="Arrival Address" />
+            </ArrivalContainer>
+            <ArrivalContainer>
+              <SelectContainer onFocus={handleFocus}>
+                <SelectTitle>Arrival</SelectTitle>
+                {/* <PlaceSelect
+                  type={EPLACE_TYPE.DEPARTURE}
+                  size={{ width: "160px", height: "30px" }}
+                /> */}
+              </SelectContainer>
+              <TextInput name="arrival" placeholder="Arrival Address" />
+            </ArrivalContainer>
+          </PlaceContainer>
+        </Scroll>
         <RequestButtonContainer>
           <RequestButton service={ESERVICE_TYPE.MOVE} />
         </RequestButtonContainer>{" "}

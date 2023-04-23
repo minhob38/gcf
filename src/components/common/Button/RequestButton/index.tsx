@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { usePickUpMutation, useTelcomMutation } from "@hooks/useApiMutation";
+import { useMoveMutation, usePickUpMutation, useTelcomMutation } from "@hooks/useApiMutation";
 import { ESERVICE_TYPE } from "types/enum";
 import { shallowEqual } from "react-redux";
 import * as variables from "@constants/variables";
@@ -57,6 +57,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
   const dispatch = useTypedDispatch();
   const pickUpMutation = usePickUpMutation();
   const telcomMutation = useTelcomMutation();
+  const moveMutation = useMoveMutation();
 
   const handleClick = () => {
     switch (service) {
@@ -118,6 +119,19 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
           kind: telcomState.kind,
         });
         return;
+      case ESERVICE_TYPE.MOVE:
+        if (
+          moveState.year === variables.SELECT_YEAR_DEFAULT_TEXT ||
+          moveState.month === variables.SELECT_MONTH_DEFAULT_TEXT
+        ) {
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month"));
+          return;
+        }
+
+        moveMutation.mutate({
+          year: moveState.year,
+          month: moveState.month,
+        });
         return;
       default:
         return;

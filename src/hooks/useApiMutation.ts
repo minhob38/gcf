@@ -120,7 +120,7 @@ export const useTelcomMutation = () => {
 
 export const useMoveMutation = () => {
   const dispatch = useTypedDispatch();
-  const mutation = useMutation(api.pickUpRequestApi, {
+  const mutation = useMutation(api.moveRequestApi, {
     onMutate: (variables) => {
       dispatch(modalActions.showLoading());
     },

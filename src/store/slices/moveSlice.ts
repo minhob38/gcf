@@ -3,11 +3,6 @@ import * as variables from "@constants/variables";
 import { ETELCOM_KIND_TYPE } from "types/enum";
 
 interface IState {
-  // checkStatus: "sign-up" | "sign-in";
-  // name: string | null;
-  // email: string | null;
-  // password: string | null;
-
   year: string;
   month: string;
   // kind: ETELCOM_KIND_TYPE[];

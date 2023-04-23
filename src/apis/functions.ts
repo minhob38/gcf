@@ -6,6 +6,7 @@ import {
   ISignUpRequest,
   IApiResponse,
   ITelcomRequest,
+  IMoveRequest,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -174,5 +175,46 @@ export const telcomRequestApi = async (input: ITelcomRequest) => {
     }
 
     throw new Error("telcom error");
+  }
+};
+
+/**
+ * @description 이사 서비스 요청 api
+ */
+export const moveRequestApi = async (input: IMoveRequest) => {
+  const { year, month } = input;
+  const body: {
+    userId: number;
+    year: number;
+    month: number;
+    day: number;
+    nation: string;
+    address: string;
+  } = {
+    userId: 1,
+    year: 2023,
+    month: 4,
+    day: 24,
+    nation: "korea",
+    address: "myhome",
+  };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/moves/request`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    // 입력데이터가 없을때
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("enter move schedule form");
+    }
+
+    throw new Error("move error");
   }
 };

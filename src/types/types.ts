@@ -3,6 +3,13 @@ export interface IButtonProps {
   label: string;
 }
 
+export interface IApiResponse {
+  data: string;
+  errorCode: string;
+  message: string;
+  result: "SUCCESS" | "FAIL";
+}
+
 export interface ILoginRequest {
   email: string;
   password: string;
@@ -12,6 +19,7 @@ export interface ISignUpRequest {
   fullName: string;
   email: string;
   password: string;
+  rePassword: string;
 }
 
 export interface IPickupRequest {

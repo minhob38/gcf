@@ -31,6 +31,22 @@ export const useApiMutation = <T>(api: any) => {
   return { mutate, isLoading, isError, error, isSuccess };
 };
 
+export const useSignUpMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.signUpApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {},
+    onSuccess: (data, variables, context) => {},
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
 export const useLoginMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.loginApi, {

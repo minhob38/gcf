@@ -8,13 +8,14 @@ import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
-import { useApiMutation } from "@hooks/useApiMutation";
+import { useApiMutation, useSignUpMutation } from "@hooks/useApiMutation";
 import { ISignUpRequest } from "types/types";
 import { signUpApi } from "@apis/functions";
 import { useEffect, useState } from "react";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
+import { error } from "console";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -48,31 +49,44 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
+  const rePassword = useTypedSelector((state) => state.rootReducer.authReducer.rePassword);
   const name = useTypedSelector((state) => state.rootReducer.authReducer.name);
 
-  const {
-    mutate: signUpMutate,
-    isError: isSignUpError,
-    isSuccess: isSignUpSucces,
-  } = useApiMutation<ISignUpRequest>(signUpApi);
+  const signUpMutation = useSignUpMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.textInput(ev.target));
   };
 
   const handleSignUpButtonClick = () => {
-    if (!email || !password || !name) {
+    // 입력정보가 없으면 에러
+    if (!email || !password || !name || !rePassword) {
       setErrorMessage("Enter name, email and password");
       return;
     }
-    signUpMutate({ fullName: name, email, password });
+
+    // 비밀번호/재확인 비밀번호가 같은 에러
+    if (password !== rePassword) {
+      setErrorMessage("Password and re-password should be same");
+      return;
+    }
+
+    // 비밀번호/재확인 비밀번호가 같은 에러
+    if (password.length < 8 || password.length > 20) {
+      setErrorMessage("Password should be between 8 and 20 characters");
+      return;
+    }
+
+    // TODO: 비밀번호 정규식
+    signUpMutation.mutate({ fullName: name, email, password, rePassword });
   };
 
-  // useEffect(() => {
-  //   if (isSignUpError) {
-  //     setErrorMessage("sign up fail");
-  //   }
-  // }, [isSignUpError]);
+  useEffect(() => {
+    const error = signUpMutation.error;
+    if (error) {
+      setErrorMessage((error as Error).message);
+    }
+  }, [signUpMutation.error]);
 
   return (
     <>
@@ -103,6 +117,15 @@ const SignUp = () => {
             placeholder="password"
             type="password"
             name="password"
+            onChange={handleTextInputChange}
+          />
+        </InputBox>
+        <InputBox>
+          {/* <SubTitle>Confirm Password</SubTitle> */}
+          <TextInput
+            placeholder="confirm password"
+            type="password"
+            name="re-password"
             onChange={handleTextInputChange}
           />
         </InputBox>

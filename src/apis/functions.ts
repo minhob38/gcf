@@ -1,5 +1,5 @@
 import axios from "@configs/axios-config";
-import { IPickupRequest, ILoginRequest, ISignUpRequest } from "types/types";
+import { IPickupRequest, ILoginRequest, ISignUpRequest, IApiResponse } from "types/types";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -26,9 +26,32 @@ export const loginApi = async (input: ILoginRequest) => {
 };
 
 export const signUpApi = async (input: ISignUpRequest) => {
-  console.log("signup", input);
-  throw new Error("signup error");
-  return "...";
+  const { fullName, email, password, rePassword } = input;
+  const body = {
+    email,
+    fullName,
+    password,
+    reEnterPassword: rePassword,
+  };
+  const response = await axios.post<IApiResponse>(
+    "https://dev.onepick.info/api/v1/user-register",
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "FAIL") {
+    // 비밀번호 형식 에러
+    if (data.errorCode === "INCORRECT_USER_PASSWORD") {
+      throw new Error(
+        "password should be  between 8 and 20 characters long and include both letters and numbers",
+      );
+    }
+
+    throw new Error("sign up error");
+    // 비밀번호/재비밀번호 다른경우 에러
+  }
 };
 
 export const pickUpRequestApi = async (input: IPickupRequest) => {

@@ -257,6 +257,7 @@ export const findMyPickupApi = async ({ queryKey }) => {
       minute: apiData.minute,
       month: apiData.month,
       year: apiData.year,
+      status: apiData.applyStatus,
     };
   }
 
@@ -295,7 +296,7 @@ export const findMyTelcomApi = async ({ queryKey }) => {
       isMobilePhone: apiData.applyMobilePhone,
       isInternet: apiData.applyInternet,
       isTv: apiData.applyTv,
-      status: apiData.applyInternet,
+      status: apiData.applyStatus,
     };
   }
 

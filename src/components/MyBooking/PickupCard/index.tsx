@@ -20,15 +20,7 @@ const Wrapper = styled.div`
   box-shadow: ${colors.SHADOW};
 `;
 
-const TimeSchedule = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: ${fonts.FONT_MEDIUM_600};
-  color: ${colors.BLACK_1};
-`;
-
-const PlaceSchedule = styled.div`
+const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,6 +39,19 @@ const PlainText = styled.div`
   color: ${colors.BLACK_1};
 `;
 
+// const Status = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 10px 0 0 0;
+//   height: 30px;
+//   border-radius: 8px;
+//   font: ${fonts.FONT_MEDIUM_600};
+//   width: 100%;
+//   color: ${colors.BLACK_1};
+//   background-color: ${colors.PRIMARY_3};
+// `;
+
 const PickupCard: React.FC = () => {
   const userId = 1;
   const query = useMyPickupBookingQuery(userId);
@@ -55,20 +60,24 @@ const PickupCard: React.FC = () => {
   // TODO PM 붙이기
   return (
     <Wrapper>
-      <TimeSchedule>
+      <TextContainer>
         <BulletText>Time</BulletText>
         <PlainText>
           {apiData?.year}/{apiData?.month}/{apiData?.date} {apiData?.hour}:{apiData?.minute}
         </PlainText>
-      </TimeSchedule>
-      <PlaceSchedule>
+      </TextContainer>
+      <TextContainer>
         <BulletText>From</BulletText>
         <PlainText>{apiData?.departure}</PlainText>
-      </PlaceSchedule>
-      <PlaceSchedule>
+      </TextContainer>
+      <TextContainer>
         <BulletText>To</BulletText>
         <PlainText>{apiData?.arrival}</PlainText>
-      </PlaceSchedule>
+      </TextContainer>
+      <TextContainer>
+        <BulletText>Status</BulletText>
+        <PlainText>{apiData?.status}</PlainText>
+      </TextContainer>
     </Wrapper>
   );
 };

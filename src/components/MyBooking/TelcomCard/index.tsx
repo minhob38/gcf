@@ -20,15 +20,7 @@ const Wrapper = styled.div`
   box-shadow: ${colors.SHADOW};
 `;
 
-const TimeSchedule = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: ${fonts.FONT_MEDIUM_600};
-  color: ${colors.BLACK_1};
-`;
-
-const ItemSchedule = styled.div`
+const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,20 +47,24 @@ const TelcomCard: React.FC = () => {
 
   return (
     <Wrapper>
-      <TimeSchedule>
+      <TextContainer>
         <BulletText>Time</BulletText>
         <PlainText>
           {apiData?.year}/{apiData?.month}
         </PlainText>
-      </TimeSchedule>
-      <ItemSchedule>
+      </TextContainer>
+      <TextContainer>
         <BulletText>Service</BulletText>
         <PlainText>
           {apiData?.isMobilePhone && "Mobile/"}
           {apiData?.isInternet && "Internet/"}
           {apiData?.isTv && "TV"}
         </PlainText>
-      </ItemSchedule>
+      </TextContainer>
+      <TextContainer>
+        <BulletText>Status</BulletText>
+        <PlainText>{apiData?.status}</PlainText>
+      </TextContainer>
     </Wrapper>
   );
 };

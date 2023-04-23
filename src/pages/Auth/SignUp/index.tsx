@@ -10,11 +10,9 @@ import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as authActions } from "@store/slices/authSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { useSignUpMutation } from "@hooks/useApiMutation";
-import { useEffect, useState } from "react";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
-import { useNavigate } from "react-router-dom";
 import SignUpNotificationModal from "modals/SignUpNotificationModal";
 import { checkIsEmailFormat } from "@utils/common";
 
@@ -75,21 +73,18 @@ const SignUp = () => {
     const isEmailFormat = checkIsEmailFormat(email);
     if (!isEmailFormat) {
       dispatch(errorActions.throwSignUpError("Invalid email format"));
-
       return;
     }
 
     // 비밀번호/재확인 비밀번호가 같은 에러
     if (password !== rePassword) {
       dispatch(errorActions.throwSignUpError("Password and re-password should be same"));
-
       return;
     }
 
-    // 비밀번호/재확인 비밀번호가 같은 에러
+    // 비밀번호 길이 에러
     if (password.length < 8 || password.length > 20) {
       dispatch(errorActions.throwSignUpError("Password should be between 8 and 20 characters"));
-
       return;
     }
 

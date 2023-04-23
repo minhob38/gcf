@@ -21,18 +21,21 @@ const modalSlice = createSlice({
         state[key] = initialState[key];
       }
     },
+    // 로그인이 필요한 서비스 경고 모달
     showLoginWarning: (state) => {
       state.isLoginWarning = true;
     },
     hideLoginWarning: (state) => {
       state.isLoginWarning = false;
     },
+    // 로딩 모달
     showLoading: (state) => {
       state.isLoading = true;
     },
     hideLoading: (state) => {
       state.isLoading = false;
     },
+    // 회원가입 성공 알림 모달
     showSignUpNotification: (state) => {
       state.isSignUpNotification = true;
     },

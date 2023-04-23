@@ -20,7 +20,7 @@ export const testPostApi = async (input) => {
 
 export const loginApi = async (input: ILoginRequest) => {
   const { email, password } = input;
-  const body = { email, password };
+  const body: { email: string; password: string } = { email, password };
 
   const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login`, body);
 
@@ -49,7 +49,12 @@ export const loginApi = async (input: ILoginRequest) => {
  */
 export const signUpApi = async (input: ISignUpRequest) => {
   const { fullName, email, password, rePassword } = input;
-  const body = {
+  const body: {
+    email: string;
+    fullName: string;
+    password: string;
+    reEnterPassword: string;
+  } = {
     email,
     fullName,
     password,
@@ -81,9 +86,19 @@ export const signUpApi = async (input: ISignUpRequest) => {
   }
 };
 
-export const pickUpRequestApi = async (input: IPickupRequest | any) => {
+export const pickUpRequestApi = async (input: IPickupRequest) => {
   // const { fullName, email, password, rePassword } = input;
-  const body = {
+  const body: {
+    userId: number;
+    year: number;
+    month: number;
+    day: number;
+    hour: number;
+    minute: number;
+    departure: string;
+    arrival: string;
+    flightNumber: string;
+  } = {
     userId: 1,
     year: 2023,
     month: 4,
@@ -94,6 +109,9 @@ export const pickUpRequestApi = async (input: IPickupRequest | any) => {
     arrival: "Seoul",
     flightNumber: "A542",
   };
+  console.log(input);
+  console.log(body);
+  return;
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/request`,

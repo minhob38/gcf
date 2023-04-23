@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { actions as authActions } from "@store/slices/authSlice";
+import { Link } from "react-router-dom";
 
 const ProfileBox = styled.div`
   display: flex;
@@ -35,18 +36,42 @@ const ProfileDropBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
-  height: 50px;
-  width: 100px;
+  width: 150px;
   background-color: ${colors.WHITE_1};
+`;
+
+const ProfileDropBoxItemContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
 `;
 
 const Logout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   font: ${fonts.FONT_SMALL_400};
   color: ${colors.BLACK_1};
 `;
+
+const SLink = styled(Link)`
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font: ${fonts.FONT_SMALL_400};
+  color: ${colors.BLACK_1};
+`;
+
+const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) => {
+  return <SLink to={path}>{title}</SLink>;
+};
 
 const Profile: React.FC = () => {
   const [isProfileClicked, setIsProfileClicked] = useState<boolean>(false);
@@ -62,7 +87,12 @@ const Profile: React.FC = () => {
       </ProfileBox>
       {isProfileClicked && (
         <ProfileDropBox>
-          <Logout onClick={handleLogoutClick}>Logout</Logout>
+          <ProfileDropBoxItemContainer>
+            <LinkButton path="my-booking" title="My Booking" />
+          </ProfileDropBoxItemContainer>
+          <ProfileDropBoxItemContainer>
+            <Logout onClick={handleLogoutClick}>Logout</Logout>
+          </ProfileDropBoxItemContainer>
         </ProfileDropBox>
       )}
     </Wrapper>

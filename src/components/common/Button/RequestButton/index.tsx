@@ -50,7 +50,7 @@ const ErrorText = styled.div`
 const RequestButton: React.FC<IProps> = ({ service }) => {
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer, shallowEqual);
   const pickUpErrorMessage = useTypedSelector(
-    (state) => state.rootReducer.errorReducer.pickUpErrorMessage,
+    (state) => state.rootReducer.errorReducer.pickUpTelcomMoveErrorMessage,
   );
   const dispatch = useTypedDispatch();
   const pickUpMutation = usePickUpMutation();
@@ -59,13 +59,13 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
         const { year, month, date, hour, minute, departure, arrival, flightNumber } = pickupState;
-        console.log(pickupState);
+
         if (
           year === variables.SELECT_YEAR_DEFAULT_TEXT ||
           month === variables.SELECT_MONTH_DEFAULT_TEXT ||
           date === variables.SELECT_DATE_DEFAULT_TEXT
         ) {
-          dispatch(errorActions.throwPickUpError("Enter year, month and date"));
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month and date"));
           return;
         }
 
@@ -73,7 +73,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
           hour === variables.SELECT_HOUR_DEFAULT_TEXT ||
           minute === variables.SELECT_MINUTE_DEFAULT_TEXT
         ) {
-          dispatch(errorActions.throwPickUpError("Enter hour and minute"));
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter hour and minute"));
           return;
         }
 
@@ -82,7 +82,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
           arrival === variables.SELECT_DEFAULT_TEXT
           // flightNumber === variables.SELECT_DEFAULT_TEXT
         ) {
-          dispatch(errorActions.throwPickUpError("Enter departure and arrival"));
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter departure and arrival"));
           return;
         }
 

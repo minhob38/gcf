@@ -4,12 +4,14 @@ interface IState {
   isLoginWarning: boolean;
   isLoading: boolean;
   isSignUpNotification: boolean;
+  isPickupTelcomMoveNotification: boolean;
 }
 
 const initialState: IState = {
   isLoginWarning: false,
   isLoading: false,
   isSignUpNotification: false,
+  isPickupTelcomMoveNotification: false,
 };
 
 const modalSlice = createSlice({
@@ -41,6 +43,13 @@ const modalSlice = createSlice({
     },
     hideSignUpNotification: (state) => {
       state.isSignUpNotification = false;
+    },
+    // pickup/telcom/move 성공 알림 모달
+    showPickupTelcomMoveNotification: (state) => {
+      state.isPickupTelcomMoveNotification = true;
+    },
+    hidePickupTelcomMoveNotification: (state) => {
+      state.isPickupTelcomMoveNotification = false;
     },
   },
 });

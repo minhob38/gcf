@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   signUpErrorMessage: string | null;
   loginErrorMessage: string | null;
-  pickUpErrorMessage: string | null;
+  pickUpTelcomMoveErrorMessage: string | null;
 }
 
 const initialState: IState = {
   signUpErrorMessage: null,
   loginErrorMessage: null,
-  pickUpErrorMessage: null,
+  pickUpTelcomMoveErrorMessage: null,
 };
 
 const errorSlice = createSlice({
@@ -35,12 +35,12 @@ const errorSlice = createSlice({
     catchLoginError: (state) => {
       state.loginErrorMessage = null;
     },
-    // Pickup 요청 에러
-    throwPickUpError: (state, action: PayloadAction<string>) => {
-      state.pickUpErrorMessage = action.payload;
+    // pickup / telcom / move 요청 에러
+    throwPickUpTelcomMoveError: (state, action: PayloadAction<string>) => {
+      state.pickUpTelcomMoveErrorMessage = action.payload;
     },
-    catchPickUpError: (state) => {
-      state.pickUpErrorMessage = null;
+    catchPickUpTelcomMoveError: (state) => {
+      state.pickUpTelcomMoveErrorMessage = null;
     },
   },
 });

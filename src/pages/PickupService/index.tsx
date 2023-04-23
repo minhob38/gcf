@@ -12,8 +12,9 @@ import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
 import Scroll from "@components/common/Scroll";
 import RequestButton from "@components/common/Button/RequestButton";
-import { useQuery } from "react-query";
-import { testGetApi } from "@apis/functions";
+import { actions as errorActions } from "@store/slices/errorSlice";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 
 const YearContainer = styled.div`
   display: flex;
@@ -71,14 +72,21 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
+  const dispatch = useTypedDispatch();
+  const isPickupTelcomMoveNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
+  );
+  const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
+
   return (
     <>
+      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
       <Header title="Pick up" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <Title>Schedule</Title>
           <YearContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Year</SelectTitle>
               <ScheduleSelect
                 service={ESERVICE_TYPE.PICKUP}
@@ -88,7 +96,7 @@ const PickupService = () => {
             </SelectContainer>
           </YearContainer>
           <MonthDateContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Month</SelectTitle>
               <ScheduleSelect
                 service={ESERVICE_TYPE.PICKUP}
@@ -96,7 +104,7 @@ const PickupService = () => {
                 size={{ width: "120px", height: "30px" }}
               />
             </SelectContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Date</SelectTitle>
               <ScheduleSelect
                 service={ESERVICE_TYPE.PICKUP}
@@ -106,7 +114,7 @@ const PickupService = () => {
             </SelectContainer>
           </MonthDateContainer>
           <HourMinuteContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Hour</SelectTitle>
               <ScheduleSelect
                 service={ESERVICE_TYPE.PICKUP}
@@ -114,7 +122,7 @@ const PickupService = () => {
                 size={{ width: "120px", height: "30px" }}
               />
             </SelectContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Minute</SelectTitle>
               <ScheduleSelect
                 service={ESERVICE_TYPE.PICKUP}
@@ -126,11 +134,11 @@ const PickupService = () => {
           <Gap />
           <Title>Place</Title>
           <PlaceContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Departure</SelectTitle>
               <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
             </SelectContainer>
-            <SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Arrival</SelectTitle>
               <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
             </SelectContainer>

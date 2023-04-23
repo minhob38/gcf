@@ -10,7 +10,7 @@ export const checkIsEmailFormat = (email: string): boolean => {
 };
 
 /**
- * @description email인지 형식체크
+ * @description 영어형태의 달을 숫자로 변환
  */
 export const convertEnglishToNumberMonth = (englishMonth: string): number => {
   switch (englishMonth) {

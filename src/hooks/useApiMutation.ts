@@ -83,11 +83,11 @@ export const usePickUpMutation = () => {
       dispatch(modalActions.showLoading());
     },
     onError: (error, variables, context) => {
-      // const errorMessage = (error as Error).message;
-      // dispatch(errorActions.throwLoginError(errorMessage));
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
     },
     onSuccess: (data, variables, context) => {
-      // dispatch(authActions.authenticate());
+      dispatch(modalActions.showPickupTelcomMoveNotification());
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

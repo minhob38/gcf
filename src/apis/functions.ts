@@ -87,6 +87,9 @@ export const signUpApi = async (input: ISignUpRequest) => {
   }
 };
 
+/**
+ * @description pickup 요청 api
+ */
 export const pickUpRequestApi = async (input: IPickupRequest) => {
   const { year, month, date, hour, minute, departure, arrival, flightNumber } = input;
   const body: {
@@ -119,10 +122,16 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
   const data = response.data;
   const status = response.status;
 
-  console.log(data);
+  if (data.result === "SUCCESS") return;
 
-  // if (data.result === "SUCCESS") return;
-  return "...";
+  if (data.result === "FAIL") {
+    // 입력데이터가 없을때
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("enter pickup schedule form");
+    }
+
+    throw new Error("pick up error");
+  }
 };
 
 export const telcomRequestApi = async (input: IPickupRequest) => {

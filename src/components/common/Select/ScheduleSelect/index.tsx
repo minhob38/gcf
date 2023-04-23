@@ -216,21 +216,21 @@ const ScheduleSelect: React.FC<IProps> = ({ service, type, size }) => {
 
           dispatch(pickupActions.selectInput(ev.target));
         }}
-        onClick={(ev) => {
-          switch (type) {
-            case ESCHEDULE_TYPE.DATE:
-              if (
-                year === variables.SELECT_DEFAULT_TEXT ||
-                month === variables.SELECT_DEFAULT_TEXT
-              ) {
-                // modal로 바꾸기
-                alert("select year and month first");
-              }
+        // onClick={(ev) => {
+        //   switch (type) {
+        //     case ESCHEDULE_TYPE.DATE:
+        //       if (
+        //         year === variables.SELECT_DEFAULT_TEXT ||
+        //         month === variables.SELECT_DEFAULT_TEXT
+        //       ) {
+        //         // modal로 바꾸기
+        //         alert("select year and month first");
+        //       }
 
-              break;
-            default:
-          }
-        }}
+        //       break;
+        //     default:
+        //   }
+        // }}
       >
         {Options}
       </Select>

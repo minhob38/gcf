@@ -16,6 +16,7 @@ import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as modalActions } from "@store/slices/modalSlice";
+import MyBooking from "pages/MyBooking";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -63,6 +64,11 @@ function App() {
             ></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
             <Route path="/gcf/sign-up" element={<SignUp />}></Route>
+            {/* pickup service */}
+            <Route
+              path="/my-booking"
+              element={isAuthenticated ? <MyBooking /> : <Navigate replace to="/" />}
+            ></Route>
             {/* pickup service */}
             <Route
               path="/pickup"

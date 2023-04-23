@@ -46,7 +46,7 @@ const SignButtonContainer = styled.div`
 
 const SignUp = () => {
   const dispatch = useTypedDispatch();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // TODO: redux로 상태관리하기
   const isSignUpNotification = useTypedSelector(
     (state) => state.rootReducer.modalReducer.isSignUpNotification,
   );
@@ -70,7 +70,6 @@ const SignUp = () => {
 
     // email 형식 체크
     const isEmailFormat = checkIsEmailFormat(email);
-
     if (!isEmailFormat) {
       setErrorMessage("Invalid email format");
       return;

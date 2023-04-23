@@ -20,9 +20,31 @@ export const testPostApi = async (input) => {
 
 export const loginApi = async (input: ILoginRequest) => {
   const { email, password } = input;
-  await new Promise((res, rej) => setTimeout(() => res("..."), 1000));
-  if (email === "gcf@gmail.com" && password === "12345") return;
-  throw new Error("invalid password");
+  const body = { email, password };
+
+  const response = await axios.post<IApiResponse>(
+    "https://dev.onepick.info/api/v1/users/login",
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    // 비밀번호 틀린 에러
+    if (data.errorCode === "INCORRECT_USER_PASSWORD") {
+      throw new Error("Invalid password");
+    }
+
+    // 존재하지 않는 회원
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("User does not exists");
+    }
+
+    throw new Error("login error");
+  }
 };
 
 /**
@@ -54,6 +76,8 @@ export const signUpApi = async (input: ISignUpRequest) => {
         "password should be  between 8 and 20 characters long and include both letters and numbers",
       );
     }
+
+    // 이미 존재하는 회원인 경우 에러
 
     throw new Error("sign up error");
     // 비밀번호/재비밀번호 다른경우 에러

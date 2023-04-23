@@ -5,7 +5,8 @@ import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions } from "@store/slices/authSlice";
+import { actions as authActions } from "@store/slices/authSlice";
+import { actions as errorActions } from "@store/slices/errorSlice";
 import { useLoginMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
@@ -15,6 +16,7 @@ import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
+import { checkIsEmailFormat } from "@utils/common";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -62,32 +64,37 @@ const Login: React.FC = () => {
   const signUpPath =
     window.location.hostname === "minhob38.github.io" ? "/gcf/sign-up" : "/sign-up";
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const errorMessage = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.loginErrorMessage,
+  );
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
-  const isLoginError = useTypedSelector((state) => state.rootReducer.errorReducer.isLoginError);
+  // const isLoginError = useTypedSelector((state) => state.rootReducer.errorReducer.isLoginError);
 
   const dispatch = useTypedDispatch();
   const loginMutation = useLoginMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.textInput(ev.target));
+    dispatch(authActions.textInput(ev.target));
   };
 
   const handleLoginButtonClick = () => {
+    // 입력정보가 없으면 에러
     if (!email || !password) {
-      setErrorMessage("Enter email and password");
+      dispatch(errorActions.throwLoginError("Enter email and password"));
       return;
     }
+
+    // email 형식 체크
+    const isEmailFormat = checkIsEmailFormat(email);
+    if (!isEmailFormat) {
+      dispatch(errorActions.throwLoginError("Invalid email format"));
+      return;
+    }
+
     loginMutation.mutate({ email, password });
   };
-
-  useEffect(() => {
-    if (isLoginError) {
-      setErrorMessage("sign in fail");
-    }
-  }, [isLoginError]);
 
   return (
     <>

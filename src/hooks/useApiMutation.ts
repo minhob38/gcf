@@ -31,6 +31,9 @@ export const useApiMutation = <T>(api: any) => {
   return { mutate, isLoading, isError, error, isSuccess };
 };
 
+/**
+ * @description 회원가입 mutation 함수
+ */
 export const useSignUpMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.signUpApi, {
@@ -56,7 +59,8 @@ export const useLoginMutation = () => {
       dispatch(modalActions.showLoading());
     },
     onError: (error, variables, context) => {
-      dispatch(errorActions.throwLoginError());
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwLoginError(errorMessage));
     },
     onSuccess: (data, variables, context) => {
       dispatch(authActions.authenticate());

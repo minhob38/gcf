@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   isLoginWarning: boolean;
   isLoading: boolean;
+  isSignUpNotification: boolean;
 }
 
 const initialState: IState = {
   isLoginWarning: false,
   isLoading: false,
+  isSignUpNotification: false,
 };
 
 const modalSlice = createSlice({
@@ -30,6 +32,12 @@ const modalSlice = createSlice({
     },
     hideLoading: (state) => {
       state.isLoading = false;
+    },
+    showSignUpNotification: (state) => {
+      state.isSignUpNotification = true;
+    },
+    hideSignUpNotification: (state) => {
+      state.isSignUpNotification = false;
     },
   },
 });

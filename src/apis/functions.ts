@@ -33,6 +33,9 @@ export const signUpApi = async (input: ISignUpRequest) => {
     password,
     reEnterPassword: rePassword,
   };
+
+  return;
+
   const response = await axios.post<IApiResponse>(
     "https://dev.onepick.info/api/v1/user-register",
     body,

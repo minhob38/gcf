@@ -8,14 +8,13 @@ import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions } from "@store/slices/authSlice";
-import { useApiMutation, useSignUpMutation } from "@hooks/useApiMutation";
-import { ISignUpRequest } from "types/types";
-import { signUpApi } from "@apis/functions";
+import { useSignUpMutation } from "@hooks/useApiMutation";
 import { useEffect, useState } from "react";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
-import { error } from "console";
+import { useNavigate } from "react-router-dom";
+import SignUpNotificationModal from "modals/SignUpNotificationModal";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -45,8 +44,12 @@ const SignButtonContainer = styled.div`
 `;
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const isSignUpNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isSignUpNotification,
+  );
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const rePassword = useTypedSelector((state) => state.rootReducer.authReducer.rePassword);
@@ -88,12 +91,15 @@ const SignUp = () => {
     }
   }, [signUpMutation.error]);
 
+  const handleFocus = () => setErrorMessage(null);
+
   return (
     <>
+      {isSignUpNotification && <SignUpNotificationModal />}
       <Header title="Welcome" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           <SubTitle>First and last name</SubTitle>
           <TextInput
             placeholder="John Doe"
@@ -102,7 +108,7 @@ const SignUp = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           <SubTitle>Email</SubTitle>
           <TextInput
             placeholder="gcf@gmail.com"
@@ -111,7 +117,7 @@ const SignUp = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           <SubTitle>Password</SubTitle>
           <TextInput
             placeholder="password"
@@ -120,7 +126,7 @@ const SignUp = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           {/* <SubTitle>Confirm Password</SubTitle> */}
           <TextInput
             placeholder="confirm password"

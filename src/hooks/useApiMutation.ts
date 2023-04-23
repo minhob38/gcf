@@ -38,7 +38,9 @@ export const useSignUpMutation = () => {
       dispatch(modalActions.showLoading());
     },
     onError: (error, variables, context) => {},
-    onSuccess: (data, variables, context) => {},
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showSignUpNotification());
+    },
     onSettled: () => {
       dispatch(modalActions.hideLoading());
     },

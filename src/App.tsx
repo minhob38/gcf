@@ -10,10 +10,12 @@ import CarService from "pages/CarService";
 import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
+import { actions as errorActions } from "@store/slices/errorSlice";
+import { actions as modalActions } from "@store/slices/modalSlice";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -27,6 +29,12 @@ function App() {
   const Fallback = () => {
     return <div>loading...</div>;
   };
+
+  // 초기화 코드
+  // useEffect(() => {
+  //   errorActions.initialize();
+  //   modalActions.initialize();
+  // }, []);
 
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.authReducer.isAuthenticated,

@@ -12,6 +12,9 @@ export const useMyPickupBookingQuery = (userId: number) => {
   const dispatch = useTypedDispatch();
 
   const query = useQuery(["my-pickup", userId], api.findMyPickupApi, {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    suspense: true,
     onError: (error) => {
       // const errorMessage = (error as Error).message;
       // dispatch(errorActions.throwSignUpError(errorMessage));

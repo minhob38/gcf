@@ -225,8 +225,6 @@ export const moveRequestApi = async (input: IMoveRequest) => {
  * @description 나의 pickup 조회 api
  */
 export const findMyPickupApi = async ({ queryKey }) => {
-  console.log(queryKey);
-  console.log(queryKey.queryKey);
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/${userId}/retrieve`,
@@ -236,7 +234,7 @@ export const findMyPickupApi = async ({ queryKey }) => {
   const status = response.status;
 
   if (data.result === "SUCCESS") {
-    const res = data.data as unknown as {
+    const apiData = data.data as unknown as {
       applyStatus: string;
       arrival: string;
       day: number;
@@ -250,15 +248,15 @@ export const findMyPickupApi = async ({ queryKey }) => {
     };
 
     return {
-      applyStatus: res.applyStatus,
-      arrival: res.arrival,
-      date: res.day,
-      departure: res.departure,
-      flightNumber: res.flightNumber,
-      hour: res.hour,
-      minute: res.minute,
-      month: res.month,
-      year: res.year,
+      applyStatus: apiData.applyStatus,
+      arrival: apiData.arrival,
+      date: apiData.day,
+      departure: apiData.departure,
+      flightNumber: apiData.flightNumber,
+      hour: apiData.hour,
+      minute: apiData.minute,
+      month: apiData.month,
+      year: apiData.year,
     };
   }
 

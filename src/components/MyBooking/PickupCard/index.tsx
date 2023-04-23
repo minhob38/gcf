@@ -66,19 +66,23 @@ const PickupCard: React.FC = () => {
   const query = useMyPickupBookingQuery(userId);
   console.log(query.data);
 
+  const apiData = query.data;
+  // TODO PM 붙이기
   return (
     <Wrapper>
       <TimeSchedule>
         <BulletText>Time</BulletText>
-        <PlainText>2023/01/31 17:30</PlainText>
+        <PlainText>
+          {apiData?.year}/{apiData?.month}/{apiData?.date} {apiData?.hour}:{apiData?.minute}
+        </PlainText>
       </TimeSchedule>
       <PlaceSchedule>
         <BulletText>From</BulletText>
-        <PlainText>Incheon Airport</PlainText>
+        <PlainText>{apiData?.departure}</PlainText>
       </PlaceSchedule>
       <PlaceSchedule>
         <BulletText>To</BulletText>
-        <PlainText>GCF</PlainText>
+        <PlainText>{apiData?.arrival}</PlainText>
       </PlaceSchedule>
     </Wrapper>
   );

@@ -1,15 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
-  // isSignUpError: boolean;
-  isLoginError: boolean;
+  signUpErrorMessage: string | null;
   loginErrorMessage: string | null;
 }
 
 const initialState: IState = {
-  isLoginError: false,
+  signUpErrorMessage: null,
   loginErrorMessage: null,
-  // isSignUpError: false,
 };
 
 const errorSlice = createSlice({
@@ -21,23 +19,20 @@ const errorSlice = createSlice({
         state[key] = initialState[key];
       }
     },
-    // // 회원가입 에러
-    // throwSignUpError: (state) => {
-    //   state.isLoginError = true;
-    // },
-    // catchSignUpError: (state) => {
-    //   state.isLoginError = false;
-    // },
+    // 회원가입 에러
+    throwSignUpError: (state, action: PayloadAction<string>) => {
+      state.signUpErrorMessage = action.payload;
+    },
+    catchSignUpError: (state) => {
+      state.signUpErrorMessage = null;
+    },
     // 로그인 에러
     throwLoginError: (state, action: PayloadAction<string>) => {
-      state.isLoginError = true;
       state.loginErrorMessage = action.payload;
     },
     catchLoginError: (state) => {
-      state.isLoginError = false;
       state.loginErrorMessage = null;
     },
-    // 로그인에러
   },
 });
 

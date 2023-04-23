@@ -7,7 +7,8 @@ import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions } from "@store/slices/authSlice";
+import { actions as authActions } from "@store/slices/authSlice";
+import { actions as errorActions } from "@store/slices/errorSlice";
 import { useSignUpMutation } from "@hooks/useApiMutation";
 import { useEffect, useState } from "react";
 import TextInput from "@components/Auth/TextInput";
@@ -46,9 +47,11 @@ const SignButtonContainer = styled.div`
 
 const SignUp = () => {
   const dispatch = useTypedDispatch();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // TODO: redux로 상태관리하기
   const isSignUpNotification = useTypedSelector(
     (state) => state.rootReducer.modalReducer.isSignUpNotification,
+  );
+  const errorMessage = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.signUpErrorMessage,
   );
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
@@ -58,32 +61,35 @@ const SignUp = () => {
   const signUpMutation = useSignUpMutation();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.textInput(ev.target));
+    dispatch(authActions.textInput(ev.target));
   };
 
   const handleSignUpButtonClick = () => {
     // 입력정보가 없으면 에러
     if (!email || !password || !name || !rePassword) {
-      setErrorMessage("Enter name, email and password");
+      dispatch(errorActions.throwSignUpError("Enter name, email and password"));
       return;
     }
 
     // email 형식 체크
     const isEmailFormat = checkIsEmailFormat(email);
     if (!isEmailFormat) {
-      setErrorMessage("Invalid email format");
+      dispatch(errorActions.throwSignUpError("Invalid email format"));
+
       return;
     }
 
     // 비밀번호/재확인 비밀번호가 같은 에러
     if (password !== rePassword) {
-      setErrorMessage("Password and re-password should be same");
+      dispatch(errorActions.throwSignUpError("Password and re-password should be same"));
+
       return;
     }
 
     // 비밀번호/재확인 비밀번호가 같은 에러
     if (password.length < 8 || password.length > 20) {
-      setErrorMessage("Password should be between 8 and 20 characters");
+      dispatch(errorActions.throwSignUpError("Password should be between 8 and 20 characters"));
+
       return;
     }
 
@@ -91,14 +97,7 @@ const SignUp = () => {
     signUpMutation.mutate({ fullName: name, email, password, rePassword });
   };
 
-  useEffect(() => {
-    const error = signUpMutation.error;
-    if (error) {
-      setErrorMessage((error as Error).message);
-    }
-  }, [signUpMutation.error]);
-
-  const handleFocus = () => setErrorMessage(null);
+  const handleFocus = () => dispatch(errorActions.catchSignUpError());
 
   return (
     <>

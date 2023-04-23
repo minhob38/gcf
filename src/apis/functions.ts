@@ -66,7 +66,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
   const data = response.data;
   const status = response.status;
-
+  console.log(data);
   if (data.result === "SUCCESS") return;
 
   if (data.result === "FAIL") {
@@ -78,6 +78,9 @@ export const signUpApi = async (input: ISignUpRequest) => {
     }
 
     // 이미 존재하는 회원인 경우 에러
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("Email already exists");
+    }
 
     throw new Error("sign up error");
     // 비밀번호/재비밀번호 다른경우 에러

@@ -40,7 +40,10 @@ export const useSignUpMutation = () => {
     onMutate: (variables) => {
       dispatch(modalActions.showLoading());
     },
-    onError: (error, variables, context) => {},
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwSignUpError(errorMessage));
+    },
     onSuccess: (data, variables, context) => {
       dispatch(modalActions.showSignUpNotification());
     },

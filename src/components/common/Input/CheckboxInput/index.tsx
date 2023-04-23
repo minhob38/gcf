@@ -51,7 +51,14 @@ const CheckboxInput: React.FC<IProps> = ({ name, title, value }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (kind.includes(value as any)) setIsChecked(true);
+    console.log("!!!");
+    console.log(value);
+    console.log(kind.includes(value as any));
+    if (kind.includes(value as any)) {
+      setIsChecked(true);
+      return;
+    }
+    setIsChecked(false);
   }, [kind, value]);
 
   const handleCheckboxInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +74,7 @@ const CheckboxInput: React.FC<IProps> = ({ name, title, value }) => {
         value={value}
         checked={isChecked}
         onChange={handleCheckboxInputChange}
+        // onClick={}
       />
     </Label>
   );

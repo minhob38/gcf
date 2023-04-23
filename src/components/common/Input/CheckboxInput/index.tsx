@@ -51,9 +51,6 @@ const CheckboxInput: React.FC<IProps> = ({ name, title, value }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("!!!");
-    console.log(value);
-    console.log(kind.includes(value as any));
     if (kind.includes(value as any)) {
       setIsChecked(true);
       return;

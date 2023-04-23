@@ -264,3 +264,42 @@ export const findMyPickupApi = async ({ queryKey }) => {
     throw new Error("find my pickup booking error");
   }
 };
+
+/**
+ * @description 나의 telcom 조회 api
+ */
+export const findMyTelcomApi = async ({ queryKey }) => {
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/telecommunications/${userId}/retrieve`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      userId: number;
+      year: number;
+      month: number;
+      applyMobilePhone: boolean;
+      applyInternet: boolean;
+      applyTv: boolean;
+      applyStatus: string;
+    };
+
+    return {
+      userId: apiData.userId,
+      year: apiData.year,
+      month: apiData.month,
+      isMobilePhone: apiData.applyMobilePhone,
+      isInternet: apiData.applyInternet,
+      isTv: apiData.applyTv,
+      status: apiData.applyInternet,
+    };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find my pickup booking error");
+  }
+};

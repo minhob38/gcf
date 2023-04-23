@@ -96,13 +96,15 @@ const Login: React.FC = () => {
     loginMutation.mutate({ email, password });
   };
 
+  const handleFocus = () => dispatch(errorActions.catchLoginError());
+
   return (
     <>
       {isLoading && <LoadingModal />}
       <Header title="Welcome" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           <SubTitle>Email</SubTitle>
           <TextInput
             placeholder="gcf@gmail.com"
@@ -111,7 +113,7 @@ const Login: React.FC = () => {
             onChange={handleTextInputChange}
           />
         </InputBox>
-        <InputBox>
+        <InputBox onFocus={handleFocus}>
           <SubTitle>Password</SubTitle>
           <TextInput
             placeholder="password"

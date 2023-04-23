@@ -1,4 +1,4 @@
-import { EENGLISH_MONTH } from "types/enum";
+import { EENGLISH_MONTH, ETELCOM_KIND_TYPE } from "types/enum";
 
 /**
  * @description email인지 형식체크
@@ -41,4 +41,15 @@ export const convertEnglishToNumberMonth = (englishMonth: string): number => {
     default:
       return 0;
   }
+};
+
+/**
+ * @description 통신서비스 property를 api spec에 맞게 변환
+ */
+export const convertTelcomServiceInputToApiRequest = (kind: ETELCOM_KIND_TYPE[]): string => {
+  let kindStr = kind.join(",");
+  kindStr = kindStr.replace(ETELCOM_KIND_TYPE.MOBILE, "MobilePhone");
+  kindStr = kindStr.replace(ETELCOM_KIND_TYPE.INTERNET, "Internet");
+  kindStr = kindStr.replace(ETELCOM_KIND_TYPE.TV, "TV");
+  return kindStr;
 };

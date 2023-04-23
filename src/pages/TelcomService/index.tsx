@@ -10,6 +10,9 @@ import { ESCHEDULE_TYPE, ESERVICE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import CheckboxInput from "@components/common/Input/CheckboxInput";
 import RequestButton from "@components/common/Button/RequestButton";
+import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
+import { actions as errorActions } from "@store/slices/errorSlice";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -66,13 +69,20 @@ const RequestButtonContainer = styled.div`
 `;
 
 const TelcomService = () => {
+  const dispatch = useTypedDispatch();
+  const isPickupTelcomMoveNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
+  );
+  const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
+
   return (
     <>
+      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
       <Header title="Telcom" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Title>Schedule</Title>
         <YearMonthContainer>
-          <SelectContainer>
+          <SelectContainer onFocus={handleFocus}>
             <SelectTitle>Year</SelectTitle>
             <ScheduleSelect
               service={ESERVICE_TYPE.TELCOM}
@@ -80,7 +90,7 @@ const TelcomService = () => {
               size={{ width: "160px", height: "30px" }}
             />
           </SelectContainer>
-          <SelectContainer>
+          <SelectContainer onFocus={handleFocus}>
             <SelectTitle>Month</SelectTitle>
             <ScheduleSelect
               service={ESERVICE_TYPE.TELCOM}
@@ -91,14 +101,14 @@ const TelcomService = () => {
         </YearMonthContainer>
         <Gap />
         <Title>Kind</Title>
-        <CheckboxContainer>
+        <CheckboxContainer onFocus={handleFocus}>
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.MOBILE} title="Mobile Phone" />
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.INTERNET} title="Internet[LAN]" />
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
         </CheckboxContainer>
         <RequestButtonContainer>
           <RequestButton service={ESERVICE_TYPE.TELCOM} />
-        </RequestButtonContainer>{" "}
+        </RequestButtonContainer>
       </Content>
     </>
   );

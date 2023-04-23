@@ -1,6 +1,12 @@
 import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
-import { convertEnglishToNumberMonth } from "@utils/common";
-import { IPickupRequest, ILoginRequest, ISignUpRequest, IApiResponse } from "types/types";
+import { convertEnglishToNumberMonth, convertTelcomServiceInputToApiRequest } from "@utils/common";
+import {
+  IPickupRequest,
+  ILoginRequest,
+  ISignUpRequest,
+  IApiResponse,
+  ITelcomRequest,
+} from "types/types";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -134,7 +140,39 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
   }
 };
 
-export const telcomRequestApi = async (input: IPickupRequest) => {
-  console.log("input", input);
-  return "...";
+/**
+ * @description 통신서비스 요청 api
+ */
+export const telcomRequestApi = async (input: ITelcomRequest) => {
+  const { year, month, kind } = input;
+  const body: {
+    userId: number;
+    year: number;
+    month: number;
+    arrApplyTelecommunicationTypeStr: string;
+  } = {
+    userId: 1,
+    year: parseInt(year),
+    month: convertEnglishToNumberMonth(month),
+    arrApplyTelecommunicationTypeStr: convertTelcomServiceInputToApiRequest(kind),
+  };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/telecommunications/request`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    // 입력데이터가 없을때
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("enter telecommunication schedule form");
+    }
+
+    throw new Error("telcom error");
+  }
 };

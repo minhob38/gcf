@@ -96,3 +96,45 @@ export const usePickUpMutation = () => {
 
   return mutation;
 };
+
+export const useTelcomMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.telcomRequestApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showPickupTelcomMoveNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+export const useMoveMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.pickUpRequestApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showPickupTelcomMoveNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};

@@ -1,3 +1,5 @@
+import { ETELCOM_KIND_TYPE } from "./enum";
+
 export interface IButtonProps {
   /** button label(typescript type)입니다. */
   label: string;
@@ -32,6 +34,7 @@ export interface IPickupRequest {
   month: string;
   year: string;
 }
+
 // <e.g>
 // arrival: "GCF";
 // date: "9";
@@ -43,7 +46,17 @@ export interface IPickupRequest {
 // year: "2024";
 
 export interface ITelcomRequest {
-  kind: string[];
+  kind: ETELCOM_KIND_TYPE[];
+  month: string;
+  year: string;
+}
+// <e.g>
+// kind: ["internet", "mobile"];
+// month: "Apr";
+// year: "2024";
+
+export interface IMoveRequest {
+  kind: ETELCOM_KIND_TYPE[];
   month: string;
   year: string;
 }

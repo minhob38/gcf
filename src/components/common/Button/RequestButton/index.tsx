@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { usePickUpMutation } from "@hooks/useApiMutation";
+import { usePickUpMutation, useTelcomMutation } from "@hooks/useApiMutation";
 import { ESERVICE_TYPE } from "types/enum";
 import { shallowEqual } from "react-redux";
 import * as variables from "@constants/variables";
@@ -49,37 +49,38 @@ const ErrorText = styled.div`
 
 const RequestButton: React.FC<IProps> = ({ service }) => {
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer, shallowEqual);
-  const pickUpErrorMessage = useTypedSelector(
+  const telcomState = useTypedSelector((state) => state.rootReducer.telcomReducer, shallowEqual);
+  const moveState = useTypedSelector((state) => state.rootReducer.moveReducer, shallowEqual);
+  const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.pickUpTelcomMoveErrorMessage,
   );
   const dispatch = useTypedDispatch();
   const pickUpMutation = usePickUpMutation();
+  const telcomMutation = useTelcomMutation();
 
   const handleClick = () => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
-        const { year, month, date, hour, minute, departure, arrival, flightNumber } = pickupState;
-
         if (
-          year === variables.SELECT_YEAR_DEFAULT_TEXT ||
-          month === variables.SELECT_MONTH_DEFAULT_TEXT ||
-          date === variables.SELECT_DATE_DEFAULT_TEXT
+          pickupState.year === variables.SELECT_YEAR_DEFAULT_TEXT ||
+          pickupState.month === variables.SELECT_MONTH_DEFAULT_TEXT ||
+          pickupState.date === variables.SELECT_DATE_DEFAULT_TEXT
         ) {
           dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month and date"));
           return;
         }
 
         if (
-          hour === variables.SELECT_HOUR_DEFAULT_TEXT ||
-          minute === variables.SELECT_MINUTE_DEFAULT_TEXT
+          pickupState.hour === variables.SELECT_HOUR_DEFAULT_TEXT ||
+          pickupState.minute === variables.SELECT_MINUTE_DEFAULT_TEXT
         ) {
           dispatch(errorActions.throwPickUpTelcomMoveError("Enter hour and minute"));
           return;
         }
 
         if (
-          departure === variables.SELECT_DEFAULT_TEXT ||
-          arrival === variables.SELECT_DEFAULT_TEXT
+          pickupState.departure === variables.SELECT_DEFAULT_TEXT ||
+          pickupState.arrival === variables.SELECT_DEFAULT_TEXT
           // flightNumber === variables.SELECT_DEFAULT_TEXT
         ) {
           dispatch(errorActions.throwPickUpTelcomMoveError("Enter departure and arrival"));
@@ -87,18 +88,36 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
         }
 
         pickUpMutation.mutate({
-          year,
-          month,
-          date,
-          hour,
-          minute,
-          departure,
-          arrival,
-          flightNumber,
+          year: pickupState.year,
+          month: pickupState.month,
+          date: pickupState.date,
+          hour: pickupState.hour,
+          minute: pickupState.minute,
+          departure: pickupState.departure,
+          arrival: pickupState.arrival,
+          flightNumber: pickupState.flightNumber,
         });
         return;
       case ESERVICE_TYPE.TELCOM:
-        // telcomMutate(pickupState);
+        if (
+          telcomState.year === variables.SELECT_YEAR_DEFAULT_TEXT ||
+          telcomState.month === variables.SELECT_MONTH_DEFAULT_TEXT
+        ) {
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month"));
+          return;
+        }
+
+        if (!telcomState.kind.length) {
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter telcom service kind"));
+          return;
+        }
+
+        telcomMutation.mutate({
+          year: telcomState.year,
+          month: telcomState.month,
+          kind: telcomState.kind,
+        });
+        return;
         return;
       default:
         return;
@@ -107,7 +126,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
 
   return (
     <Wrapper>
-      <ErrorText>{pickUpErrorMessage}</ErrorText>
+      <ErrorText>{errorMessage}</ErrorText>
       <Button onClick={handleClick}>Request</Button>
     </Wrapper>
   );

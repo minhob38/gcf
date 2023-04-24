@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import * as api from "@apis/functions";
-import { useTypedDispatch } from "./useStore";
+import { useTypedDispatch, useTypedSelector } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as authActions } from "@store/slices/authSlice";
@@ -8,7 +8,8 @@ import { actions as authActions } from "@store/slices/authSlice";
 /**
  * @description my pickup 조회 query 함수
  */
-export const useMyPickupBookingQuery = (userId: number) => {
+export const useMyPickupBookingQuery = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
   const query = useQuery(["my-pickup", userId], api.findMyPickupApi, {
     refetchOnWindowFocus: false,
     retry: 0,

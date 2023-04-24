@@ -15,16 +15,6 @@ const SubTitle = styled.div`
   margin: 0 0 5px 0;
 `;
 
-const InputBox = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  margin: 0 auto 20px auto;
-`;
-
 const Margin = styled.div`
   height: ${margins.TOP_MARGIN};
 `;

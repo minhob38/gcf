@@ -92,7 +92,13 @@ const MoveService = () => {
 
   return (
     <>
-      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
+      {isPickupTelcomMoveNotification && (
+        <PickupTelcomMoveNotificationModal
+          notification="Request success"
+          buttonText="Go to home"
+          path="/"
+        />
+      )}
       <Header title="Move" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>

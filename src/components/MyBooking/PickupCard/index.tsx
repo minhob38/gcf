@@ -53,8 +53,7 @@ const PlainText = styled.div`
 // `;
 
 const PickupCard: React.FC = () => {
-  const userId = 1;
-  const query = useMyPickupBookingQuery(userId);
+  const query = useMyPickupBookingQuery();
   const apiData = query.data;
 
   // TODO PM 붙이기

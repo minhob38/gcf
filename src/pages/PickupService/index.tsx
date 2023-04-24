@@ -15,6 +15,7 @@ import RequestButton from "@components/common/Button/RequestButton";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
+import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
 
 const YearContainer = styled.div`
   display: flex;
@@ -78,9 +79,26 @@ const PickupService = () => {
   );
   const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
 
+  const query = useMyPickupBookingQuery();
+  const apiData = query.data;
+  console.log(apiData);
+
   return (
     <>
-      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
+      {apiData && (
+        <PickupTelcomMoveNotificationModal
+          notification="You have a booking in progress"
+          buttonText="Go to my booking"
+          path="/my-booking"
+        />
+      )}
+      {isPickupTelcomMoveNotification && (
+        <PickupTelcomMoveNotificationModal
+          notification="Request success"
+          buttonText="Go to home"
+          path="/"
+        />
+      )}
       <Header title="Pick up" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>

@@ -77,7 +77,13 @@ const TelcomService = () => {
 
   return (
     <>
-      {isPickupTelcomMoveNotification && <PickupTelcomMoveNotificationModal />}
+      {isPickupTelcomMoveNotification && (
+        <PickupTelcomMoveNotificationModal
+          notification="Request success"
+          buttonText="Go to home"
+          path="/"
+        />
+      )}
       <Header title="Telcom" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Title>Schedule</Title>

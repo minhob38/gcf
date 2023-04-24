@@ -7,6 +7,12 @@ import { useTypedDispatch } from "@hooks/useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { useNavigate } from "react-router-dom";
 
+interface IProps {
+  notification: string;
+  buttonText: string;
+  path: string;
+}
+
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -49,7 +55,11 @@ const Button = styled.div`
   color: ${colors.WHITE_1};
 `;
 
-const PickupTelcomMoveNotificationModal: React.FC = () => {
+const PickupTelcomMoveNotificationModal: React.FC<IProps> = ({
+  notification,
+  buttonText,
+  path,
+}) => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
@@ -57,7 +67,6 @@ const PickupTelcomMoveNotificationModal: React.FC = () => {
     // dispatch(modalActions.hideSignUpNotification());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    let path = "/";
     path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
     dispatch(modalActions.hidePickupTelcomMoveNotification());
     navigate(path);
@@ -66,8 +75,8 @@ const PickupTelcomMoveNotificationModal: React.FC = () => {
   return (
     <Modal onClick={handleClickModal}>
       <Box>
-        Request success
-        <Button onClick={handleClickButton}>Go to home</Button>
+        {notification}
+        <Button onClick={handleClickButton}>{buttonText}</Button>
       </Box>
     </Modal>
   );

@@ -262,6 +262,7 @@ export const findMyPickupApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
     throw new Error("find my pickup booking error");
   }
 };

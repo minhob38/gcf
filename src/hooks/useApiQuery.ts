@@ -52,3 +52,27 @@ export const useMyTelcomBookingQuery = () => {
 
   return query;
 };
+
+/**
+ * @description my move 조회 query 함수
+ */
+export const useMyMoveBookingQuery = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const query = useQuery(["my-move", userId], api.findMyMoveApi, {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    suspense: true,
+    onError: (error) => {
+      // const errorMessage = (error as Error).message;
+      // dispatch(errorActions.throwSignUpError(errorMessage));
+    },
+    onSuccess: (data) => {
+      // dispatch(modalActions.showSignUpNotification());
+    },
+    onSettled: () => {
+      // dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return query;
+};

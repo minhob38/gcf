@@ -302,6 +302,47 @@ export const findMyTelcomApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
+    throw new Error("find my pickup booking error");
+  }
+};
+
+/**
+ * @description 나의 move 조회 api
+ */
+export const findMyMoveApi = async ({ queryKey }) => {
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/moves/${userId}/retrieve`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      userId: number;
+      year: number;
+      month: number;
+      departureNation: string;
+      departureAddress: string;
+      arrivalNation: string;
+      arrivalAddress: string;
+    };
+
+    return {
+      userId: apiData.userId,
+      year: apiData.year,
+      month: apiData.month,
+      departureNation: apiData.departureNation,
+      departureAddress: apiData.departureAddress,
+      arrivalNation: apiData.arrivalNation,
+      arrivalAddress: apiData.arrivalAddress,
+    };
+  }
+
+  if (data.result === "FAIL") {
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
     throw new Error("find my pickup booking error");
   }
 };

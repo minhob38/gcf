@@ -55,9 +55,9 @@ const TelcomCard: React.FC = () => {
       <TextContainer>
         <BulletText>Service</BulletText>
         <PlainText>
-          {apiData?.isMobilePhone && "Mobile/"}
-          {apiData?.isInternet && "Internet/"}
-          {apiData?.isTv && "TV"}
+          {apiData?.isMobilePhone && "Mobile /"}
+          {apiData?.isInternet && " Internet /"}
+          {apiData?.isTv && " TV"}
         </PlainText>
       </TextContainer>
       <TextContainer>

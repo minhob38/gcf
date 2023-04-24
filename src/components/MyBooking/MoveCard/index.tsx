@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
+import { useMyMoveBookingQuery, useMyTelcomBookingQuery } from "@hooks/useApiQuery";
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const PlainText = styled.div`
 `;
 
 const MoveCard: React.FC = () => {
-  const query = useMyTelcomBookingQuery();
+  const query = useMyMoveBookingQuery();
   const apiData = query.data;
   // TODO PM 붙이기
 
@@ -53,16 +53,16 @@ const MoveCard: React.FC = () => {
         </PlainText>
       </TextContainer>
       <TextContainer>
-        <BulletText>Service</BulletText>
+        <BulletText>Departure</BulletText>
         <PlainText>
-          {apiData?.isMobilePhone && "Mobile/"}
-          {apiData?.isInternet && "Internet/"}
-          {apiData?.isTv && "TV"}
+          {apiData?.departureNation} / {apiData?.departureAddress}
         </PlainText>
       </TextContainer>
       <TextContainer>
         <BulletText>Status</BulletText>
-        <PlainText>{apiData?.status}</PlainText>
+        <PlainText>
+          {apiData?.arrivalNation} / {apiData?.arrivalAddress}
+        </PlainText>
       </TextContainer>
     </Wrapper>
   );

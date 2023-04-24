@@ -53,8 +53,8 @@ const SignUpNotificationModal: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    if (ev.currentTarget !== ev.target) return;
-    dispatch(modalActions.hideSignUpNotification());
+    // if (ev.currentTarget !== ev.target) return;
+    // dispatch(modalActions.hideSignUpNotification());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     let path = "/login";

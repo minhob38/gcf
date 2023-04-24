@@ -8,7 +8,9 @@ import {
   IApiResponse,
   ITelcomRequest,
   IMoveRequest,
-  IFindMyPickup,
+  IMoveCancel,
+  IPickupCancel,
+  ITelcomCancel,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -217,6 +219,72 @@ export const moveRequestApi = async (input: IMoveRequest) => {
       throw new Error("enter move schedule form");
     }
 
+    throw new Error("move error");
+  }
+};
+
+/**
+ * @description pickup 서비스 취소 api
+ */
+export const pickupCancelApi = async (input: IPickupCancel) => {
+  const { userId } = input;
+  const body: { userId: number } = { userId };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/pickups/cancel`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    throw new Error("move error");
+  }
+};
+
+/**
+ * @description telcom 서비스 취소 api
+ */
+export const telcomCancelApi = async (input: ITelcomCancel) => {
+  const { userId } = input;
+  const body: { userId: number } = { userId };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/telecommunications/cancel`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    throw new Error("telcom error");
+  }
+};
+
+/**
+ * @description move 서비스 취소 api
+ */
+export const moveCancelApi = async (input: IMoveCancel) => {
+  const { userId } = input;
+  const body: { userId: number } = { userId };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/moves/cancel`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
     throw new Error("move error");
   }
 };

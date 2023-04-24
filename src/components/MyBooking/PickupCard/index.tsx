@@ -6,6 +6,7 @@ import * as margins from "@constants/margins";
 import { useMyPickupBookingQuery, useMyPickupBookingQueryClient } from "@hooks/useApiQuery";
 import CancelButton from "../CancelButton";
 import { useQueryClient } from "react-query";
+import { ESERVICE_TYPE } from "types/enum";
 
 const PADDING = "15px";
 
@@ -75,7 +76,7 @@ const PickupCard: React.FC = () => {
   return (
     <Wrapper>
       <CancelButtonContainer>
-        <CancelButton>Cancel</CancelButton>
+        <CancelButton service={ESERVICE_TYPE.PICKUP}>Cancel</CancelButton>
       </CancelButtonContainer>
       <TextContainer>
         <BulletText>Time</BulletText>

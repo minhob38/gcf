@@ -55,6 +55,9 @@ export const useSignUpMutation = () => {
   return mutation;
 };
 
+/**
+ * @description 로그인 mutation 함수
+ */
 export const useLoginMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.loginApi, {
@@ -76,6 +79,9 @@ export const useLoginMutation = () => {
   return mutation;
 };
 
+/**
+ * @description pickup 요청 mutation 함수
+ */
 export const usePickUpMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.pickUpRequestApi, {
@@ -97,6 +103,9 @@ export const usePickUpMutation = () => {
   return mutation;
 };
 
+/**
+ * @description telcom 요청 mutation 함수
+ */
 export const useTelcomMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.telcomRequestApi, {
@@ -118,6 +127,9 @@ export const useTelcomMutation = () => {
   return mutation;
 };
 
+/**
+ * @description move 요청 mutation 함수
+ */
 export const useMoveMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.moveRequestApi, {
@@ -129,6 +141,81 @@ export const useMoveMutation = () => {
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
     },
     onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showPickupTelcomMoveNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
+ * @description pickup cancel mutation 함수
+ */
+export const usePickupCancelMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.pickupCancelApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      // 여기에 매개변수를 넣게???
+      dispatch(modalActions.showPickupTelcomMoveNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
+ * @description pickup cancel mutation 함수
+ */
+export const useTelocmCancelMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.telcomCancelApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      // 여기에 매개변수를 넣게???
+      dispatch(modalActions.showPickupTelcomMoveNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
+ * @description move cancel mutation 함수
+ */
+export const useMoveCancelMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.moveCancelApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      // 여기에 매개변수를 넣게???
       dispatch(modalActions.showPickupTelcomMoveNotification());
     },
     onSettled: () => {

@@ -63,6 +63,14 @@ export interface IMoveRequest {
 // month: "Apr";
 // year: "2024";
 
-export interface IFindMyPickup {
+export interface IPickupCancel {
+  userId: number;
+}
+
+export interface ITelcomCancel {
+  userId: number;
+}
+
+export interface IMoveCancel {
   userId: number;
 }

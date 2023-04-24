@@ -5,6 +5,7 @@ import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import { useMyMoveBookingQuery, useMyTelcomBookingQuery } from "@hooks/useApiQuery";
 import CancelButton from "../CancelButton";
+import { ESERVICE_TYPE } from "types/enum";
 
 const PADDING = "15px";
 
@@ -57,7 +58,7 @@ const MoveCard: React.FC = () => {
   return (
     <Wrapper>
       <CancelButtonContainer>
-        <CancelButton>Cancel</CancelButton>
+        <CancelButton service={ESERVICE_TYPE.MOVE}>Cancel</CancelButton>
       </CancelButtonContainer>
       <TextContainer>
         <BulletText>Time</BulletText>

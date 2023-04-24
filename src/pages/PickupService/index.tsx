@@ -81,7 +81,6 @@ const PickupService = () => {
 
   const query = useMyPickupBookingQuery();
   const apiData = query.data;
-  console.log(apiData);
 
   return (
     <>

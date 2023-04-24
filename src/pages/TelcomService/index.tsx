@@ -13,6 +13,7 @@ import RequestButton from "@components/common/Button/RequestButton";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
+import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -75,8 +76,18 @@ const TelcomService = () => {
   );
   const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
 
+  const query = useMyTelcomBookingQuery();
+  const apiData = query.data;
+
   return (
     <>
+      {apiData && (
+        <PickupTelcomMoveNotificationModal
+          notification="You have a booking in progress"
+          buttonText="Go to my booking"
+          path="/my-booking"
+        />
+      )}
       {isPickupTelcomMoveNotification && (
         <PickupTelcomMoveNotificationModal
           notification="Request success"

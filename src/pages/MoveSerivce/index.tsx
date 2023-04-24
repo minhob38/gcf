@@ -15,6 +15,7 @@ import Scroll from "@components/common/Scroll";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
+import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
 
 const YearContainer = styled.div`
   display: flex;

@@ -40,8 +40,7 @@ const PlainText = styled.div`
 `;
 
 const TelcomCard: React.FC = () => {
-  const userId = 1;
-  const query = useMyTelcomBookingQuery(userId);
+  const query = useMyTelcomBookingQuery();
   const apiData = query.data;
   // TODO PM 붙이기
 

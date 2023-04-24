@@ -32,7 +32,8 @@ export const useMyPickupBookingQuery = () => {
 /**
  * @description my telcom 조회 query 함수
  */
-export const useMyTelcomBookingQuery = (userId: number) => {
+export const useMyTelcomBookingQuery = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
   const query = useQuery(["my-telcom", userId], api.findMyTelcomApi, {
     refetchOnWindowFocus: false,
     retry: 0,

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
+import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,39 +39,26 @@ const PlainText = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-// const Status = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 10px 0 0 0;
-//   height: 30px;
-//   border-radius: 8px;
-//   font: ${fonts.FONT_MEDIUM_600};
-//   width: 100%;
-//   color: ${colors.BLACK_1};
-//   background-color: ${colors.PRIMARY_3};
-// `;
-
-const PickupCard: React.FC = () => {
-  const query = useMyPickupBookingQuery();
+const MoveCard: React.FC = () => {
+  const query = useMyTelcomBookingQuery();
   const apiData = query.data;
-
   // TODO PM 붙이기
+
   return (
     <Wrapper>
       <TextContainer>
         <BulletText>Time</BulletText>
         <PlainText>
-          {apiData?.year}/{apiData?.month}/{apiData?.date} {apiData?.hour}:{apiData?.minute}
+          {apiData?.year}/{apiData?.month}
         </PlainText>
       </TextContainer>
       <TextContainer>
-        <BulletText>From</BulletText>
-        <PlainText>{apiData?.departure}</PlainText>
-      </TextContainer>
-      <TextContainer>
-        <BulletText>To</BulletText>
-        <PlainText>{apiData?.arrival}</PlainText>
+        <BulletText>Service</BulletText>
+        <PlainText>
+          {apiData?.isMobilePhone && "Mobile/"}
+          {apiData?.isInternet && "Internet/"}
+          {apiData?.isTv && "TV"}
+        </PlainText>
       </TextContainer>
       <TextContainer>
         <BulletText>Status</BulletText>
@@ -81,4 +68,4 @@ const PickupCard: React.FC = () => {
   );
 };
 
-export default PickupCard;
+export default MoveCard;

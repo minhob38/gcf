@@ -8,11 +8,13 @@ import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import PickupCard from "@components/MyBooking/PickupCard";
 import TelcomCard from "@components/MyBooking/TelcomCard";
+import MoveCard from "@components/MyBooking/MoveCard";
+import Scroll from "@components/common/Scroll";
 
 const SubTitle = styled.div`
-  font: ${fonts.FONT_MEDIUM_600};
+  font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
-  margin: 0 0 5px 0;
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const Margin = styled.div`
@@ -23,7 +25,8 @@ const BookingCardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 30px auto;
+  width: 100%;
 `;
 
 const MyBooking: React.FC = () => {
@@ -31,13 +34,21 @@ const MyBooking: React.FC = () => {
     <>
       <Header title="My booking" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Margin />
-        <BookingCardContainer>
-          <PickupCard />
-        </BookingCardContainer>
-        <BookingCardContainer>
-          <TelcomCard />
-        </BookingCardContainer>
+        <Scroll direction="y" height={`calc(100%)`}>
+          <Margin />
+          <SubTitle>Pick up</SubTitle>
+          <BookingCardContainer>
+            <PickupCard />
+          </BookingCardContainer>
+          <SubTitle>Telecommunication</SubTitle>
+          <BookingCardContainer>
+            <TelcomCard />
+          </BookingCardContainer>
+          <SubTitle>Move</SubTitle>
+          <BookingCardContainer>
+            <MoveCard />
+          </BookingCardContainer>
+        </Scroll>
       </Content>
     </>
   );

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  margin: 0 auto 20px auto;
+  margin: 0 auto 0 auto;
   padding: 15px;
   border-radius: 8px;
   background-color: ${colors.WHITE_1};

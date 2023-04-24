@@ -10,6 +10,11 @@ import PickupCard from "@components/MyBooking/PickupCard";
 import TelcomCard from "@components/MyBooking/TelcomCard";
 import MoveCard from "@components/MyBooking/MoveCard";
 import Scroll from "@components/common/Scroll";
+import {
+  useMyMoveBookingQuery,
+  useMyPickupBookingQuery,
+  useMyTelcomBookingQuery,
+} from "@hooks/useApiQuery";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_LARGE_600};
@@ -30,6 +35,10 @@ const BookingCardContainer = styled.div`
 `;
 
 const MyBooking: React.FC = () => {
+  const pickupQuery = useMyPickupBookingQuery();
+  const telcomQuery = useMyTelcomBookingQuery();
+  const moveQuery = useMyMoveBookingQuery();
+
   return (
     <>
       <Header title="My booking" mode="back"></Header>

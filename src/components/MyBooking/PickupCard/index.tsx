@@ -3,8 +3,9 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
+import { useMyPickupBookingQuery, useMyPickupBookingQueryClient } from "@hooks/useApiQuery";
 import CancelButton from "../CancelButton";
+import { useQueryClient } from "react-query";
 
 const PADDING = "15px";
 
@@ -64,7 +65,11 @@ const CancelButtonContainer = styled.div`
 
 const PickupCard: React.FC = () => {
   const query = useMyPickupBookingQuery();
-  const apiData = query.data;
+  const queryClient = useQueryClient();
+  // const da = queryClient.getQueryData(["my-pickup", 1]);
+  // console.log("!!!!");
+  // console.log(da);
+  const apiData = useMyPickupBookingQueryClient();
 
   // TODO PM 붙이기
   return (

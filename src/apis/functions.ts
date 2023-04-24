@@ -247,6 +247,8 @@ export const findMyPickupApi = async ({ queryKey }) => {
       year: number;
     };
 
+    if (!apiData) return null;
+
     return {
       applyStatus: apiData.applyStatus,
       arrival: apiData.arrival,
@@ -262,7 +264,7 @@ export const findMyPickupApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
-    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
+    // if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
     throw new Error("find my pickup booking error");
   }
 };
@@ -290,6 +292,8 @@ export const findMyTelcomApi = async ({ queryKey }) => {
       applyStatus: string;
     };
 
+    if (!apiData) return null;
+
     return {
       userId: apiData.userId,
       year: apiData.year,
@@ -302,7 +306,7 @@ export const findMyTelcomApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
-    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
+    // if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
     throw new Error("find my pickup booking error");
   }
 };
@@ -331,6 +335,8 @@ export const findMyMoveApi = async ({ queryKey }) => {
       applyStatus: string;
     };
 
+    if (!apiData) return null;
+
     return {
       userId: apiData.userId,
       year: apiData.year,
@@ -344,7 +350,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
-    if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
+    // if (data.errorCode === "COMMON_INVALID_PARAMETER") return null;
     throw new Error("find my pickup booking error");
   }
 };

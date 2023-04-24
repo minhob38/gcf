@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import * as api from "@apis/functions";
 import { useTypedDispatch, useTypedSelector } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
@@ -30,6 +30,19 @@ export const useMyPickupBookingQuery = () => {
 };
 
 /**
+ * @description my pickup 조회 query client 함수
+ */
+export const useMyPickupBookingQueryClient = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const queryClient = useQueryClient();
+  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyPickupApi>>>([
+    "my-pickup",
+    userId,
+  ]);
+  return apiData;
+};
+
+/**
  * @description my telcom 조회 query 함수
  */
 export const useMyTelcomBookingQuery = () => {
@@ -54,6 +67,19 @@ export const useMyTelcomBookingQuery = () => {
 };
 
 /**
+ * @description my telcom 조회 query client 함수
+ */
+export const useMyTelcomBookingQueryClient = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const queryClient = useQueryClient();
+  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyTelcomApi>>>([
+    "my-telcom",
+    userId,
+  ]);
+  return apiData;
+};
+
+/**
  * @description my move 조회 query 함수
  */
 export const useMyMoveBookingQuery = () => {
@@ -75,4 +101,17 @@ export const useMyMoveBookingQuery = () => {
   });
 
   return query;
+};
+
+/**
+ * @description my move 조회 query client 함수
+ */
+export const useMyMoveQueryClient = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const queryClient = useQueryClient();
+  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyMoveApi>>>([
+    "my-move",
+    userId,
+  ]);
+  return apiData;
 };

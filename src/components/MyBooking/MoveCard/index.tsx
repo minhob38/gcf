@@ -4,8 +4,12 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import { useMyMoveBookingQuery, useMyTelcomBookingQuery } from "@hooks/useApiQuery";
+import CancelButton from "../CancelButton";
+
+const PADDING = "15px";
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
@@ -14,7 +18,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
   margin: 0 auto 0 auto;
-  padding: 15px;
+  padding: ${PADDING};
   border-radius: 8px;
   background-color: ${colors.WHITE_1};
   box-shadow: ${colors.SHADOW};
@@ -39,6 +43,12 @@ const PlainText = styled.div`
   color: ${colors.BLACK_1};
 `;
 
+const CancelButtonContainer = styled.div`
+  position: absolute;
+  top: ${PADDING};
+  right: ${PADDING};
+`;
+
 const MoveCard: React.FC = () => {
   const query = useMyMoveBookingQuery();
   const apiData = query.data;
@@ -46,6 +56,9 @@ const MoveCard: React.FC = () => {
 
   return (
     <Wrapper>
+      <CancelButtonContainer>
+        <CancelButton>Cancel</CancelButton>
+      </CancelButtonContainer>
       <TextContainer>
         <BulletText>Time</BulletText>
         <PlainText>
@@ -59,10 +72,14 @@ const MoveCard: React.FC = () => {
         </PlainText>
       </TextContainer>
       <TextContainer>
-        <BulletText>Status</BulletText>
+        <BulletText>Arrival</BulletText>
         <PlainText>
           {apiData?.arrivalNation} / {apiData?.arrivalAddress}
         </PlainText>
+      </TextContainer>
+      <TextContainer>
+        <BulletText>Status</BulletText>
+        <PlainText>{apiData?.status}</PlainText>
       </TextContainer>
     </Wrapper>
   );

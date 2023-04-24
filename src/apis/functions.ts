@@ -328,6 +328,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
       departureAddress: string;
       arrivalNation: string;
       arrivalAddress: string;
+      applyStatus: string;
     };
 
     return {
@@ -338,6 +339,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
       departureAddress: apiData.departureAddress,
       arrivalNation: apiData.arrivalNation,
       arrivalAddress: apiData.arrivalAddress,
+      status: apiData.applyStatus,
     };
   }
 

@@ -4,8 +4,12 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
+import CancelButton from "../CancelButton";
+
+const PADDING = "15px";
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
@@ -14,7 +18,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
   margin: 0 auto 0 auto;
-  padding: 15px;
+  padding: ${PADDING};
   border-radius: 8px;
   background-color: ${colors.WHITE_1};
   box-shadow: ${colors.SHADOW};
@@ -52,6 +56,12 @@ const PlainText = styled.div`
 //   background-color: ${colors.PRIMARY_3};
 // `;
 
+const CancelButtonContainer = styled.div`
+  position: absolute;
+  top: ${PADDING};
+  right: ${PADDING};
+`;
+
 const PickupCard: React.FC = () => {
   const query = useMyPickupBookingQuery();
   const apiData = query.data;
@@ -59,6 +69,9 @@ const PickupCard: React.FC = () => {
   // TODO PM 붙이기
   return (
     <Wrapper>
+      <CancelButtonContainer>
+        <CancelButton>Cancel</CancelButton>
+      </CancelButtonContainer>
       <TextContainer>
         <BulletText>Time</BulletText>
         <PlainText>

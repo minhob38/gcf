@@ -38,6 +38,9 @@ const MyBooking: React.FC = () => {
   const pickupQuery = useMyPickupBookingQuery();
   const telcomQuery = useMyTelcomBookingQuery();
   const moveQuery = useMyMoveBookingQuery();
+  const pickupApiData = pickupQuery.data;
+  const telcomApiData = telcomQuery.data;
+  const moveApiData = moveQuery.data;
 
   return (
     <>
@@ -45,18 +48,31 @@ const MyBooking: React.FC = () => {
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100%)`}>
           <Margin />
-          <SubTitle>Pick up</SubTitle>
-          <BookingCardContainer>
-            <PickupCard />
-          </BookingCardContainer>
-          <SubTitle>Telecommunication</SubTitle>
-          <BookingCardContainer>
-            <TelcomCard />
-          </BookingCardContainer>
-          <SubTitle>Move</SubTitle>
-          <BookingCardContainer>
-            <MoveCard />
-          </BookingCardContainer>
+          {pickupApiData && (
+            <>
+              <SubTitle>Pick up</SubTitle>
+              <BookingCardContainer>
+                <PickupCard />
+              </BookingCardContainer>
+            </>
+          )}
+          {telcomApiData && (
+            <>
+              <SubTitle>Telecommunication</SubTitle>
+              <BookingCardContainer>
+                <TelcomCard />
+              </BookingCardContainer>
+            </>
+          )}
+
+          {moveApiData && (
+            <>
+              <SubTitle>Move</SubTitle>
+              <BookingCardContainer>
+                <MoveCard />
+              </BookingCardContainer>
+            </>
+          )}
         </Scroll>
       </Content>
     </>

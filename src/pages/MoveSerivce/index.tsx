@@ -15,7 +15,7 @@ import Scroll from "@components/common/Scroll";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
-import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
+import * as variables from "@constants/variables";
 
 const YearContainer = styled.div`
   display: flex;
@@ -138,28 +138,32 @@ const MoveService = () => {
             <ArrivalContainer onFocus={handleFocus}>
               <SelectContainer>
                 <SelectTitle>Departure</SelectTitle>
-                {/* <PlaceSelect
+                <PlaceSelect
+                  service={ESERVICE_TYPE.MOVE}
                   type={EPLACE_TYPE.DEPARTURE}
                   size={{ width: "160px", height: "30px" }}
-                /> */}
+                  places={variables.DEPARTURE_NATIONS}
+                />
               </SelectContainer>
-              <TextInput name="arrival" placeholder="Arrival Address" />
+              <TextInput name="departureAddress" placeholder="Departure Address" />
             </ArrivalContainer>
             <ArrivalContainer>
               <SelectContainer onFocus={handleFocus}>
                 <SelectTitle>Arrival</SelectTitle>
-                {/* <PlaceSelect
-                  type={EPLACE_TYPE.DEPARTURE}
+                <PlaceSelect
+                  service={ESERVICE_TYPE.MOVE}
+                  type={EPLACE_TYPE.ARRIVAL}
                   size={{ width: "160px", height: "30px" }}
-                /> */}
+                  places={variables.ARRIVAL_NATIONS}
+                />
               </SelectContainer>
-              <TextInput name="arrival" placeholder="Arrival Address" />
+              <TextInput name="arrivalAddress" placeholder="Arrival Address" />
             </ArrivalContainer>
           </PlaceContainer>
         </Scroll>
         <RequestButtonContainer>
           <RequestButton service={ESERVICE_TYPE.MOVE} />
-        </RequestButtonContainer>{" "}
+        </RequestButtonContainer>
       </Content>
     </>
   );

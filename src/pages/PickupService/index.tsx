@@ -16,6 +16,7 @@ import { actions as errorActions } from "@store/slices/errorSlice";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
+import * as variables from "@constants/variables";
 
 const YearContainer = styled.div`
   display: flex;
@@ -153,11 +154,21 @@ const PickupService = () => {
           <PlaceContainer>
             <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Departure</SelectTitle>
-              <PlaceSelect type={EPLACE_TYPE.DEPARTURE} size={{ width: "160px", height: "30px" }} />
+              <PlaceSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={EPLACE_TYPE.DEPARTURE}
+                size={{ width: "160px", height: "30px" }}
+                places={variables.DEPARTURE_PLACES}
+              />
             </SelectContainer>
             <SelectContainer onFocus={handleFocus}>
               <SelectTitle>Arrival</SelectTitle>
-              <PlaceSelect type={EPLACE_TYPE.ARRIVAL} size={{ width: "160px", height: "30px" }} />
+              <PlaceSelect
+                service={ESERVICE_TYPE.PICKUP}
+                type={EPLACE_TYPE.ARRIVAL}
+                size={{ width: "160px", height: "30px" }}
+                places={variables.ARRIVAL_PLACES}
+              />
             </SelectContainer>
           </PlaceContainer>
           <Gap />

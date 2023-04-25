@@ -1,17 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as variables from "@constants/variables";
-import { ETELCOM_KIND_TYPE } from "types/enum";
 
 interface IState {
   year: string;
   month: string;
-  // kind: ETELCOM_KIND_TYPE[];
+  date: string;
+  departureNation: string;
+  departureAddress: string;
+  arrivalNation: string;
+  arrivalAddress: string;
 }
 
 const initialState: IState = {
   year: variables.SELECT_DEFAULT_TEXT,
   month: variables.SELECT_DEFAULT_TEXT,
-  // kind: [],
+  date: variables.SELECT_DEFAULT_TEXT,
+  departureNation: variables.SELECT_DEFAULT_TEXT,
+  departureAddress: variables.SELECT_DEFAULT_TEXT,
+  arrivalNation: variables.SELECT_DEFAULT_TEXT,
+  arrivalAddress: variables.SELECT_DEFAULT_TEXT,
 };
 
 const moveSlice = createSlice({

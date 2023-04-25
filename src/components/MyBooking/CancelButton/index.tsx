@@ -8,7 +8,6 @@ import {
   usePickupCancelMutation,
   useTelocmCancelMutation,
 } from "@hooks/useApiMutation";
-import { useTypedSelector } from "@hooks/useStore";
 import {
   useMyMoveBookingQuery,
   useMyPickupBookingQuery,
@@ -32,8 +31,6 @@ const Wrapper = styled.div`
 `;
 
 const CancelButton: React.FC<IProps> = ({ service }) => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
-
   const myPickupBookingQuery = useMyPickupBookingQuery();
   const myTelcomBookingQuery = useMyTelcomBookingQuery();
   const myMoveBookingQuery = useMyMoveBookingQuery();

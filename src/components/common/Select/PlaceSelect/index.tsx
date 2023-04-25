@@ -5,15 +5,16 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions } from "@store/slices/pickupSlice";
+import { actions as pickUpActions } from "@store/slices/pickupSlice";
+import { actions as moveActions } from "@store/slices/moveSlice";
 import { EPLACE_TYPE, ESERVICE_TYPE } from "types/enum";
 import { useEffect, useState } from "react";
 
 interface IProps {
-  service?: ESERVICE_TYPE;
+  service: ESERVICE_TYPE;
   type: EPLACE_TYPE;
   size: { width: string; height: string };
-  // places: stirng[];
+  places: string[];
 }
 
 interface IStyleProps {
@@ -23,55 +24,101 @@ interface IStyleProps {
 /**
  * @description arrival/departure select box (item들은 인자로 전달)
  */
-const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
+const PlaceSelect: React.FC<IProps> = ({ service, type, size, places }) => {
   const dispatch = useTypedDispatch();
-  const arrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);
-  const departure = useTypedSelector((state) => state.rootReducer.pickupReducer.departure);
+  const pickupArrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);
+  const pickupDeparture = useTypedSelector((state) => state.rootReducer.pickupReducer.departure);
+  const moveArrival = useTypedSelector((state) => state.rootReducer.moveReducer.arrivalNation);
+  const moveDeparture = useTypedSelector((state) => state.rootReducer.moveReducer.departureNation);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   useEffect(() => {
-    switch (type) {
-      case EPLACE_TYPE.ARRIVAL:
-        if (arrival === variables.SELECT_DEFAULT_TEXT) {
-          setIsSelected(false);
-          return;
+    switch (service) {
+      case ESERVICE_TYPE.PICKUP:
+        switch (type) {
+          case EPLACE_TYPE.ARRIVAL:
+            if (pickupArrival === variables.SELECT_DEFAULT_TEXT) {
+              setIsSelected(false);
+              return;
+            }
+            setIsSelected(true);
+            break;
+          case EPLACE_TYPE.DEPARTURE:
+            if (pickupDeparture === variables.SELECT_DEFAULT_TEXT) {
+              setIsSelected(false);
+              return;
+            }
+            setIsSelected(true);
+            break;
+          default:
+            setIsSelected(false);
         }
-        setIsSelected(true);
         break;
-      case EPLACE_TYPE.DEPARTURE:
-        if (departure === variables.SELECT_DEFAULT_TEXT) {
-          setIsSelected(false);
-          return;
+      case ESERVICE_TYPE.MOVE:
+        switch (type) {
+          case EPLACE_TYPE.ARRIVAL:
+            if (moveArrival === variables.SELECT_DEFAULT_TEXT) {
+              setIsSelected(false);
+              return;
+            }
+            setIsSelected(true);
+            break;
+          case EPLACE_TYPE.DEPARTURE:
+            if (moveDeparture === variables.SELECT_DEFAULT_TEXT) {
+              setIsSelected(false);
+              return;
+            }
+            setIsSelected(true);
+            break;
+          default:
+            setIsSelected(false);
         }
-        setIsSelected(true);
         break;
       default:
-        setIsSelected(false);
     }
-  }, [type, arrival, departure]);
+  }, [service, type, pickupArrival, pickupDeparture, moveDeparture, moveArrival]);
 
-  const departures = [variables.SELECT_DEFAULT_TEXT, "Incheon Airport"];
-  const arrivals = [variables.SELECT_DEFAULT_TEXT, "GCF"];
+  // const departures = [variables.SELECT_DEFAULT_TEXT, "Incheon Airport"];
+  // const arrivals = [variables.SELECT_DEFAULT_TEXT, "GCF"];
 
   let value: string;
   let name: string;
-  let options: string[];
+  const options = places;
 
-  switch (type) {
-    case EPLACE_TYPE.ARRIVAL:
-      value = arrival;
-      name = "arrival";
-      options = arrivals;
+  switch (service) {
+    case ESERVICE_TYPE.PICKUP:
+      switch (type) {
+        case EPLACE_TYPE.ARRIVAL:
+          value = pickupArrival;
+          name = "arrival";
+          break;
+        case EPLACE_TYPE.DEPARTURE:
+          value = pickupDeparture;
+          name = "departure";
+          break;
+        default:
+          value = "";
+          name = "";
+      }
       break;
-    case EPLACE_TYPE.DEPARTURE:
-      value = departure;
-      name = "departure";
-      options = departures;
+    case ESERVICE_TYPE.MOVE:
+      switch (type) {
+        case EPLACE_TYPE.ARRIVAL:
+          value = moveArrival;
+          name = "arrivalNation";
+          break;
+        case EPLACE_TYPE.DEPARTURE:
+          value = moveDeparture;
+          name = "departureNation";
+          break;
+        default:
+          value = "";
+          name = "";
+      }
       break;
     default:
       value = "";
       name = "";
-      options = [];
   }
 
   const Options = options.map((option) => {
@@ -101,15 +148,21 @@ const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
     color: ${(props: IStyleProps) => (props.selected ? `${colors.BLACK_1}` : `${colors.GRAY_1}`)};
   `;
 
+  const handleClick = (ev) => {
+    switch (service) {
+      case ESERVICE_TYPE.PICKUP:
+        dispatch(pickUpActions.selectInput(ev.target));
+        return;
+      case ESERVICE_TYPE.MOVE:
+        dispatch(moveActions.selectInput(ev.target));
+        return;
+      default:
+    }
+  };
+
   return (
     <Wrapper selected={isSelected}>
-      <Select
-        name={name}
-        value={value}
-        onChange={(ev) => {
-          dispatch(actions.selectInput(ev.target));
-        }}
-      >
+      <Select name={name} value={value} onChange={handleClick}>
         {Options}
       </Select>
     </Wrapper>

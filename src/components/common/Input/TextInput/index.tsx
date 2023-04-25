@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import { useTypedDispatch } from "@hooks/useStore";
-import { actions } from "@store/slices/pickupSlice";
+import { actions as pickupActions } from "@store/slices/pickupSlice";
+import { actions as moveActions } from "@store/slices/moveSlice";
 import { ESERVICE_TYPE } from "types/enum";
 
 const Input = styled.input`
@@ -19,7 +20,7 @@ const Input = styled.input`
 `;
 
 interface IProps {
-  service?: ESERVICE_TYPE;
+  service: ESERVICE_TYPE;
   name: string;
   placeholder: string;
 }
@@ -28,11 +29,19 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const TextInput: React.FC<IProps> = ({ name, placeholder }) => {
+const TextInput: React.FC<IProps> = ({ service, name, placeholder }) => {
   const dispatch = useTypedDispatch();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.textInput(ev.target));
+    switch (service) {
+      case ESERVICE_TYPE.PICKUP:
+        dispatch(pickupActions.textInput(ev.target));
+        return;
+      case ESERVICE_TYPE.MOVE:
+        dispatch(moveActions.textInput(ev.target));
+        return;
+      default:
+    }
   };
 
   return (

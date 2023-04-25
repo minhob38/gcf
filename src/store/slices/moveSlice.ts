@@ -36,23 +36,10 @@ const moveSlice = createSlice({
       state[name] = value;
     },
 
-    // checkboxInput: (
-    //   state,
-    //   action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>,
-    // ) => {
-    //   const { name, value, type } = action.payload;
-
-    //   if (type === "checkbox") {
-    //     const idx = (state[name] as string[]).indexOf(value);
-
-    //     if (idx === -1) {
-    //       state[name].push(value);
-    //       return;
-    //     }
-
-    //     (state[name] as string[]).splice(idx, 1);
-    //   }
-    // },
+    textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
+      const { name, value } = action.payload;
+      state[name] = value;
+    },
   },
 });
 

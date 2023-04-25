@@ -174,7 +174,11 @@ const PickupService = () => {
           <Gap />
           <Title>Flight</Title>
           <FlightContainer>
-            <TextInput name="flightNumber" placeholder="Flight Number" />
+            <TextInput
+              service={ESERVICE_TYPE.PICKUP}
+              name="flightNumber"
+              placeholder="Flight Number"
+            />
           </FlightContainer>
         </Scroll>
         <RequestButtonContainer>

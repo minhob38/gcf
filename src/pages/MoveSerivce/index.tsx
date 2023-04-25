@@ -145,7 +145,11 @@ const MoveService = () => {
                   places={variables.DEPARTURE_NATIONS}
                 />
               </SelectContainer>
-              <TextInput name="departureAddress" placeholder="Departure Address" />
+              <TextInput
+                service={ESERVICE_TYPE.MOVE}
+                name="departureAddress"
+                placeholder="Departure Address"
+              />
             </ArrivalContainer>
             <ArrivalContainer>
               <SelectContainer onFocus={handleFocus}>
@@ -157,7 +161,11 @@ const MoveService = () => {
                   places={variables.ARRIVAL_NATIONS}
                 />
               </SelectContainer>
-              <TextInput name="arrivalAddress" placeholder="Arrival Address" />
+              <TextInput
+                service={ESERVICE_TYPE.MOVE}
+                name="arrivalAddress"
+                placeholder="Arrival Address"
+              />
             </ArrivalContainer>
           </PlaceContainer>
         </Scroll>

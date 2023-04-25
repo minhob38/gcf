@@ -25,6 +25,7 @@ export interface ISignUpRequest {
 }
 
 export interface IPickupRequest {
+  userId: number;
   arrival: string;
   date: string;
   departure: string;
@@ -45,6 +46,7 @@ export interface IPickupRequest {
 // year: "2024";
 
 export interface ITelcomRequest {
+  userId: number;
   kind: ETELCOM_KIND_TYPE[];
   month: string;
   year: string;
@@ -65,8 +67,12 @@ export interface IMoveRequest {
   arrivalAddress: string;
 }
 // <e.g>
-// kind: ["internet", "mobile"];
-// month: "Apr";
+// arrivalAddress: "강남";
+// arrivalNation: "Korea";
+// date: "8";
+// departureAddress: "텍사스";
+// departureNation: "USA";
+// month: "Jun";
 // year: "2024";
 
 export interface IPickupCancel {

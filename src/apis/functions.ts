@@ -102,7 +102,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
  * @description pickup 요청 api
  */
 export const pickUpRequestApi = async (input: IPickupRequest) => {
-  const { year, month, date, hour, minute, departure, arrival, flightNumber } = input;
+  const { userId, year, month, date, hour, minute, departure, arrival, flightNumber } = input;
   const body: {
     userId: number;
     year: number;
@@ -114,7 +114,7 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
     arrival: string;
     flightNumber: string;
   } = {
-    userId: 1,
+    userId,
     year: parseInt(year),
     month: convertEnglishToNumberMonth(month),
     day: parseInt(date),
@@ -149,14 +149,14 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
  * @description 통신서비스 요청 api
  */
 export const telcomRequestApi = async (input: ITelcomRequest) => {
-  const { year, month, kind } = input;
+  const { userId, year, month, kind } = input;
   const body: {
     userId: number;
     year: number;
     month: number;
     arrApplyTelecommunicationTypeStr: string;
   } = {
-    userId: 1,
+    userId,
     year: parseInt(year),
     month: convertEnglishToNumberMonth(month),
     arrApplyTelecommunicationTypeStr: convertTelcomServiceInputToApiRequest(kind),
@@ -206,7 +206,7 @@ export const moveRequestApi = async (input: IMoveRequest) => {
     arrivalNation: string;
     arrivalAddress: string;
   } = {
-    userId: 1,
+    userId,
     year: parseInt(year),
     month: convertEnglishToNumberMonth(month),
     day: parseInt(date),

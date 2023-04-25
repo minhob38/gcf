@@ -90,6 +90,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
         }
 
         pickUpMutation.mutate({
+          userId,
           year: pickupState.year,
           month: pickupState.month,
           date: pickupState.date,
@@ -115,6 +116,7 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
         }
 
         telcomMutation.mutate({
+          userId,
           year: telcomState.year,
           month: telcomState.month,
           kind: telcomState.kind,

@@ -15,6 +15,7 @@ import {
   useMyPickupBookingQuery,
   useMyTelcomBookingQuery,
 } from "@hooks/useApiQuery";
+import EmptyCard from "@components/MyBooking/EmptyCard";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_LARGE_600};
@@ -48,31 +49,16 @@ const MyBooking: React.FC = () => {
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100%)`}>
           <Margin />
-          {pickupApiData && (
-            <>
-              <SubTitle>Pick up</SubTitle>
-              <BookingCardContainer>
-                <PickupCard />
-              </BookingCardContainer>
-            </>
-          )}
-          {telcomApiData && (
-            <>
-              <SubTitle>Telecommunication</SubTitle>
-              <BookingCardContainer>
-                <TelcomCard />
-              </BookingCardContainer>
-            </>
-          )}
-
-          {moveApiData && (
-            <>
-              <SubTitle>Move</SubTitle>
-              <BookingCardContainer>
-                <MoveCard />
-              </BookingCardContainer>
-            </>
-          )}
+          <SubTitle>Pick up</SubTitle>
+          <BookingCardContainer>
+            {pickupApiData ? <PickupCard /> : <EmptyCard />}
+          </BookingCardContainer>
+          <SubTitle>Telecommunication</SubTitle>
+          <BookingCardContainer>
+            {telcomApiData ? <TelcomCard /> : <EmptyCard />}
+          </BookingCardContainer>
+          <SubTitle>Move</SubTitle>
+          <BookingCardContainer>{moveApiData ? <MoveCard /> : <EmptyCard />}</BookingCardContainer>
         </Scroll>
       </Content>
     </>

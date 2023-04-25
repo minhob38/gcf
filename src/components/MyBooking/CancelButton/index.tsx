@@ -9,6 +9,11 @@ import {
   useTelocmCancelMutation,
 } from "@hooks/useApiMutation";
 import { useTypedSelector } from "@hooks/useStore";
+import {
+  useMyMoveBookingQuery,
+  useMyPickupBookingQuery,
+  useMyTelcomBookingQuery,
+} from "@hooks/useApiQuery";
 
 interface IProps {
   service: ESERVICE_TYPE;
@@ -28,6 +33,14 @@ const Wrapper = styled.div`
 
 const CancelButton: React.FC<IProps> = ({ service }) => {
   const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+
+  const myPickupBookingQuery = useMyPickupBookingQuery();
+  const myTelcomBookingQuery = useMyTelcomBookingQuery();
+  const myMoveBookingQuery = useMyMoveBookingQuery();
+  const pickUpId = myPickupBookingQuery.data?.pickUpId || null;
+  const telcomId = myTelcomBookingQuery.data?.telecommunicationId || null;
+  const moveId = myMoveBookingQuery.data?.moveId || null;
+
   const pickUpMutation = usePickupCancelMutation();
   const telcomMutation = useTelocmCancelMutation();
   const moveMutation = useMoveCancelMutation();
@@ -35,13 +48,16 @@ const CancelButton: React.FC<IProps> = ({ service }) => {
   const handleClick = () => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
-        pickUpMutation.mutate({ userId });
+        if (!pickUpId) throw new Error("pickUpId does not exists");
+        pickUpMutation.mutate({ pickUpId });
         break;
       case ESERVICE_TYPE.TELCOM:
-        telcomMutation.mutate({ userId });
+        if (!telcomId) throw new Error("telcomId does not exists");
+        telcomMutation.mutate({ telcomId });
         break;
       case ESERVICE_TYPE.MOVE:
-        moveMutation.mutate({ userId });
+        if (!moveId) throw new Error("moveId does not exists");
+        moveMutation.mutate({ moveId });
         break;
       default:
     }

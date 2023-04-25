@@ -13,12 +13,16 @@ interface IProps {
   service?: ESERVICE_TYPE;
   type: EPLACE_TYPE;
   size: { width: string; height: string };
+  // places: stirng[];
 }
 
 interface IStyleProps {
   selected: boolean;
 }
 
+/**
+ * @description arrival/departure select box (item들은 인자로 전달)
+ */
 const PlaceSelect: React.FC<IProps> = ({ type, size }) => {
   const dispatch = useTypedDispatch();
   const arrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);

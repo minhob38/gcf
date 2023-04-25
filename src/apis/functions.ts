@@ -227,8 +227,8 @@ export const moveRequestApi = async (input: IMoveRequest) => {
  * @description pickup 서비스 취소 api
  */
 export const pickupCancelApi = async (input: IPickupCancel) => {
-  const { userId } = input;
-  const body: { userId: number } = { userId };
+  const { pickUpId } = input;
+  const body: { pickUpId: number } = { pickUpId };
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/cancel`,
@@ -249,8 +249,8 @@ export const pickupCancelApi = async (input: IPickupCancel) => {
  * @description telcom 서비스 취소 api
  */
 export const telcomCancelApi = async (input: ITelcomCancel) => {
-  const { userId } = input;
-  const body: { userId: number } = { userId };
+  const { telcomId } = input;
+  const body: { telecommunicationId: number } = { telecommunicationId: telcomId };
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/telecommunications/cancel`,
@@ -271,8 +271,8 @@ export const telcomCancelApi = async (input: ITelcomCancel) => {
  * @description move 서비스 취소 api
  */
 export const moveCancelApi = async (input: IMoveCancel) => {
-  const { userId } = input;
-  const body: { userId: number } = { userId };
+  const { moveId } = input;
+  const body: { moveId: number } = { moveId };
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/moves/cancel`,
@@ -303,6 +303,7 @@ export const findMyPickupApi = async ({ queryKey }) => {
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
+      pickUpId: number;
       applyStatus: string;
       arrival: string;
       day: number;
@@ -311,13 +312,13 @@ export const findMyPickupApi = async ({ queryKey }) => {
       hour: number;
       minute: number;
       month: number;
-      userId: number;
       year: number;
     };
 
     if (!apiData) return null;
 
     return {
+      pickUpId: apiData.pickUpId,
       applyStatus: apiData.applyStatus,
       arrival: apiData.arrival,
       date: apiData.day,
@@ -351,7 +352,7 @@ export const findMyTelcomApi = async ({ queryKey }) => {
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
-      userId: number;
+      telecommunicationId: number;
       year: number;
       month: number;
       applyMobilePhone: boolean;
@@ -363,7 +364,7 @@ export const findMyTelcomApi = async ({ queryKey }) => {
     if (!apiData) return null;
 
     return {
-      userId: apiData.userId,
+      telecommunicationId: apiData.telecommunicationId,
       year: apiData.year,
       month: apiData.month,
       isMobilePhone: apiData.applyMobilePhone,
@@ -393,7 +394,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
-      userId: number;
+      moveId: number;
       year: number;
       month: number;
       departureNation: string;
@@ -406,7 +407,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
     if (!apiData) return null;
 
     return {
-      userId: apiData.userId,
+      moveId: apiData.moveId,
       year: apiData.year,
       month: apiData.month,
       departureNation: apiData.departureNation,

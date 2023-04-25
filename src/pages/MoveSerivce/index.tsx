@@ -39,7 +39,7 @@ const SelectContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  /* margin: 0 20px 0 0; */
+  margin: 0 20px 0 0;
 `;
 
 const SelectTitle = styled.div`

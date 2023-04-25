@@ -64,13 +64,13 @@ export interface IMoveRequest {
 // year: "2024";
 
 export interface IPickupCancel {
-  userId: number;
+  pickUpId: number;
 }
 
 export interface ITelcomCancel {
-  userId: number;
+  telcomId: number;
 }
 
 export interface IMoveCancel {
-  userId: number;
+  moveId: number;
 }

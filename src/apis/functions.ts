@@ -186,21 +186,34 @@ export const telcomRequestApi = async (input: ITelcomRequest) => {
  * @description 이사 서비스 요청 api
  */
 export const moveRequestApi = async (input: IMoveRequest) => {
-  const { year, month } = input;
+  const {
+    userId,
+    year,
+    month,
+    date,
+    departureNation,
+    departureAddress,
+    arrivalNation,
+    arrivalAddress,
+  } = input;
   const body: {
     userId: number;
     year: number;
     month: number;
     day: number;
-    nation: string;
-    address: string;
+    departureNation: string;
+    departureAddress: string;
+    arrivalNation: string;
+    arrivalAddress: string;
   } = {
     userId: 1,
-    year: 2023,
-    month: 4,
-    day: 24,
-    nation: "korea",
-    address: "myhome",
+    year: parseInt(year),
+    month: convertEnglishToNumberMonth(month),
+    day: parseInt(date),
+    departureNation,
+    departureAddress,
+    arrivalNation,
+    arrivalAddress,
   };
 
   const response = await axios.post<IApiResponse>(

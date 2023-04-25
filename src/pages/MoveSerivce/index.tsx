@@ -135,8 +135,8 @@ const MoveService = () => {
           <Gap />
           <Title>Place</Title>
           <PlaceContainer>
-            <ArrivalContainer onFocus={handleFocus}>
-              <SelectContainer>
+            <ArrivalContainer>
+              <SelectContainer onFocus={handleFocus}>
                 <SelectTitle>Departure</SelectTitle>
                 <PlaceSelect
                   service={ESERVICE_TYPE.MOVE}

@@ -55,8 +55,14 @@ export interface ITelcomRequest {
 // year: "2024";
 
 export interface IMoveRequest {
-  month: string;
+  userId: number;
   year: string;
+  month: string;
+  date: string;
+  departureNation: string;
+  departureAddress: string;
+  arrivalNation: string;
+  arrivalAddress: string;
 }
 // <e.g>
 // kind: ["internet", "mobile"];

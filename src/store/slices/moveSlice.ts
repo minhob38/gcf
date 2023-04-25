@@ -12,9 +12,9 @@ interface IState {
 }
 
 const initialState: IState = {
-  year: variables.SELECT_DEFAULT_TEXT,
-  month: variables.SELECT_DEFAULT_TEXT,
-  date: variables.SELECT_DEFAULT_TEXT,
+  year: variables.SELECT_YEAR_DEFAULT_TEXT,
+  month: variables.SELECT_MONTH_DEFAULT_TEXT,
+  date: variables.SELECT_DATE_DEFAULT_TEXT,
   departureNation: variables.SELECT_DEFAULT_TEXT,
   departureAddress: variables.SELECT_DEFAULT_TEXT,
   arrivalNation: variables.SELECT_DEFAULT_TEXT,

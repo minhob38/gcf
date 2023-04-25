@@ -48,6 +48,7 @@ const ErrorText = styled.div`
 `;
 
 const RequestButton: React.FC<IProps> = ({ service }) => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer, shallowEqual);
   const telcomState = useTypedSelector((state) => state.rootReducer.telcomReducer, shallowEqual);
   const moveState = useTypedSelector((state) => state.rootReducer.moveReducer, shallowEqual);
@@ -122,15 +123,32 @@ const RequestButton: React.FC<IProps> = ({ service }) => {
       case ESERVICE_TYPE.MOVE:
         if (
           moveState.year === variables.SELECT_YEAR_DEFAULT_TEXT ||
-          moveState.month === variables.SELECT_MONTH_DEFAULT_TEXT
+          moveState.month === variables.SELECT_MONTH_DEFAULT_TEXT ||
+          moveState.date === variables.SELECT_DATE_DEFAULT_TEXT
         ) {
-          dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month"));
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter year, month and date"));
+          return;
+        }
+
+        if (
+          moveState.departureNation === variables.SELECT_DEFAULT_TEXT ||
+          moveState.departureNation === variables.SELECT_DEFAULT_TEXT ||
+          moveState.arrivalNation === variables.SELECT_DEFAULT_TEXT ||
+          moveState.arrivalAddress === variables.SELECT_DEFAULT_TEXT
+        ) {
+          dispatch(errorActions.throwPickUpTelcomMoveError("Enter departure and arrival"));
           return;
         }
 
         moveMutation.mutate({
+          userId,
           year: moveState.year,
           month: moveState.month,
+          date: moveState.date,
+          departureNation: moveState.departureNation,
+          departureAddress: moveState.departureAddress,
+          arrivalNation: moveState.arrivalNation,
+          arrivalAddress: moveState.arrivalAddress,
         });
         return;
       default:

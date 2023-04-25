@@ -15,6 +15,7 @@ import {
 } from "@hooks/useApiQuery";
 import { useQueryClient } from "react-query";
 import { useTypedSelector } from "@hooks/useStore";
+import { EQUERY_KEY } from "@constants/query-key";
 
 interface IProps {
   service: ESERVICE_TYPE;
@@ -51,17 +52,17 @@ const CancelButton: React.FC<IProps> = ({ service }) => {
       case ESERVICE_TYPE.PICKUP:
         if (!pickUpId) throw new Error("pickUpId does not exists");
         await pickUpMutation.mutateAsync({ pickUpId });
-        queryClient.invalidateQueries(["my-pickup", userId]);
+        queryClient.invalidateQueries([EQUERY_KEY.PICKUP, userId]);
         break;
       case ESERVICE_TYPE.TELCOM:
         if (!telcomId) throw new Error("telcomId does not exists");
         await telcomMutation.mutateAsync({ telcomId });
-        queryClient.invalidateQueries(["my-telcom", userId]);
+        queryClient.invalidateQueries([EQUERY_KEY.TELCOM, userId]);
         break;
       case ESERVICE_TYPE.MOVE:
         if (!moveId) throw new Error("moveId does not exists");
         await moveMutation.mutateAsync({ moveId });
-        queryClient.invalidateQueries(["my-move", userId]);
+        queryClient.invalidateQueries([EQUERY_KEY.MOVE, userId]);
         break;
       default:
     }

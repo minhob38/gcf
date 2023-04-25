@@ -65,11 +65,6 @@ const CancelButtonContainer = styled.div`
 `;
 
 const PickupCard: React.FC = () => {
-  const query = useMyPickupBookingQuery();
-  const queryClient = useQueryClient();
-  // const da = queryClient.getQueryData(["my-pickup", 1]);
-  // console.log("!!!!");
-  // console.log(da);
   const apiData = useMyPickupBookingQueryClient();
 
   // TODO PM 붙이기

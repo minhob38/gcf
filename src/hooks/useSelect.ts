@@ -16,7 +16,7 @@ export const useDateSelector = (service: ESERVICE_TYPE): string[] => {
 
   const moveYear = useTypedSelector((state) => state.rootReducer.moveReducer.year);
   const moveMonth = useTypedSelector((state) => state.rootReducer.moveReducer.month);
-  // const moveDate = useTypedSelector((state) => state.rootReducer.moveReducer.date);
+  const moveDate = useTypedSelector((state) => state.rootReducer.moveReducer.date);
   // const moveHour = useTypedSelector((state) => state.rootReducer.moveReducer.hour);
   // const moveMinute = useTypedSelector((state) => state.rootReducer.pickupReducer.minute);
 
@@ -26,7 +26,7 @@ export const useDateSelector = (service: ESERVICE_TYPE): string[] => {
     case ESERVICE_TYPE.TELCOM:
       return [telcomYear, telcomMonth];
     case ESERVICE_TYPE.MOVE:
-      return [moveYear, moveMonth];
+      return [moveYear, moveMonth, moveDate];
     default:
       return [];
   }

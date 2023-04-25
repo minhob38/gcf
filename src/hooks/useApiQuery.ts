@@ -1,9 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import * as api from "@apis/functions";
-import { useTypedDispatch, useTypedSelector } from "./useStore";
-import { actions as modalActions } from "@store/slices/modalSlice";
-import { actions as errorActions } from "@store/slices/errorSlice";
-import { actions as authActions } from "@store/slices/authSlice";
+import { useTypedSelector } from "./useStore";
 
 /**
  * @description my pickup 조회 query 함수

@@ -13,6 +13,8 @@ import {
   useMyPickupBookingQuery,
   useMyTelcomBookingQuery,
 } from "@hooks/useApiQuery";
+import { useQueryClient } from "react-query";
+import { useTypedSelector } from "@hooks/useStore";
 
 interface IProps {
   service: ESERVICE_TYPE;
@@ -31,6 +33,8 @@ const Wrapper = styled.div`
 `;
 
 const CancelButton: React.FC<IProps> = ({ service }) => {
+  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const queryClient = useQueryClient();
   const myPickupBookingQuery = useMyPickupBookingQuery();
   const myTelcomBookingQuery = useMyTelcomBookingQuery();
   const myMoveBookingQuery = useMyMoveBookingQuery();
@@ -42,19 +46,22 @@ const CancelButton: React.FC<IProps> = ({ service }) => {
   const telcomMutation = useTelocmCancelMutation();
   const moveMutation = useMoveCancelMutation();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
         if (!pickUpId) throw new Error("pickUpId does not exists");
-        pickUpMutation.mutate({ pickUpId });
+        await pickUpMutation.mutateAsync({ pickUpId });
+        queryClient.invalidateQueries(["my-pickup", userId]);
         break;
       case ESERVICE_TYPE.TELCOM:
         if (!telcomId) throw new Error("telcomId does not exists");
-        telcomMutation.mutate({ telcomId });
+        await telcomMutation.mutateAsync({ telcomId });
+        queryClient.invalidateQueries(["my-telcom", userId]);
         break;
       case ESERVICE_TYPE.MOVE:
         if (!moveId) throw new Error("moveId does not exists");
-        moveMutation.mutate({ moveId });
+        await moveMutation.mutateAsync({ moveId });
+        queryClient.invalidateQueries(["my-move", userId]);
         break;
       default:
     }

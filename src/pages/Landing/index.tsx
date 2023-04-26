@@ -7,8 +7,14 @@ import * as margins from "@constants/margins";
 import ServiceBanner from "@components/Landing/ServiceBanner";
 import { ESERVICE_TYPE } from "types/enum";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions as modalActions } from "@store/slices/modalSlice";
 import LoginWarningModal from "modals/LoginWarningModal";
+import { useEffect } from "react";
+import { actions as errorActions } from "@store/slices/errorSlice";
+import { actions as modalActions } from "@store/slices/modalSlice";
+import { actions as pickupActions } from "@store/slices/pickupSlice";
+import { actions as telcomActions } from "@store/slices/telcomSlice";
+import { actions as moveActions } from "@store/slices/moveSlice";
+import { actions as authActions } from "@store/slices/authSlice";
 
 const ServiceContainer = styled.div`
   display: flex;
@@ -33,6 +39,16 @@ const Landing: React.FC = () => {
     if (isAuthenticated) return;
     dispatch(modalActions.showLoginWarning());
   };
+
+  //초기화 코드
+  useEffect(() => {
+    // dispatch(authActions.initialize());
+    dispatch(pickupActions.initialize());
+    dispatch(telcomActions.initialize());
+    dispatch(moveActions.initialize());
+    dispatch(modalActions.initialize());
+    dispatch(errorActions.initialize());
+  }, []);
 
   return (
     <>

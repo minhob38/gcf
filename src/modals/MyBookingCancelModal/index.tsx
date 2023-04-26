@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
@@ -48,7 +48,7 @@ const Box = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const Button = styled.div`
+const YesNoButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,6 +60,11 @@ const Button = styled.div`
   color: ${colors.WHITE_1};
 `;
 
+const Button = styled(YesNoButton)`
+  width: 240px;
+  margin: 0 auto;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -68,6 +73,7 @@ const ButtonContainer = styled.div`
 `;
 
 const MyBookingCancelModal: React.FC = () => {
+  const [isYesClicked, setIsYesClicked] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const service = useTypedSelector(
     (state) => state.rootReducer.modalReducer.myBookingCancelCurrentService,
@@ -93,7 +99,6 @@ const MyBookingCancelModal: React.FC = () => {
   };
 
   const handleYesClickButton: React.MouseEventHandler<HTMLDivElement> = async (ev) => {
-    dispatch(modalActions.hideMyBookingCancelNotification());
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
         if (!pickUpId) throw new Error("pickUpId does not exists");
@@ -112,20 +117,33 @@ const MyBookingCancelModal: React.FC = () => {
         break;
       default:
     }
+
+    setIsYesClicked(true);
   };
+
   const handleNoClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+    dispatch(modalActions.hideMyBookingCancelNotification());
+  };
+  const handleCloseClick: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     dispatch(modalActions.hideMyBookingCancelNotification());
   };
 
   return (
     <Modal onClick={handleClickModal}>
-      <Box>
-        Are you sure you want to cancel?
-        <ButtonContainer>
-          <Button onClick={handleYesClickButton}>Yes</Button>
-          <Button onClick={handleNoClickButton}>No</Button>
-        </ButtonContainer>
-      </Box>
+      {isYesClicked ? (
+        <Box>
+          Cancel success
+          <Button onClick={handleCloseClick}>Close</Button>
+        </Box>
+      ) : (
+        <Box>
+          Are you sure you want to cancel?
+          <ButtonContainer>
+            <YesNoButton onClick={handleYesClickButton}>Yes</YesNoButton>
+            <YesNoButton onClick={handleNoClickButton}>No</YesNoButton>
+          </ButtonContainer>
+        </Box>
+      )}
     </Modal>
   );
 };

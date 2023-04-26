@@ -91,6 +91,7 @@ const MyBookingCancelModal: React.FC = () => {
     if (ev.currentTarget !== ev.target) return;
     dispatch(modalActions.hideMyBookingCancelNotification());
   };
+
   const handleYesClickButton: React.MouseEventHandler<HTMLDivElement> = async (ev) => {
     dispatch(modalActions.hideMyBookingCancelNotification());
     switch (service) {

@@ -11,7 +11,7 @@ import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
 import MyBooking from "pages/MyBooking";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";

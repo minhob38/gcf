@@ -146,6 +146,7 @@ const PlaceSelect: React.FC<IProps> = ({ service, type, size, places }) => {
     text-align: center;
     font: ${fonts.FONT_SMALL_400};
     color: ${(props: IStyleProps) => (props.selected ? `${colors.BLACK_1}` : `${colors.GRAY_1}`)};
+    overflow: hidden;
   `;
 
   const handleClick = (ev) => {

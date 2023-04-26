@@ -42,7 +42,7 @@ const Landing: React.FC = () => {
 
   //초기화 코드
   useEffect(() => {
-    // dispatch(authActions.initialize());
+    // dispatch(authActions.initialize()); 인증정보는 초기화하면 안됨
     dispatch(pickupActions.initialize());
     dispatch(telcomActions.initialize());
     dispatch(moveActions.initialize());

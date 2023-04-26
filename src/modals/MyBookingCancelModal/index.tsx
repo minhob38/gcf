@@ -5,7 +5,6 @@ import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
 import { useTypedDispatch } from "@hooks/useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
-import { useNavigate } from "react-router-dom";
 
 const Modal = styled.div`
   position: fixed;
@@ -40,37 +39,45 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 240px;
+  width: 110px;
   height: 46px;
-  margin: 0 auto;
   border-radius: 4px;
   background-color: ${colors.PRIMARY_1};
   font: ${fonts.FONT_MEDIUM_400};
   color: ${colors.WHITE_1};
 `;
 
-const SignUpNotificationModal: React.FC = () => {
-  const navigate = useNavigate();
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+`;
+
+const MyBookingCancelModal: React.FC = () => {
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    // if (ev.currentTarget !== ev.target) return;
-    // dispatch(modalActions.hideSignUpNotification());
+    if (ev.currentTarget !== ev.target) return;
+    dispatch(modalActions.hideMyBookingCancelNotification());
   };
-  const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    let path = "/login";
-    path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
-    dispatch(modalActions.hideSignUpNotification());
-    navigate(path);
+  const handleYesClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+    dispatch(modalActions.hideMyBookingCancelNotification());
+  };
+  const handleNoClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+    dispatch(modalActions.hideMyBookingCancelNotification());
   };
 
   return (
     <Modal onClick={handleClickModal}>
       <Box>
-        Sign up success
-        <Button onClick={handleClickButton}>Go to login</Button>
+        Are you sure you want to cancel?
+        <ButtonContainer>
+          <Button onClick={handleYesClickButton}>Yes</Button>
+          <Button onClick={handleNoClickButton}>No</Button>
+        </ButtonContainer>
       </Box>
     </Modal>
   );
 };
 
-export default SignUpNotificationModal;
+export default MyBookingCancelModal;

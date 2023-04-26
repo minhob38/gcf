@@ -16,6 +16,8 @@ import {
   useMyTelcomBookingQuery,
 } from "@hooks/useApiQuery";
 import EmptyCard from "@components/MyBooking/EmptyCard";
+import MyBookingCancelModal from "modals/MyBookingCancelModal";
+import { useTypedSelector } from "@hooks/useStore";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_LARGE_600};
@@ -36,6 +38,9 @@ const BookingCardContainer = styled.div`
 `;
 
 const MyBooking: React.FC = () => {
+  const isMyBookingCancelNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isMyBookingCancelNotification,
+  );
   const pickupQuery = useMyPickupBookingQuery();
   const telcomQuery = useMyTelcomBookingQuery();
   const moveQuery = useMyMoveBookingQuery();
@@ -45,6 +50,7 @@ const MyBooking: React.FC = () => {
 
   return (
     <>
+      {isMyBookingCancelNotification && <MyBookingCancelModal />}
       <Header title="My booking" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100%)`}>

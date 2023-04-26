@@ -5,6 +5,7 @@ interface IState {
   isLoading: boolean;
   isSignUpNotification: boolean;
   isPickupTelcomMoveNotification: boolean;
+  isMyBookingCancelNotification: boolean;
 }
 
 const initialState: IState = {
@@ -12,6 +13,7 @@ const initialState: IState = {
   isLoading: false,
   isSignUpNotification: false,
   isPickupTelcomMoveNotification: false,
+  isMyBookingCancelNotification: false,
 };
 
 const modalSlice = createSlice({
@@ -50,6 +52,13 @@ const modalSlice = createSlice({
     },
     hidePickupTelcomMoveNotification: (state) => {
       state.isPickupTelcomMoveNotification = false;
+    },
+    // my booking 취소 물어보기 모달
+    showMyBookingCancelNotification: (state) => {
+      state.isMyBookingCancelNotification = true;
+    },
+    hideMyBookingCancelNotification: (state) => {
+      state.isMyBookingCancelNotification = false;
     },
   },
 });

@@ -17,6 +17,7 @@ import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { useMyPickupBookingQuery } from "@hooks/useApiQuery";
 import * as variables from "@constants/variables";
+import { useEffect, useState } from "react";
 
 const YearContainer = styled.div`
   display: flex;
@@ -74,14 +75,26 @@ const Gap = styled.div`
 const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
 
 const PickupService = () => {
+  const [isAirport, setIsAirport] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const isPickupTelcomMoveNotification = useTypedSelector(
     (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
   );
+  const arrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);
+  const departure = useTypedSelector((state) => state.rootReducer.pickupReducer.departure);
+
   const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
 
   const query = useMyPickupBookingQuery();
   const apiData = query.data;
+
+  useEffect(() => {
+    if (arrival === variables.EPICKUP_PLACE.IA || departure === variables.EPICKUP_PLACE.IA) {
+      setIsAirport(true);
+      return;
+    }
+    return setIsAirport(false);
+  }, [arrival, departure]);
 
   return (
     <>
@@ -172,14 +185,18 @@ const PickupService = () => {
             </SelectContainer>
           </PlaceContainer>
           <Gap />
-          <Title>Flight</Title>
-          <FlightContainer>
-            <TextInput
-              service={ESERVICE_TYPE.PICKUP}
-              name="flightNumber"
-              placeholder="Flight Number"
-            />
-          </FlightContainer>
+          {isAirport && (
+            <>
+              <Title>Flight</Title>
+              <FlightContainer>
+                <TextInput
+                  service={ESERVICE_TYPE.PICKUP}
+                  name="flightNumber"
+                  placeholder="Flight Number"
+                />
+              </FlightContainer>
+            </>
+          )}
         </Scroll>
         <RequestButtonContainer>
           <RequestButton service={ESERVICE_TYPE.PICKUP} />

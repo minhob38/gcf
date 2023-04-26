@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ESERVICE_TYPE } from "types/enum";
 
 interface IState {
   isLoginWarning: boolean;
@@ -6,6 +7,7 @@ interface IState {
   isSignUpNotification: boolean;
   isPickupTelcomMoveNotification: boolean;
   isMyBookingCancelNotification: boolean;
+  myBookingCancelCurrentService: ESERVICE_TYPE | null;
 }
 
 const initialState: IState = {
@@ -14,6 +16,7 @@ const initialState: IState = {
   isSignUpNotification: false,
   isPickupTelcomMoveNotification: false,
   isMyBookingCancelNotification: false,
+  myBookingCancelCurrentService: null,
 };
 
 const modalSlice = createSlice({
@@ -54,11 +57,13 @@ const modalSlice = createSlice({
       state.isPickupTelcomMoveNotification = false;
     },
     // my booking 취소 물어보기 모달
-    showMyBookingCancelNotification: (state) => {
+    showMyBookingCancelNotification: (state, action: PayloadAction<ESERVICE_TYPE>) => {
       state.isMyBookingCancelNotification = true;
+      state.myBookingCancelCurrentService = action.payload;
     },
     hideMyBookingCancelNotification: (state) => {
       state.isMyBookingCancelNotification = false;
+      state.myBookingCancelCurrentService = null;
     },
   },
 });

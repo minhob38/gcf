@@ -16,6 +16,7 @@ import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificati
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import * as variables from "@constants/variables";
+import { useMyMoveBookingQuery } from "@hooks/useApiQuery";
 
 const YearContainer = styled.div`
   display: flex;
@@ -89,10 +90,20 @@ const MoveService = () => {
   const isPickupTelcomMoveNotification = useTypedSelector(
     (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
   );
+  const query = useMyMoveBookingQuery();
+  const apiData = query.data;
+
   const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
 
   return (
     <>
+      {apiData && (
+        <PickupTelcomMoveNotificationModal
+          notification="You have a booking in progress"
+          buttonText="Go to my booking"
+          path="/my-booking"
+        />
+      )}
       {isPickupTelcomMoveNotification && (
         <PickupTelcomMoveNotificationModal
           notification="Request success"

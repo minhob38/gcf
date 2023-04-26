@@ -74,10 +74,10 @@ const TelcomService = () => {
   const isPickupTelcomMoveNotification = useTypedSelector(
     (state) => state.rootReducer.modalReducer.isPickupTelcomMoveNotification,
   );
-  const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
-
   const query = useMyTelcomBookingQuery();
   const apiData = query.data;
+
+  const handleFocus = () => dispatch(errorActions.catchPickUpTelcomMoveError());
 
   return (
     <>

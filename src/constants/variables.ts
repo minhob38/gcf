@@ -5,7 +5,7 @@ export const SELECT_DATE_DEFAULT_TEXT = "-";
 export const SELECT_HOUR_DEFAULT_TEXT = "-";
 export const SELECT_MINUTE_DEFAULT_TEXT = "-";
 
-// pickup service 출발/도착지 국가 목록
+// pickup service 출발/도착지 장소
 export enum EPICKUP_PLACE {
   IA = "Incheon airport",
   GCF = "GCF",

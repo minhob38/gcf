@@ -11,10 +11,11 @@ import CarCard from "@components/CarService/CarCard";
 const ButtonContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 15px 0 15px 0;
   padding: 0 ${margins.SIDE_MAIN_MARGIN};
+  gap: 0 10px;
 `;
 
 const CarCardContainer = styled.div`
@@ -32,7 +33,7 @@ const CarService = () => {
         <ButtonContainer>
           <Button title="Buy/New" width="100px" height="40px"></Button>
           <Button title="Buy/Used" width="100px" height="40px"></Button>
-          <Button title="Rent/New" width="100px" height="40px"></Button>
+          {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <CarCardContainer>

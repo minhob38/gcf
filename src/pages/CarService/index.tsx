@@ -28,7 +28,7 @@ const SCROLL_BOTTOM_MARGIN = 70 + 20;
 const CarService = () => {
   return (
     <>
-      <Header title="GCF CAR" mode="logo"></Header>
+      <Header title="Car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <ButtonContainer>
           <Button title="Buy/New" width="100px" height="40px"></Button>

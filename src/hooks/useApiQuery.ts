@@ -113,3 +113,37 @@ export const useMyMoveQueryClient = () => {
   ]);
   return apiData;
 };
+
+/**
+ * @description 구매가능한 car 조회 query 함수
+ */
+export const useCarsSalesQuery = () => {
+  const query = useQuery([EQUERY_KEY.CAR_SALE], api.findCarSalesApi, {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    suspense: true,
+    onError: (error) => {
+      // const errorMessage = (error as Error).message;
+      // dispatch(errorActions.throwSignUpError(errorMessage));
+    },
+    onSuccess: (data) => {
+      // dispatch(modalActions.showSignUpNotification());
+    },
+    onSettled: () => {
+      // dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return query;
+};
+
+/**
+ * @description my pickup 조회 query client 함수
+ */
+export const useCarSalesQueryClient = () => {
+  const queryClient = useQueryClient();
+  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyPickupApi>>>([
+    EQUERY_KEY.CAR_SALE,
+  ]);
+  return apiData;
+};

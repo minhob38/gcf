@@ -7,6 +7,7 @@ import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import CarCard from "@components/CarService/CarCard";
+import { useCarsSalesQuery } from "@hooks/useApiQuery";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -26,6 +27,10 @@ const CarCardContainer = styled.div`
 const SCROLL_BOTTOM_MARGIN = 70 + 20;
 
 const CarService = () => {
+  const query = useCarsSalesQuery();
+  const apiData = query.data;
+  console.log(apiData);
+
   return (
     <>
       <Header title="Car" mode="back"></Header>
@@ -36,6 +41,7 @@ const CarService = () => {
           {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          {/* Car Sales 컴포넌트 */}
           <CarCardContainer>
             <CarCard />
             <CarCard />

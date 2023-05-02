@@ -436,3 +436,64 @@ export const findMyMoveApi = async ({ queryKey }) => {
     throw new Error("find my pickup booking error");
   }
 };
+
+/**
+ * @description 구매가능한 car 조회 api
+ */
+export const findCarSalesApi = async ({ queryKey }) => {
+  const [key, userId] = queryKey;
+  const body: { newAndUsed: "NEW" | "USED"; priceStart: number; priceEnd: number } = {
+    newAndUsed: "USED",
+    priceStart: 9000,
+    priceEnd: 13000,
+  };
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/car-sales/available`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      carBasicId: number;
+      brandCode: string;
+      brandName: string;
+      carModelCode: string;
+      carModelName: string;
+      newAndUsed: "USED" | "NEW";
+      generationName: string;
+      bodyType: string;
+      seatCount: number;
+      price: number;
+      carImagePath: string;
+      carImageFileName: string;
+      buyerUserId: number;
+    }[];
+
+    if (!apiData) return null;
+
+    return apiData.map((data) => {
+      return {
+        carBasicId: data.carBasicId,
+        brandCode: data.brandCode,
+        brandName: data.brandName,
+        carModelCode: data.carModelCode,
+        carModelName: data.carModelName,
+        newAndUsed: data.newAndUsed,
+        generationName: data.generationName,
+        bodyType: data.bodyType,
+        seatCount: data.seatCount,
+        price: data.price,
+        carImagePath: data.carImagePath,
+        carImageFileName: data.carImageFileName,
+        buyerUserId: data.buyerUserId, // ?
+      };
+    });
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find car sale list error");
+  }
+};

@@ -1,6 +1,7 @@
 import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
 import { convertEnglishToNumberMonth, convertTelcomServiceInputToApiRequest } from "@utils/common";
 import { QueryFunctionContext, QueryKey } from "react-query";
+import { ECAR_SEARCH_TYPE } from "types/enum";
 import {
   IPickupRequest,
   ILoginRequest,
@@ -441,9 +442,9 @@ export const findMyMoveApi = async ({ queryKey }) => {
  * @description 구매가능한 car 조회 api
  */
 export const findCarSalesApi = async ({ queryKey }) => {
-  const [key, userId] = queryKey;
-  const body: { newAndUsed: "NEW" | "USED"; priceStart: number; priceEnd: number } = {
-    newAndUsed: "USED",
+  const [key, searchType] = queryKey;
+  const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
+    newAndUsed: searchType,
     priceStart: 9000,
     priceEnd: 13000,
   };
@@ -462,7 +463,7 @@ export const findCarSalesApi = async ({ queryKey }) => {
       brandName: string;
       carModelCode: string;
       carModelName: string;
-      newAndUsed: "USED" | "NEW";
+      newAndUsed: ECAR_SEARCH_TYPE;
       generationName: string;
       bodyType: string;
       seatCount: number;
@@ -486,8 +487,7 @@ export const findCarSalesApi = async ({ queryKey }) => {
         bodyType: data.bodyType,
         seatCount: data.seatCount,
         price: data.price,
-        carImagePath: data.carImagePath,
-        carImageFileName: data.carImageFileName,
+        carImageUrl: data.carImagePath + data.carImageFileName,
         buyerUserId: data.buyerUserId, // ?
       };
     });

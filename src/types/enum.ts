@@ -38,3 +38,8 @@ export enum EENGLISH_MONTH {
   NOV = "Nov",
   DEC = "Dec",
 }
+
+export enum ECAR_SEARCH_TYPE {
+  NEW = "NEW",
+  USED = "USED",
+}

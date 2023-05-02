@@ -41,21 +41,18 @@ const CarChip = styled.div`
   border-radius: 4px;
 `;
 
-const CarCard: React.FC = () => {
+const CarCard: React.FC<any> = ({ carImageUrl, brandName, carModelName, bodyType, price }) => {
+  // car id 심기 (attribute)
   return (
     <Wrapper>
-      <Image
-        src="https://user-images.githubusercontent.com/57255024/214351958-1ef60011-d940-4680-a38e-5c7c664f4e18.png"
-        alt="car"
-        width="55%"
-      />
+      <Image src={carImageUrl} alt="car" width="55%" />
       <div
         css={css`
           margin: 0 0 0 5%;
         `}
       />
       <Info>
-        <CarName>Kia Sorento</CarName>
+        <CarName>{`${brandName} ${carModelName}`}</CarName>
         {/* <CarChip> */}
         <CarChipContainer>
           <div

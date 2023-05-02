@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "react-query";
 import * as api from "@apis/functions";
 import { useTypedSelector } from "./useStore";
 import { EQUERY_KEY } from "@constants/query-key";
+import { ECAR_SEARCH_TYPE } from "types/enum";
 
 /**
  * @description my pickup 조회 query 함수
@@ -117,8 +118,8 @@ export const useMyMoveQueryClient = () => {
 /**
  * @description 구매가능한 car 조회 query 함수
  */
-export const useCarsSalesQuery = () => {
-  const query = useQuery([EQUERY_KEY.CAR_SALE], api.findCarSalesApi, {
+export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
+  const query = useQuery([EQUERY_KEY.CAR_SALE, searchType], api.findCarSalesApi, {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,

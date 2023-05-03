@@ -37,7 +37,7 @@ const CarChip = styled.div`
   flex: 1;
   font: ${fonts.FONT_TINY_400};
   color: ${colors.BLACK_1};
-  background-color: ${colors.PRIMARY_3};
+  background-color: ${colors.GRAY_2};
   padding: 5.5px 12px;
   border-radius: 4px;
   overflow: hidden;

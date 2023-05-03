@@ -11,15 +11,17 @@ interface IProps extends IStyleProps {
 interface IStyleProps {
   width: string;
   height: string;
+  clicked: boolean;
 }
 
 const Wrapper = styled.button`
   all: unset;
   display: block;
-  background-color: ${colors.WHITE_1};
+  box-sizing: border-box;
+  background-color: ${(props: IStyleProps) => (props.clicked ? `${colors.PRIMARY_3}` : `none`)};
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
-  border: 2px solid ${colors.PRIMARY_3};
+  border: ${(props: IStyleProps) => (props.clicked ? `none` : `2px solid ${colors.PRIMARY_3}`)};
   border-radius: 8px;
   font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
@@ -31,9 +33,9 @@ const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-const Button: React.FC<IProps> = ({ title, width, height, onClick }) => {
+const Button: React.FC<IProps> = ({ title, width, height, clicked, onClick }) => {
   return (
-    <Wrapper width={width} height={height} onClick={onClick}>
+    <Wrapper width={width} height={height} clicked={clicked} onClick={onClick}>
       {title}
     </Wrapper>
   );

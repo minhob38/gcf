@@ -10,10 +10,11 @@ import CarCard from "@components/CarService/CarCard";
 import { useCarsSalesQuery } from "@hooks/useApiQuery";
 import UsedCarSales from "@components/CarService/UsedCarSales";
 import PriceSelect from "@components/common/Select/PriceSelect";
-import { EPRICE_TYPE } from "types/enum";
+import { ECAR_SEARCH_TYPE, EPRICE_TYPE } from "types/enum";
 import * as variables from "@constants/variables";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
+import { useState } from "react";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -80,13 +81,29 @@ const HypenText = styled.div`
 const SCROLL_BOTTOM_MARGIN = 40 + 15 + 15 + 40;
 
 const CarService = () => {
+  const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE | null>(null);
+  const handleNewSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.NEW);
+  const handleUsedSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.USED);
+
   return (
     <>
       <Header title="Car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <ButtonContainer>
-          <Button title="New" width="100px" height="40px"></Button>
-          <Button title="Used" width="100px" height="40px"></Button>
+          <Button
+            title="New"
+            width="100px"
+            height="40px"
+            clicked={carSearchType === ECAR_SEARCH_TYPE.NEW}
+            onClick={handleNewSearchButtonClick}
+          ></Button>
+          <Button
+            title="Used"
+            width="100px"
+            height="40px"
+            clicked={carSearchType === ECAR_SEARCH_TYPE.USED}
+            onClick={handleUsedSearchButtonClick}
+          ></Button>
           {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
         <PriceContainer>

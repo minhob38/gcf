@@ -10,7 +10,6 @@ import { v4 as uuid4 } from "uuid";
 
 const CarCardContainer = styled.div`
   padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
-  box-shadow: 0 5px 10px -10px ${colors.GRAY_1}; // 아래에만 그림자 넣기
 `;
 
 const UsedCarSales = () => {

@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   flex-flow: row;
   justify-content: start;
   margin: 0 0 10px 0;
+  box-shadow: 0 5px 10px -10px ${colors.GRAY_1}; // 아래에만 그림자 넣기
 `;
 
 const Info = styled.div`

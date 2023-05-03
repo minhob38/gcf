@@ -39,10 +39,22 @@ const CarCardContainer = styled.div`
 //   margin: 0 auto 0 auto;
 // `;
 
+const PriceContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
+  margin: 0 auto 20px auto;
+`;
+
 const PriceText = styled.div`
-display: flex
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px 0 0;
   border-radius: 8px;
-  font: ${fonts.FONT_MEDIUM_600};
+  font: ${fonts.FONT_LARGE_400};
   color: ${colors.BLACK_1};
   text-align: center;
 `;
@@ -52,9 +64,16 @@ const PriceSelectBoxContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  gap: 0 10px;
-  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  margin: 0 auto 0 auto;
+`;
+
+const HypenText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 10px;
+  font: ${fonts.FONT_LARGE_400};
+  color: ${colors.BLACK_1};
+  text-align: center;
 `;
 
 // = ButtonContainer height + margin을 줄 height
@@ -70,19 +89,22 @@ const CarService = () => {
           <Button title="Used" width="100px" height="40px"></Button>
           {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
-        <PriceText>Price</PriceText>
-        <PriceSelectBoxContainer>
-          <PriceSelect
-            type={EPRICE_TYPE.MIN}
-            size={{ width: "120px", height: "30px" }}
-            prices={variables.MIN_PRICES}
-          />
-          <PriceSelect
-            type={EPRICE_TYPE.MIN}
-            size={{ width: "120px", height: "30px" }}
-            prices={variables.MIN_PRICES}
-          />
-        </PriceSelectBoxContainer>
+        <PriceContainer>
+          <PriceText>Price</PriceText>
+          <PriceSelectBoxContainer>
+            <PriceSelect
+              type={EPRICE_TYPE.MIN}
+              size={{ width: "100px", height: "30px" }}
+              prices={variables.MIN_PRICES}
+            />
+            <HypenText>~</HypenText>
+            <PriceSelect
+              type={EPRICE_TYPE.MAX}
+              size={{ width: "100px", height: "30px" }}
+              prices={variables.MAX_PRICES}
+            />
+          </PriceSelectBoxContainer>
+        </PriceContainer>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <UsedCarSales />
         </Scroll>

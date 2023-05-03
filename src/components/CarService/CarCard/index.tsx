@@ -23,7 +23,7 @@ const Info = styled.div`
 
 const CarName = styled.div`
   margin: 0 0 10px 0;
-  font: ${fonts.FONT_MEDIUM_600};
+  font: ${fonts.FONT_SMALL_400};
   color: ${colors.BLACK_1};
 `;
 

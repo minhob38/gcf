@@ -31,3 +31,21 @@ export const ARRIVAL_PLACES = [
 // move service 출발/도착지 국가 목록
 export const DEPARTURE_NATIONS = [SELECT_DEFAULT_TEXT, "Korea", "USA"];
 export const ARRIVAL_NATIONS = [SELECT_DEFAULT_TEXT, "Korea", "USA"];
+
+// car service 가격범위 (dollar 단위)
+const STEP = 5000;
+const MAX_PRICE = 100000;
+const MIN_PRICES: number[] = [];
+const MAX_PRICES: number[] = [];
+
+const N = Math.floor(MAX_PRICE / STEP);
+
+for (let i = 0; i < N; i++) {
+  MIN_PRICES.push(STEP * i);
+}
+
+for (let i = 1; i < N + 1; i++) {
+  MAX_PRICES.push(STEP * i);
+}
+
+export { MIN_PRICES, MAX_PRICES };

@@ -14,7 +14,6 @@ const CarCardContainer = styled.div`
 const UsedCarSales = () => {
   const query = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
   const apiData = query.data;
-  console.log(apiData);
 
   const Cards = apiData?.map((data) => {
     return (

@@ -21,7 +21,7 @@ const Wrapper = styled.button`
   height: ${(props: IStyleProps) => props.height};
   border: 2px solid ${colors.PRIMARY_3};
   border-radius: 8px;
-  font: ${fonts.FONT_MEDIUM_600};
+  font: ${fonts.FONT_LARGE_600};
   color: ${colors.BLACK_1};
   text-align: center;
   /* &:hover {

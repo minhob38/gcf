@@ -43,3 +43,8 @@ export enum ECAR_SEARCH_TYPE {
   NEW = "NEW",
   USED = "USED",
 }
+
+export enum EPRICE_TYPE {
+  MIN = "min",
+  MAX = "max",
+}

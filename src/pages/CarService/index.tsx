@@ -77,8 +77,7 @@ const HypenText = styled.div`
   text-align: center;
 `;
 
-// = ButtonContainer height + margin을 줄 height
-const SCROLL_BOTTOM_MARGIN = 40 + 15 + 15 + 40;
+const SCROLL_BOTTOM_MARGIN = 130;
 
 const CarService = () => {
   const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE | null>(null);

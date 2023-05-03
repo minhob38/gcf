@@ -5,6 +5,9 @@ export const SELECT_DATE_DEFAULT_TEXT = "-";
 export const SELECT_HOUR_DEFAULT_TEXT = "-";
 export const SELECT_MINUTE_DEFAULT_TEXT = "-";
 
+export const SELECT_MIN_PRICE_DEFAULT_TEXT = "Min";
+export const SELECT_MAX_PRICE_DEFAULT_TEXT = "Max";
+
 // pickup service 출발/도착지 장소
 export enum EPICKUP_PLACE {
   IA = "Incheon airport",
@@ -35,8 +38,8 @@ export const ARRIVAL_NATIONS = [SELECT_DEFAULT_TEXT, "Korea", "USA"];
 // car service 가격범위 (dollar 단위)
 const STEP = 5000;
 const MAX_PRICE = 100000;
-const MIN_PRICES: number[] = [];
-const MAX_PRICES: number[] = [];
+const MIN_PRICES: (number | string)[] = [SELECT_MIN_PRICE_DEFAULT_TEXT];
+const MAX_PRICES: (number | string)[] = [SELECT_MAX_PRICE_DEFAULT_TEXT];
 
 const N = Math.floor(MAX_PRICE / STEP);
 

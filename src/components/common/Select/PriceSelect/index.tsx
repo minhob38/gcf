@@ -5,15 +5,15 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions as pickUpActions } from "@store/slices/pickupSlice";
+import { actions as carActions } from "@store/slices/carSlice";
 import { actions as moveActions } from "@store/slices/moveSlice";
-import { EPLACE_TYPE, EPRICE_TYPE, ESERVICE_TYPE } from "types/enum";
+import { ECAR_SEARCH_TYPE, EPLACE_TYPE, EPRICE_TYPE, ESERVICE_TYPE } from "types/enum";
 import { useEffect, useState } from "react";
 
 interface IProps {
   type: EPRICE_TYPE;
   size: { width: string; height: string };
-  prices: number[];
+  prices: (number | string)[];
 }
 
 interface IStyleProps {
@@ -24,101 +24,28 @@ interface IStyleProps {
  * @description price range(min/max) select box (item들은 인자로 전달)
  */
 const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
-  // const dispatch = useTypedDispatch();
-  // const pickupArrival = useTypedSelector((state) => state.rootReducer.pickupReducer.arrival);
-  // const pickupDeparture = useTypedSelector((state) => state.rootReducer.pickupReducer.departure);
-  // const moveArrival = useTypedSelector((state) => state.rootReducer.moveReducer.arrivalNation);
-  // const moveDeparture = useTypedSelector((state) => state.rootReducer.moveReducer.departureNation);
+  const dispatch = useTypedDispatch();
+  const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
+  const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
   // const [isSelected, setIsSelected] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   switch (service) {
-  //     case ESERVICE_TYPE.PICKUP:
-  //       switch (type) {
-  //         case EPLACE_TYPE.ARRIVAL:
-  //           if (pickupArrival === variables.SELECT_DEFAULT_TEXT) {
-  //             setIsSelected(false);
-  //             return;
-  //           }
-  //           setIsSelected(true);
-  //           break;
-  //         case EPLACE_TYPE.DEPARTURE:
-  //           if (pickupDeparture === variables.SELECT_DEFAULT_TEXT) {
-  //             setIsSelected(false);
-  //             return;
-  //           }
-  //           setIsSelected(true);
-  //           break;
-  //         default:
-  //           setIsSelected(false);
-  //       }
-  //       break;
-  //     case ESERVICE_TYPE.MOVE:
-  //       switch (type) {
-  //         case EPLACE_TYPE.ARRIVAL:
-  //           if (moveArrival === variables.SELECT_DEFAULT_TEXT) {
-  //             setIsSelected(false);
-  //             return;
-  //           }
-  //           setIsSelected(true);
-  //           break;
-  //         case EPLACE_TYPE.DEPARTURE:
-  //           if (moveDeparture === variables.SELECT_DEFAULT_TEXT) {
-  //             setIsSelected(false);
-  //             return;
-  //           }
-  //           setIsSelected(true);
-  //           break;
-  //         default:
-  //           setIsSelected(false);
-  //       }
-  //       break;
-  //     default:
-  //   }
-  // }, [service, type, pickupArrival, pickupDeparture, moveDeparture, moveArrival]);
-
-  // const departures = [variables.SELECT_DEFAULT_TEXT, "Incheon Airport"];
-  // const arrivals = [variables.SELECT_DEFAULT_TEXT, "GCF"];
 
   let value: string;
   let name: string;
   const options = prices;
 
-  // switch (service) {
-  //   case ESERVICE_TYPE.PICKUP:
-  //     switch (type) {
-  //       case EPLACE_TYPE.ARRIVAL:
-  //         value = pickupArrival;
-  //         name = "arrival";
-  //         break;
-  //       case EPLACE_TYPE.DEPARTURE:
-  //         value = pickupDeparture;
-  //         name = "departure";
-  //         break;
-  //       default:
-  //         value = "";
-  //         name = "";
-  //     }
-  //     break;
-  //   case ESERVICE_TYPE.MOVE:
-  //     switch (type) {
-  //       case EPLACE_TYPE.ARRIVAL:
-  //         value = moveArrival;
-  //         name = "arrivalNation";
-  //         break;
-  //       case EPLACE_TYPE.DEPARTURE:
-  //         value = moveDeparture;
-  //         name = "departureNation";
-  //         break;
-  //       default:
-  //         value = "";
-  //         name = "";
-  //     }
-  //     break;
-  //   default:
-  //     value = "";
-  //     name = "";
-  // }
+  switch (type) {
+    case EPRICE_TYPE.MIN:
+      value = minimumPrice;
+      name = "minimumPrice";
+      break;
+    case EPRICE_TYPE.MAX:
+      value = maximumPrice;
+      name = "maximumPrice";
+      break;
+    default:
+      value = "";
+      name = "";
+  }
 
   const Options = options.map((option) => {
     return (
@@ -149,15 +76,7 @@ const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
   `;
 
   const handleClick = (ev) => {
-    // switch (service) {
-    //   case ESERVICE_TYPE.PICKUP:
-    //     dispatch(pickUpActions.selectInput(ev.target));
-    //     return;
-    //   case ESERVICE_TYPE.MOVE:
-    //     dispatch(moveActions.selectInput(ev.target));
-    //     return;
-    //   default:
-    // }
+    dispatch(carActions.selectInput(ev.target));
   };
 
   // return (
@@ -170,7 +89,7 @@ const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
 
   return (
     <Wrapper selected={false}>
-      <Select name={"name"} value={"value"} onChange={handleClick}>
+      <Select name={name} value={value} onChange={handleClick}>
         {Options}
       </Select>
     </Wrapper>

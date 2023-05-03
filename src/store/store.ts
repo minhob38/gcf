@@ -8,6 +8,7 @@ import pickupReducer from "@store/slices/pickupSlice";
 import telcomReducer from "@store/slices/telcomSlice";
 import modalReducer from "@store/slices/modalSlice";
 import moveReducer from "@store/slices/moveSlice";
+import carReducer from "@store/slices/carSlice";
 import errorReducer from "@store/slices/errorSlice";
 
 export function* rootSaga() {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   pickupReducer,
   telcomReducer,
   moveReducer,
+  carReducer,
   modalReducer,
   errorReducer,
 });

@@ -23,6 +23,9 @@ const UsedCarSales = () => {
         carImageUrl={data.carImageUrl}
         brandName={data.brandName}
         carModelName={data.carModelName}
+        bodyType={data.bodyType}
+        price={data.price}
+        seatCount={data.seatCount}
       />
     );
   });

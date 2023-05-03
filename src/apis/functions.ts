@@ -476,6 +476,19 @@ export const findCarSalesApi = async ({ queryKey }) => {
     if (!apiData) return null;
 
     return apiData.map((data) => {
+      let bodyType: string;
+
+      switch (data.bodyType) {
+        case "SEDAN":
+          bodyType = "Sedan";
+          break;
+        case "HATCHBACK":
+          bodyType = "Hatch";
+          break;
+        default:
+          bodyType = data.bodyType;
+      }
+
       return {
         carBasicId: data.carBasicId,
         brandCode: data.brandCode,
@@ -484,7 +497,7 @@ export const findCarSalesApi = async ({ queryKey }) => {
         carModelName: data.carModelName,
         newAndUsed: data.newAndUsed,
         generationName: data.generationName,
-        bodyType: data.bodyType,
+        bodyType,
         seatCount: data.seatCount,
         price: data.price,
         carImageUrl: data.carImagePath + data.carImageFileName,

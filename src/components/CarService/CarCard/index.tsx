@@ -39,9 +39,18 @@ const CarChip = styled.div`
   background-color: ${colors.PRIMARY_3};
   padding: 5.5px 12px;
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-const CarCard: React.FC<any> = ({ carImageUrl, brandName, carModelName, bodyType, price }) => {
+const CarCard: React.FC<any> = ({
+  carImageUrl,
+  brandName,
+  carModelName,
+  bodyType,
+  price,
+  seatCount,
+}) => {
   // car id 심기 (attribute)
   return (
     <Wrapper>
@@ -63,15 +72,15 @@ const CarCard: React.FC<any> = ({ carImageUrl, brandName, carModelName, bodyType
               /* width: fit-content; */
             `}
           >
-            <CarChip>Hatch</CarChip>
+            <CarChip>{bodyType}</CarChip>
             <div
               css={css`
                 width: 5px;
               `}
             />
-            <CarChip>Seat 7</CarChip>
+            <CarChip>{`Seat ${seatCount}`}</CarChip>
           </div>
-          <CarChip>$10K ~ 20K</CarChip>
+          <CarChip>{`$${price}`}</CarChip>
         </CarChipContainer>
       </Info>
     </Wrapper>

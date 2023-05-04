@@ -15,6 +15,8 @@ import * as variables from "@constants/variables";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -58,6 +60,13 @@ const PriceText = styled.div`
   font: ${fonts.FONT_LARGE_400};
   color: ${colors.BLACK_1};
   text-align: center;
+`;
+
+const SearchButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px 0 0;
 `;
 
 const PriceSelectBoxContainer = styled.div`
@@ -106,7 +115,10 @@ const CarService = () => {
           {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
         <PriceContainer>
-          <PriceText>Price</PriceText>
+          {/* <PriceText>Price</PriceText> */}
+          <SearchButtonContainer>
+            <FontAwesomeIcon icon={faMagnifyingGlass} fontSize={"24px"} />
+          </SearchButtonContainer>
           <PriceSelectBoxContainer>
             <PriceSelect
               type={EPRICE_TYPE.MIN}

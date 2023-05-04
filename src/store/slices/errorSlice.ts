@@ -4,12 +4,14 @@ interface IState {
   signUpErrorMessage: string | null;
   loginErrorMessage: string | null;
   pickUpTelcomMoveErrorMessage: string | null;
+  carSaleErrorMessage: string | null;
 }
 
 const initialState: IState = {
   signUpErrorMessage: null,
   loginErrorMessage: null,
   pickUpTelcomMoveErrorMessage: null,
+  carSaleErrorMessage: null,
 };
 
 const errorSlice = createSlice({
@@ -41,6 +43,13 @@ const errorSlice = createSlice({
     },
     catchPickUpTelcomMoveError: (state) => {
       state.pickUpTelcomMoveErrorMessage = null;
+    },
+    // car sale service 에러
+    throwCarSaleError: (state, action: PayloadAction<string>) => {
+      state.carSaleErrorMessage = action.payload;
+    },
+    catchCarSaleError: (state) => {
+      state.carSaleErrorMessage = null;
     },
   },
 });

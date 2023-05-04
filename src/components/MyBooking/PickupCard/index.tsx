@@ -3,9 +3,8 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-import { useMyPickupBookingQuery, useMyPickupBookingQueryClient } from "@hooks/useApiQuery";
+import { useMyPickupBookingQueryClient } from "@hooks/useApiQuery";
 import CancelButton from "../CancelButton";
-import { useQueryClient } from "react-query";
 import { ESERVICE_TYPE } from "types/enum";
 
 const PADDING = "15px";

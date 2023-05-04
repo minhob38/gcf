@@ -12,6 +12,7 @@ import {
   IMoveCancel,
   IPickupCancel,
   ITelcomCancel,
+  ICarSale,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -441,7 +442,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
 /**
  * @description 구매가능한 car 조회 api
  */
-export const findCarSalesApi = async ({ queryKey }) => {
+export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
   const [key, searchType] = queryKey;
   const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
     newAndUsed: searchType,
@@ -473,7 +474,7 @@ export const findCarSalesApi = async ({ queryKey }) => {
       buyerUserId: number;
     }[];
 
-    if (!apiData) return null;
+    if (!apiData) return [];
 
     return apiData.map((data) => {
       let bodyType: string;
@@ -509,4 +510,6 @@ export const findCarSalesApi = async ({ queryKey }) => {
   if (data.result === "FAIL") {
     throw new Error("find car sale list error");
   }
+
+  return [];
 };

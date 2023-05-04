@@ -1,4 +1,4 @@
-import { ETELCOM_KIND_TYPE } from "./enum";
+import { ECAR_SEARCH_TYPE, ETELCOM_KIND_TYPE } from "./enum";
 
 export interface IButtonProps {
   /** button label(typescript type)입니다. */
@@ -85,4 +85,20 @@ export interface ITelcomCancel {
 
 export interface IMoveCancel {
   moveId: number;
+}
+
+// react query의 response data type
+export interface ICarSale {
+  carBasicId: number;
+  brandCode: string;
+  brandName: string;
+  carModelCode: string;
+  carModelName: string;
+  newAndUsed: ECAR_SEARCH_TYPE;
+  generationName: string;
+  bodyType: string;
+  seatCount: number;
+  price: number;
+  carImageUrl: string;
+  buyerUserId: number;
 }

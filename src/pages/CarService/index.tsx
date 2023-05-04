@@ -89,9 +89,13 @@ const HypenText = styled.div`
 const SCROLL_BOTTOM_MARGIN = 130;
 
 const CarService = () => {
+  const query = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
+  const apiData = query.data || [];
+
   const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE | null>(null);
   const handleNewSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.NEW);
   const handleUsedSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.USED);
+  const handleSearchClick = () => query.refetch();
 
   return (
     <>
@@ -112,12 +116,15 @@ const CarService = () => {
             clicked={carSearchType === ECAR_SEARCH_TYPE.USED}
             onClick={handleUsedSearchButtonClick}
           ></Button>
-          {/* <Button title="Rent/New" width="100px" height="40px"></Button> */}
         </ButtonContainer>
         <PriceContainer>
           {/* <PriceText>Price</PriceText> */}
           <SearchButtonContainer>
-            <FontAwesomeIcon icon={faMagnifyingGlass} fontSize={"24px"} />
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              fontSize={"24px"}
+              onClick={handleSearchClick}
+            />
           </SearchButtonContainer>
           <PriceSelectBoxContainer>
             <PriceSelect
@@ -134,7 +141,7 @@ const CarService = () => {
           </PriceSelectBoxContainer>
         </PriceContainer>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
-          <UsedCarSales />
+          <UsedCarSales cars={apiData} />
         </Scroll>
       </Content>
     </>

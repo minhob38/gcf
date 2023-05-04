@@ -123,6 +123,7 @@ export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,
+    enabled: false,
     onError: (error) => {
       // const errorMessage = (error as Error).message;
       // dispatch(errorActions.throwSignUpError(errorMessage));

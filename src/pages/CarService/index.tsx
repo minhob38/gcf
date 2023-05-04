@@ -13,11 +13,11 @@ import { ECAR_SEARCH_TYPE, EPRICE_TYPE } from "types/enum";
 import * as variables from "@constants/variables";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
+import { actions as carActions } from "@store/slices/carSlice";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -28,20 +28,6 @@ const ButtonContainer = styled.div`
   padding: 0 ${margins.SIDE_MAIN_MARGIN};
   gap: 0 10px;
 `;
-
-const CarCardContainer = styled.div`
-  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
-`;
-
-// const PriceSelectBoxContainer = styled.div`
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: space-between;
-//   align-items: center;
-//   gap: 0 10px;
-//   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-//   margin: 0 auto 0 auto;
-// `;
 
 const PriceContainer = styled.div`
   display: flex;
@@ -117,18 +103,22 @@ const CarService = () => {
   const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.carSaleErrorMessage,
   );
+  const carSearchType = useTypedSelector((state) => state.rootReducer.carReducer.carSearchType);
   const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
   const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
 
-  const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE>(ECAR_SEARCH_TYPE.NEW);
   const newQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.NEW);
   const usedQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
 
   const newApiData = newQuery.data || [];
   const usedApiData = usedQuery.data || [];
 
-  const handleNewSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.NEW);
-  const handleUsedSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.USED);
+  const handleNewSearchButtonClick = () => {
+    dispatch(carActions.changeSearchType(ECAR_SEARCH_TYPE.NEW));
+  };
+  const handleUsedSearchButtonClick = () => {
+    dispatch(carActions.changeSearchType(ECAR_SEARCH_TYPE.USED));
+  };
   const handleSearchClick = () => {
     // 최소/최대값을 입력하지 않았을때
     if (
@@ -168,6 +158,7 @@ const CarService = () => {
             width="100px"
             height="40px"
             clicked={carSearchType === ECAR_SEARCH_TYPE.NEW}
+            onClick={handleNewSearchButtonClick}
           />
           <Button
             title="Used"

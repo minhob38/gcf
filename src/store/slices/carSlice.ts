@@ -3,13 +3,13 @@ import * as variables from "@constants/variables";
 import { ECAR_SEARCH_TYPE } from "types/enum";
 
 interface IState {
-  carSearchType: ECAR_SEARCH_TYPE | null;
+  carSearchType: ECAR_SEARCH_TYPE;
   minimumPrice: string;
   maximumPrice: string;
 }
 
 const initialState: IState = {
-  carSearchType: null,
+  carSearchType: ECAR_SEARCH_TYPE.NEW,
   minimumPrice: variables.SELECT_MIN_PRICE_DEFAULT_TEXT,
   maximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
 };
@@ -27,6 +27,10 @@ const carSlice = createSlice({
     selectInput: (state, action: PayloadAction<React.ChangeEvent<HTMLSelectElement>["target"]>) => {
       const { name, value } = action.payload;
       state[name] = value;
+    },
+
+    changeSearchType: (state, action: PayloadAction<ECAR_SEARCH_TYPE>) => {
+      state.carSearchType = action.payload;
     },
   },
 });

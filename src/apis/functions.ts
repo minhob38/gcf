@@ -443,11 +443,12 @@ export const findMyMoveApi = async ({ queryKey }) => {
  * @description 구매가능한 car 조회 api
  */
 export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
-  const [key, searchType] = queryKey;
+  const [key, searchType, { priceStart, priceEnd }] = queryKey;
+  console.log(priceStart, priceEnd);
   const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
     newAndUsed: searchType,
-    priceStart: 9000,
-    priceEnd: 13000,
+    priceStart,
+    priceEnd,
   };
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/available`,

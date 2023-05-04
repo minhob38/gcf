@@ -119,22 +119,29 @@ export const useMyMoveQueryClient = () => {
  * @description 구매가능한 car 조회 query 함수
  */
 export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
-  const query = useQuery([EQUERY_KEY.CAR_SALE, searchType], api.findCarSalesApi, {
-    refetchOnWindowFocus: false,
-    retry: 0,
-    suspense: true,
-    enabled: false,
-    onError: (error) => {
-      // const errorMessage = (error as Error).message;
-      // dispatch(errorActions.throwSignUpError(errorMessage));
+  const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
+  const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
+
+  const query = useQuery(
+    [EQUERY_KEY.CAR_SALE, searchType, { priceStart: minimumPrice, priceEnd: maximumPrice }],
+    api.findCarSalesApi,
+    {
+      refetchOnWindowFocus: false,
+      retry: 0,
+      suspense: true,
+      enabled: false,
+      onError: (error) => {
+        // const errorMessage = (error as Error).message;
+        // dispatch(errorActions.throwSignUpError(errorMessage));
+      },
+      onSuccess: (data) => {
+        // dispatch(modalActions.showSignUpNotification());
+      },
+      onSettled: () => {
+        // dispatch(modalActions.hideLoading());
+      },
     },
-    onSuccess: (data) => {
-      // dispatch(modalActions.showSignUpNotification());
-    },
-    onSettled: () => {
-      // dispatch(modalActions.hideLoading());
-    },
-  });
+  );
 
   return query;
 };

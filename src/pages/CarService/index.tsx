@@ -86,16 +86,40 @@ const HypenText = styled.div`
   text-align: center;
 `;
 
+const NotificationText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
+  font: ${fonts.FONT_LARGE_400};
+  color: ${colors.BLACK_1};
+  text-align: center;
+`;
+
 const SCROLL_BOTTOM_MARGIN = 130;
 
 const CarService = () => {
-  const query = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
-  const apiData = query.data || [];
+  const newQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.NEW);
+  const usedQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
 
-  const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE | null>(null);
+  const newApiData = newQuery.data || [];
+  const usedApiData = usedQuery.data || [];
+
+  const [carSearchType, setCarSearchType] = useState<ECAR_SEARCH_TYPE>(ECAR_SEARCH_TYPE.NEW);
   const handleNewSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.NEW);
   const handleUsedSearchButtonClick = () => setCarSearchType(ECAR_SEARCH_TYPE.USED);
-  const handleSearchClick = () => query.refetch();
+  const handleSearchClick = () => {
+    switch (carSearchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        newQuery.refetch();
+        return;
+      case ECAR_SEARCH_TYPE.USED:
+        usedQuery.refetch();
+        return;
+      default:
+    }
+  };
 
   return (
     <>
@@ -108,14 +132,14 @@ const CarService = () => {
             height="40px"
             clicked={carSearchType === ECAR_SEARCH_TYPE.NEW}
             onClick={handleNewSearchButtonClick}
-          ></Button>
+          />
           <Button
             title="Used"
             width="100px"
             height="40px"
             clicked={carSearchType === ECAR_SEARCH_TYPE.USED}
             onClick={handleUsedSearchButtonClick}
-          ></Button>
+          />
         </ButtonContainer>
         <PriceContainer>
           {/* <PriceText>Price</PriceText> */}
@@ -141,7 +165,9 @@ const CarService = () => {
           </PriceSelectBoxContainer>
         </PriceContainer>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
-          <UsedCarSales cars={apiData} />
+          <NotificationText>Click magnifier after setting price range</NotificationText>
+          {carSearchType === ECAR_SEARCH_TYPE.NEW && <UsedCarSales cars={newApiData} />}
+          {carSearchType === ECAR_SEARCH_TYPE.USED && <UsedCarSales cars={usedApiData} />}
         </Scroll>
       </Content>
     </>

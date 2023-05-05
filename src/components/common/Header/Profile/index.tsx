@@ -89,6 +89,9 @@ const Profile: React.FC = () => {
       {isProfileClicked && (
         <ProfileDropBox>
           <ProfileDropBoxItemContainer>
+            <LinkButton path="my-page" title="My Page" />
+          </ProfileDropBoxItemContainer>
+          <ProfileDropBoxItemContainer>
             <LinkButton path="my-booking" title="My Booking" />
           </ProfileDropBoxItemContainer>
           <ProfileDropBoxItemContainer>

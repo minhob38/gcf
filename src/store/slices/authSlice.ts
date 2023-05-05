@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IState {
   name: string | null;
   email: string | null;
+  phoneNumber: string | null;
   password: string | null;
   rePassword: string | null;
 }
@@ -10,6 +11,7 @@ interface IState {
 const initialState: IState = {
   name: null,
   email: null,
+  phoneNumber: null,
   password: null,
   rePassword: null,
 };
@@ -32,6 +34,9 @@ const authSlice = createSlice({
         case "email":
           state.email = value;
           break;
+        case "phoneNumber":
+          state.phoneNumber = value;
+          break;
         case "password":
           state.password = value;
           break;
@@ -40,6 +45,19 @@ const authSlice = createSlice({
           break;
         default:
       }
+    },
+    clickEdit: (
+      state,
+      action: PayloadAction<{
+        name: string;
+        email: string;
+        phoneNumber: string;
+      }>,
+    ) => {
+      const { name, email, phoneNumber } = action.payload;
+      state.name = name;
+      state.email = email;
+      state.phoneNumber = phoneNumber;
     },
   },
 });

@@ -17,6 +17,10 @@ import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
 import CarBuy from "pages/CarService/CarBuy";
 import MyCar from "pages/MyCar";
+import MyPage from "pages/MyPage";
+
+// useMutation은 suspense fallback 반영 X
+// useQuery는 suspense fallback 반영 O
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -54,6 +58,11 @@ function App() {
               element={!isAuthenticated ? <Login /> : <Navigate replace to="/" />}
             />
             <Route path="/sign-up" element={<SignUp />} />
+            {/* my page */}
+            <Route
+              path="/my-page"
+              element={isAuthenticated ? <MyPage /> : <Navigate replace to="/" />}
+            />
             {/* my car and booking */}
             <Route
               path="/my-booking"

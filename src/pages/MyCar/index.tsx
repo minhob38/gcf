@@ -56,6 +56,7 @@ const MyCar: React.FC = () => {
       <CardContainer>
         <MyCarCard
           key={uuid4()}
+          carToSaleId={apiData.carToSaleId}
           carBasicId={apiData.carBasicId}
           carImageUrl={apiData.carImageUrl}
           brandName={apiData.brandName}

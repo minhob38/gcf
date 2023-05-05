@@ -9,6 +9,7 @@ import CancelButton from "../CancelButton";
 import { useTypedDispatch } from "@hooks/useStore";
 
 interface IProps {
+  carToSaleId: number;
   carBasicId: number;
   carImageUrl: string;
   brandName: string;
@@ -90,6 +91,7 @@ const CancelButtonContainer = styled.div`
 `;
 
 const MyCarCard: React.FC<IProps> = ({
+  carToSaleId,
   carBasicId,
   carImageUrl,
   brandName,
@@ -104,7 +106,7 @@ const MyCarCard: React.FC<IProps> = ({
 }) => {
   const dispatch = useTypedDispatch();
   const handleCancelClick = () => {
-    dispatch(carActions.clickCar(carBasicId));
+    dispatch(carActions.clickCarToCancel(carToSaleId));
   };
 
   return (

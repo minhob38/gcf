@@ -8,13 +8,14 @@ import {
   IApiResponse,
   ITelcomRequest,
   IMoveRequest,
-  IMoveCancel,
-  IPickupCancel,
-  ITelcomCancel,
+  IMoveCancelRequest,
+  IPickupCancelRequest,
+  ITelcomCancelRequest,
   ICarRequest,
   IMyCarResponse,
   TSaleStatus,
   ICarSaleResponse,
+  ICarCancelRequest,
 } from "types/api-type";
 
 export const testGetApi = async () => {
@@ -307,7 +308,7 @@ export const carBuyRequestApi = async (input: ICarRequest) => {
 /**
  * @description pickup 서비스 취소 api
  */
-export const pickupCancelApi = async (input: IPickupCancel) => {
+export const pickupCancelApi = async (input: IPickupCancelRequest) => {
   const { pickUpId } = input;
   const body: { pickUpId: number } = { pickUpId };
 
@@ -329,7 +330,7 @@ export const pickupCancelApi = async (input: IPickupCancel) => {
 /**
  * @description telcom 서비스 취소 api
  */
-export const telcomCancelApi = async (input: ITelcomCancel) => {
+export const telcomCancelApi = async (input: ITelcomCancelRequest) => {
   const { telcomId } = input;
   const body: { telecommunicationId: number } = { telecommunicationId: telcomId };
 
@@ -351,12 +352,34 @@ export const telcomCancelApi = async (input: ITelcomCancel) => {
 /**
  * @description move 서비스 취소 api
  */
-export const moveCancelApi = async (input: IMoveCancel) => {
+export const moveCancelApi = async (input: IMoveCancelRequest) => {
   const { moveId } = input;
   const body: { moveId: number } = { moveId };
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/moves/cancel`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    throw new Error("move error");
+  }
+};
+
+/**
+ * @description 차량 구매 취소 api
+ */
+export const carCancelApi = async (input: ICarCancelRequest) => {
+  const { carToSaleId } = input;
+  const body: { carToSaleId: number } = { carToSaleId };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/car-sales/withdraw`,
     body,
   );
 
@@ -667,6 +690,7 @@ export const findMyCarsApi = async ({ queryKey }): Promise<IMyCarResponse[]> => 
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
+      carToSaleId: number;
       carBasicId: number;
       brandCode: string;
       brandName: string;
@@ -732,6 +756,7 @@ export const findMyCarsApi = async ({ queryKey }): Promise<IMyCarResponse[]> => 
       }
 
       return {
+        carToSaleId: data.carToSaleId,
         carBasicId: data.carBasicId,
         brandCode: data.brandCode,
         brandName: data.brandName,

@@ -6,6 +6,7 @@ import * as fonts from "@constants/fonts";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import {
+  useMyCarsQuery,
   useMyMoveBookingQuery,
   useMyPickupBookingQuery,
   useMyTelcomBookingQuery,
@@ -14,6 +15,7 @@ import { useQueryClient } from "react-query";
 import { EQUERY_KEY } from "@constants/query-key";
 import { ESERVICE_TYPE } from "types/enum";
 import {
+  useCarCancelMutation,
   useMoveCancelMutation,
   usePickupCancelMutation,
   useTelocmCancelMutation,
@@ -76,44 +78,21 @@ const MyCarCancelModal: React.FC = () => {
   const [isYesClicked, setIsYesClicked] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
+  const carSaleId = useTypedSelector((state) => state.rootReducer.carReducer.selectedCarSaleId);
 
-  const pickUpMutation = usePickupCancelMutation();
-  const telcomMutation = useTelocmCancelMutation();
-  const moveMutation = useMoveCancelMutation();
-
+  const mutation = useCarCancelMutation();
   const queryClient = useQueryClient();
-  const myPickupBookingQuery = useMyPickupBookingQuery();
-  const myTelcomBookingQuery = useMyTelcomBookingQuery();
-  const myMoveBookingQuery = useMyMoveBookingQuery();
-
-  const pickUpId = myPickupBookingQuery.data?.pickUpId || null;
-  const telcomId = myTelcomBookingQuery.data?.telecommunicationId || null;
-  const moveId = myMoveBookingQuery.data?.moveId || null;
+  // const query = useMyCarsQuery();
 
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (ev.currentTarget !== ev.target) return;
-    dispatch(modalActions.hideMyBookingCancelNotification());
+    dispatch(modalActions.hideMyCarCancelNotification());
   };
 
   const handleYesClickButton: React.MouseEventHandler<HTMLDivElement> = async (ev) => {
-    // switch (service) {
-    //   case ESERVICE_TYPE.PICKUP:
-    //     if (!pickUpId) throw new Error("pickUpId does not exists");
-    //     await pickUpMutation.mutateAsync({ pickUpId });
-    //     queryClient.invalidateQueries([EQUERY_KEY.PICKUP, userId]);
-    //     break;
-    //   case ESERVICE_TYPE.TELCOM:
-    //     if (!telcomId) throw new Error("telcomId does not exists");
-    //     await telcomMutation.mutateAsync({ telcomId });
-    //     queryClient.invalidateQueries([EQUERY_KEY.TELCOM, userId]);
-    //     break;
-    //   case ESERVICE_TYPE.MOVE:
-    //     if (!moveId) throw new Error("moveId does not exists");
-    //     await moveMutation.mutateAsync({ moveId });
-    //     queryClient.invalidateQueries([EQUERY_KEY.MOVE, userId]);
-    //     break;
-    //   default:
-    // }
+    if (!carSaleId) throw new Error("carSaleId does not exists");
+    await mutation.mutateAsync({ carToSaleId: carSaleId });
+    queryClient.invalidateQueries([EQUERY_KEY.MY_CAR, userId]);
 
     setIsYesClicked(true);
   };

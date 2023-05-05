@@ -75,16 +75,20 @@ export interface ICarRequest {
   carBasicId: number;
 }
 
-export interface IPickupCancel {
+export interface IPickupCancelRequest {
   pickUpId: number;
 }
 
-export interface ITelcomCancel {
+export interface ITelcomCancelRequest {
   telcomId: number;
 }
 
-export interface IMoveCancel {
+export interface IMoveCancelRequest {
   moveId: number;
+}
+
+export interface ICarCancelRequest {
+  carToSaleId: number;
 }
 
 // react query의 response data type
@@ -108,6 +112,7 @@ export interface ICarSaleResponse {
 export type TSaleStatus = "Applied" | "Prepared" | "Completed" | "Canceled";
 
 export interface IMyCarResponse {
+  carToSaleId: number;
   carBasicId: number;
   brandCode: string;
   brandName: string;

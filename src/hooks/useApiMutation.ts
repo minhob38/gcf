@@ -272,3 +272,27 @@ export const useMoveCancelMutation = () => {
 
   return mutation;
 };
+
+/**
+ * @description car cancel mutation 함수
+ */
+export const useCarCancelMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.carCancelApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwCarSaleError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showCarNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};

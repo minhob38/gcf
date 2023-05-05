@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import * as api from "@apis/functions";
-import { useTypedDispatch } from "./useStore";
+import { useTypedDispatch, useTypedSelector } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as authActions } from "@store/slices/authSlice";
@@ -61,6 +61,7 @@ export const useSignUpMutation = () => {
  */
 export const useLoginMutation = () => {
   const dispatch = useTypedDispatch();
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const mutation = useMutation(api.loginApi, {
     onMutate: (variables) => {
       dispatch(modalActions.showLoading());
@@ -69,14 +70,30 @@ export const useLoginMutation = () => {
       const errorMessage = (error as Error).message;
       dispatch(errorActions.throwLoginError(errorMessage));
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: async (data, variables, context) => {
       // 로그인 성공 시, 로컬스토리지 로그인상태를 true로 변경
-      dispatch(authActions.authenticate());
-      if (process.env.NODE_ENV !== "production") return;
-      // data에서 user id 가져오기
-      if (!data) return;
-      const { userId } = data;
-      dispatch(userActions.login(userId));
+      dispatch(userActions.authenticate());
+
+      if (process.env.NODE_ENV === "production") {
+        // data에서 user id 가져오기
+        const userId = data?.userId;
+
+        if (!userId) return;
+        const myInfo = await api.findMeApi(userId);
+
+        if (!myInfo) return;
+        dispatch(userActions.findMe({ userId, ...myInfo }));
+
+        return;
+      }
+
+      // development 환경
+      if (!userId) return;
+      const myInfo = await api.findMeApi(userId);
+      if (!myInfo) return;
+      dispatch(userActions.findMe({ userId, ...myInfo }));
+
+      return;
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

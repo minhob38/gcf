@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { actions as authActions } from "@store/slices/authSlice";
+import { actions as userActions } from "@store/slices/userSlice";
 import { Link } from "react-router-dom";
 
 const ProfileBox = styled.div`
@@ -77,7 +78,7 @@ const Profile: React.FC = () => {
   const [isProfileClicked, setIsProfileClicked] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const handleProfileClick = () => setIsProfileClicked(!isProfileClicked);
-  const handleLogoutClick = () => dispatch(authActions.unAuthenticate());
+  const handleLogoutClick = () => dispatch(userActions.unAuthenticate());
 
   return (
     <Wrapper>

@@ -5,7 +5,6 @@ interface IState {
   email: string | null;
   password: string | null;
   rePassword: string | null;
-  isAuthenticated: boolean;
 }
 
 const initialState: IState = {
@@ -13,7 +12,6 @@ const initialState: IState = {
   email: null,
   password: null,
   rePassword: null,
-  isAuthenticated: process.env.NODE_ENV === "production" ? false : true,
 };
 
 const authSlice = createSlice({
@@ -24,14 +22,6 @@ const authSlice = createSlice({
       for (const key in state) {
         state[key] = initialState[key];
       }
-    },
-    authenticate: (state) => {
-      state.isAuthenticated = true;
-      // 나중에 401 error 받으면, 로그인 정보 지우기
-    },
-    unAuthenticate: (state) => {
-      state.isAuthenticated = false;
-      // 나중에 401 error 받으면, 로그인 정보 지우기
     },
     textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
       const { name, value } = action.payload;

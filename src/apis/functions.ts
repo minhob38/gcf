@@ -24,7 +24,6 @@ export const testGetApi = async () => {
 };
 
 export const testPostApi = async (input) => {
-  console.log("input", input);
   const body = { title: "foo", body: "bar", userId: 1 };
   const response = await axios.post("https://jsonplaceholder.typicode.com/posts", body);
   const { data } = response;
@@ -109,8 +108,7 @@ export const signUpApi = async (input: ISignUpRequest) => {
 /**
  * @description 나의 정보 조회 api
  */
-export const findMeApi = async ({ queryKey }) => {
-  const [key, userId] = queryKey;
+export const findMeApi = async (userId: number) => {
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
   );
@@ -126,7 +124,7 @@ export const findMeApi = async ({ queryKey }) => {
     };
 
     if (!apiData) return null;
-    console.log(apiData);
+
     return {
       email: apiData.email,
       fullName: apiData.fullName,

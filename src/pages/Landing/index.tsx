@@ -32,12 +32,8 @@ const Margin = styled.div`
 `;
 
 const Landing: React.FC = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.userReducer.name);
-  console.log("userId");
-  console.log(userId);
-
   const isAuthenticated = useTypedSelector(
-    (state) => state.rootReducer.authReducer.isAuthenticated,
+    (state) => state.rootReducer.userReducer.isAuthenticated,
   );
   const isLoginWarning = useTypedSelector((state) => state.rootReducer.modalReducer.isLoginWarning);
   const dispatch = useTypedDispatch();

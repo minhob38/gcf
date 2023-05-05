@@ -5,11 +5,13 @@ interface IState {
   name: string | null;
   email: string | null;
   phoneNumber: string | null;
+  isAuthenticated: boolean;
 }
 
 const initialState: IState = {
-  userId: 1, //process.env.NODE_ENV === "production" ? null : 1,
-  name: "SADSAD",
+  isAuthenticated: false, // process.env.NODE_ENV === "production" ? false : true,
+  userId: process.env.NODE_ENV === "production" ? null : 1,
+  name: null,
   email: null,
   phoneNumber: null,
 };
@@ -24,9 +26,33 @@ const userSlice = createSlice({
       }
     },
 
-    login: (state, action: PayloadAction<number>) => {
-      console.log("login");
-      // state.userId = action.payload;
+    authenticate: (state) => {
+      state.isAuthenticated = true;
+      // 나중에 401 error 받으면, 로그인 정보 지우기
+    },
+    unAuthenticate: (state) => {
+      state.isAuthenticated = false;
+
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+      // 나중에 401 error 받으면, 로그인 정보 지우기
+    },
+
+    findMe: (
+      state,
+      action: PayloadAction<{
+        userId: number;
+        email: string;
+        fullName: string;
+        phoneNumber: string;
+      }>,
+    ) => {
+      const { userId, email, fullName, phoneNumber } = action.payload;
+      state.userId = userId;
+      state.name = email;
+      state.email = fullName;
+      state.phoneNumber = phoneNumber;
     },
   },
 });

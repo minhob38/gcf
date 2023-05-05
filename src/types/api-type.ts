@@ -1,10 +1,5 @@
 import { ECAR_SEARCH_TYPE, ETELCOM_KIND_TYPE } from "./enum";
 
-export interface IButtonProps {
-  /** button label(typescript type)입니다. */
-  label: string;
-}
-
 export interface IApiResponse {
   data: any;
   errorCode: string;
@@ -93,7 +88,7 @@ export interface IMoveCancel {
 }
 
 // react query의 response data type
-export interface ICarSale {
+export interface ICarSaleResponse {
   carBasicId: number;
   brandCode: string;
   brandName: string;
@@ -110,7 +105,9 @@ export interface ICarSale {
   buyerUserId: number;
 }
 
-export interface IMyCar {
+export type TSaleStatus = "Applied" | "Prepared" | "Completed" | "Canceled";
+
+export interface IMyCarResponse {
   carBasicId: number;
   brandCode: string;
   brandName: string;
@@ -125,5 +122,5 @@ export interface IMyCar {
   price: number;
   carImageUrl: string;
   buyerUserId: number;
-  saleStatus: string;
+  saleStatus: TSaleStatus;
 }

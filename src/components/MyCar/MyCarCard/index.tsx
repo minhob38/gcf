@@ -5,6 +5,7 @@ import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import Image from "@components/common/Image";
 import { ECAR_SEARCH_TYPE } from "types/enum";
+import CancelButton from "../CancelButton";
 
 interface IProps {
   carBasicId: number;
@@ -55,6 +56,7 @@ const TextContainer = styled.div`
 `;
 
 const StateBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +78,14 @@ const BulletText = styled.div`
 const PlainText = styled.div`
   font: ${fonts.FONT_MEDIUM_400};
   color: ${colors.BLACK_1};
+`;
+
+/* transform: translate(0, -100%); */
+const CancelButtonContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: -100%;
+  z-index: 3;
 `;
 
 const MyCarCard: React.FC<IProps> = ({
@@ -128,7 +138,14 @@ const MyCarCard: React.FC<IProps> = ({
         <BulletText>Price</BulletText>
         <PlainText>{`$ ${price}`}</PlainText>
       </TextContainer>
-      <StateBox>{saleStatus}</StateBox>
+      <StateBox>
+        {saleStatus}
+        {saleStatus !== "Canceled" && (
+          <CancelButtonContainer>
+            <CancelButton>Cancel</CancelButton>
+          </CancelButtonContainer>
+        )}
+      </StateBox>
     </Wrapper>
   );
 };

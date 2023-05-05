@@ -2,7 +2,7 @@ import { Meta, Story } from "@storybook/react";
 import CarSearchTypeButton from "../components/CarService/CarSearchTypeButton";
 import { decorators } from "../../.storybook/preview";
 import { action } from "@storybook/addon-actions";
-import { IButtonProps } from "../types/types";
+import { IButtonProps } from "../types/type";
 
 export default {
   title: "버튼",

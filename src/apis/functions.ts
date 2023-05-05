@@ -11,10 +11,11 @@ import {
   IMoveCancel,
   IPickupCancel,
   ITelcomCancel,
-  ICarSale,
   ICarRequest,
-  IMyCar,
-} from "types/types";
+  IMyCarResponse,
+  TSaleStatus,
+  ICarSaleResponse,
+} from "types/api-type";
 
 export const testGetApi = async () => {
   const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -507,7 +508,7 @@ export const findMyMoveApi = async ({ queryKey }) => {
 /**
  * @description 구매가능한 car들 조회 api
  */
-export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
+export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]> => {
   const [key, searchType, { priceStart, priceEnd }] = queryKey;
   const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
     newAndUsed: searchType,
@@ -655,7 +656,7 @@ export const findCarDetailApi = async ({ queryKey }) => {
 /**
  * @description 구매신청한 car들 조회 api
  */
-export const findMyCarsApi = async ({ queryKey }): Promise<IMyCar[]> => {
+export const findMyCarsApi = async ({ queryKey }): Promise<IMyCarResponse[]> => {
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/users/${userId}`,
@@ -688,7 +689,7 @@ export const findMyCarsApi = async ({ queryKey }): Promise<IMyCar[]> => {
 
     return apiData.map((data) => {
       let bodyType: string;
-      let saleStatus: string;
+      let saleStatus: TSaleStatus;
       let newAndUsed: string;
 
       switch (data.bodyType) {

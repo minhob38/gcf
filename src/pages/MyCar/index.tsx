@@ -13,6 +13,9 @@ import { useTypedSelector } from "@hooks/useStore";
 import MyCarCard from "@components/MyCar/MyCarCard";
 import { v4 as uuid4 } from "uuid";
 import EmptyCard from "@components/MyCar/EmptyCard";
+import CancelButton from "@components/MyCar/CancelButton";
+
+const PADDING = "15px";
 
 const SubTitle = styled.div`
   display: flex;
@@ -30,6 +33,7 @@ const Margin = styled.div`
 `;
 
 const CardContainer = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

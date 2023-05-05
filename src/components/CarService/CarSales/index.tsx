@@ -15,6 +15,7 @@ const CarSales: React.FC<{ cars: ICarSale[] }> = ({ cars }) => {
     return (
       <CarCard
         key={uuid4()}
+        carBasicId={car.carBasicId}
         carImageUrl={car.carImageUrl}
         brandName={car.brandName}
         carModelName={car.carModelName}

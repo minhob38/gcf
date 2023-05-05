@@ -3,8 +3,20 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
-
 import Image from "@components/common/Image";
+import { Link } from "react-router-dom";
+
+interface IProps {
+  carBasicId: number;
+  carImageUrl: string;
+  brandName: string;
+  carModelName: string;
+  segment: string;
+  fuelType: string;
+  bodyType: string;
+  price: number;
+  seatCount: number;
+}
 
 const Wrapper = styled.div`
   position: relative;
@@ -49,7 +61,26 @@ const CarChip = styled.div`
   text-overflow: ellipsis;
 `;
 
-const CarCard: React.FC<any> = ({
+const SLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font: ${fonts.FONT_TINY_600};
+  color: ${colors.BLACK_1};
+  background-color: ${colors.PRIMARY_3};
+  padding: 5.5px 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const BuyButton: React.FC<{ path: string; title: string }> = ({ path, title }) => {
+  return <SLink to={path}>{title}</SLink>;
+};
+
+const CarCard: React.FC<IProps> = ({
+  carBasicId,
   carImageUrl,
   brandName,
   carModelName,
@@ -108,7 +139,7 @@ const CarCard: React.FC<any> = ({
             <CarChip>{`Seat ${seatCount}`}</CarChip>
           </div>
           {/* 가격 */}
-          <CarChip>{`$${price}`}</CarChip>
+          <BuyButton path={`/car/buy/${carBasicId}`} title={`Buy $${price}`}></BuyButton>
         </CarChipContainer>
       </Info>
     </Wrapper>

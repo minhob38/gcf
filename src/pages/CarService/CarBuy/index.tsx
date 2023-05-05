@@ -21,6 +21,7 @@ import CarSales from "@components/CarService/CarSales";
 import CarCard from "@components/CarService/CarCard";
 import CarRequestButton from "@components/CarService/CarRequestButton";
 import ApplicantCard from "@components/CarService/ApplicantCard";
+import { useParams } from "react-router";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -121,7 +122,9 @@ const RequestButtonContainer = styled.div`
 const SCROLL_BOTTOM_MARGIN = 150;
 
 const CarBuy = () => {
-  const carBasicId = 488;
+  const { carBasicId } = useParams();
+  console.log(carBasicId);
+
   const dispatch = useTypedDispatch();
   const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.carSaleErrorMessage,
@@ -139,7 +142,7 @@ const CarBuy = () => {
   const newQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.NEW);
   const usedQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
 
-  const query = useCarDetailQuery();
+  const query = useCarDetailQuery(parseInt(carBasicId || ""));
   const apiData = query.data;
 
   const newCacheApiData = useCarSalesQueryClient(ECAR_SEARCH_TYPE.NEW);
@@ -205,6 +208,7 @@ const CarBuy = () => {
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           {apiData && (
             <CarCard
+              carBasicId={apiData.carBasicId}
               carImageUrl={apiData.carImageUrl}
               brandName={apiData.brandName}
               carModelName={apiData.carModelName}

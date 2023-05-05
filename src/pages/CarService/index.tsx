@@ -38,17 +38,6 @@ const PriceContainer = styled.div`
   margin: 0 auto 0 auto;
 `;
 
-const PriceText = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 20px 0 0;
-  border-radius: 8px;
-  font: ${fonts.FONT_LARGE_400};
-  color: ${colors.BLACK_1};
-  text-align: center;
-`;
-
 const SearchButtonContainer = styled.div`
   display: flex;
   justify-content: center;

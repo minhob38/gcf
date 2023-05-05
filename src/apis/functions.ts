@@ -477,7 +477,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
     }[];
 
     if (!apiData) return [];
-    console.log(apiData);
+
     return apiData.map((data) => {
       let bodyType: string;
 

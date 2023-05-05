@@ -100,7 +100,7 @@ function App() {
               element={isAuthenticated ? <CarService /> : <Navigate replace to="/gcf" />}
             ></Route>
             <Route
-              path="/car/buy"
+              path="/car/buy/:carBasicId"
               element={isAuthenticated ? <CarBuy /> : <Navigate replace to="/" />}
             />
           </Routes>

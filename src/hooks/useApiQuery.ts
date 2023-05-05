@@ -171,8 +171,7 @@ export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
 /**
  * @description car 상세 조회 query 함수
  */
-export const useCarDetailQuery = () => {
-  const carBasicId = 488;
+export const useCarDetailQuery = (carBasicId: number) => {
   const query = useQuery([EQUERY_KEY.CAR_SALE, carBasicId], api.findCarDetailApi, {
     refetchOnWindowFocus: false,
     retry: 0,

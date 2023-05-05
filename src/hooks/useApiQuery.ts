@@ -174,6 +174,7 @@ export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
       case ECAR_SEARCH_TYPE.USED:
         return state.rootReducer.carReducer.usedMinimumPrice;
       default:
+        return state.rootReducer.carReducer.newMinimumPrice;
     }
   });
   const maximumPrice = useTypedSelector((state) => {
@@ -183,6 +184,7 @@ export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
       case ECAR_SEARCH_TYPE.USED:
         return state.rootReducer.carReducer.usedMaximumPrice;
       default:
+        return state.rootReducer.carReducer.newMinimumPrice;
     }
   });
 

@@ -53,6 +53,8 @@ const CarCard: React.FC<any> = ({
   carImageUrl,
   brandName,
   carModelName,
+  segment,
+  fuelType,
   bodyType,
   price,
   seatCount,
@@ -71,6 +73,23 @@ const CarCard: React.FC<any> = ({
         <CarName>{carModelName}</CarName>
         {/* <CarChip> */}
         <CarChipContainer>
+          {/* 세그먼트,연료 */}
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row nowrap;
+              margin: 0 0 5px 0;
+              /* width: fit-content; */
+            `}
+          >
+            <CarChip>{`Seg ${segment}`}</CarChip>
+            <div
+              css={css`
+                width: 5px;
+              `}
+            />
+            <CarChip>{fuelType}</CarChip>
+          </div>
           {/* 차종,인승 */}
           <div
             css={css`

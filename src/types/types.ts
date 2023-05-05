@@ -96,6 +96,8 @@ export interface ICarSale {
   carModelName: string;
   newAndUsed: ECAR_SEARCH_TYPE;
   generationName: string;
+  fuelType: string;
+  segment: string;
   bodyType: string;
   seatCount: number;
   price: number;

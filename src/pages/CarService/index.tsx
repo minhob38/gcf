@@ -122,12 +122,6 @@ const CarService = () => {
   const newApiData = newQuery.data || newCacheApiData || [];
   const usedApiData = usedQuery.data || usedCacheApiData || [];
 
-  console.log("new api data");
-  console.log(newApiData);
-
-  console.log("use api data");
-  console.log(usedApiData);
-
   const handleNewSearchButtonClick = () => {
     dispatch(carActions.changeSearchType(ECAR_SEARCH_TYPE.NEW));
   };

@@ -18,6 +18,8 @@ const CarSales: React.FC<{ cars: ICarSale[] }> = ({ cars }) => {
         carImageUrl={car.carImageUrl}
         brandName={car.brandName}
         carModelName={car.carModelName}
+        segment={car.segment}
+        fuelType={car.fuelType}
         bodyType={car.bodyType}
         price={car.price}
         seatCount={car.seatCount}

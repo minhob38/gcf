@@ -467,6 +467,8 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
       carModelName: string;
       newAndUsed: ECAR_SEARCH_TYPE;
       generationName: string;
+      fuelType: string;
+      segment: string;
       bodyType: string;
       seatCount: number;
       price: number;
@@ -476,7 +478,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
     }[];
 
     if (!apiData) return [];
-
+    console.log(apiData);
     return apiData.map((data) => {
       let bodyType: string;
 
@@ -499,6 +501,8 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
         carModelName: data.carModelName,
         newAndUsed: data.newAndUsed,
         generationName: data.generationName,
+        fuelType: data.fuelType,
+        segment: data.segment,
         bodyType,
         seatCount: data.seatCount,
         price: data.price,

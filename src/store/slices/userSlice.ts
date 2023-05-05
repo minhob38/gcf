@@ -50,8 +50,8 @@ const userSlice = createSlice({
     ) => {
       const { userId, email, fullName, phoneNumber } = action.payload;
       state.userId = userId;
-      state.name = email;
-      state.email = fullName;
+      state.name = fullName;
+      state.email = email;
       state.phoneNumber = phoneNumber;
     },
   },

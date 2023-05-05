@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 import * as size from "@constants/size";
 import * as colors from "@constants/colors";
 import * as fonts from "@constants/fonts";
-import { useTypedDispatch } from "@hooks/useStore";
+import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { actions as authActions } from "@store/slices/authSlice";
 import { actions as userActions } from "@store/slices/userSlice";
 import { Link } from "react-router-dom";
 
@@ -77,6 +76,7 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
 const Profile: React.FC = () => {
   const [isProfileClicked, setIsProfileClicked] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
+  const userName = useTypedSelector((state) => state.rootReducer.userReducer.name);
   const handleProfileClick = () => setIsProfileClicked(!isProfileClicked);
   const handleLogoutClick = () => dispatch(userActions.unAuthenticate());
 
@@ -84,7 +84,7 @@ const Profile: React.FC = () => {
     <Wrapper>
       <ProfileBox onClick={handleProfileClick}>
         <FontAwesomeIcon icon={faUser} fontSize={"24px"} />
-        <ProfileName>Minho</ProfileName>
+        <ProfileName>{userName}</ProfileName>
       </ProfileBox>
       {isProfileClicked && (
         <ProfileDropBox>

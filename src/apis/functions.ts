@@ -301,6 +301,10 @@ export const carBuyRequestApi = async (input: ICarRequest) => {
       throw new Error("enter car buy form");
     }
 
+    if (data.errorCode === "COMMON_ILLEGAL_STATUS") {
+      throw new Error("the car has already been purchased");
+    }
+
     throw new Error("car service error");
   }
 };
@@ -560,8 +564,8 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
       bodyType: string;
       seatCount: number;
       price: number;
-      carImagePath: string;
-      carImageFileName: string;
+      imagePath: string;
+      imageFileName: string;
       buyerUserId: number;
     }[];
 
@@ -594,7 +598,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
         bodyType,
         seatCount: data.seatCount,
         price: data.price,
-        carImageUrl: data.carImagePath + data.carImageFileName,
+        carImageUrl: (data.imagePath || "") + (data.imageFileName || ""),
         buyerUserId: data.buyerUserId, // ?
       };
     });
@@ -633,8 +637,8 @@ export const findCarDetailApi = async ({ queryKey }) => {
       bodyType: string;
       seatCount: number;
       price: number;
-      carImagePath: string;
-      carImageFileName: string;
+      imagePath: string;
+      imageFileName: string;
       buyerUserId: number;
     };
 
@@ -666,7 +670,7 @@ export const findCarDetailApi = async ({ queryKey }) => {
       bodyType,
       seatCount: apiData.seatCount,
       price: apiData.price,
-      carImageUrl: apiData.carImagePath + apiData.carImageFileName,
+      carImageUrl: (apiData.imagePath || "") + (apiData.imageFileName || ""),
       buyerUserId: apiData.buyerUserId, // ?
     };
   }

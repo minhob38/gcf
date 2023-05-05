@@ -130,8 +130,10 @@ const CarService = () => {
         }
 
         // 최소값이 최대값보다 클때
-        if (newMinimumPrice > newMaximumPrice) {
-          dispatch(errorActions.throwCarSaleError("Maximum price should be minimum price"));
+        if (parseInt(newMinimumPrice) > parseInt(newMaximumPrice)) {
+          dispatch(
+            errorActions.throwCarSaleError("Maximum price should be greater than minimum price"),
+          );
           return;
         }
 
@@ -148,8 +150,10 @@ const CarService = () => {
         }
 
         // 최소값이 최대값보다 클때
-        if (usedMinimumPrice > usedMaximumPrice) {
-          dispatch(errorActions.throwCarSaleError("Maximum price should be minimum price"));
+        if (parseInt(usedMinimumPrice) > parseInt(usedMaximumPrice)) {
+          dispatch(
+            errorActions.throwCarSaleError("Maximum price should be greater than minimum price"),
+          );
           return;
         }
 

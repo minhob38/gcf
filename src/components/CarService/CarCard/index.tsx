@@ -113,7 +113,7 @@ const CarCard: React.FC<IProps> = ({
               /* width: fit-content; */
             `}
           >
-            <CarChip>{`Seg ${segment}`}</CarChip>
+            <CarChip>{`${segment} Seg`}</CarChip>
             <div
               css={css`
                 width: 5px;

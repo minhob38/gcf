@@ -69,12 +69,14 @@ export const useLoginMutation = () => {
       const errorMessage = (error as Error).message;
       dispatch(errorActions.throwLoginError(errorMessage));
     },
-    onSuccess: async (data, variables, context) => {
+    onSuccess: (data, variables, context) => {
       // 로그인 성공 시, 로컬스토리지 로그인상태를 true로 변경
       dispatch(authActions.authenticate());
       if (process.env.NODE_ENV !== "production") return;
       // data에서 user id 가져오기
-      dispatch(userActions.login(1));
+      if (!data) return;
+      const { userId } = data;
+      dispatch(userActions.login(userId));
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

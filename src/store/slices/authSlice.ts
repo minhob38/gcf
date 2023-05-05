@@ -15,7 +15,7 @@ const initialState: IState = {
   email: null,
   password: null,
   rePassword: null,
-  isAuthenticated: localStorage.getItem("isAuthenticated") === "true" ? true : false,
+  isAuthenticated: process.env.NODE_ENV === "production" ? false : true,
 };
 
 const authSlice = createSlice({
@@ -36,15 +36,11 @@ const authSlice = createSlice({
 
     authenticate: (state) => {
       state.isAuthenticated = true;
-      // localstorage에 로그인 정보 저장
       // 나중에 401 error 받으면, 로그인 정보 지우기
-      localStorage.setItem("isAuthenticated", "true");
     },
     unAuthenticate: (state) => {
       state.isAuthenticated = false;
-      // localstorage에 로그인 정보 저장
       // 나중에 401 error 받으면, 로그인 정보 지우기
-      localStorage.setItem("isAuthenticated", "false");
     },
     textInput: (state, action: PayloadAction<React.ChangeEvent<HTMLInputElement>["target"]>) => {
       const { name, value } = action.payload;

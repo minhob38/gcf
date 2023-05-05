@@ -8,7 +8,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  userId: null,
+  userId: process.env.NODE_ENV === "production" ? null : 1,
   name: null,
   email: null,
   phoneNumber: null,
@@ -26,8 +26,6 @@ const userSlice = createSlice({
 
     login: (state, action: PayloadAction<number>) => {
       state.userId = action.payload;
-      console.log("stateee");
-      console.log(state.userId);
     },
   },
 });

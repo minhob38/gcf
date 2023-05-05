@@ -16,7 +16,6 @@ import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
 import { checkIsEmailFormat } from "@utils/common";
-import { useFindMeQuery } from "@hooks/useApiQuery";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -69,11 +68,9 @@ const Login: React.FC = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
-  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
 
   const dispatch = useTypedDispatch();
   const loginMutation = useLoginMutation();
-  const query = useFindMeQuery();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(authActions.textInput(ev.target));

@@ -39,9 +39,12 @@ export const loginApi = async (input: ILoginRequest) => {
   const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login`, body);
 
   const data = response.data;
+  const apiData = data.data;
   const status = response.status;
 
-  if (data.result === "SUCCESS") return;
+  if (data.result === "SUCCESS") {
+    return { userId: apiData.userId };
+  }
 
   if (data.result === "FAIL") {
     // 비밀번호 틀린 에러

@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-flow: column nowrap;
-  gap: 10px 0;
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -43,7 +42,7 @@ const PlainText = styled.div`
   color: ${colors.BLACK_1};
 `;
 
-const ApplicantCard: React.FC = () => {
+const BuyerCard: React.FC = () => {
   const query = useMyMoveBookingQuery();
   const apiData = query.data;
   // TODO PM 붙이기
@@ -66,4 +65,4 @@ const ApplicantCard: React.FC = () => {
   );
 };
 
-export default ApplicantCard;
+export default BuyerCard;

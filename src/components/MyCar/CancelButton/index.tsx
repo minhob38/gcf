@@ -21,7 +21,7 @@ const CancelButton: React.FC = () => {
   const dispatch = useTypedDispatch();
 
   const handleClick = async () => {
-    // dispatch(modalActions.showMyBookingCancelNotification(service));
+    dispatch(modalActions.showMyCarCancelNotification());
   };
 
   return <Wrapper onClick={handleClick}>Cancel</Wrapper>;

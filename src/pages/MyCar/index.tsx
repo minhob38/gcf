@@ -14,6 +14,7 @@ import MyCarCard from "@components/MyCar/MyCarCard";
 import { v4 as uuid4 } from "uuid";
 import EmptyCard from "@components/MyCar/EmptyCard";
 import CancelButton from "@components/MyCar/CancelButton";
+import MyCarCancelModal from "modals/MyCarCancelModal";
 
 const PADDING = "15px";
 
@@ -44,9 +45,9 @@ const CardContainer = styled.div`
 const SCROLL_BOTTOM_MARGIN = 20;
 
 const MyCar: React.FC = () => {
-  // const isMyBookingCancelNotification = useTypedSelector(
-  //   (state) => state.rootReducer.modalReducer.isMyBookingCancelNotification,
-  // );
+  const isMyCarCancelNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isMyCarCancelNotification,
+  );
   const query = useMyCarsQuery();
   const apiData = query.data || [];
 
@@ -71,11 +72,9 @@ const MyCar: React.FC = () => {
     );
   });
 
-  console.log(MyCarCards.length);
-
   return (
     <>
-      {/* {isMyBookingCancelNotification && <MyBookingCancelModal />} */}
+      {isMyCarCancelNotification && <MyCarCancelModal />}
       <Header title="My car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>

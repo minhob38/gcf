@@ -3,19 +3,9 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import {
-  useCarBuyRequestMutation,
-  useMoveMutation,
-  usePickUpMutation,
-  useTelcomMutation,
-} from "@hooks/useApiMutation";
-import { ESERVICE_TYPE } from "types/enum";
-import { shallowEqual } from "react-redux";
-import * as variables from "@constants/variables";
+import { useCarBuyRequestMutation } from "@hooks/useApiMutation";
 import { actions as errorActions } from "@store/slices/errorSlice";
-import * as margins from "@constants/margins";
 import { useParams } from "react-router-dom";
-import { useCarDetailQuery } from "@hooks/useApiQuery";
 
 const Wrapper = styled.div`
   display: flex;

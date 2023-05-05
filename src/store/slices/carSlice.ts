@@ -8,6 +8,7 @@ interface IState {
   newMaximumPrice: string;
   usedMinimumPrice: string;
   usedMaximumPrice: string;
+  selectedCarBasicId: number | null;
 }
 
 const initialState: IState = {
@@ -16,6 +17,7 @@ const initialState: IState = {
   newMaximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
   usedMinimumPrice: variables.SELECT_MIN_PRICE_DEFAULT_TEXT,
   usedMaximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
+  selectedCarBasicId: null,
 };
 
 const carSlice = createSlice({
@@ -35,6 +37,9 @@ const carSlice = createSlice({
 
     changeSearchType: (state, action: PayloadAction<ECAR_SEARCH_TYPE>) => {
       state.carSearchType = action.payload;
+    },
+    clickCar: (state, action: PayloadAction<number>) => {
+      state.selectedCarBasicId = action.payload;
     },
   },
 });

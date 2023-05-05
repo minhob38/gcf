@@ -4,8 +4,9 @@ import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import Image from "@components/common/Image";
-import { ECAR_SEARCH_TYPE } from "types/enum";
+import { actions as carActions } from "@store/slices/carSlice";
 import CancelButton from "../CancelButton";
+import { useTypedDispatch } from "@hooks/useStore";
 
 interface IProps {
   carBasicId: number;
@@ -101,6 +102,11 @@ const MyCarCard: React.FC<IProps> = ({
   saleStatus,
   newAndUsed,
 }) => {
+  const dispatch = useTypedDispatch();
+  const handleCancelClick = () => {
+    dispatch(carActions.clickCar(carBasicId));
+  };
+
   return (
     <Wrapper>
       <ImageContainer>
@@ -141,7 +147,7 @@ const MyCarCard: React.FC<IProps> = ({
       <StateBox>
         {saleStatus}
         {saleStatus !== "Canceled" && (
-          <CancelButtonContainer>
+          <CancelButtonContainer onClick={handleCancelClick}>
             <CancelButton>Cancel</CancelButton>
           </CancelButtonContainer>
         )}

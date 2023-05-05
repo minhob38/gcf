@@ -53,7 +53,7 @@ const MyCar: React.FC = () => {
 
   const MyCarCards = apiData.map((apiData) => {
     return (
-      <CardContainer>
+      <CardContainer key={uuid4()}>
         <MyCarCard
           key={uuid4()}
           carToSaleId={apiData.carToSaleId}

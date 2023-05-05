@@ -23,6 +23,10 @@ interface IProps {
   newAndUsed: string;
 }
 
+interface IStyleProps {
+  isCanceled: boolean;
+}
+
 const PADDING = "15px";
 
 const Wrapper = styled.div`
@@ -66,7 +70,8 @@ const StateBox = styled.div`
   margin: 10px auto 0 auto;
   height: 40px;
   border-radius: 8px;
-  background-color: ${colors.PRIMARY_1};
+  background: ${(props: IStyleProps) =>
+    props.isCanceled ? `${colors.ERROR_RED}` : `${colors.PRIMARY_1}`};
   font: ${fonts.FONT_MEDIUM_600};
   color: ${colors.WHITE_1};
 `;
@@ -146,7 +151,7 @@ const MyCarCard: React.FC<IProps> = ({
         <BulletText>Price</BulletText>
         <PlainText>{`$ ${price}`}</PlainText>
       </TextContainer>
-      <StateBox>
+      <StateBox isCanceled={saleStatus === "Canceled"}>
         {saleStatus}
         {saleStatus !== "Canceled" && (
           <CancelButtonContainer onClick={handleCancelClick}>

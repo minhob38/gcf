@@ -10,13 +10,11 @@ import { actions as errorActions } from "@store/slices/errorSlice";
 import { useLoginMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
-import { Link } from "react-router-dom";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
-import { checkIsEmailFormat } from "@utils/common";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -45,24 +43,8 @@ const SignButtonContainer = styled.div`
   margin: 15px auto 15px auto;
 `;
 
-const SLink = styled(Link)`
-  all: unset;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.FONT_MEDIUM_600};
-  color: ${colors.BLACK_1};
-  text-decoration: underline;
-`;
-
-const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) => {
-  return <SLink to={path}>{title}</SLink>;
-};
-
 const MyPage: React.FC = () => {
-  const signUpPath = "/sign-up";
-
+  const [isEdit, setIsEdit] = useState(false);
   const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.loginErrorMessage,
   );
@@ -94,21 +76,12 @@ const MyPage: React.FC = () => {
     dispatch(authActions.textInput(ev.target));
   };
 
-  const handleLoginButtonClick = async () => {
-    // // 입력정보가 없으면 에러
-    // if (!email || !password) {
-    //   dispatch(errorActions.throwLoginError("Enter email and password"));
-    //   return;
-    // }
-    // // email 형식 체크
-    // const isEmailFormat = checkIsEmailFormat(email);
-    // if (!isEmailFormat) {
-    //   dispatch(errorActions.throwLoginError("Invalid email format"));
-    //   return;
-    // }
-    // await loginMutation.mutateAsync({ email, password });
-    // 로그인 뒤, 나의정보 조회
-    // query.refetch();
+  const handleButtonClick = async () => {
+    if (isEdit) {
+      // api 요청
+    }
+
+    setIsEdit(!isEdit);
   };
 
   const handleFocus = () => dispatch(errorActions.catchLoginError());
@@ -116,7 +89,7 @@ const MyPage: React.FC = () => {
   return (
     <>
       {isLoading && <LoadingModal />}
-      <Header title="Welcome" mode="back"></Header>
+      <Header title="My page" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />
         <InputBox onFocus={handleFocus}>
@@ -138,6 +111,7 @@ const MyPage: React.FC = () => {
             type="text"
             name="name"
             onChange={handleTextInputChange}
+            disabled={isEdit ? false : true}
           />
         </InputBox>
         <InputBox onFocus={handleFocus}>
@@ -148,13 +122,13 @@ const MyPage: React.FC = () => {
             type="text"
             name="phoneNumber"
             onChange={handleTextInputChange}
+            disabled={isEdit ? false : true}
           />
         </InputBox>
         <ErrorText text={errorMessage} />
         <SignButtonContainer>
-          <SignButton onClick={handleLoginButtonClick} label="Login" />
+          <SignButton onClick={handleButtonClick} label={isEdit ? "Save" : "Edit"} />
         </SignButtonContainer>
-        <LinkButton path={signUpPath} title="create an account ?" />
       </Content>
     </>
   );

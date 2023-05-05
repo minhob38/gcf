@@ -16,6 +16,7 @@ import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
 import CarBuy from "pages/CarService/CarBuy";
+import MyCar from "pages/MyCar";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -53,10 +54,14 @@ function App() {
               element={!isAuthenticated ? <Login /> : <Navigate replace to="/" />}
             />
             <Route path="/sign-up" element={<SignUp />} />
-            {/* pickup service */}
+            {/* my car and booking */}
             <Route
               path="/my-booking"
               element={isAuthenticated ? <MyBooking /> : <Navigate replace to="/" />}
+            />
+            <Route
+              path="/my-car"
+              element={isAuthenticated ? <MyCar /> : <Navigate replace to="/" />}
             />
             {/* pickup service */}
             <Route

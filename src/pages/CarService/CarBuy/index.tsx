@@ -6,18 +6,14 @@ import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
 import { useCarDetailQuery } from "@hooks/useApiQuery";
-import * as variables from "@constants/variables";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
-import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
-import { actions as errorActions } from "@store/slices/errorSlice";
-import { actions as carActions } from "@store/slices/carSlice";
+import { useTypedSelector } from "@hooks/useStore";
 import CarRequestButton from "@components/CarService/CarRequestButton";
 import BuyerCard from "@components/CarService/BuyerCard";
 import { useParams } from "react-router";
 import CardDetailCard from "@components/CarService/CarDetatilCard";
 import CarNotificationModal from "modals/CarNotificationModal";
-import { useCarBuyRequestMutation } from "@hooks/useApiMutation";
 
 const Subtitle = styled.div`
   display: flex;

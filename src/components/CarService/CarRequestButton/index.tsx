@@ -59,9 +59,10 @@ const CarRequestButton: React.FC = () => {
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
 
   const mutation = useCarBuyRequestMutation();
+
   const handleClick = () => {
     if (!userId || !carBasicId) {
-      dispatch(errorActions.throwCarSaleError("Enter departure and arrival"));
+      dispatch(errorActions.throwCarSaleError("No user id and car basic id"));
       return;
     }
     mutation.mutate({ userId, carBasicId: parseInt(carBasicId) });

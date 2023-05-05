@@ -4,4 +4,5 @@ export enum EQUERY_KEY {
   TELCOM = "my-telcom",
   MOVE = "my-move",
   CAR_SALE = "car-sale",
+  MY_CAR = "my-car",
 }

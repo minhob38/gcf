@@ -207,11 +207,28 @@ export const useCarDetailQuery = (carBasicId: number) => {
  * @description car 상세 조회 query client 함수
  */
 export const useCarDetailQueryClient = () => {
-  // const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  // const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   // const queryClient = useQueryClient();
   // const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findCarDetailApi>>>([
   //   EQUERY_KEY.MOVE,
   //   userId,
   // ]);
   // return apiData;
+};
+
+/**
+ * @description 구매신청한 car들 조회 query 함수
+ */
+export const useMyCarsQuery = () => {
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
+  const query = useQuery([EQUERY_KEY.MY_CAR, userId], api.findMyCarsApi, {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    suspense: true,
+    onError: (error) => {},
+    onSuccess: (data) => {},
+    onSettled: () => {},
+  });
+
+  return query;
 };

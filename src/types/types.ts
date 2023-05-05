@@ -109,3 +109,21 @@ export interface ICarSale {
   carImageUrl: string;
   buyerUserId: number;
 }
+
+export interface IMyCar {
+  carBasicId: number;
+  brandCode: string;
+  brandName: string;
+  carModelCode: string;
+  carModelName: string;
+  newAndUsed: string;
+  generationName: string;
+  fuelType: string;
+  segment: string;
+  bodyType: string;
+  seatCount: number;
+  price: number;
+  carImageUrl: string;
+  buyerUserId: number;
+  saleStatus: string;
+}

@@ -92,6 +92,9 @@ const Profile: React.FC = () => {
             <LinkButton path="my-booking" title="My Booking" />
           </ProfileDropBoxItemContainer>
           <ProfileDropBoxItemContainer>
+            <LinkButton path="my-car" title="My Car" />
+          </ProfileDropBoxItemContainer>
+          <ProfileDropBoxItemContainer>
             <Logout onClick={handleLogoutClick}>Logout</Logout>
           </ProfileDropBoxItemContainer>
         </ProfileDropBox>

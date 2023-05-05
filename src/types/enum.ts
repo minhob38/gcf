@@ -48,3 +48,10 @@ export enum EPRICE_TYPE {
   MIN = "min",
   MAX = "max",
 }
+
+export enum ESALE_STATUS {
+  APPLIED = "APPLIED",
+  PREPARED = "PREPARED",
+  WITHDRAWAL = "WITHDRAWAL",
+  DELIVERY_COMPLETE = "DELIVERY_COMPLETE",
+}

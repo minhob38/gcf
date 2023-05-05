@@ -1,7 +1,6 @@
 import axios, { API_SERVER_ADDRESS } from "@configs/axios-config";
 import { convertEnglishToNumberMonth, convertTelcomServiceInputToApiRequest } from "@utils/common";
-import { QueryFunctionContext, QueryKey } from "react-query";
-import { ECAR_SEARCH_TYPE } from "types/enum";
+import { ECAR_SEARCH_TYPE, ESALE_STATUS } from "types/enum";
 import {
   IPickupRequest,
   ILoginRequest,
@@ -14,6 +13,7 @@ import {
   ITelcomCancel,
   ICarSale,
   ICarRequest,
+  IMyCar,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -650,4 +650,109 @@ export const findCarDetailApi = async ({ queryKey }) => {
   if (data.result === "FAIL") {
     throw new Error("find car detail  error");
   }
+};
+
+/**
+ * @description 구매신청한 car들 조회 api
+ */
+export const findMyCarsApi = async ({ queryKey }): Promise<IMyCar[]> => {
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/car-sales/users/${userId}`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      carBasicId: number;
+      brandCode: string;
+      brandName: string;
+      carModelCode: string;
+      carModelName: string;
+      newAndUsed: ECAR_SEARCH_TYPE;
+      generationName: string;
+      fuelType: string;
+      segment: string;
+      bodyType: string;
+      seatCount: number;
+      price: number;
+      imagePath: string;
+      imageFileName: string;
+      buyerUserId: number;
+      saleStatus: ESALE_STATUS;
+    }[];
+
+    if (!apiData) return [];
+
+    return apiData.map((data) => {
+      let bodyType: string;
+      let saleStatus: string;
+      let newAndUsed: string;
+
+      switch (data.bodyType) {
+        case "SEDAN":
+          bodyType = "Sedan";
+          break;
+        case "HATCHBACK":
+          bodyType = "Hatch";
+          break;
+        default:
+          bodyType = data.bodyType;
+      }
+
+      switch (data.saleStatus) {
+        case ESALE_STATUS.APPLIED:
+          saleStatus = "Applied";
+          break;
+        case ESALE_STATUS.PREPARED:
+          saleStatus = "Prepared";
+          break;
+        case ESALE_STATUS.DELIVERY_COMPLETE:
+          saleStatus = "Completed";
+          break;
+        case ESALE_STATUS.WITHDRAWAL:
+          saleStatus = "Canceled";
+          break;
+        default:
+          saleStatus = data.saleStatus;
+      }
+
+      switch (data.newAndUsed) {
+        case ECAR_SEARCH_TYPE.NEW:
+          newAndUsed = "new car";
+          break;
+        case ECAR_SEARCH_TYPE.USED:
+          newAndUsed = "used card";
+          break;
+        default:
+          newAndUsed = data.newAndUsed;
+      }
+
+      return {
+        carBasicId: data.carBasicId,
+        brandCode: data.brandCode,
+        brandName: data.brandName,
+        carModelCode: data.carModelCode,
+        carModelName: data.carModelName,
+        newAndUsed,
+        generationName: data.generationName,
+        fuelType: data.fuelType,
+        segment: data.segment,
+        bodyType,
+        seatCount: data.seatCount,
+        price: data.price,
+        carImageUrl: data.imagePath + data.imageFileName,
+        buyerUserId: data.buyerUserId,
+        saleStatus,
+      };
+    });
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find my cars error");
+  }
+
+  return [];
 };

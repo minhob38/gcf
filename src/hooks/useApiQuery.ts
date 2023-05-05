@@ -9,12 +9,12 @@ import { ECAR_SEARCH_TYPE } from "types/enum";
  */
 export const useFindMeQuery = () => {
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
-  console.log("user id", userId);
+
   const query = useQuery([EQUERY_KEY.MY_INFO, userId], api.findMeApi, {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,
-    enabled: false,
+    // enabled: false,
     onError: (error) => {},
     onSuccess: (data) => {
       console.log("data");

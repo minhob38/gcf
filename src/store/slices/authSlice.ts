@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
-  // checkStatus: "sign-up" | "sign-in";
   name: string | null;
   email: string | null;
   password: string | null;
@@ -10,7 +9,6 @@ interface IState {
 }
 
 const initialState: IState = {
-  // checkStatus: "sign-up",
   name: null,
   email: null,
   password: null,
@@ -27,13 +25,6 @@ const authSlice = createSlice({
         state[key] = initialState[key];
       }
     },
-    // checkSignUp: (state) => {
-    //   state.checkStatus = "sign-up";
-    // },
-    // checkSignIn: (state) => {
-    //   state.checkStatus = "sign-in";
-    // },
-
     authenticate: (state) => {
       state.isAuthenticated = true;
       // 나중에 401 error 받으면, 로그인 정보 지우기

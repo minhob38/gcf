@@ -8,8 +8,8 @@ interface IState {
 }
 
 const initialState: IState = {
-  userId: process.env.NODE_ENV === "production" ? null : 1,
-  name: null,
+  userId: 1, //process.env.NODE_ENV === "production" ? null : 1,
+  name: "SADSAD",
   email: null,
   phoneNumber: null,
 };
@@ -25,7 +25,8 @@ const userSlice = createSlice({
     },
 
     login: (state, action: PayloadAction<number>) => {
-      state.userId = action.payload;
+      console.log("login");
+      // state.userId = action.payload;
     },
   },
 });

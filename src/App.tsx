@@ -11,11 +11,12 @@ import PickupService from "pages/PickupService";
 import TelcomService from "pages/TelcomService";
 import MoveService from "pages/MoveSerivce";
 import MyBooking from "pages/MyBooking";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
 import CarBuy from "pages/CarService/CarBuy";
+import { useFindMeQuery } from "@hooks/useApiQuery";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -33,7 +34,8 @@ function App() {
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.authReducer.isAuthenticated,
   );
-  // const isAuthenticated = false;
+
+  // TODO: 여기에 쿠키 확인해서, 로그인 체크하는 로직 넣기
 
   return (
     <MobileWrapper>

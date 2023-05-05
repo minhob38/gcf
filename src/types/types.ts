@@ -75,6 +75,11 @@ export interface IMoveRequest {
 // month: "Jun";
 // year: "2024";
 
+export interface ICarRequest {
+  userId: number;
+  carBasicId: number;
+}
+
 export interface IPickupCancel {
   pickUpId: number;
 }

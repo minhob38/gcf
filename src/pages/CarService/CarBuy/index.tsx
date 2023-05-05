@@ -16,6 +16,8 @@ import CarRequestButton from "@components/CarService/CarRequestButton";
 import BuyerCard from "@components/CarService/BuyerCard";
 import { useParams } from "react-router";
 import CardDetailCard from "@components/CarService/CarDetatilCard";
+import CarNotificationModal from "modals/CarNotificationModal";
+import { useCarBuyRequestMutation } from "@hooks/useApiMutation";
 
 const Subtitle = styled.div`
   display: flex;
@@ -74,16 +76,17 @@ const SCROLL_BOTTOM_MARGIN = 10;
 
 const CarBuy = () => {
   const { carBasicId } = useParams();
-  const dispatch = useTypedDispatch();
-  const errorMessage = useTypedSelector(
-    (state) => state.rootReducer.errorReducer.carSaleErrorMessage,
+  const isCarNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isCarNotification,
   );
-
   const query = useCarDetailQuery(parseInt(carBasicId || ""));
   const apiData = query.data;
 
   return (
     <>
+      {isCarNotification && (
+        <CarNotificationModal notification="Request success" buttonText="Go to home" path="/" />
+      )}
       <Header title="Car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>

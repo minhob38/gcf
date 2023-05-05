@@ -7,6 +7,7 @@ interface IState {
   isSignUpNotification: boolean;
   isPickupTelcomMoveNotification: boolean;
   isMyBookingCancelNotification: boolean;
+  isCarNotification: boolean;
   myBookingCancelCurrentService: ESERVICE_TYPE | null;
 }
 
@@ -16,6 +17,7 @@ const initialState: IState = {
   isSignUpNotification: false,
   isPickupTelcomMoveNotification: false,
   isMyBookingCancelNotification: false,
+  isCarNotification: false,
   myBookingCancelCurrentService: null,
 };
 
@@ -64,6 +66,13 @@ const modalSlice = createSlice({
     hideMyBookingCancelNotification: (state) => {
       state.isMyBookingCancelNotification = false;
       state.myBookingCancelCurrentService = null;
+    },
+    // car 성공 알림 모달
+    showCarNotification: (state) => {
+      state.isCarNotification = true;
+    },
+    hideCarNotification: (state) => {
+      state.isCarNotification = false;
     },
   },
 });

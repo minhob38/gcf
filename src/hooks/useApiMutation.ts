@@ -175,6 +175,30 @@ export const useMoveMutation = () => {
 };
 
 /**
+ * @description car buy 요청 mutation 함수
+ */
+export const useCarBuyRequestMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.carBuyRequestApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwCarSaleError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showCarNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
  * @description pickup cancel mutation 함수
  */
 export const usePickupCancelMutation = () => {

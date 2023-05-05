@@ -47,8 +47,6 @@ const BuyerCard: React.FC = () => {
   const name = useTypedSelector((state) => state.rootReducer.userReducer.name);
   const phoneNumber = useTypedSelector((state) => state.rootReducer.userReducer.phoneNumber);
 
-  // TODO PM 붙이기
-
   return (
     <Wrapper>
       <TextContainer>

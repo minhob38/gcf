@@ -13,6 +13,7 @@ import {
   IPickupCancel,
   ITelcomCancel,
   ICarSale,
+  ICarRequest,
 } from "types/types";
 
 export const testGetApi = async () => {
@@ -272,6 +273,33 @@ export const moveRequestApi = async (input: IMoveRequest) => {
     }
 
     throw new Error("move error");
+  }
+};
+
+/**
+ * @description car 서비스 요청 api
+ */
+export const carBuyRequestApi = async (input: ICarRequest) => {
+  const { userId, carBasicId } = input;
+  const body: { userId: number; carBasicId: number } = { userId, carBasicId };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/car-sales/apply`,
+    body,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    // 입력데이터가 없을때
+    if (data.errorCode === "COMMON_SYSTEM_ERROR") {
+      throw new Error("enter car buy form");
+    }
+
+    throw new Error("car service error");
   }
 };
 

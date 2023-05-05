@@ -61,6 +61,8 @@ const PickupTelcomMoveRequestButton: React.FC<IProps> = ({ service }) => {
   const moveMutation = useMoveMutation();
 
   const handleClick = () => {
+    if (!userId) return null;
+
     switch (service) {
       case ESERVICE_TYPE.PICKUP:
         if (

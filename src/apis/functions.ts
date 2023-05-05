@@ -75,7 +75,10 @@ export const signUpApi = async (input: ISignUpRequest) => {
     reEnterPassword: rePassword,
   };
 
-  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/v1/user-register`, body);
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/user-register`,
+    body,
+  );
 
   const data = response.data;
   const status = response.status;
@@ -97,6 +100,39 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
     throw new Error("sign up error");
     // 비밀번호/재비밀번호 다른경우 에러
+  }
+};
+
+/**
+ * @description 나의 정보 조회 api
+ */
+export const findMeApi = async ({ queryKey }) => {
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      email: string;
+      fullName: string;
+      phoneNumber: string;
+    };
+
+    if (!apiData) return null;
+    console.log(apiData);
+    return {
+      email: apiData.email,
+      fullName: apiData.fullName,
+      phoneNumber: apiData.phoneNumber,
+    };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find my information  error");
   }
 };
 
@@ -584,38 +620,5 @@ export const findCarDetailApi = async ({ queryKey }) => {
 
   if (data.result === "FAIL") {
     throw new Error("find car detail  error");
-  }
-};
-
-/**
- * @description 나의 정보 조회 api
- */
-export const findMeApi = async ({ queryKey }) => {
-  const [key, userId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
-  );
-
-  const data = response.data;
-  const status = response.status;
-
-  if (data.result === "SUCCESS") {
-    const apiData = data.data as unknown as {
-      email: string;
-      fullName: string;
-      phoneNumber: string;
-    };
-
-    if (!apiData) return null;
-
-    return {
-      email: apiData.email,
-      fullName: apiData.fullName,
-      phoneNumber: apiData.phoneNumber,
-    };
-  }
-
-  if (data.result === "FAIL") {
-    throw new Error("find my information  error");
   }
 };

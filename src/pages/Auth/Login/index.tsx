@@ -16,6 +16,7 @@ import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
 import { checkIsEmailFormat } from "@utils/common";
+import { useFindMeQuery } from "@hooks/useApiQuery";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -68,16 +69,17 @@ const Login: React.FC = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
 
   const dispatch = useTypedDispatch();
   const loginMutation = useLoginMutation();
-  // 나의정보조회 mutate
+  const query = useFindMeQuery();
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(authActions.textInput(ev.target));
   };
 
-  const handleLoginButtonClick = () => {
+  const handleLoginButtonClick = async () => {
     // 입력정보가 없으면 에러
     if (!email || !password) {
       dispatch(errorActions.throwLoginError("Enter email and password"));
@@ -91,7 +93,9 @@ const Login: React.FC = () => {
       return;
     }
 
-    loginMutation.mutateAsync({ email, password });
+    await loginMutation.mutateAsync({ email, password });
+    // 로그인 뒤, 나의정보 조회
+    // query.refetch();
   };
 
   const handleFocus = () => dispatch(errorActions.catchLoginError());

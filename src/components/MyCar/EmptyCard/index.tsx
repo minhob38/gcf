@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const EmptyCard: React.FC = () => {
-  return <Wrapper>No Booking</Wrapper>;
+  return <Wrapper>No Car</Wrapper>;
 };
 
 export default EmptyCard;

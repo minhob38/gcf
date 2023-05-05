@@ -10,8 +10,9 @@ import Scroll from "@components/common/Scroll";
 import { useMyCarsQuery } from "@hooks/useApiQuery";
 import MyBookingCancelModal from "modals/MyBookingCancelModal";
 import { useTypedSelector } from "@hooks/useStore";
-import MyCarCard from "@components/MyCar";
+import MyCarCard from "@components/MyCar/MyCarCard";
 import { v4 as uuid4 } from "uuid";
+import EmptyCard from "@components/MyCar/EmptyCard";
 
 const SubTitle = styled.div`
   display: flex;
@@ -36,14 +37,16 @@ const CardContainer = styled.div`
   gap: 20px;
 `;
 
+const SCROLL_BOTTOM_MARGIN = 20;
+
 const MyCar: React.FC = () => {
-  const isMyBookingCancelNotification = useTypedSelector(
-    (state) => state.rootReducer.modalReducer.isMyBookingCancelNotification,
-  );
+  // const isMyBookingCancelNotification = useTypedSelector(
+  //   (state) => state.rootReducer.modalReducer.isMyBookingCancelNotification,
+  // );
   const query = useMyCarsQuery();
   const apiData = query.data || [];
 
-  const MyCards = apiData.map((apiData) => {
+  const MyCarCards = apiData.map((apiData) => {
     return (
       <CardContainer>
         <MyCarCard
@@ -64,28 +67,17 @@ const MyCar: React.FC = () => {
     );
   });
 
+  console.log(MyCarCards.length);
+
   return (
     <>
-      {isMyBookingCancelNotification && <MyBookingCancelModal />}
+      {/* {isMyBookingCancelNotification && <MyBookingCancelModal />} */}
       <Header title="My car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Scroll direction="y" height={`calc(100%)`}>
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <Margin />
-          <SubTitle>Delivered Car</SubTitle>
-          <CardContainer>{MyCards}</CardContainer>
-          <SubTitle>On-process Car</SubTitle>
-          <CardContainer>{MyCards}</CardContainer>
-          <SubTitle>Canceled Car</SubTitle>
-          <CardContainer>{MyCards}</CardContainer>
-          {/* <BookingCardContainer>
-            {pickupApiData ? <PickupCard /> : <EmptyCard />}
-          </BookingCardContainer> */}
-          {/* <SubTitle>Telecommunication</SubTitle>
-          <BookingCardContainer>
-            {telcomApiData ? <TelcomCard /> : <EmptyCard />}
-          </BookingCardContainer>
-          <SubTitle>Move</SubTitle>
-          <BookingCardContainer>{moveApiData ? <MoveCard /> : <EmptyCard />}</BookingCardContainer> */}
+          <SubTitle>My Car</SubTitle>
+          {MyCarCards.length ? <CardContainer>{MyCarCards}</CardContainer> : <EmptyCard />}
         </Scroll>
       </Content>
     </>

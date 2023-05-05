@@ -721,10 +721,10 @@ export const findMyCarsApi = async ({ queryKey }): Promise<IMyCar[]> => {
 
       switch (data.newAndUsed) {
         case ECAR_SEARCH_TYPE.NEW:
-          newAndUsed = "new car";
+          newAndUsed = "New car";
           break;
         case ECAR_SEARCH_TYPE.USED:
-          newAndUsed = "used card";
+          newAndUsed = "Used car";
           break;
         default:
           newAndUsed = data.newAndUsed;

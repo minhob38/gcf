@@ -5,7 +5,6 @@ import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as authActions } from "@store/slices/authSlice";
 import { actions as userActions } from "@store/slices/userSlice";
-import { useFindMeQuery } from "./useApiQuery";
 
 export const useApiMutation = <T>(api: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation<unknown, unknown, T, void>(
@@ -73,11 +72,8 @@ export const useLoginMutation = () => {
     onSuccess: async (data, variables, context) => {
       // 로그인 성공 시, 로컬스토리지 로그인상태를 true로 변경
       dispatch(authActions.authenticate());
-      // 로그인 성공 시, 로컬에서는 userId를 1로설정
-      if (process.env.NODE_ENV === "production") {
-        // data에서 user id 가져오기
-        return;
-      }
+      if (process.env.NODE_ENV !== "production") return;
+      // data에서 user id 가져오기
       dispatch(userActions.login(1));
     },
     onSettled: () => {

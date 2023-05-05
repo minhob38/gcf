@@ -15,6 +15,7 @@ import { actions as pickupActions } from "@store/slices/pickupSlice";
 import { actions as telcomActions } from "@store/slices/telcomSlice";
 import { actions as moveActions } from "@store/slices/moveSlice";
 import { actions as authActions } from "@store/slices/authSlice";
+import { actions as carActions } from "@store/slices/carSlice";
 
 const ServiceContainer = styled.div`
   display: flex;
@@ -42,7 +43,8 @@ const Landing: React.FC = () => {
 
   //초기화 코드
   useEffect(() => {
-    // dispatch(authActions.initialize()); 인증정보는 초기화하면 안됨
+    dispatch(authActions.initialize());
+    dispatch(carActions.initialize());
     dispatch(pickupActions.initialize());
     dispatch(telcomActions.initialize());
     dispatch(moveActions.initialize());

@@ -37,7 +37,8 @@ const rootReducer = combineReducers({
   errorReducer,
 });
 
-const persistConfig = { key: "root", version: 1, storage };
+// redux persist 설정
+const persistConfig = { key: "root", version: 1, storage, blacklist: ["authReducer"] };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

@@ -3,7 +3,6 @@ import * as api from "@apis/functions";
 import { useTypedDispatch, useTypedSelector } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
-import { actions as authActions } from "@store/slices/authSlice";
 import { actions as userActions } from "@store/slices/userSlice";
 
 export const useApiMutation = <T>(api: any) => {

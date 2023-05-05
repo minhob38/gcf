@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import * as fonts from "@constants/fonts";
 import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
-import { useMyMoveBookingQuery, useMyTelcomBookingQuery } from "@hooks/useApiQuery";
+import { useTypedSelector } from "@hooks/useStore";
 
 const PADDING = "15px";
 
@@ -43,23 +43,25 @@ const PlainText = styled.div`
 `;
 
 const BuyerCard: React.FC = () => {
-  const query = useMyMoveBookingQuery();
-  const apiData = query.data;
+  const email = useTypedSelector((state) => state.rootReducer.userReducer.email);
+  const name = useTypedSelector((state) => state.rootReducer.userReducer.name);
+  const phoneNumber = useTypedSelector((state) => state.rootReducer.userReducer.phoneNumber);
+
   // TODO PM 붙이기
 
   return (
     <Wrapper>
       <TextContainer>
         <BulletText>Name</BulletText>
-        <PlainText>minho</PlainText>
+        <PlainText>{name}</PlainText>
       </TextContainer>
       <TextContainer>
         <BulletText>Email</BulletText>
-        <PlainText>minho@gcf.com</PlainText>
+        <PlainText>{email}</PlainText>
       </TextContainer>
       <TextContainer>
         <BulletText>Mobile</BulletText>
-        <PlainText>01011112222</PlainText>
+        <PlainText>{phoneNumber}</PlainText>
       </TextContainer>
     </Wrapper>
   );

@@ -71,6 +71,7 @@ const Login: React.FC = () => {
 
   const dispatch = useTypedDispatch();
   const loginMutation = useLoginMutation();
+  // 나의정보조회 mutate
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(authActions.textInput(ev.target));
@@ -90,7 +91,7 @@ const Login: React.FC = () => {
       return;
     }
 
-    loginMutation.mutate({ email, password });
+    loginMutation.mutateAsync({ email, password });
   };
 
   const handleFocus = () => dispatch(errorActions.catchLoginError());

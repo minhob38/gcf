@@ -8,7 +8,7 @@ import { ECAR_SEARCH_TYPE } from "types/enum";
  * @description my pickup 조회 query 함수
  */
 export const useMyPickupBookingQuery = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.PICKUP, userId], api.findMyPickupApi, {
     refetchOnWindowFocus: false,
     retry: 0,
@@ -25,7 +25,7 @@ export const useMyPickupBookingQuery = () => {
  * @description my pickup 조회 query client 함수
  */
 export const useMyPickupBookingQueryClient = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const queryClient = useQueryClient();
   const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyPickupApi>>>([
     EQUERY_KEY.PICKUP,
@@ -38,7 +38,7 @@ export const useMyPickupBookingQueryClient = () => {
  * @description my telcom 조회 query 함수
  */
 export const useMyTelcomBookingQuery = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.TELCOM, userId], api.findMyTelcomApi, {
     refetchOnWindowFocus: false,
     retry: 0,
@@ -55,7 +55,7 @@ export const useMyTelcomBookingQuery = () => {
  * @description my telcom 조회 query client 함수
  */
 export const useMyTelcomBookingQueryClient = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const queryClient = useQueryClient();
   const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyTelcomApi>>>([
     EQUERY_KEY.TELCOM,
@@ -68,7 +68,7 @@ export const useMyTelcomBookingQueryClient = () => {
  * @description my move 조회 query 함수
  */
 export const useMyMoveBookingQuery = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.MOVE, userId], api.findMyMoveApi, {
     refetchOnWindowFocus: false,
     retry: 0,
@@ -85,7 +85,7 @@ export const useMyMoveBookingQuery = () => {
  * @description my move 조회 query client 함수
  */
 export const useMyMoveQueryClient = () => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const queryClient = useQueryClient();
   const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyMoveApi>>>([
     EQUERY_KEY.MOVE,

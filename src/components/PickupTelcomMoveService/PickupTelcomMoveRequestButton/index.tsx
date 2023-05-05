@@ -48,7 +48,7 @@ const ErrorText = styled.div`
 `;
 
 const PickupTelcomMoveRequestButton: React.FC<IProps> = ({ service }) => {
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const pickupState = useTypedSelector((state) => state.rootReducer.pickupReducer, shallowEqual);
   const telcomState = useTypedSelector((state) => state.rootReducer.telcomReducer, shallowEqual);
   const moveState = useTypedSelector((state) => state.rootReducer.moveReducer, shallowEqual);

@@ -78,7 +78,7 @@ const MyBookingCancelModal: React.FC = () => {
   const service = useTypedSelector(
     (state) => state.rootReducer.modalReducer.myBookingCancelCurrentService,
   );
-  const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
 
   const pickUpMutation = usePickupCancelMutation();
   const telcomMutation = useTelocmCancelMutation();

@@ -9,6 +9,7 @@ import telcomReducer from "@store/slices/telcomSlice";
 import modalReducer from "@store/slices/modalSlice";
 import moveReducer from "@store/slices/moveSlice";
 import carReducer from "@store/slices/carSlice";
+import userReducer from "@store/slices/userSlice";
 import errorReducer from "@store/slices/errorSlice";
 
 export function* rootSaga() {
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === "development") {
 // combine으로 합치지 않아도 됩니다. (코드정리를 위해 rootReducer로 묶었습니다.)
 const rootReducer = combineReducers({
   authReducer,
+  userReducer,
   pickupReducer,
   telcomReducer,
   moveReducer,

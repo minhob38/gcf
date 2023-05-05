@@ -7,7 +7,6 @@ interface IState {
   password: string | null;
   rePassword: string | null;
   isAuthenticated: boolean;
-  userId: number;
 }
 
 const initialState: IState = {
@@ -17,7 +16,6 @@ const initialState: IState = {
   password: null,
   rePassword: null,
   isAuthenticated: localStorage.getItem("isAuthenticated") === "true" ? true : false,
-  userId: 1,
 };
 
 const authSlice = createSlice({

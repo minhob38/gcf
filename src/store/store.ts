@@ -3,6 +3,8 @@ import { combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import logger from "redux-logger";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import authReducer from "@store/slices/authSlice";
 import pickupReducer from "@store/slices/pickupSlice";
 import telcomReducer from "@store/slices/telcomSlice";
@@ -15,6 +17,7 @@ import errorReducer from "@store/slices/errorSlice";
 export function* rootSaga() {
   yield all([]);
 }
+
 const sagaMiddleware = createSagaMiddleware();
 const middleware: any = [sagaMiddleware];
 
@@ -34,8 +37,11 @@ const rootReducer = combineReducers({
   errorReducer,
 });
 
+const persistConfig = { key: "root", version: 1, storage };
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: { rootReducer },
+  reducer: { rootReducer: persistedReducer },
   middleware,
 });
 

@@ -75,8 +75,6 @@ const ServiceBanner: React.FC<IProps> = ({ type, onClick }) => {
       path = "/car";
   }
 
-  path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
-
   return (
     <Wrapper onClick={onClick}>
       <Link to={path}>

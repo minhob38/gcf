@@ -57,8 +57,7 @@ const SignUpNotificationModal: React.FC = () => {
     // dispatch(modalActions.hideSignUpNotification());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    let path = "/login";
-    path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
+    const path = "/login";
     dispatch(modalActions.hideSignUpNotification());
     navigate(path);
   };

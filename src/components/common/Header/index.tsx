@@ -69,8 +69,8 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
     (state) => state.rootReducer.authReducer.isAuthenticated,
   );
 
-  const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
-  const loginPath = window.location.hostname === "minhob38.github.io" ? "/gcf/login" : "/login";
+  const homePath = "/";
+  const loginPath = "/login";
 
   switch (mode) {
     case (mode = "logo"):

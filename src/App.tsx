@@ -45,60 +45,38 @@ function App() {
       >
         <Suspense fallback={<Fallback />}>
           <Routes>
-            <Route path="/" element={<Landing />}></Route>
-            <Route path="/gcf" element={<Landing />}></Route>
+            <Route path="/" element={<Landing />} />
             {/* auth */}
             <Route
               path="/login"
               element={!isAuthenticated ? <Login /> : <Navigate replace to="/" />}
-            ></Route>
-            <Route
-              path="/gcf/login"
-              element={!isAuthenticated ? <Login /> : <Navigate replace to="/gcf" />}
-            ></Route>
-            <Route path="/sign-up" element={<SignUp />}></Route>
-            <Route path="/gcf/sign-up" element={<SignUp />}></Route>
+            />
+            <Route path="/sign-up" element={<SignUp />} />
             {/* pickup service */}
             <Route
               path="/my-booking"
               element={isAuthenticated ? <MyBooking /> : <Navigate replace to="/" />}
-            ></Route>
+            />
             {/* pickup service */}
             <Route
               path="/pickup"
               element={isAuthenticated ? <PickupService /> : <Navigate replace to="/" />}
-            ></Route>
-            <Route
-              path="/gcf/pickup"
-              element={isAuthenticated ? <PickupService /> : <Navigate replace to="/gcf" />}
-            ></Route>
+            />
             {/* telcom service */}
             <Route
               path="/telcom"
               element={isAuthenticated ? <TelcomService /> : <Navigate replace to="/" />}
-            ></Route>
-            <Route
-              path="/gcf/telcom"
-              element={isAuthenticated ? <TelcomService /> : <Navigate replace to="/gcf" />}
-            ></Route>
+            />
             {/* move service */}
             <Route
               path="/move"
               element={isAuthenticated ? <MoveService /> : <Navigate replace to="/" />}
-            ></Route>
-            <Route
-              path="/gcf/move"
-              element={isAuthenticated ? <MoveService /> : <Navigate replace to="/gcf" />}
-            ></Route>
+            />
             {/* car service */}
             <Route
               path="/car"
               element={isAuthenticated ? <CarService /> : <Navigate replace to="/" />}
-            ></Route>
-            <Route
-              path="/gcf/car"
-              element={isAuthenticated ? <CarService /> : <Navigate replace to="/gcf" />}
-            ></Route>
+            />
             <Route
               path="/car/buy/:carBasicId"
               element={isAuthenticated ? <CarBuy /> : <Navigate replace to="/" />}

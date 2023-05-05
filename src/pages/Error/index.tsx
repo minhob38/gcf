@@ -58,7 +58,7 @@ const ResetButton = styled.div`
 `;
 
 const ErrorPage = ({ error, resetErrorBoundary }) => {
-  const homePath = window.location.hostname === "minhob38.github.io" ? "/gcf" : "/";
+  const homePath = "/";
 
   return (
     <Wrapper>

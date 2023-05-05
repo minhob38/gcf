@@ -583,6 +583,39 @@ export const findCarDetailApi = async ({ queryKey }) => {
   }
 
   if (data.result === "FAIL") {
-    throw new Error("find car sale list error");
+    throw new Error("find car detail  error");
+  }
+};
+
+/**
+ * @description 나의 정보 조회 api
+ */
+export const findMeApi = async ({ queryKey }) => {
+  const [key, userId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      email: string;
+      fullName: string;
+      phoneNumber: string;
+    };
+
+    if (!apiData) return null;
+
+    return {
+      email: apiData.email,
+      fullName: apiData.fullName,
+      phoneNumber: apiData.phoneNumber,
+    };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find my information  error");
   }
 };

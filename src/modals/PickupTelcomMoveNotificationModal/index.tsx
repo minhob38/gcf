@@ -67,7 +67,6 @@ const PickupTelcomMoveNotificationModal: React.FC<IProps> = ({
     // dispatch(modalActions.hideSignUpNotification());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
-    path = window.location.hostname === "minhob38.github.io" ? `/gcf${path}` : path;
     dispatch(modalActions.hidePickupTelcomMoveNotification());
     navigate(path);
   };

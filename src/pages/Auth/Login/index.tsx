@@ -10,7 +10,6 @@ import { actions as errorActions } from "@store/slices/errorSlice";
 import { useLoginMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
@@ -61,8 +60,7 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
 };
 
 const Login: React.FC = () => {
-  const signUpPath =
-    window.location.hostname === "minhob38.github.io" ? "/gcf/sign-up" : "/sign-up";
+  const signUpPath = "/sign-up";
 
   const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.loginErrorMessage,
@@ -70,7 +68,6 @@ const Login: React.FC = () => {
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const password = useTypedSelector((state) => state.rootReducer.authReducer.password);
   const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
-  // const isLoginError = useTypedSelector((state) => state.rootReducer.errorReducer.isLoginError);
 
   const dispatch = useTypedDispatch();
   const loginMutation = useLoginMutation();

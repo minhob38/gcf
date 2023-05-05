@@ -6,8 +6,7 @@ import Button from "@components/CarService/Button";
 import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
-import { useCarsSalesQuery } from "@hooks/useApiQuery";
-import UsedCarSales from "@components/CarService/UsedCarSales";
+import { useCarSalesQueryClient, useCarsSalesQuery } from "@hooks/useApiQuery";
 import PriceSelect from "@components/common/Select/PriceSelect";
 import { ECAR_SEARCH_TYPE, EPRICE_TYPE } from "types/enum";
 import * as variables from "@constants/variables";
@@ -18,6 +17,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as carActions } from "@store/slices/carSlice";
+import CarSales from "@components/CarService/CarSales";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -96,7 +96,7 @@ const ErrorText = styled.div`
   text-align: center;
 `;
 
-const SCROLL_BOTTOM_MARGIN = 130;
+const SCROLL_BOTTOM_MARGIN = 150;
 
 const CarService = () => {
   const dispatch = useTypedDispatch();
@@ -104,14 +104,29 @@ const CarService = () => {
     (state) => state.rootReducer.errorReducer.carSaleErrorMessage,
   );
   const carSearchType = useTypedSelector((state) => state.rootReducer.carReducer.carSearchType);
-  const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
-  const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
+  const newMinimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.newMinimumPrice);
+  const newMaximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.newMaximumPrice);
+  const usedMinimumPrice = useTypedSelector(
+    (state) => state.rootReducer.carReducer.usedMinimumPrice,
+  );
+  const usedMaximumPrice = useTypedSelector(
+    (state) => state.rootReducer.carReducer.usedMaximumPrice,
+  );
 
   const newQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.NEW);
   const usedQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
 
-  const newApiData = newQuery.data || [];
-  const usedApiData = usedQuery.data || [];
+  const newCacheApiData = useCarSalesQueryClient(ECAR_SEARCH_TYPE.NEW);
+  const usedCacheApiData = useCarSalesQueryClient(ECAR_SEARCH_TYPE.USED);
+
+  const newApiData = newQuery.data || newCacheApiData || [];
+  const usedApiData = usedQuery.data || usedCacheApiData || [];
+
+  console.log("new api data");
+  console.log(newApiData);
+
+  console.log("use api data");
+  console.log(usedApiData);
 
   const handleNewSearchButtonClick = () => {
     dispatch(carActions.changeSearchType(ECAR_SEARCH_TYPE.NEW));
@@ -120,26 +135,41 @@ const CarService = () => {
     dispatch(carActions.changeSearchType(ECAR_SEARCH_TYPE.USED));
   };
   const handleSearchClick = () => {
-    // 최소/최대값을 입력하지 않았을때
-    if (
-      minimumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT ||
-      maximumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT
-    ) {
-      dispatch(errorActions.throwCarSaleError("Select minimum or maximum price"));
-      return;
-    }
-
-    // 최소값이 최대값보다 클때
-    if (minimumPrice > maximumPrice) {
-      dispatch(errorActions.throwCarSaleError("Maximum price should be minimum price"));
-      return;
-    }
-
     switch (carSearchType) {
       case ECAR_SEARCH_TYPE.NEW:
+        // 최소/최대값을 입력하지 않았을때
+        if (
+          newMinimumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT ||
+          newMaximumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT
+        ) {
+          dispatch(errorActions.throwCarSaleError("Select minimum or maximum price"));
+          return;
+        }
+
+        // 최소값이 최대값보다 클때
+        if (newMinimumPrice > newMaximumPrice) {
+          dispatch(errorActions.throwCarSaleError("Maximum price should be minimum price"));
+          return;
+        }
+
         newQuery.refetch();
         return;
       case ECAR_SEARCH_TYPE.USED:
+        // 최소/최대값을 입력하지 않았을때
+        if (
+          usedMinimumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT ||
+          usedMaximumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT
+        ) {
+          dispatch(errorActions.throwCarSaleError("Select minimum or maximum price"));
+          return;
+        }
+
+        // 최소값이 최대값보다 클때
+        if (usedMinimumPrice > usedMaximumPrice) {
+          dispatch(errorActions.throwCarSaleError("Maximum price should be minimum price"));
+          return;
+        }
+
         usedQuery.refetch();
         return;
       default:
@@ -180,12 +210,14 @@ const CarService = () => {
             </SearchButtonContainer>
             <PriceSelectBoxContainer onFocus={handleFocus}>
               <PriceSelect
+                carSearchType={carSearchType}
                 type={EPRICE_TYPE.MIN}
                 size={{ width: "100px", height: "30px" }}
                 prices={variables.MIN_PRICES}
               />
               <HypenText>~</HypenText>
               <PriceSelect
+                carSearchType={carSearchType}
                 type={EPRICE_TYPE.MAX}
                 size={{ width: "100px", height: "30px" }}
                 prices={variables.MAX_PRICES}
@@ -196,8 +228,8 @@ const CarService = () => {
         </div>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           {/* {<NotificationText>Click magnifier after setting price range</NotificationText>} */}
-          {carSearchType === ECAR_SEARCH_TYPE.NEW && <UsedCarSales cars={newApiData} />}
-          {carSearchType === ECAR_SEARCH_TYPE.USED && <UsedCarSales cars={usedApiData} />}
+          {carSearchType === ECAR_SEARCH_TYPE.NEW && <CarSales cars={newApiData} />}
+          {carSearchType === ECAR_SEARCH_TYPE.USED && <CarSales cars={usedApiData} />}
         </Scroll>
       </Content>
     </>

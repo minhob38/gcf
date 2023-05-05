@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   flex-flow: row;
   justify-content: start;
   margin: 0 0 10px 0;
+  padding: 5px;
   box-shadow: 0 5px 10px -10px ${colors.GRAY_1}; // 아래에만 그림자 넣기
 `;
 
@@ -22,8 +23,12 @@ const Info = styled.div`
   width: 40%;
 `;
 
+const BrandName = styled.div`
+  font: ${fonts.FONT_SMALL_400};
+  color: ${colors.BLACK_1};
+`;
+
 const CarName = styled.div`
-  margin: 0 0 10px 0;
   font: ${fonts.FONT_SMALL_400};
   color: ${colors.BLACK_1};
 `;
@@ -62,9 +67,11 @@ const CarCard: React.FC<any> = ({
         `}
       />
       <Info>
-        <CarName>{`${brandName} ${carModelName}`}</CarName>
+        <BrandName>{brandName}</BrandName>
+        <CarName>{carModelName}</CarName>
         {/* <CarChip> */}
         <CarChipContainer>
+          {/* 차종,인승 */}
           <div
             css={css`
               display: flex;
@@ -81,6 +88,7 @@ const CarCard: React.FC<any> = ({
             />
             <CarChip>{`Seat ${seatCount}`}</CarChip>
           </div>
+          {/* 가격 */}
           <CarChip>{`$${price}`}</CarChip>
         </CarChipContainer>
       </Info>

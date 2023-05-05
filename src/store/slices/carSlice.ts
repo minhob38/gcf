@@ -4,14 +4,18 @@ import { ECAR_SEARCH_TYPE } from "types/enum";
 
 interface IState {
   carSearchType: ECAR_SEARCH_TYPE;
-  minimumPrice: string;
-  maximumPrice: string;
+  newMinimumPrice: string;
+  newMaximumPrice: string;
+  usedMinimumPrice: string;
+  usedMaximumPrice: string;
 }
 
 const initialState: IState = {
   carSearchType: ECAR_SEARCH_TYPE.NEW,
-  minimumPrice: variables.SELECT_MIN_PRICE_DEFAULT_TEXT,
-  maximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
+  newMinimumPrice: variables.SELECT_MIN_PRICE_DEFAULT_TEXT,
+  newMaximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
+  usedMinimumPrice: variables.SELECT_MIN_PRICE_DEFAULT_TEXT,
+  usedMaximumPrice: variables.SELECT_MAX_PRICE_DEFAULT_TEXT,
 };
 
 const carSlice = createSlice({

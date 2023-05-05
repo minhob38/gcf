@@ -119,8 +119,24 @@ export const useMyMoveQueryClient = () => {
  * @description 구매가능한 car 조회 query 함수
  */
 export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
-  const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
-  const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
+  const minimumPrice = useTypedSelector((state) => {
+    switch (searchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMinimumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMinimumPrice;
+      default:
+    }
+  });
+  const maximumPrice = useTypedSelector((state) => {
+    switch (searchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMaximumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMaximumPrice;
+      default:
+    }
+  });
 
   const query = useQuery(
     [EQUERY_KEY.CAR_SALE, searchType, { priceStart: minimumPrice, priceEnd: maximumPrice }],
@@ -147,12 +163,33 @@ export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
 };
 
 /**
- * @description my pickup 조회 query client 함수
+ * @description car sale 조회 query client 함수
  */
-export const useCarSalesQueryClient = () => {
+export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
   const queryClient = useQueryClient();
-  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findMyPickupApi>>>([
+  const minimumPrice = useTypedSelector((state) => {
+    switch (carSearchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMinimumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMinimumPrice;
+      default:
+    }
+  });
+  const maximumPrice = useTypedSelector((state) => {
+    switch (carSearchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMaximumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMaximumPrice;
+      default:
+    }
+  });
+
+  const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findCarSalesApi>>>([
     EQUERY_KEY.CAR_SALE,
+    carSearchType,
+    { minimumPrice, maximumPrice },
   ]);
   return apiData;
 };

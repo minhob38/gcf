@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
-import * as size from "@constants/size";
-import * as colors from "@constants/colors";
 import * as margins from "@constants/margins";
 import CarCard from "@components/CarService/CarCard";
-import { useCarsSalesQuery } from "@hooks/useApiQuery";
-import { ECAR_SEARCH_TYPE } from "types/enum";
 import { v4 as uuid4 } from "uuid";
 import { ICarSale } from "types/types";
 
@@ -13,10 +9,8 @@ const CarCardContainer = styled.div`
   padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
-const UsedCarSales: React.FC<{ cars: ICarSale[] }> = ({ cars }) => {
-  // const query = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
-  // const apiData = query.data;
-
+// TODO: 신차/중고차 UI 바뀌면, 그때 New, Used 나누기
+const CarSales: React.FC<{ cars: ICarSale[] }> = ({ cars }) => {
   const Cards = cars?.map((car) => {
     return (
       <CarCard
@@ -38,4 +32,4 @@ const UsedCarSales: React.FC<{ cars: ICarSale[] }> = ({ cars }) => {
   );
 };
 
-export default UsedCarSales;
+export default CarSales;

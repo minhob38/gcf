@@ -6,11 +6,10 @@ import * as colors from "@constants/colors";
 import * as variables from "@constants/variables";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as carActions } from "@store/slices/carSlice";
-import { actions as moveActions } from "@store/slices/moveSlice";
-import { ECAR_SEARCH_TYPE, EPLACE_TYPE, EPRICE_TYPE, ESERVICE_TYPE } from "types/enum";
-import { useEffect, useState } from "react";
+import { ECAR_SEARCH_TYPE, EPRICE_TYPE } from "types/enum";
 
 interface IProps {
+  carSearchType: ECAR_SEARCH_TYPE;
   type: EPRICE_TYPE;
   size: { width: string; height: string };
   prices: (number | string)[];
@@ -23,10 +22,30 @@ interface IStyleProps {
 /**
  * @description price range(min/max) select box (item들은 인자로 전달)
  */
-const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
+const PriceSelect: React.FC<IProps> = ({ carSearchType, type, size, prices }) => {
   const dispatch = useTypedDispatch();
-  const minimumPrice = useTypedSelector((state) => state.rootReducer.carReducer.minimumPrice);
-  const maximumPrice = useTypedSelector((state) => state.rootReducer.carReducer.maximumPrice);
+
+  const minimumPrice = useTypedSelector((state) => {
+    switch (carSearchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMinimumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMinimumPrice;
+      default:
+        return state.rootReducer.carReducer.newMinimumPrice;
+    }
+  });
+  const maximumPrice = useTypedSelector((state) => {
+    switch (carSearchType) {
+      case ECAR_SEARCH_TYPE.NEW:
+        return state.rootReducer.carReducer.newMaximumPrice;
+      case ECAR_SEARCH_TYPE.USED:
+        return state.rootReducer.carReducer.usedMaximumPrice;
+      default:
+        return state.rootReducer.carReducer.newMinimumPrice;
+    }
+  });
+
   // const [isSelected, setIsSelected] = useState<boolean>(false);
 
   let value: string;
@@ -36,11 +55,23 @@ const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
   switch (type) {
     case EPRICE_TYPE.MIN:
       value = minimumPrice;
-      name = "minimumPrice";
+      if (carSearchType === ECAR_SEARCH_TYPE.NEW) {
+        name = "newMinimumPrice";
+      } else if (carSearchType === ECAR_SEARCH_TYPE.USED) {
+        name = "usedMinimumPrice";
+      } else {
+        name = "";
+      }
       break;
     case EPRICE_TYPE.MAX:
       value = maximumPrice;
-      name = "maximumPrice";
+      if (carSearchType === ECAR_SEARCH_TYPE.NEW) {
+        name = "newMaximumPrice";
+      } else if (carSearchType === ECAR_SEARCH_TYPE.USED) {
+        name = "usedMaximumPrice";
+      } else {
+        name = "";
+      }
       break;
     default:
       value = "";
@@ -78,14 +109,6 @@ const PriceSelect: React.FC<IProps> = ({ type, size, prices }) => {
   const handleClick = (ev) => {
     dispatch(carActions.selectInput(ev.target));
   };
-
-  // return (
-  //   <Wrapper selected={isSelected}>
-  //     <Select name={name} value={value} onChange={handleClick}>
-  //       {Options}
-  //     </Select>
-  //   </Wrapper>
-  // );
 
   return (
     <Wrapper selected={false}>

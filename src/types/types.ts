@@ -6,7 +6,7 @@ export interface IButtonProps {
 }
 
 export interface IApiResponse {
-  data: string;
+  data: any;
   errorCode: string;
   message: string;
   result: "SUCCESS" | "FAIL";

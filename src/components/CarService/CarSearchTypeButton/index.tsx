@@ -33,7 +33,7 @@ const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-const Button: React.FC<IProps> = ({ title, width, height, clicked, onClick }) => {
+const CarSearchTypeButton: React.FC<IProps> = ({ title, width, height, clicked, onClick }) => {
   return (
     <Wrapper width={width} height={height} clicked={clicked} onClick={onClick}>
       {title}
@@ -41,4 +41,4 @@ const Button: React.FC<IProps> = ({ title, width, height, clicked, onClick }) =>
   );
 };
 
-export default Button;
+export default CarSearchTypeButton;

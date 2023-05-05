@@ -10,7 +10,7 @@ import PlaceSelect from "@components/common/Select/PlaceSelect";
 import { EPLACE_TYPE, ESCHEDULE_TYPE, ESERVICE_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import TextInput from "@components/common/Input/TextInput";
-import RequestButton from "@components/common/Button/RequestButton";
+import PickupTelcomMoveRequestButton from "@components/PickupTelcomMoveService/PickupTelcomMoveRequestButton";
 import Scroll from "@components/common/Scroll";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
@@ -181,7 +181,7 @@ const MoveService = () => {
           </PlaceContainer>
         </Scroll>
         <RequestButtonContainer>
-          <RequestButton service={ESERVICE_TYPE.MOVE} />
+          <PickupTelcomMoveRequestButton service={ESERVICE_TYPE.MOVE} />
         </RequestButtonContainer>
       </Content>
     </>

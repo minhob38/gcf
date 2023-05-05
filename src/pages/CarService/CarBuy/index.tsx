@@ -6,7 +6,7 @@ import CarSearchTypeButton from "@components/CarService/CarSearchTypeButton";
 import Scroll from "@components/common/Scroll";
 import * as size from "@constants/size";
 import * as margins from "@constants/margins";
-import { useCarSalesQueryClient, useCarsSalesQuery } from "@hooks/useApiQuery";
+import { useCarDetailQuery, useCarSalesQueryClient, useCarsSalesQuery } from "@hooks/useApiQuery";
 import PriceSelect from "@components/common/Select/PriceSelect";
 import { ECAR_SEARCH_TYPE, EPRICE_TYPE } from "types/enum";
 import * as variables from "@constants/variables";
@@ -18,6 +18,9 @@ import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as carActions } from "@store/slices/carSlice";
 import CarSales from "@components/CarService/CarSales";
+import CarCard from "@components/CarService/CarCard";
+import CarRequestButton from "@components/CarService/CarRequestButton";
+import ApplicantCard from "@components/CarService/ApplicantCard";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -73,7 +76,7 @@ const HypenText = styled.div`
   text-align: center;
 `;
 
-const NotificationText = styled.div`
+const NoticeText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,9 +99,29 @@ const ErrorText = styled.div`
   text-align: center;
 `;
 
+const ApplicantCardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px auto;
+  width: 100%;
+`;
+
+const RequestButtonContainer = styled.div`
+  position: fixed;
+  bottom: ${margins.SIDE_MAIN_MARGIN};
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+`;
+
 const SCROLL_BOTTOM_MARGIN = 150;
 
-const CarService = () => {
+const CarBuy = () => {
+  const carBasicId = 488;
   const dispatch = useTypedDispatch();
   const errorMessage = useTypedSelector(
     (state) => state.rootReducer.errorReducer.carSaleErrorMessage,
@@ -115,6 +138,9 @@ const CarService = () => {
 
   const newQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.NEW);
   const usedQuery = useCarsSalesQuery(ECAR_SEARCH_TYPE.USED);
+
+  const query = useCarDetailQuery();
+  const apiData = query.data;
 
   const newCacheApiData = useCarSalesQueryClient(ECAR_SEARCH_TYPE.NEW);
   const usedCacheApiData = useCarSalesQueryClient(ECAR_SEARCH_TYPE.USED);
@@ -176,58 +202,32 @@ const CarService = () => {
     <>
       <Header title="Car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <ButtonContainer onFocus={handleFocus}>
-          <CarSearchTypeButton
-            title="New"
-            width="100px"
-            height="40px"
-            clicked={carSearchType === ECAR_SEARCH_TYPE.NEW}
-            onClick={handleNewSearchButtonClick}
-          />
-          <CarSearchTypeButton
-            title="Used"
-            width="100px"
-            height="40px"
-            clicked={carSearchType === ECAR_SEARCH_TYPE.USED}
-            onClick={handleUsedSearchButtonClick}
-          />
-        </ButtonContainer>
-        <div>
-          <PriceContainer>
-            {/* <PriceText>Price</PriceText> */}
-            <SearchButtonContainer onFocus={handleFocus}>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                fontSize={"24px"}
-                onClick={handleSearchClick}
-              />
-            </SearchButtonContainer>
-            <PriceSelectBoxContainer onFocus={handleFocus}>
-              <PriceSelect
-                carSearchType={carSearchType}
-                type={EPRICE_TYPE.MIN}
-                size={{ width: "100px", height: "30px" }}
-                prices={variables.MIN_PRICES}
-              />
-              <HypenText>~</HypenText>
-              <PriceSelect
-                carSearchType={carSearchType}
-                type={EPRICE_TYPE.MAX}
-                size={{ width: "100px", height: "30px" }}
-                prices={variables.MAX_PRICES}
-              />
-            </PriceSelectBoxContainer>
-          </PriceContainer>
-          <ErrorText>{errorMessage}</ErrorText>
-        </div>
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
-          {/* {<NotificationText>Click magnifier after setting price range</NotificationText>} */}
-          {carSearchType === ECAR_SEARCH_TYPE.NEW && <CarSales cars={newApiData} />}
-          {carSearchType === ECAR_SEARCH_TYPE.USED && <CarSales cars={usedApiData} />}
+          {apiData && (
+            <CarCard
+              carImageUrl={apiData.carImageUrl}
+              brandName={apiData.brandName}
+              carModelName={apiData.carModelName}
+              segment={apiData.segment}
+              fuelType={apiData.fuelType}
+              bodyType={apiData.bodyType}
+              price={apiData.price}
+              seatCount={apiData.seatCount}
+            />
+          )}
+          <NoticeText>If you apply, we will contact you separately within 7 days</NoticeText>
+
+          <ApplicantCardContainer>
+            <ApplicantCard />
+          </ApplicantCardContainer>
+          <RequestButtonContainer>
+            <CarRequestButton />
+          </RequestButtonContainer>
         </Scroll>
       </Content>
     </>
   );
 };
 
-export default CarService;
+export default CarBuy;
+// isDetail 플래그 넣기

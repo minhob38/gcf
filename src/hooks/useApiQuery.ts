@@ -13,16 +13,9 @@ export const useMyPickupBookingQuery = () => {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,
-    onError: (error) => {
-      // const errorMessage = (error as Error).message;
-      // dispatch(errorActions.throwSignUpError(errorMessage));
-    },
-    onSuccess: (data) => {
-      // dispatch(modalActions.showSignUpNotification());
-    },
-    onSettled: () => {
-      // dispatch(modalActions.hideLoading());
-    },
+    onError: (error) => {},
+    onSuccess: (data) => {},
+    onSettled: () => {},
   });
 
   return query;
@@ -50,16 +43,9 @@ export const useMyTelcomBookingQuery = () => {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,
-    onError: (error) => {
-      // const errorMessage = (error as Error).message;
-      // dispatch(errorActions.throwSignUpError(errorMessage));
-    },
-    onSuccess: (data) => {
-      // dispatch(modalActions.showSignUpNotification());
-    },
-    onSettled: () => {
-      // dispatch(modalActions.hideLoading());
-    },
+    onError: (error) => {},
+    onSuccess: (data) => {},
+    onSettled: () => {},
   });
 
   return query;
@@ -87,16 +73,9 @@ export const useMyMoveBookingQuery = () => {
     refetchOnWindowFocus: false,
     retry: 0,
     suspense: true,
-    onError: (error) => {
-      // const errorMessage = (error as Error).message;
-      // dispatch(errorActions.throwSignUpError(errorMessage));
-    },
-    onSuccess: (data) => {
-      // dispatch(modalActions.showSignUpNotification());
-    },
-    onSettled: () => {
-      // dispatch(modalActions.hideLoading());
-    },
+    onError: (error) => {},
+    onSuccess: (data) => {},
+    onSettled: () => {},
   });
 
   return query;
@@ -146,16 +125,9 @@ export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
       retry: 0,
       suspense: true,
       enabled: false,
-      onError: (error) => {
-        // const errorMessage = (error as Error).message;
-        // dispatch(errorActions.throwSignUpError(errorMessage));
-      },
-      onSuccess: (data) => {
-        // dispatch(modalActions.showSignUpNotification());
-      },
-      onSettled: () => {
-        // dispatch(modalActions.hideLoading());
-      },
+      onError: (error) => {},
+      onSuccess: (data) => {},
+      onSettled: () => {},
     },
   );
 
@@ -194,4 +166,34 @@ export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
     { minimumPrice, maximumPrice },
   ]);
   return apiData;
+};
+
+/**
+ * @description car 상세 조회 query 함수
+ */
+export const useCarDetailQuery = () => {
+  const carBasicId = 488;
+  const query = useQuery([EQUERY_KEY.CAR_SALE, carBasicId], api.findCarDetailApi, {
+    refetchOnWindowFocus: false,
+    retry: 0,
+    suspense: true,
+    onError: (error) => {},
+    onSuccess: (data) => {},
+    onSettled: () => {},
+  });
+
+  return query;
+};
+
+/**
+ * @description car 상세 조회 query client 함수
+ */
+export const useCarDetailQueryClient = () => {
+  // const userId = useTypedSelector((state) => state.rootReducer.authReducer.userId);
+  // const queryClient = useQueryClient();
+  // const apiData = queryClient.getQueryData<Awaited<ReturnType<typeof api.findCarDetailApi>>>([
+  //   EQUERY_KEY.MOVE,
+  //   userId,
+  // ]);
+  // return apiData;
 };

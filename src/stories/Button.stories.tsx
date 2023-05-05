@@ -1,17 +1,17 @@
 import { Meta, Story } from "@storybook/react";
-import Button from "../components/CarService/Button";
+import CarSearchTypeButton from "../components/CarService/CarSearchTypeButton";
 import { decorators } from "../../.storybook/preview";
 import { action } from "@storybook/addon-actions";
 import { IButtonProps } from "../types/types";
 
 export default {
   title: "버튼",
-  component: Button,
+  component: CarSearchTypeButton,
   decorators,
   // argTypes: { onClick: { action: "clicked" } },
 } as Meta;
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <CarSearchTypeButton {...args} />;
 export const Basic: Story<IButtonProps> = Template.bind({});
 export const Primary: Story<IButtonProps> = Template.bind({});
 

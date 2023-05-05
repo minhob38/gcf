@@ -15,6 +15,7 @@ import { Suspense } from "react";
 import SignUp from "pages/Auth/SignUp";
 import { Navigate } from "react-router-dom";
 import { useTypedSelector } from "@hooks/useStore";
+import CarBuy from "pages/CarService/CarBuy";
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -98,6 +99,10 @@ function App() {
               path="/gcf/car"
               element={isAuthenticated ? <CarService /> : <Navigate replace to="/gcf" />}
             ></Route>
+            <Route
+              path="/car/buy"
+              element={isAuthenticated ? <CarBuy /> : <Navigate replace to="/" />}
+            />
           </Routes>
         </Suspense>
       </ErrorBoundary>

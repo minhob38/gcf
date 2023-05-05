@@ -440,11 +440,10 @@ export const findMyMoveApi = async ({ queryKey }) => {
 };
 
 /**
- * @description 구매가능한 car 조회 api
+ * @description 구매가능한 car들 조회 api
  */
 export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
   const [key, searchType, { priceStart, priceEnd }] = queryKey;
-  console.log(priceStart, priceEnd);
   const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
     newAndUsed: searchType,
     priceStart,
@@ -517,4 +516,73 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSale[]> => {
   }
 
   return [];
+};
+
+/**
+ * @description car 상세 조회 api
+ */
+export const findCarDetailApi = async ({ queryKey }) => {
+  const [key, carBasicId] = queryKey;
+  const response = await axios.get<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/car-sales/${carBasicId}`,
+  );
+
+  const data = response.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    const apiData = data.data as unknown as {
+      carBasicId: number;
+      brandCode: string;
+      brandName: string;
+      carModelCode: string;
+      carModelName: string;
+      newAndUsed: ECAR_SEARCH_TYPE;
+      generationName: string;
+      fuelType: string;
+      segment: string;
+      bodyType: string;
+      seatCount: number;
+      price: number;
+      carImagePath: string;
+      carImageFileName: string;
+      buyerUserId: number;
+    };
+
+    if (!apiData) return null;
+
+    let bodyType: string;
+
+    switch (apiData.bodyType) {
+      case "SEDAN":
+        bodyType = "Sedan";
+        break;
+      case "HATCHBACK":
+        bodyType = "Hatch";
+        break;
+      default:
+        bodyType = apiData.bodyType;
+    }
+
+    return {
+      carBasicId: apiData.carBasicId,
+      brandCode: apiData.brandCode,
+      brandName: apiData.brandName,
+      carModelCode: apiData.carModelCode,
+      carModelName: apiData.carModelName,
+      newAndUsed: apiData.newAndUsed,
+      generationName: apiData.generationName,
+      fuelType: apiData.fuelType,
+      segment: apiData.segment,
+      bodyType,
+      seatCount: apiData.seatCount,
+      price: apiData.price,
+      carImageUrl: apiData.carImagePath + apiData.carImageFileName,
+      buyerUserId: apiData.buyerUserId, // ?
+    };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("find car sale list error");
+  }
 };

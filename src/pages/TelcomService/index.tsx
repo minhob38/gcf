@@ -9,7 +9,7 @@ import * as colors from "@constants/colors";
 import { ESCHEDULE_TYPE, ESERVICE_TYPE, ETELCOM_KIND_TYPE } from "types/enum";
 import ScheduleSelect from "@components/common/Select/ScheduleSelect";
 import CheckboxInput from "@components/common/Input/CheckboxInput";
-import RequestButton from "@components/common/Button/RequestButton";
+import PickupTelcomMoveRequestButton from "@components/PickupTelcomMoveService/PickupTelcomMoveRequestButton";
 import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificationModal";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
@@ -124,7 +124,7 @@ const TelcomService = () => {
           <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
         </CheckboxContainer>
         <RequestButtonContainer>
-          <RequestButton service={ESERVICE_TYPE.TELCOM} />
+          <PickupTelcomMoveRequestButton service={ESERVICE_TYPE.TELCOM} />
         </RequestButtonContainer>
       </Content>
     </>

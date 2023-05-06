@@ -91,8 +91,6 @@ const Login: React.FC = () => {
     }
 
     await loginMutation.mutateAsync({ email, password });
-    // 로그인 뒤, 나의정보 조회
-    // query.refetch();
   };
 
   const handleFocus = () => dispatch(errorActions.catchLoginError());

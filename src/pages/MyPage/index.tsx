@@ -7,7 +7,8 @@ import * as size from "@constants/size";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as authActions } from "@store/slices/authSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
-import { useLoginMutation } from "@hooks/useApiMutation";
+import { actions as userActions } from "@store/slices/userSlice";
+import { useLoginMutation, useUpdateMeMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import TextInput from "@components/Auth/TextInput";
@@ -15,6 +16,10 @@ import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
 import LoadingModal from "modals/SpinnerLoadingModal";
 import { useEffect, useState } from "react";
+import UpdateMeNotificationModal from "modals/UpdateMeNotificationModal";
+import { useQueryClient } from "react-query";
+import { EQUERY_KEY } from "@constants/query-key";
+import * as api from "@apis/functions";
 
 const SubTitle = styled.div`
   font: ${fonts.FONT_MEDIUM_600};
@@ -46,8 +51,9 @@ const SignButtonContainer = styled.div`
 const MyPage: React.FC = () => {
   const [isEdit, setIsEdit] = useState(false);
   const errorMessage = useTypedSelector(
-    (state) => state.rootReducer.errorReducer.loginErrorMessage,
+    (state) => state.rootReducer.errorReducer.updateMeErrorMessage,
   );
+  const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const defaultEmail = useTypedSelector((state) => state.rootReducer.userReducer.email || "");
   const email = useTypedSelector((state) => state.rootReducer.authReducer.email);
   const defaultName = useTypedSelector((state) => state.rootReducer.userReducer.name || "");
@@ -57,10 +63,13 @@ const MyPage: React.FC = () => {
   );
   const phoneNumber = useTypedSelector((state) => state.rootReducer.authReducer.phoneNumber);
 
-  const isLoading = useTypedSelector((state) => state.rootReducer.modalReducer.isLoading);
+  const isUpdateMeNotification = useTypedSelector(
+    (state) => state.rootReducer.modalReducer.isUpdateMeNotification,
+  );
 
   const dispatch = useTypedDispatch();
-  const loginMutation = useLoginMutation();
+  const mutation = useUpdateMeMutation();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     dispatch(
@@ -70,7 +79,7 @@ const MyPage: React.FC = () => {
         phoneNumber: defaultPhoneNumber,
       }),
     );
-  }, []);
+  }, [dispatch, defaultEmail, defaultName, defaultPhoneNumber]);
 
   const handleTextInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(authActions.textInput(ev.target));
@@ -78,17 +87,35 @@ const MyPage: React.FC = () => {
 
   const handleButtonClick = async () => {
     if (isEdit) {
-      // api 요청
+      if (!userId || !name || !phoneNumber) {
+        dispatch(errorActions.throwUpdateMeError("!!!"));
+        return;
+      }
+
+      await mutation.mutateAsync({ userId, name, phoneNumber });
+
+      const myInfo = await api.findMeApi(userId);
+
+      if (!myInfo) return;
+      dispatch(userActions.findMe({ userId, ...myInfo }));
+
+      return;
     }
 
     setIsEdit(!isEdit);
   };
 
-  const handleFocus = () => dispatch(errorActions.catchLoginError());
+  const handleFocus = () => dispatch(errorActions.catchUpdateMeError());
 
   return (
     <>
-      {isLoading && <LoadingModal />}
+      {isUpdateMeNotification && (
+        <UpdateMeNotificationModal
+          notification="Request success"
+          buttonText="Go to home"
+          path="/"
+        />
+      )}
       <Header title="My page" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Margin />

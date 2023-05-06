@@ -103,6 +103,30 @@ export const useLoginMutation = () => {
 };
 
 /**
+ * @description 회원정보수정 mutation 함수
+ */
+export const useUpdateMeMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.updateMeApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      dispatch(errorActions.throwUpdateMeError(errorMessage));
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(modalActions.showUpdateMeNotification());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
  * @description pickup 요청 mutation 함수
  */
 export const usePickUpMutation = () => {

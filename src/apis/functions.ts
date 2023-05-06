@@ -16,6 +16,7 @@ import {
   TSaleStatus,
   ICarSaleResponse,
   ICarCancelRequest,
+  IUpdateMeRequest,
 } from "types/api-type";
 
 export const testGetApi = async () => {
@@ -32,35 +33,6 @@ export const testPostApi = async (input) => {
   const { data } = response;
   // throw new Error("error"); -> onError로 감
   return data;
-};
-
-export const loginApi = async (input: ILoginRequest) => {
-  const { email, password } = input;
-  const body: { email: string; password: string } = { email, password };
-
-  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login`, body);
-
-  const data = response.data;
-  const apiData = data.data;
-  const status = response.status;
-
-  if (data.result === "SUCCESS") {
-    return { userId: apiData.userId };
-  }
-
-  if (data.result === "FAIL") {
-    // 비밀번호 틀린 에러
-    if (data.errorCode === "INCORRECT_USER_PASSWORD") {
-      throw new Error("Invalid password");
-    }
-
-    // 존재하지 않는 회원
-    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
-      throw new Error("User does not exists");
-    }
-
-    throw new Error("login error");
-  }
 };
 
 /**
@@ -105,6 +77,57 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
     throw new Error("sign up error");
     // 비밀번호/재비밀번호 다른경우 에러
+  }
+};
+
+export const loginApi = async (input: ILoginRequest) => {
+  const { email, password } = input;
+  const body: { email: string; password: string } = { email, password };
+
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login`, body);
+
+  const data = response.data;
+  const apiData = data.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    return { userId: apiData.userId };
+  }
+
+  if (data.result === "FAIL") {
+    // 비밀번호 틀린 에러
+    if (data.errorCode === "INCORRECT_USER_PASSWORD") {
+      throw new Error("Invalid password");
+    }
+
+    // 존재하지 않는 회원
+    if (data.errorCode === "COMMON_INVALID_PARAMETER") {
+      throw new Error("User does not exists");
+    }
+
+    throw new Error("login error");
+  }
+};
+
+export const updateMeApi = async (input: IUpdateMeRequest) => {
+  const { userId, name, phoneNumber } = input;
+  const body: { userId: number; name: string; phoneNumber: string } = { userId, name, phoneNumber };
+
+  const response = await axios.post<IApiResponse>(
+    `${API_SERVER_ADDRESS}/api/v1/mypage/user-profiles/${userId}`,
+    body,
+  );
+
+  const data = response.data;
+  const apiData = data.data;
+  const status = response.status;
+
+  if (data.result === "SUCCESS") {
+    return { userId: apiData.userId };
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("update my information error");
   }
 };
 

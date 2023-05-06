@@ -5,6 +5,7 @@ interface IState {
   isLoginWarning: boolean;
   isLoading: boolean;
   isSignUpNotification: boolean;
+  isUpdateMeNotification: boolean;
   isPickupTelcomMoveNotification: boolean;
   isMyBookingCancelNotification: boolean;
   isCarNotification: boolean;
@@ -16,6 +17,7 @@ const initialState: IState = {
   isLoginWarning: false,
   isLoading: false,
   isSignUpNotification: false,
+  isUpdateMeNotification: false,
   isPickupTelcomMoveNotification: false,
   isMyBookingCancelNotification: false,
   isCarNotification: false,
@@ -52,6 +54,13 @@ const modalSlice = createSlice({
     },
     hideSignUpNotification: (state) => {
       state.isSignUpNotification = false;
+    },
+    // 회원정보수정 성공 알림 모달
+    showUpdateMeNotification: (state) => {
+      state.isUpdateMeNotification = true;
+    },
+    hideUpdateMeNotification: (state) => {
+      state.isUpdateMeNotification = false;
     },
     // pickup/telcom/move 성공 알림 모달
     showPickupTelcomMoveNotification: (state) => {

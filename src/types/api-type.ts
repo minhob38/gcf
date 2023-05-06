@@ -7,16 +7,22 @@ export interface IApiResponse {
   result: "SUCCESS" | "FAIL";
 }
 
-export interface ILoginRequest {
-  email: string;
-  password: string;
-}
-
 export interface ISignUpRequest {
   fullName: string;
   email: string;
   password: string;
   rePassword: string;
+}
+
+export interface ILoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface IUpdateMeRequest {
+  userId: number;
+  name: string;
+  phoneNumber: string;
 }
 
 export interface IPickupRequest {

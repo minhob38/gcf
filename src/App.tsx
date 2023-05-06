@@ -18,6 +18,7 @@ import { useTypedSelector } from "@hooks/useStore";
 import CarBuy from "pages/CarService/CarBuy";
 import MyCar from "pages/MyCar";
 import MyPage from "pages/MyPage";
+import LoadingModal from "modals/SpinnerLoadingModal";
 
 // useMutation은 suspense fallback 반영 X
 // useQuery는 suspense fallback 반영 O
@@ -32,7 +33,7 @@ const MobileWrapper = styled.div`
 
 function App() {
   const Fallback = () => {
-    return <div>loading...</div>;
+    return <LoadingModal />;
   };
 
   const isAuthenticated = useTypedSelector(

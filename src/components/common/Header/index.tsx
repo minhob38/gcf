@@ -65,6 +65,7 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
 };
 
 const Header: React.FC<IProps> = ({ title, mode }) => {
+  alert(`${mode}`);
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.userReducer.isAuthenticated,
   );

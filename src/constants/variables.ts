@@ -52,3 +52,5 @@ for (let i = 1; i < N + 1; i++) {
 }
 
 export { MIN_PRICES, MAX_PRICES };
+
+export const UNAUTHORIZED = "unauthorized";

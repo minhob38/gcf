@@ -68,7 +68,7 @@ const RequestButtonContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
 `;
 
-const SCROLL_BOTTOM_MARGIN = 10;
+const SCROLL_BOTTOM_MARGIN = size.REQUEST_BUTTON_SCROLL_HEIGHT;
 
 const CarBuy = () => {
   const { carBasicId } = useParams();
@@ -107,10 +107,10 @@ const CarBuy = () => {
             <BuyerCard />
           </CardContainer>
           <NoticeText>If you apply, we will contact you separately within 7 days</NoticeText>
-          <RequestButtonContainer>
-            <CarRequestButton />
-          </RequestButtonContainer>
         </Scroll>
+        <RequestButtonContainer>
+          <CarRequestButton />
+        </RequestButtonContainer>
       </Content>
     </>
   );

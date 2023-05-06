@@ -83,7 +83,7 @@ const RequestButtonContainer = styled.div`
 
 // = button 영역 + margin을 줄 height
 // prettier-ignore
-const SCROLL_BOTTOM_MARGIN = (50 + 20) + 20 + 20;
+const SCROLL_BOTTOM_MARGIN = size.REQUEST_BUTTON_SCROLL_HEIGHT;
 
 const MoveService = () => {
   const dispatch = useTypedDispatch();

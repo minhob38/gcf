@@ -14,6 +14,7 @@ import PickupTelcomMoveNotificationModal from "modals/PickupTelcomMoveNotificati
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { useMyTelcomBookingQuery } from "@hooks/useApiQuery";
+import Scroll from "@components/common/Scroll";
 
 // = ButtonContainer height + margin을 줄 height
 
@@ -69,6 +70,8 @@ const RequestButtonContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
 `;
 
+const SCROLL_BOTTOM_MARGIN = size.REQUEST_BUTTON_SCROLL_HEIGHT;
+
 const TelcomService = () => {
   const dispatch = useTypedDispatch();
   const isPickupTelcomMoveNotification = useTypedSelector(
@@ -97,32 +100,34 @@ const TelcomService = () => {
       )}
       <Header title="Telcom" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
-        <Title>Schedule</Title>
-        <YearMonthContainer>
-          <SelectContainer onFocus={handleFocus}>
-            <SelectTitle>Year</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.TELCOM}
-              type={ESCHEDULE_TYPE.YEAR}
-              size={{ width: "160px", height: "30px" }}
-            />
-          </SelectContainer>
-          <SelectContainer onFocus={handleFocus}>
-            <SelectTitle>Month</SelectTitle>
-            <ScheduleSelect
-              service={ESERVICE_TYPE.TELCOM}
-              type={ESCHEDULE_TYPE.MONTH}
-              size={{ width: "120px", height: "30px" }}
-            />
-          </SelectContainer>
-        </YearMonthContainer>
-        <Gap />
-        <Title>Kind</Title>
-        <CheckboxContainer onFocus={handleFocus}>
-          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.MOBILE} title="Mobile Phone" />
-          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.INTERNET} title="Internet[LAN]" />
-          <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
-        </CheckboxContainer>
+        <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
+          <Title>Schedule</Title>
+          <YearMonthContainer>
+            <SelectContainer onFocus={handleFocus}>
+              <SelectTitle>Year</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.TELCOM}
+                type={ESCHEDULE_TYPE.YEAR}
+                size={{ width: "160px", height: "30px" }}
+              />
+            </SelectContainer>
+            <SelectContainer onFocus={handleFocus}>
+              <SelectTitle>Month</SelectTitle>
+              <ScheduleSelect
+                service={ESERVICE_TYPE.TELCOM}
+                type={ESCHEDULE_TYPE.MONTH}
+                size={{ width: "120px", height: "30px" }}
+              />
+            </SelectContainer>
+          </YearMonthContainer>
+          <Gap />
+          <Title>Kind</Title>
+          <CheckboxContainer onFocus={handleFocus}>
+            <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.MOBILE} title="Mobile Phone" />
+            <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.INTERNET} title="Internet[LAN]" />
+            <CheckboxInput name="kind" value={ETELCOM_KIND_TYPE.TV} title="Television" />
+          </CheckboxContainer>
+        </Scroll>
         <RequestButtonContainer>
           <PickupTelcomMoveRequestButton service={ESERVICE_TYPE.TELCOM} />
         </RequestButtonContainer>

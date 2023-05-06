@@ -112,7 +112,7 @@ const SignUp = () => {
         <InputBox onFocus={handleFocus}>
           <SubTitle>Email</SubTitle>
           <TextInput
-            placeholder="gcf@gmail.com"
+            placeholder="email"
             type="email"
             name="email"
             onChange={handleTextInputChange}

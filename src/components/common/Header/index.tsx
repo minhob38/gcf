@@ -65,7 +65,6 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
 };
 
 const Header: React.FC<IProps> = ({ title, mode }) => {
-  alert(`${mode}`);
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.userReducer.isAuthenticated,
   );
@@ -74,14 +73,14 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
   const loginPath = "/login";
 
   switch (mode) {
-    case (mode = "logo"):
+    case "logo":
       return (
         <Wrapper>
           <LogoTitle>{title}</LogoTitle>
           {!isAuthenticated ? <LinkButton path={loginPath} title="Login" /> : <Profile />}
         </Wrapper>
       );
-    case (mode = "back"):
+    case "back":
       return (
         <Wrapper>
           <Link to={homePath}>

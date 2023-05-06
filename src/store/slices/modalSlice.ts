@@ -31,6 +31,7 @@ const modalSlice = createSlice({
   reducers: {
     initialize: (state) => {
       for (const key in state) {
+        if (key === "isLoginWarning") return;
         state[key] = initialState[key];
       }
     },

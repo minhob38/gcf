@@ -8,17 +8,14 @@ import { useTypedDispatch, useTypedSelector } from "@hooks/useStore";
 import { actions as authActions } from "@store/slices/authSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as userActions } from "@store/slices/userSlice";
-import { useLoginMutation, useUpdateMeMutation } from "@hooks/useApiMutation";
+import { useUpdateMeMutation } from "@hooks/useApiMutation";
 import Header from "@components/common/Header";
 import Content from "@components/common/Content";
 import TextInput from "@components/Auth/TextInput";
 import SignButton from "@components/Auth/SignButton";
 import ErrorText from "@components/Auth/ErrorText";
-import LoadingModal from "modals/SpinnerLoadingModal";
 import { useEffect, useState } from "react";
 import UpdateMeNotificationModal from "modals/UpdateMeNotificationModal";
-import { useQueryClient } from "react-query";
-import { EQUERY_KEY } from "@constants/query-key";
 import * as api from "@apis/functions";
 
 const SubTitle = styled.div`
@@ -69,7 +66,6 @@ const MyPage: React.FC = () => {
 
   const dispatch = useTypedDispatch();
   const mutation = useUpdateMeMutation();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     dispatch(

@@ -42,7 +42,7 @@ const SearchButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 20px 0 0;
+  margin: 0 0 0 20px;
 `;
 
 const PriceSelectBoxContainer = styled.div`
@@ -71,6 +71,18 @@ const NotificationText = styled.div`
   font: ${fonts.FONT_LARGE_400};
   color: ${colors.BLACK_1};
   text-align: center;
+`;
+
+const SearchText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: ${fonts.FONT_LARGE_400};
+  color: ${colors.BLACK_1};
+  text-align: center;
+  border-radius: 8px;
+  padding: 0 10px;
+  background-color: ${colors.PRIMARY_3};
 `;
 
 const ErrorText = styled.div`
@@ -187,14 +199,6 @@ const CarService = () => {
         </ButtonContainer>
         <div>
           <PriceContainer>
-            {/* <PriceText>Price</PriceText> */}
-            <SearchButtonContainer onFocus={handleFocus}>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                fontSize={"24px"}
-                onClick={handleSearchClick}
-              />
-            </SearchButtonContainer>
             <PriceSelectBoxContainer onFocus={handleFocus}>
               <PriceSelect
                 carSearchType={carSearchType}
@@ -210,6 +214,14 @@ const CarService = () => {
                 prices={variables.MAX_PRICES}
               />
             </PriceSelectBoxContainer>
+            <SearchButtonContainer onFocus={handleFocus}>
+              {/* <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                fontSize={"24px"}
+                onClick={handleSearchClick}
+              /> */}
+              <SearchText onClick={handleSearchClick}>Search</SearchText>
+            </SearchButtonContainer>
           </PriceContainer>
           <ErrorText>{errorMessage}</ErrorText>
         </div>

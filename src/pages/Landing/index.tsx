@@ -16,7 +16,6 @@ import { actions as telcomActions } from "@store/slices/telcomSlice";
 import { actions as moveActions } from "@store/slices/moveSlice";
 import { actions as authActions } from "@store/slices/authSlice";
 import { actions as carActions } from "@store/slices/carSlice";
-import { actions as userActions } from "@store/slices/carSlice";
 
 const ServiceContainer = styled.div`
   display: flex;

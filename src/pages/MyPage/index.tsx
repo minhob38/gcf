@@ -84,7 +84,7 @@ const MyPage: React.FC = () => {
   const handleButtonClick = async () => {
     if (isEdit) {
       if (!userId || !name || !phoneNumber) {
-        dispatch(errorActions.throwUpdateMeError("!!!"));
+        dispatch(errorActions.throwUpdateMeError("user id, name and phone number are required"));
         return;
       }
 
@@ -102,7 +102,8 @@ const MyPage: React.FC = () => {
   };
 
   const handleFocus = () => dispatch(errorActions.catchUpdateMeError());
-
+  console.log("isUpdateMeNotification");
+  console.log(isUpdateMeNotification);
   return (
     <>
       {isUpdateMeNotification && (

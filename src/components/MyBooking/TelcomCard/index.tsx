@@ -71,7 +71,7 @@ const TelcomCard: React.FC = () => {
         <PlainText>
           {apiData?.isMobilePhone && "Mobile /"}
           {apiData?.isInternet && " Internet /"}
-          {apiData?.isTv && " TV"}
+          {apiData?.isTv && " TV /"}
         </PlainText>
       </TextContainer>
       <TextContainer>

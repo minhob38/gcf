@@ -60,7 +60,8 @@
     "serve": "craco build && serve -s build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "aws-deploy": "rm -rf ./build && npm run build && aws s3 sync ./build s3://gcf-frontend --profile=onepick",
+    "aws-prod-deploy": "rm -rf ./build && npm run build && aws s3 sync ./build s3://gcf-frontend --profile=onepick",
+    "aws-dev-deploy": "rm -rf ./build && npm run build && aws s3 sync ./build s3://gcf-dev-frontend --profile=onepick",
     "aws-cache-invalidation": "aws cloudfront create-invalidation --profile=onepick --distribution-id ER7WZL69IN53R --paths /"
   },
   "eslintConfig": {

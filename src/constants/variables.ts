@@ -1,3 +1,5 @@
+import countryList from "react-select-country-list";
+
 export const SELECT_DEFAULT_TEXT = "-";
 export const SELECT_YEAR_DEFAULT_TEXT = "-";
 export const SELECT_MONTH_DEFAULT_TEXT = "-";
@@ -32,8 +34,14 @@ export const ARRIVAL_PLACES = [
 ];
 
 // move service 출발/도착지 국가 목록
-export const DEPARTURE_NATIONS = [SELECT_DEFAULT_TEXT, "Korea", "USA"];
-export const ARRIVAL_NATIONS = [SELECT_DEFAULT_TEXT, "Korea", "USA"];
+const countries = countryList()
+  .getData()
+  .map((country) => {
+    return country.label;
+  });
+
+export const DEPARTURE_NATIONS = [SELECT_DEFAULT_TEXT, ...countries];
+export const ARRIVAL_NATIONS = [SELECT_DEFAULT_TEXT, ...countries];
 
 // car service 가격범위 (dollar 단위)
 const STEP = 5000;

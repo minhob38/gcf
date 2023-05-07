@@ -102,8 +102,7 @@ const MyPage: React.FC = () => {
   };
 
   const handleFocus = () => dispatch(errorActions.catchUpdateMeError());
-  console.log("isUpdateMeNotification");
-  console.log(isUpdateMeNotification);
+
   return (
     <>
       {isUpdateMeNotification && (

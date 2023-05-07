@@ -81,7 +81,7 @@ const CarBuy = () => {
   return (
     <>
       {isCarNotification && (
-        <CarNotificationModal notification="Request success" buttonText="Go to home" path="/" />
+        <CarNotificationModal notification="Request success" buttonText="Go to home" path="/car" />
       )}
       <Header title="Car" mode="back"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">

@@ -135,7 +135,7 @@ const CarService = () => {
         // 최소/최대값을 입력하지 않았을때
         if (
           newMinimumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT ||
-          newMaximumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT
+          newMaximumPrice === variables.SELECT_MAX_PRICE_DEFAULT_TEXT
         ) {
           dispatch(errorActions.throwCarSaleError("Select minimum or maximum price"));
           return;
@@ -155,7 +155,7 @@ const CarService = () => {
         // 최소/최대값을 입력하지 않았을때
         if (
           usedMinimumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT ||
-          usedMaximumPrice === variables.SELECT_MIN_PRICE_DEFAULT_TEXT
+          usedMaximumPrice === variables.SELECT_MAX_PRICE_DEFAULT_TEXT
         ) {
           dispatch(errorActions.throwCarSaleError("Select minimum or maximum price"));
           return;

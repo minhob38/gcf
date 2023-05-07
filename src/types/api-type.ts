@@ -113,6 +113,7 @@ export interface ICarSaleResponse {
   price: number;
   carImageUrl: string;
   buyerUserId: number;
+  carYear: string;
 }
 
 export type TSaleStatus = "Applied" | "Prepared" | "Completed" | "Canceled";

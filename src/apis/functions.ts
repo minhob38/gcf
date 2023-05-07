@@ -706,6 +706,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
       imagePath: string;
       imageFileName: string;
       buyerUserId: number;
+      carYear: string;
     }[];
 
     if (!apiData) return [];
@@ -739,6 +740,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
         price: data.price,
         carImageUrl: (data.imagePath || "") + (data.imageFileName || ""),
         buyerUserId: data.buyerUserId, // ?
+        carYear: data.carYear,
       };
     });
   }

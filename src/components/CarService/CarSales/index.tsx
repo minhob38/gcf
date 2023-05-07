@@ -26,7 +26,7 @@ const CarSales: React.FC<{ cars: ICarSaleResponse[] }> = ({ cars }) => {
         price={car.price}
         seatCount={car.seatCount}
         // 중고차는 연식보여주기
-        year={car.newAndUsed === ECAR_SEARCH_TYPE.USED ? 2023 : null}
+        carYear={car.newAndUsed === ECAR_SEARCH_TYPE.USED ? car.carYear : null}
       />
     );
   });

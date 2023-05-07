@@ -13,6 +13,7 @@ import Profile from "./Profile";
 interface IProps {
   title: string;
   mode: "logo" | "back" | "close";
+  path?: string;
   // login
 }
 
@@ -64,7 +65,7 @@ const LinkButton: React.FC<{ path: string; title: string }> = ({ path, title }) 
   return <SLink to={path}>{title}</SLink>;
 };
 
-const Header: React.FC<IProps> = ({ title, mode }) => {
+const Header: React.FC<IProps> = ({ title, mode, path }) => {
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.userReducer.isAuthenticated,
   );
@@ -83,7 +84,7 @@ const Header: React.FC<IProps> = ({ title, mode }) => {
     case "back":
       return (
         <Wrapper>
-          <Link to={homePath}>
+          <Link to={path || homePath}>
             <Image src={leftArrowImage} alt="back" height="24px" />
           </Link>
           <BackTitle>{title}</BackTitle>

@@ -81,9 +81,9 @@ const CarBuy = () => {
   return (
     <>
       {isCarNotification && (
-        <CarNotificationModal notification="Request success" buttonText="Go to home" path="/car" />
+        <CarNotificationModal notification="Request success" buttonText="Go to home" path="/" />
       )}
-      <Header title="Car" mode="back"></Header>
+      <Header title="Car" mode="back" path="/car"></Header>
       <Content top={size.HEADER_HEIGHT} bottom="0">
         <Scroll direction="y" height={`calc(100% - ${SCROLL_BOTTOM_MARGIN}px)`}>
           <Subtitle>Car information</Subtitle>

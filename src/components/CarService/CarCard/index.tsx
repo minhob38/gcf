@@ -16,6 +16,7 @@ interface IProps {
   bodyType: string;
   price: number;
   seatCount: number;
+  year: number | null;
 }
 
 const Wrapper = styled.div`
@@ -42,6 +43,11 @@ const BrandName = styled.div`
 
 const CarName = styled.div`
   font: ${fonts.FONT_SMALL_400};
+  color: ${colors.BLACK_1};
+`;
+
+const Year = styled.div`
+  font: ${fonts.FONT_TINY_400};
   color: ${colors.BLACK_1};
 `;
 
@@ -89,6 +95,7 @@ const CarCard: React.FC<IProps> = ({
   bodyType,
   price,
   seatCount,
+  year,
 }) => {
   // car id 심기 (attribute)
   return (
@@ -102,6 +109,7 @@ const CarCard: React.FC<IProps> = ({
       <Info>
         <BrandName>{brandName}</BrandName>
         <CarName>{carModelName}</CarName>
+        {year && <Year>{year}</Year>}
         {/* <CarChip> */}
         <CarChipContainer>
           {/* 세그먼트,연료 */}

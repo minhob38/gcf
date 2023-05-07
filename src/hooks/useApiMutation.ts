@@ -34,12 +34,14 @@ export const useApiMutation = <T>(api: any) => {
 };
 
 /**
- * @description 회원정보수정 mutation 함수
+ * @description 초기 인증체크 mutation 함수
  */
-export const useCheckInitialAuth = () => {
+export const useCheckInitialAuthMutation = () => {
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.checkInitialAuth, {
-    onMutate: (variables) => {},
+    onMutate: (variables) => {
+      // dispatch(modalActions.showLoading());
+    },
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {

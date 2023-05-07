@@ -19,6 +19,7 @@ import CarBuy from "pages/CarService/CarBuy";
 import MyCar from "pages/MyCar";
 import MyPage from "pages/MyPage";
 import LoadingModal from "modals/SpinnerLoadingModal";
+import { useInitialAuthentication } from "@hooks/useAuth";
 
 // useMutation은 suspense fallback 반영 X
 // useQuery는 suspense fallback 반영 O
@@ -39,6 +40,8 @@ function App() {
   const isAuthenticated = useTypedSelector(
     (state) => state.rootReducer.userReducer.isAuthenticated,
   );
+
+  useInitialAuthentication();
 
   // TODO: 여기에 쿠키 확인해서, 로그인 체크하는 로직 넣기
 

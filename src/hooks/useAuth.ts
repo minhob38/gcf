@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTypedDispatch } from "./useStore";
 import { actions as userActions } from "@store/slices/userSlice";
 import { useEffect } from "react";
+import { useCheckInitialAuthMutation } from "./useApiMutation";
 
 export const useUnauthorizedNavigate = () => {
   const dispatch = useTypedDispatch();
@@ -14,5 +15,8 @@ export const useUnauthorizedNavigate = () => {
 };
 
 export const useInitialAuthentication = () => {
-  useEffect(() => {}, []);
+  const mutate = useCheckInitialAuthMutation();
+  useEffect(() => {
+    mutate.mutate();
+  }, []);
 };

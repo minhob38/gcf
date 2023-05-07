@@ -157,6 +157,7 @@ export const logoutApi = async () => {
 };
 
 export const updateMeApi = async (input: IUpdateMeRequest) => {
+  await checkInitialAuth();
   const { userId, name, phoneNumber } = input;
   const body: { userId: number; name: string; phoneNumber: string } = { userId, name, phoneNumber };
 
@@ -185,6 +186,7 @@ export const updateMeApi = async (input: IUpdateMeRequest) => {
  * @description 나의 정보 조회 api
  */
 export const findMeApi = async (userId: number) => {
+  await checkInitialAuth();
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
     // { withCredentials: true },
@@ -220,6 +222,7 @@ export const findMeApi = async (userId: number) => {
  * @description pickup 요청 api
  */
 export const pickUpRequestApi = async (input: IPickupRequest) => {
+  await checkInitialAuth();
   const { userId, year, month, date, hour, minute, departure, arrival, flightNumber } = input;
   const body: {
     userId: number;
@@ -270,6 +273,8 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
  * @description 통신서비스 요청 api
  */
 export const telcomRequestApi = async (input: ITelcomRequest) => {
+  await checkInitialAuth();
+
   const { userId, year, month, kind } = input;
   const body: {
     userId: number;
@@ -310,6 +315,8 @@ export const telcomRequestApi = async (input: ITelcomRequest) => {
  * @description 이사 서비스 요청 api
  */
 export const moveRequestApi = async (input: IMoveRequest) => {
+  await checkInitialAuth();
+
   const {
     userId,
     year,
@@ -367,6 +374,8 @@ export const moveRequestApi = async (input: IMoveRequest) => {
  * @description car 서비스 요청 api
  */
 export const carBuyRequestApi = async (input: ICarRequest) => {
+  await checkInitialAuth();
+
   const { userId, carBasicId } = input;
   const body: { userId: number; carBasicId: number } = { userId, carBasicId };
 
@@ -401,6 +410,8 @@ export const carBuyRequestApi = async (input: ICarRequest) => {
  * @description pickup 서비스 취소 api
  */
 export const pickupCancelApi = async (input: IPickupCancelRequest) => {
+  await checkInitialAuth();
+
   const { pickUpId } = input;
   const body: { pickUpId: number } = { pickUpId };
 
@@ -426,6 +437,8 @@ export const pickupCancelApi = async (input: IPickupCancelRequest) => {
  * @description telcom 서비스 취소 api
  */
 export const telcomCancelApi = async (input: ITelcomCancelRequest) => {
+  await checkInitialAuth();
+
   const { telcomId } = input;
   const body: { telecommunicationId: number } = { telecommunicationId: telcomId };
 
@@ -451,6 +464,8 @@ export const telcomCancelApi = async (input: ITelcomCancelRequest) => {
  * @description move 서비스 취소 api
  */
 export const moveCancelApi = async (input: IMoveCancelRequest) => {
+  await checkInitialAuth();
+
   const { moveId } = input;
   const body: { moveId: number } = { moveId };
 
@@ -474,6 +489,8 @@ export const moveCancelApi = async (input: IMoveCancelRequest) => {
  * @description 차량 구매 취소 api
  */
 export const carCancelApi = async (input: ICarCancelRequest) => {
+  await checkInitialAuth();
+
   const { carToSaleId } = input;
   const body: { carToSaleId: number } = { carToSaleId };
 
@@ -499,6 +516,8 @@ export const carCancelApi = async (input: ICarCancelRequest) => {
  * @description 나의 pickup 조회 api
  */
 export const findMyPickupApi = async ({ queryKey }) => {
+  await checkInitialAuth();
+
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/${userId}/retrieve`,
@@ -551,6 +570,8 @@ export const findMyPickupApi = async ({ queryKey }) => {
  * @description 나의 telcom 조회 api
  */
 export const findMyTelcomApi = async ({ queryKey }) => {
+  await checkInitialAuth();
+
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/telecommunications/${userId}/retrieve`,
@@ -596,6 +617,8 @@ export const findMyTelcomApi = async ({ queryKey }) => {
  * @description 나의 move 조회 api
  */
 export const findMyMoveApi = async ({ queryKey }) => {
+  await checkInitialAuth();
+
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/moves/${userId}/retrieve`,
@@ -663,7 +686,7 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
   const status = response.status;
 
   // if (status === 401) throw new Error(UNAUTHORIZED);
-  console.log("???SADASD");
+
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
       carBasicId: number;
@@ -729,6 +752,8 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
  * @description car 상세 조회 api
  */
 export const findCarDetailApi = async ({ queryKey }) => {
+  await checkInitialAuth();
+
   const [key, carBasicId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/${carBasicId}`,
@@ -801,6 +826,8 @@ export const findCarDetailApi = async ({ queryKey }) => {
  * @description 구매신청한 car들 조회 api
  */
 export const findMyCarsApi = async ({ queryKey }): Promise<IMyCarResponse[]> => {
+  await checkInitialAuth();
+
   const [key, userId] = queryKey;
   const response = await axios.get<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/users/${userId}`,

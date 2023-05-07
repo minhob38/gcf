@@ -75,26 +75,26 @@ export const useLoginMutation = () => {
       // 로그인 성공 시, 로컬스토리지 로그인상태를 true로 변경
       dispatch(userActions.authenticate());
 
-      if (process.env.NODE_ENV === "production") {
-        // data에서 user id 가져오기
-        const userId = data?.userId;
+      // if (process.env.NODE_ENV === "production") {
+      // data에서 user id 가져오기
+      const userId = data?.userId;
 
-        if (!userId) return;
-        const myInfo = await api.findMeApi(userId);
-
-        if (!myInfo) return;
-        dispatch(userActions.findMe({ userId, ...myInfo }));
-
-        return;
-      }
-
-      // development 환경
       if (!userId) return;
       const myInfo = await api.findMeApi(userId);
+
       if (!myInfo) return;
       dispatch(userActions.findMe({ userId, ...myInfo }));
 
       return;
+      // }
+
+      // // development 환경
+      // if (!userId) return;
+      // const myInfo = await api.findMeApi(userId);
+      // if (!myInfo) return;
+      // dispatch(userActions.findMe({ userId, ...myInfo }));
+
+      // return;
     },
     onSettled: () => {
       dispatch(modalActions.hideLoading());

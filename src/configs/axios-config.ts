@@ -5,7 +5,7 @@ import axios from "axios";
 //   process.env.NODE_ENV === "production"
 //     ? "https://api.onepick.info"
 //     : "https://dev-api.onepick.info";
-export const API_SERVER_ADDRESS = "https://dev-api.onepick.info";
+export const API_SERVER_ADDRESS = "https://api.onepick.info";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000/api",

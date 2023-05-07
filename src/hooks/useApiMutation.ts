@@ -131,6 +131,33 @@ export const useLoginMutation = () => {
 };
 
 /**
+ * @description 로그아웃 mutation 함수
+ */
+export const useLogoutMutation = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.logoutApi, {
+    onMutate: (variables) => {
+      dispatch(modalActions.showLoading());
+    },
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      if (errorMessage === UNAUTHORIZED) {
+        dispatch(userActions.unAuthenticate());
+        return;
+      }
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(userActions.unAuthenticate());
+    },
+    onSettled: () => {
+      dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
+};
+
+/**
  * @description 회원정보수정 mutation 함수
  */
 export const useUpdateMeMutation = () => {

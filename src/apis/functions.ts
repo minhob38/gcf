@@ -116,8 +116,6 @@ export const loginApi = async (input: ILoginRequest) => {
   const apiData = data.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
-
   if (data.result === "SUCCESS") {
     return { userId: apiData.userId };
   }
@@ -134,6 +132,26 @@ export const loginApi = async (input: ILoginRequest) => {
     }
 
     throw new Error("login error");
+  }
+};
+
+export const logoutApi = async () => {
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/logout`, {
+    withCredentials: true,
+  });
+
+  const data = response.data;
+  const apiData = data.data;
+  const status = response.status;
+
+  if (status === 401) throw new Error(UNAUTHORIZED);
+
+  if (data.result === "SUCCESS") {
+    return;
+  }
+
+  if (data.result === "FAIL") {
+    throw new Error("logout error");
   }
 };
 

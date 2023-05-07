@@ -17,6 +17,8 @@ export const useUnauthorizedNavigate = () => {
 export const useInitialAuthentication = () => {
   const mutate = useCheckInitialAuthMutation();
   useEffect(() => {
-    mutate.mutate();
+    if (process.env.NODE_ENV === "production") {
+      mutate.mutate();
+    }
   }, []);
 };

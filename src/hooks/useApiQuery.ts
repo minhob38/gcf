@@ -5,6 +5,7 @@ import { EQUERY_KEY } from "@constants/query-key";
 import { ECAR_SEARCH_TYPE } from "types/enum";
 import { useNavigate } from "react-router-dom";
 import { UNAUTHORIZED } from "@constants/variables";
+import { useUnauthorized, useUnauthorizedNavigate } from "./useAuth";
 
 // /**
 //  * @description my pickup 조회 query 함수
@@ -29,7 +30,7 @@ import { UNAUTHORIZED } from "@constants/variables";
  * @description my pickup 조회 query 함수
  */
 export const useMyPickupBookingQuery = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.PICKUP, userId], api.findMyPickupApi, {
     refetchOnWindowFocus: false,
@@ -38,7 +39,7 @@ export const useMyPickupBookingQuery = () => {
     onError: (error) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
         return;
       }
     },
@@ -66,7 +67,7 @@ export const useMyPickupBookingQueryClient = () => {
  * @description my telcom 조회 query 함수
  */
 export const useMyTelcomBookingQuery = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.TELCOM, userId], api.findMyTelcomApi, {
     refetchOnWindowFocus: false,
@@ -75,7 +76,7 @@ export const useMyTelcomBookingQuery = () => {
     onError: (error) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
         return;
       }
     },
@@ -103,7 +104,7 @@ export const useMyTelcomBookingQueryClient = () => {
  * @description my move 조회 query 함수
  */
 export const useMyMoveBookingQuery = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.MOVE, userId], api.findMyMoveApi, {
     refetchOnWindowFocus: false,
@@ -112,7 +113,7 @@ export const useMyMoveBookingQuery = () => {
     onError: (error) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
         return;
       }
     },
@@ -140,7 +141,7 @@ export const useMyMoveQueryClient = () => {
  * @description 구매가능한 car 조회 query 함수
  */
 export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const minimumPrice = useTypedSelector((state) => {
     switch (searchType) {
       case ECAR_SEARCH_TYPE.NEW:
@@ -171,7 +172,7 @@ export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
       onError: (error) => {
         const errorMessage = (error as Error).message;
         if (errorMessage === UNAUTHORIZED) {
-          navigate("/login");
+          unauthorizedNavigate();
           return;
         }
       },
@@ -187,7 +188,7 @@ export const useCarsSalesQuery = (searchType: ECAR_SEARCH_TYPE) => {
  * @description car sale 조회 query client 함수
  */
 export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const queryClient = useQueryClient();
   const minimumPrice = useTypedSelector((state) => {
     switch (carSearchType) {
@@ -222,7 +223,7 @@ export const useCarSalesQueryClient = (carSearchType: ECAR_SEARCH_TYPE) => {
  * @description car 상세 조회 query 함수
  */
 export const useCarDetailQuery = (carBasicId: number) => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const query = useQuery([EQUERY_KEY.CAR_SALE, carBasicId], api.findCarDetailApi, {
     refetchOnWindowFocus: false,
     retry: 0,
@@ -230,7 +231,7 @@ export const useCarDetailQuery = (carBasicId: number) => {
     onError: (error) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
         return;
       }
     },
@@ -258,7 +259,7 @@ export const useCarDetailQueryClient = () => {
  * @description 구매신청한 car들 조회 query 함수
  */
 export const useMyCarsQuery = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const userId = useTypedSelector((state) => state.rootReducer.userReducer.userId);
   const query = useQuery([EQUERY_KEY.MY_CAR, userId], api.findMyCarsApi, {
     refetchOnWindowFocus: false,
@@ -267,7 +268,7 @@ export const useMyCarsQuery = () => {
     onError: (error) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
         return;
       }
     },

@@ -10,7 +10,7 @@ interface IState {
 
 const initialState: IState = {
   isAuthenticated: false, // process.env.NODE_ENV === "production" ? false : true,
-  userId: process.env.NODE_ENV === "production" ? null : 1,
+  userId: null, //process.env.NODE_ENV === "production" ? null : 1,
   name: null,
   email: null,
   phoneNumber: null,

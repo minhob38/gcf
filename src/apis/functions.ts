@@ -40,20 +40,23 @@ export const testPostApi = async (input) => {
  * @description 초기 인증 체크
  */
 export const checkInitialAuth = async () => {
-  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/login-status`, {
-    withCredentials: true,
-  });
+  const response = await axios.get<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/login-status`);
 
   const data = response.data;
   const status = response.status;
 
   // if (status === 401) throw new Error(UNAUTHORIZED);
 
-  if (data.result === "SUCCESS") return;
+  // 개발환경에서는 cookie 체크안함
+  if (process.env.NODE_ENV === "development") return;
 
-  if (data.result === "FAIL") {
-    throw new Error("auth check error");
+  if (data.result === "SUCCESS") {
+    const apiData = data.data;
+    if (apiData.validLogin) return;
+    throw new Error(UNAUTHORIZED);
   }
+
+  throw new Error("auth check error");
 };
 
 /**
@@ -136,9 +139,7 @@ export const loginApi = async (input: ILoginRequest) => {
 };
 
 export const logoutApi = async () => {
-  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/logout`, {
-    withCredentials: true,
-  });
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/users/logout`);
 
   const data = response.data;
   const apiData = data.data;
@@ -642,13 +643,15 @@ export const findMyMoveApi = async ({ queryKey }) => {
  * @description 구매가능한 car들 조회 api
  */
 export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]> => {
+  await checkInitialAuth();
+
   const [key, searchType, { priceStart, priceEnd }] = queryKey;
   const body: { newAndUsed: ECAR_SEARCH_TYPE; priceStart: number; priceEnd: number } = {
     newAndUsed: searchType,
     priceStart,
     priceEnd,
   };
-  console.log("!!@!@!@!@");
+
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/available`,
     body,

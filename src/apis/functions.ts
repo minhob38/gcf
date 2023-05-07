@@ -145,15 +145,17 @@ export const logoutApi = async () => {
   const apiData = data.data;
   const status = response.status;
 
+  // 로그아웃은 별도 응답처리할 필요 없음
+
   // if (status === 401) throw new Error(UNAUTHORIZED);
 
-  if (data.result === "SUCCESS") {
-    return;
-  }
+  // if (data.result === "SUCCESS") {
+  //   return;
+  // }
 
-  if (data.result === "FAIL") {
-    throw new Error("logout error");
-  }
+  // if (data.result === "FAIL") {
+  //   throw new Error("logout error");
+  // }
 };
 
 export const updateMeApi = async (input: IUpdateMeRequest) => {

@@ -37,6 +37,26 @@ export const testPostApi = async (input) => {
 };
 
 /**
+ * @description 초기 인증 체크
+ */
+export const checkInitialAuth = async () => {
+  const response = await axios.post<IApiResponse>(`${API_SERVER_ADDRESS}/api/v1/login-status`, {
+    withCredentials: true,
+  });
+
+  const data = response.data;
+  const status = response.status;
+
+  if (status === 401) throw new Error(UNAUTHORIZED);
+
+  if (data.result === "SUCCESS") return;
+
+  if (data.result === "FAIL") {
+    throw new Error("auth check error");
+  }
+};
+
+/**
  * @description 회원가입 api
  */
 export const signUpApi = async (input: ISignUpRequest) => {

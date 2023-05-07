@@ -3,9 +3,8 @@ import * as api from "@apis/functions";
 import { useTypedSelector } from "./useStore";
 import { EQUERY_KEY } from "@constants/query-key";
 import { ECAR_SEARCH_TYPE } from "types/enum";
-import { useNavigate } from "react-router-dom";
 import { UNAUTHORIZED } from "@constants/variables";
-import { useUnauthorized, useUnauthorizedNavigate } from "./useAuth";
+import { useUnauthorizedNavigate } from "./useAuth";
 
 // /**
 //  * @description my pickup 조회 query 함수

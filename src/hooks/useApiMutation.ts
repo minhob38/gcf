@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import * as api from "@apis/functions";
 import { useTypedDispatch, useTypedSelector } from "./useStore";
 import { actions as modalActions } from "@store/slices/modalSlice";
 import { actions as errorActions } from "@store/slices/errorSlice";
 import { actions as userActions } from "@store/slices/userSlice";
 import { UNAUTHORIZED } from "@constants/variables";
+import { useUnauthorizedNavigate } from "./useAuth";
 
 export const useApiMutation = <T>(api: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation<unknown, unknown, T, void>(
@@ -31,6 +31,30 @@ export const useApiMutation = <T>(api: any) => {
   );
 
   return { mutate, isLoading, isError, error, isSuccess };
+};
+
+/**
+ * @description 회원정보수정 mutation 함수
+ */
+export const useCheckInitialAuth = () => {
+  const dispatch = useTypedDispatch();
+  const mutation = useMutation(api.checkInitialAuth, {
+    onMutate: (variables) => {},
+    onError: (error, variables, context) => {
+      const errorMessage = (error as Error).message;
+      if (errorMessage === UNAUTHORIZED) {
+        dispatch(userActions.unAuthenticate());
+      }
+    },
+    onSuccess: (data, variables, context) => {
+      dispatch(userActions.authenticate());
+    },
+    onSettled: () => {
+      // dispatch(modalActions.hideLoading());
+    },
+  });
+
+  return mutation;
 };
 
 /**
@@ -108,7 +132,7 @@ export const useLoginMutation = () => {
  * @description 회원정보수정 mutation 함수
  */
 export const useUpdateMeMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.updateMeApi, {
     onMutate: (variables) => {
@@ -117,7 +141,8 @@ export const useUpdateMeMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwUpdateMeError(errorMessage));
@@ -137,7 +162,7 @@ export const useUpdateMeMutation = () => {
  * @description pickup 요청 mutation 함수
  */
 export const usePickUpMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.pickUpRequestApi, {
     onMutate: (variables) => {
@@ -146,7 +171,8 @@ export const usePickUpMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -166,7 +192,7 @@ export const usePickUpMutation = () => {
  * @description telcom 요청 mutation 함수
  */
 export const useTelcomMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.telcomRequestApi, {
     onMutate: (variables) => {
@@ -175,7 +201,8 @@ export const useTelcomMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -195,7 +222,7 @@ export const useTelcomMutation = () => {
  * @description move 요청 mutation 함수
  */
 export const useMoveMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.moveRequestApi, {
     onMutate: (variables) => {
@@ -204,7 +231,8 @@ export const useMoveMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -224,7 +252,7 @@ export const useMoveMutation = () => {
  * @description car buy 요청 mutation 함수
  */
 export const useCarBuyRequestMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.carBuyRequestApi, {
     onMutate: (variables) => {
@@ -233,7 +261,8 @@ export const useCarBuyRequestMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwCarSaleError(errorMessage));
@@ -253,7 +282,7 @@ export const useCarBuyRequestMutation = () => {
  * @description pickup cancel mutation 함수
  */
 export const usePickupCancelMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.pickupCancelApi, {
     onMutate: (variables) => {
@@ -262,7 +291,8 @@ export const usePickupCancelMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -283,7 +313,7 @@ export const usePickupCancelMutation = () => {
  * @description pickup cancel mutation 함수
  */
 export const useTelocmCancelMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.telcomCancelApi, {
     onMutate: (variables) => {
@@ -292,7 +322,8 @@ export const useTelocmCancelMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -313,7 +344,7 @@ export const useTelocmCancelMutation = () => {
  * @description move cancel mutation 함수
  */
 export const useMoveCancelMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.moveCancelApi, {
     onMutate: (variables) => {
@@ -322,7 +353,8 @@ export const useMoveCancelMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwPickUpTelcomMoveError(errorMessage));
@@ -343,7 +375,7 @@ export const useMoveCancelMutation = () => {
  * @description car cancel mutation 함수
  */
 export const useCarCancelMutation = () => {
-  const navigate = useNavigate();
+  const unauthorizedNavigate = useUnauthorizedNavigate();
   const dispatch = useTypedDispatch();
   const mutation = useMutation(api.carCancelApi, {
     onMutate: (variables) => {
@@ -352,7 +384,8 @@ export const useCarCancelMutation = () => {
     onError: (error, variables, context) => {
       const errorMessage = (error as Error).message;
       if (errorMessage === UNAUTHORIZED) {
-        navigate("/login");
+        unauthorizedNavigate();
+
         return;
       }
       dispatch(errorActions.throwCarSaleError(errorMessage));

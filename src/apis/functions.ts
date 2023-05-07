@@ -47,7 +47,7 @@ export const checkInitialAuth = async () => {
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -75,8 +75,8 @@ export const signUpApi = async (input: ISignUpRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/user-register`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
@@ -108,8 +108,8 @@ export const loginApi = async (input: ILoginRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/users/login`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
@@ -144,7 +144,7 @@ export const logoutApi = async () => {
   const apiData = data.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     return;
@@ -161,15 +161,15 @@ export const updateMeApi = async (input: IUpdateMeRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/mypage/user-profiles/${userId}`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const apiData = data.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     return { userId: apiData.userId };
@@ -184,15 +184,14 @@ export const updateMeApi = async (input: IUpdateMeRequest) => {
  * @description 나의 정보 조회 api
  */
 export const findMeApi = async (userId: number) => {
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/mypage/users/${userId}`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
@@ -244,14 +243,14 @@ export const pickUpRequestApi = async (input: IPickupRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/request`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -284,14 +283,14 @@ export const telcomRequestApi = async (input: ITelcomRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/telecommunications/request`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -341,14 +340,14 @@ export const moveRequestApi = async (input: IMoveRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/moves/request`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -371,14 +370,14 @@ export const carBuyRequestApi = async (input: ICarRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/apply`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -405,14 +404,14 @@ export const pickupCancelApi = async (input: IPickupCancelRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/pickups/cancel`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -430,14 +429,14 @@ export const telcomCancelApi = async (input: ITelcomCancelRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/telecommunications/cancel`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -455,8 +454,8 @@ export const moveCancelApi = async (input: IMoveCancelRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/moves/cancel`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
@@ -478,14 +477,14 @@ export const carCancelApi = async (input: ICarCancelRequest) => {
 
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/withdraw`,
-    body,
-    { withCredentials: true },
+    // body,
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") return;
 
@@ -499,15 +498,14 @@ export const carCancelApi = async (input: ICarCancelRequest) => {
  */
 export const findMyPickupApi = async ({ queryKey }) => {
   const [key, userId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/pickups/${userId}/retrieve`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/pickups/${userId}/retrieve`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
@@ -551,15 +549,14 @@ export const findMyPickupApi = async ({ queryKey }) => {
  */
 export const findMyTelcomApi = async ({ queryKey }) => {
   const [key, userId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/telecommunications/${userId}/retrieve`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/telecommunications/${userId}/retrieve`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
@@ -596,15 +593,14 @@ export const findMyTelcomApi = async ({ queryKey }) => {
  */
 export const findMyMoveApi = async ({ queryKey }) => {
   const [key, userId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/moves/${userId}/retrieve`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/moves/${userId}/retrieve`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
@@ -648,17 +644,19 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
     priceStart,
     priceEnd,
   };
+  console.log("!!@!@!@!@");
   const response = await axios.post<IApiResponse>(
     `${API_SERVER_ADDRESS}/api/v1/car-sales/available`,
     body,
-    { withCredentials: true },
+
+    // { withCredentials: true },
   );
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
-
+  // if (status === 401) throw new Error(UNAUTHORIZED);
+  console.log("???SADASD");
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
       carBasicId: number;
@@ -725,15 +723,14 @@ export const findCarSalesApi = async ({ queryKey }): Promise<ICarSaleResponse[]>
  */
 export const findCarDetailApi = async ({ queryKey }) => {
   const [key, carBasicId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/car-sales/${carBasicId}`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/car-sales/${carBasicId}`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {
@@ -797,15 +794,14 @@ export const findCarDetailApi = async ({ queryKey }) => {
  */
 export const findMyCarsApi = async ({ queryKey }): Promise<IMyCarResponse[]> => {
   const [key, userId] = queryKey;
-  const response = await axios.get<IApiResponse>(
-    `${API_SERVER_ADDRESS}/api/v1/car-sales/users/${userId}`,
-    { withCredentials: true },
-  );
+  const response = await axios.get<IApiResponse>();
+  // `${API_SERVER_ADDRESS}/api/v1/car-sales/users/${userId}`,
+  // { withCredentials: true },
 
   const data = response.data;
   const status = response.status;
 
-  if (status === 401) throw new Error(UNAUTHORIZED);
+  // if (status === 401) throw new Error(UNAUTHORIZED);
 
   if (data.result === "SUCCESS") {
     const apiData = data.data as unknown as {

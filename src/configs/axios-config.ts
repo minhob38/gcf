@@ -8,7 +8,11 @@ import axios from "axios";
 export const API_SERVER_ADDRESS = "https://api.onepick.info";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://api.onepick.info",
+  validateStatus: (status) => {
+    return status >= 200 || status === 302;
+  },
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(
@@ -28,5 +32,9 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+// axios.defaults.validateStatus = (status) => {
+//   return status >= 200 || status === 302;
+// };
 
 export default instance;
